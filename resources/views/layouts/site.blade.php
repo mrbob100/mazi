@@ -42,10 +42,15 @@
      @endif
     @yield('content')
 
-    <script type="text/javascript" src="  http:://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js " ></script>
-    <script type="text/javascript" src=" {{asset('public/js/script.js') }}    "></script>
+
   </body>
+  <script type="text/javascript" src =" {{asset('public/js/jquery-3.1.1.min.js') }}" ></script>
+  <script type="text/javascript" src=" {{asset('public/js/bootstrap.js') }}"  ></script>
+  <script type="text/javascript" src=" {{asset('public/js/script.js') }}"  ></script>
+  <script type="text/javascript" src=" {{asset('public/js/jquery.accordion.js') }} "  ></script>
 
 
-  <?=asset('public/js/app.js')?>
+  <script type="text/javascript" src=" {{asset('public/js/main.js') }}"  charset="utf-8"></script>
+
+
 </html>

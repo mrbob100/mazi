@@ -25,3 +25,6 @@ Route::delete('page/delete/{article}', function(\App\Product $product) {
     return redirect('/');
 
 })->name('articleDelete');
+
+Route::get('loadcsv',['uses'=>'Admin\CsvloadController@index','as'=>'loadCsv']);
+Route::post('loadcsv','Admin\CsvloadController@store')->name('storeCsv');

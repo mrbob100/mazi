@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Models\Category;
 use App\Models;
+use App\Widgets\MainWidget;
 class IndexController extends Controller
 {
 
@@ -20,11 +22,13 @@ class IndexController extends Controller
 
     public function index()
     {
-        $categories=DB::table('categories')->get();
-        dump($categories);
+     //   $categories=DB::table('categories')->toArray()->get();
+        $akkord = new MainWidget();
+        $akkord->init();
+        $akkordeon= $akkord->run();
         $articles = DB::table('products')->simplePaginate(4);
         dump($articles);
-        return view('page')->with(['message' => $this->message, 'header' => $this->header, 'articles' => $articles]);
+        return view('page')->with(['message' => $this->message, 'header' => $this->header, 'articles' => $articles, 'akkordeon'=>$akkordeon]);
     }
 
 

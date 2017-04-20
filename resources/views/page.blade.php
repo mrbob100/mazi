@@ -3,6 +3,7 @@
 
 
 @section('content')
+
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="jumbotron">
         <div class="container">
@@ -15,7 +16,15 @@
     <div class="container">
         <!-- Example row of columns -->
         <div class="row">
+            <style>
+                li {
+                    list-style-type: none; /* Убираем маркеры */
+                }
+            </style>
 
+            <ul class="catalog"  >
+             <div > {!! $akkordeon !!}  </div>
+          </ul>
 
             @foreach($articles as $article)
 
