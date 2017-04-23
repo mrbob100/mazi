@@ -31,7 +31,7 @@ class CsvloadController extends Controller
             echo '</pre>';
             $req = ob_get_contents();
             ob_end_clean();
-            echo json_encode($req); // вернем полученное в ответе
+            echo json_encode($req,JSON_UNESCAPED_UNICODE); // вернем полученное в ответе
             $uploads_dir = 'public/upload';
             // if ($_FILES["my_file"]["error"]) {
 

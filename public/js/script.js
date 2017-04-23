@@ -1,4 +1,4 @@
-$(function(){
+$( document ).ready(function(){
 	var progressBar = $('#progressbar');
 	$('#my_form').on('submit', function(e){
 		e.preventDefault();

@@ -28,3 +28,5 @@ Route::delete('page/delete/{article}', function(\App\Product $product) {
 
 Route::get('loadcsv',['uses'=>'Admin\CsvloadController@index','as'=>'loadCsv']);
 Route::post('loadcsv','Admin\CsvloadController@store')->name('storeCsv');
+
+Route::get('category/{id}',['uses'=>'CategoryController@index','as'=>'category']);

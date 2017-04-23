@@ -1,9 +1,100 @@
 /*price range*/
 
-// $('#sl2').slider();
+$('#sl2').slider();
 $('.catalog').dcAccordion({
 	speed: 300
 });
+
+
+
+function showCart(cart){
+	$('#cart .modal-body').html(cart);
+	$('#cart').modal();
+}
+
+function getCart(){
+	$.ajax({
+		url: 'http://localhost/ceil/web/cart/show',
+      //  url: 'http://pullsky.kretivz.pro/web/cart/show',
+		type: 'GET',
+		success: function(res){
+			if(!res) alert('Ошибка!');
+			showCart(res);
+		},
+		error: function(){
+			alert('Error!');
+		}
+	});
+	return false;
+}
+
+
+$(function(){
+$(' .modal-body').on('click', '.del-item', function(){
+	//alert(123);
+	var id = $(this).data('id');
+    var cat = $(this).data('cat');
+	$.ajax({
+		url: 'http://localhost/ceil/web/cart/del-item',
+		data: {id: id, cat: cat},
+		type: 'GET',
+		success: function(res){
+			if(!res) alert('Ошибка!');
+			showCart(res);
+		},
+		error: function(){
+			alert('Error!');
+		}
+	});
+  });
+});
+
+
+function clearCart(){
+	$.ajax({
+		url: 'http://localhost/ceil/web/cart/clear',
+		type: 'GET',
+		success: function(res){
+			if(!res) alert('Выйдите из категории товара и повторите очистку!');
+			showCart(res);
+		},
+		error: function(){
+			alert('Выйдите из категории товара и повторите очистку!!!');
+		}
+	      });
+}
+
+
+$(function(){
+$('.add-to-cart').on('click', function (e) {
+	e.preventDefault();
+	var id = $(this).data('id'),
+	 qty=$('#qty').val();
+	$.ajax({
+		//url: 'http://pullsky.kretivz.pro/web/cart/add',
+        url: 'http://localhost/ceil/web/cart/add',
+	//	url: '@web/cart/add',
+		data: {id: id, qty: qty},
+		type: 'GET',
+		dataType: "text",
+		success: function(res){
+			if(!res) alert('Ошибка!');
+			showCart(res);
+
+
+		},
+		error: function(){
+			alert('Ошибка передачи!');
+		}
+	});
+});
+});
+
+
+
+
+
+
 
 
 

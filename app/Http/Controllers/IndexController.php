@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Category;
 use App\Models;
+use App\Models\Product;
 use App\Widgets\MainWidget;
 class IndexController extends Controller
 {
@@ -27,8 +28,8 @@ class IndexController extends Controller
         $akkord->init();
         $akkordeon= $akkord->run();
         $articles = DB::table('products')->simplePaginate(4);
-        dump($articles);
-        return view('page')->with(['message' => $this->message, 'header' => $this->header, 'articles' => $articles, 'akkordeon'=>$akkordeon]);
+     //   dump($articles);
+        return view('page')->with(['message' => $this->message, 'header' => $this->header, 'articles' => $articles , 'akkordeon'=>$akkordeon  ] );
     }
 
 

@@ -1,7 +1,6 @@
 
 @extends('layouts.site')
 
-
 @section('content')
 
     <!-- Main jumbotron for a primary marketing message or call to action -->
@@ -22,8 +21,10 @@
                 }
             </style>
 
-            <ul class="catalog"  >
-             <div > {!! $akkordeon !!}  </div>
+            <ul class="catalog" >
+             <div> {!!  $akkordeon !!}    </div>
+
+
           </ul>
 
             @foreach($articles as $article)

@@ -5,8 +5,17 @@
 
     <title>Jumbotron Template for Bootstrap</title>
 
-    <link href="{{ asset('public/css/bootstrap.min.css') }}" rel="stylesheet">
+      <link href="{{ asset('public/css/bootstrap.min.css') }}" rel="stylesheet">
+      <link href="{{ asset('public/css/animate.css') }}" rel="stylesheet">
+      <script type="text/javascript" src=" {!! asset('public/js/jquery.js')   !!}  "  ></script>
+      <script type="text/javascript" src=" {!! asset('public/js/bootstrap.min.js') !!} "  ></script>
+
+
     <link href="{{ asset('public/css/jumbotron.css') }}" rel="stylesheet">
+      <link href="{{ asset('public/css/animate.css') }}" rel="stylesheet">
+      <link href="{{ asset('public/css/site.css') }}" rel="stylesheet">
+
+
 
 
   </head>
@@ -40,17 +49,21 @@
 
         </div>
      @endif
+
     @yield('content')
 
 
   </body>
-  <script type="text/javascript" src =" {{asset('public/js/jquery-3.1.1.min.js') }}" ></script>
-  <script type="text/javascript" src=" {{asset('public/js/bootstrap.js') }}"  ></script>
-  <script type="text/javascript" src=" {{asset('public/js/script.js') }}"  ></script>
-  <script type="text/javascript" src=" {{asset('public/js/jquery.accordion.js') }} "  ></script>
 
 
-  <script type="text/javascript" src=" {{asset('public/js/main.js') }}"  charset="utf-8"></script>
+  <script type="text/javascript" src=" {!! asset('public/js/jquery.scrollUp.min.js') !!}  "  ></script>
+  <script type="text/javascript" src=" {!! asset('public/js/jquery.cookie.js') !!}  "  ></script>
+  <script type="text/javascript" src=" {!! asset('public/js/jquery.accordion.js') !!}  "  ></script>
+  <script type="text/javascript" src=" {!! asset('public/js/price-range.js') !!}  " charset="utf-8" ></script>
+  <script type="text/javascript" src=" {!! asset('public/js/main.js') !!} "  ></script>
+  <script type="text/javascript" src=" {!! asset('public/js/script.js') !!}  " charset="utf-8" ></script>
+
+
 
 
 </html>

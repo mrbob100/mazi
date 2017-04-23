@@ -25,34 +25,38 @@ class MainWidget extends AbstractWidget
 
         if( $this->tpl === null ){
             $this->tpl = 'menu';
-            $this->config=['tpl'=>'menu.blade.php'];
+            $this->config=['tpl'=>'menu.php'];
         }
-        $this->tpl .= '.blade.php';
+        $this->tpl .= '.php';
     }
 
     public function run()
     {
-        if(!$this->config)  $this->config=['tpl'=>'menu.blade.php'];
+        if(!$this->config)  $this->config=['tpl'=>'menu.php'];
         // get cache
-        if($this->tpl == 'menu.blade.php'){
-            $menu = Cache::get('menu');
-         //   if($menu) return $menu;
-        }
 
+  /*      if($this->tpl == 'menu.php'){
+            $menu = Cache::get('menu');
+           if($menu) return $menu;
+        }
+*/
         $categories=Category::all();
         $keyd=$categories->keyBy('id');
         $this->data=$keyd->toArray();
-        dump($this->data);
+       // dump($this->data);
 
 
         $this->tree = $this->getTree();
-        echo '<pre>'.print_r($this->tree, true).'</pre>';
+      //  echo '<pre>'.print_r($this->tree, true).'</pre>';
         $this->menuHtml = $this->getMenuHtml($this->tree);
+
         // set cache
-        if($this->tpl == 'menu.blade.php') {
+/*
+        if($this->tpl == 'menu.php') {
             Cache::put('menu', $this->menuHtml, 60);
         }
-        // debug($this->menuHtml);
+*/
+        // dump($this->menuHtml);
         return $this->menuHtml;
 
     }
