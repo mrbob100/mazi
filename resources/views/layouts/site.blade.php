@@ -1,24 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="utf-8">
 
-    <title>Jumbotron Template for Bootstrap</title>
-
-      <link href="{{ asset('public/css/bootstrap.min.css') }}" rel="stylesheet">
-      <link href="{{ asset('public/css/animate.css') }}" rel="stylesheet">
-      <script type="text/javascript" src=" {!! asset('public/js/jquery.js')   !!}  "  ></script>
-      <script type="text/javascript" src=" {!! asset('public/js/bootstrap.min.js') !!} "  ></script>
-
+    <link href="{{ asset('public/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('public/css/animate.css') }}" rel="stylesheet">
+    <script type="text/javascript" src=" {!! asset('public/js/jquery.js')   !!}  "  ></script>
+    <script type="text/javascript" src=" {!! asset('public/js/bootstrap.min.js') !!} "  ></script>
 
     <link href="{{ asset('public/css/jumbotron.css') }}" rel="stylesheet">
-      <link href="{{ asset('public/css/animate.css') }}" rel="stylesheet">
-      <link href="{{ asset('public/css/site.css') }}" rel="stylesheet">
+    <link href="{{ asset('public/css/animate.css') }}" rel="stylesheet">
+    <link href="{{ asset('public/css/site.css') }}" rel="stylesheet">
 
+    <link href="{{ asset('public/css/style.css') }}" rel="stylesheet">
+    <link href="{{ asset('public/css/flexslider.css') }}" rel="stylesheet">
+    <title>Eshop a Flat E-Commerce Bootstrap Responsive Website Template | Home :: w3layouts</title>
 
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 
-
-  </head>
+</head>
 
   <body>
 
@@ -56,12 +56,18 @@
   </body>
 
 
-  <script type="text/javascript" src=" {!! asset('public/js/jquery.scrollUp.min.js') !!}  "  ></script>
-  <script type="text/javascript" src=" {!! asset('public/js/jquery.cookie.js') !!}  "  ></script>
-  <script type="text/javascript" src=" {!! asset('public/js/jquery.accordion.js') !!}  "  ></script>
-  <script type="text/javascript" src=" {!! asset('public/js/price-range.js') !!}  " charset="utf-8" ></script>
-  <script type="text/javascript" src=" {!! asset('public/js/main.js') !!} "  ></script>
-  <script type="text/javascript" src=" {!! asset('public/js/script.js') !!}  " charset="utf-8" ></script>
+<script type="text/javascript" src=" {!! asset('public/js/jquery.scrollUp.min.js') !!}  "  ></script>
+<script type="text/javascript" src=" {!! asset('public/js/jquery.cookie.js') !!}  "  ></script>
+<script type="text/javascript" src=" {!! asset('public/js/jquery.accordion.js') !!}  "  ></script>
+<script type="text/javascript" src=" {!! asset('public/js/price-range.js') !!}  " charset="utf-8" ></script>
+<script type="text/javascript" src=" {!! asset('public/js/main.js') !!} "  ></script>
+<script type="text/javascript" src=" {!! asset('public/js/script.js') !!}  " charset="utf-8" ></script>
+
+<script type="text/javascript" src=" {!! asset('public/js/simpleCart.min.js') !!} "  ></script>
+<script type="text/javascript" src=" {!! asset('public/js/responsiveslides.min.js') !!} "  ></script>
+<script type="text/javascript" src=" {!! asset('public/js/jquery.flexisel.js') !!} "  ></script>
+
+
 
 
 

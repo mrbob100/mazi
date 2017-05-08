@@ -1,0 +1,21 @@
+.catalog {
+  outline: none;
+  text-transform: uppercase;
+  font-family: 'Lato-Regular';
+  font-size: 0.95em;
+  font-style: italic;
+  z-index: 1000;
+  padding: 0px 30px 0px 50px;
+  margin: 0;
+  position: absolute; }
+  .catalog:hover {
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 8px;
+    background-color: transparent;
+    padding: 0px 30px 0px 50px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175); }
+
+.multi-column-dropdown li a {
+  outline: none; }
+
+/*# sourceMappingURL=uroda.css.map */

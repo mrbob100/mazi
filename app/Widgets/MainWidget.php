@@ -35,11 +35,11 @@ class MainWidget extends AbstractWidget
         if(!$this->config)  $this->config=['tpl'=>'menu.php'];
         // get cache
 
-  /*      if($this->tpl == 'menu.php'){
+       if($this->tpl == 'menu.php'){
             $menu = Cache::get('menu');
            if($menu) return $menu;
         }
-*/
+
         $categories=Category::all();
         $keyd=$categories->keyBy('id');
         $this->data=$keyd->toArray();
@@ -51,11 +51,11 @@ class MainWidget extends AbstractWidget
         $this->menuHtml = $this->getMenuHtml($this->tree);
 
         // set cache
-/*
+
         if($this->tpl == 'menu.php') {
             Cache::put('menu', $this->menuHtml, 60);
         }
-*/
+
         // dump($this->menuHtml);
         return $this->menuHtml;
 

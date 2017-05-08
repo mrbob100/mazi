@@ -12,7 +12,7 @@
 */
 
 
-Route::get('/', 'IndexController@index');
+Route::get('/', 'IndexController@index')->name('index');
 Route::get('article/{page}', 'IndexController@show')->name('articleShow');
 Route::delete('page/delete/{article}', function(\App\Product $product) {
 

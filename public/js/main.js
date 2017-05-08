@@ -7,6 +7,8 @@ $('.catalog').dcAccordion({
 
 
 
+
+
 function showCart(cart){
 	$('#cart .modal-body').html(cart);
 	$('#cart').modal();
@@ -47,7 +49,12 @@ $(' .modal-body').on('click', '.del-item', function(){
 		}
 	});
   });
+
 });
+
+
+
+
 
 
 function clearCart(){
