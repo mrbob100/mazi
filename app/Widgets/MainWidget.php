@@ -35,7 +35,7 @@ class MainWidget extends AbstractWidget
         if(!$this->config)  $this->config=['tpl'=>'menu.php'];
         // get cache
 
-       if($this->tpl == 'menu.php'){
+       if($this->tpl){
             $menu = Cache::get('menu');
            if($menu) return $menu;
         }

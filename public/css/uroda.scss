@@ -9,7 +9,7 @@ body{
   font-size: 0.95em;
   font-style: italic;
   z-index: 1000;
-  padding:0px 30px 0px 80px;
+  padding:0px 30px 0px 79px;
   /*text-align: center; */
  margin: 0;
 position: absolute;
@@ -18,10 +18,11 @@ position: absolute;
     display: inline;
     border: 1px solid rgba(0,0,0,.15);
     border-radius: 8px;
-    background-color:tan;
-    padding:0px 30px 0px 80px;
+    background-color:#fff;
+    padding:0px 30px 0px 79px;
    /* text-align: center; */
     box-shadow: 0 6px 12px rgba(0,0,0,.175);
+
   }
 
        }

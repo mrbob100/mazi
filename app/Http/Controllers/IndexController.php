@@ -3,18 +3,20 @@
 namespace App\Http\Controllers;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\DBAL\Schema\Table;
+use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Category;
 use App\Models\Product;
-
 use App\Widgets\MainWidget;
+use Cache;
 class IndexController extends Controller
 {
 
     protected $message;
     protected $header;
-
+    protected $sells;
 
     public function __construct()
     {
@@ -35,9 +37,12 @@ class IndexController extends Controller
         $qweb=Category::where('id',$id)->first();
 
        $nan=$qweb->name;
-       $articles=Product::where('category_id',$id)->simplePaginate(6);
-        $sells=Product::where('category_id',$id)->where('sale',true)->get();
-
+        $articles=DB::table('products')->where('category_id',$id)->where('sale','like',false)->simplePaginate(6);
+        $sells=Cache::get('sells');
+        if(!$sells) {
+        $sells=Product::where('category_id',$id)->where('sale',true)->limit(8)->get();
+            Cache::put('sells',$sells, 60);
+        }
        // $articles=Category::with('products')->where('id',$id)->simplePaginate(6)->get('category_id');
 
       //  dump($articles);
