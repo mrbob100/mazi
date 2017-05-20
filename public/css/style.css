@@ -436,10 +436,15 @@ ul.multi-column-dropdown h6 {
     float: right;
 }
 .shop a {
+    position: absolute;
+    margin-left: 30px;
+width:300px;
+
 	text-decoration:none;
 	padding:12px 20px;
-	border:1px solid #000;
-	color:#000;
+	border:1px solid #816263;
+	color:#816263;
+
 	font-size:18px;
 	letter-spacing:2px;
 }

@@ -9,26 +9,36 @@
     <div class="container">
         <!-- Example row of columns -->
         <div class="row">
-
+            <header>
+                <h3 class="head text-center">Latest Products</h3>
+            </header>
 
             @foreach($articles as $article)
 
-                <div class="col-md-4">
-                    <h2>{{ $article->category_id }}</h2>
-                    <p>{!! $article->name !!}</p>
-                    <p><a class="btn btn-default" href="{{ route('articleShow',['id'=>$article->id]) }}" role="button">Подробнее &raquo;</a></p>
+                <div class="col-md-4 product simpleCart_shelfItem text-center">
+
+                    <img src="{{ asset('public/images/'.$article->img) }}" width="350" alt="вывод изображения" />
+                    <div class="mask">
+                        <a href="{{route('product',['id'=>$article->id]) }}">Quick View</a>
+                    </div>
+                    <div class="product liked-product simpleCart_shelfItem">
+                        <a class="like_name" href="{{route('product',['id'=>$article->id]) }}">{!! $article->label !!}</a>
+                        <p><a class="item_add" href="{{route('product',['id'=>$article->id]) }}"><i></i> <span class=" item_price">${!!$article->price  !!}</span></a></p>
+                    </div>
+
+
+                    <!--p><a class="btn btn-default" href="{{-- route('articleShow',['id'=>$article->id]) --}}" role="button">Подробнее &raquo;</a></p-->
 
                 <form action="{{ route('articleDelete',['article' => $article->id]) }}" method="post">
 
                     <!-- <input type="hidden" name="_method" value="DELETE">-->
 
-                    {{method_field('DELETE')}}
+                    {{--method_field('DELETE')--}}
 
                     {{ csrf_field() }}
-
-                    <button type="submit" class="btn btn-danger">
+                    <!--button type="submit" class="btn btn-danger">
                         Delete
-                    </button>
+                    </button-->
 
                 </form>
                 </div>
@@ -38,9 +48,7 @@
         {!! $articles->render()  !!}
         <hr>
 
-        <footer>
-            <p>&copy; 2016 Company, Inc.</p>
-        </footer>
+
     </div> <!-- /container -->
 
 @endsection

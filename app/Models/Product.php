@@ -3,19 +3,19 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Category;
+
 
 class Product extends Model
 {
     protected $table='products';
     protected $primaryKey='id';
-    protected $fillable = ['category_id','name','content','price','keywords','description','img','hit','new','sale'];
+    protected $fillable = ['category_id','name','content','price','keywords','description','img','label','hit','new','sale'];
     public function user(){
         return $this->belongsTo('App\User');
     }
 
-    public function category()
+    public function categories()
     {
-        return  $this->belongsTo('Category','id','category_id');
+        return  $this->belongsTo('App\Models\Category','id','category_id');
     }
 }

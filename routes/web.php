@@ -30,3 +30,4 @@ Route::get('loadcsv',['uses'=>'Admin\CsvloadController@index','as'=>'loadCsv']);
 Route::post('loadcsv','Admin\CsvloadController@store')->name('storeCsv');
 
 Route::get('category/{id}',['uses'=>'CategoryController@index','as'=>'category']);
+Route::get('product/{id}',['uses'=>'ProductController@index','as'=>'product']);
