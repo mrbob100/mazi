@@ -9,7 +9,7 @@
         "arrilot/laravel-widgets": "^3.7",
         "laravel/framework": "5.4.*",
         "laravel/tinker": "~1.0",
-        "illuminate/html": "5.*",
+        "laravelcollective/html":"^5.4.0",
         "doctrine/dbal": "*"
     },
     "require-dev": {

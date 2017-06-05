@@ -13,7 +13,7 @@
     <link href="{{ asset('public/css/animate.css') }}" rel="stylesheet">
 
 	<link href="{{ asset('public/css/component.css') }}" rel="stylesheet">
-	<link href="{{ asset('public/css/flexslider.css') }}" rel="stylesheet">
+	<link href="{{ asset('public/css/flexslider.css') }}" media="screen" rel="stylesheet">
 	<link href="{{ asset('public/css/style.css') }}" rel="stylesheet">
 	<link href="{{ asset('public/css/uroda.css') }}" rel="stylesheet">
 

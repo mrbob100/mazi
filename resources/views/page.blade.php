@@ -29,18 +29,18 @@
 
                     <!--p><a class="btn btn-default" href="{{-- route('articleShow',['id'=>$article->id]) --}}" role="button">Подробнее &raquo;</a></p-->
 
-                <form action="{{ route('articleDelete',['article' => $article->id]) }}" method="post">
+                <!--form action="{{-- route('articleDelete',['article' => $article->id]) --}}" method="post"-->
 
                     <!-- <input type="hidden" name="_method" value="DELETE">-->
 
                     {{--method_field('DELETE')--}}
 
-                    {{ csrf_field() }}
+                    {{-- csrf_field() --}}
                     <!--button type="submit" class="btn btn-danger">
                         Delete
                     </button-->
 
-                </form>
+                <!--/form-->
                 </div>
             @endforeach
 

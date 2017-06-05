@@ -18,4 +18,9 @@ class Product extends Model
     {
         return  $this->belongsTo('App\Models\Category','id','category_id');
     }
+
+    public function order_items()
+    {
+        return $this->belongsTo('App\Models\Order_item','product_id','id');
+    }
 }
