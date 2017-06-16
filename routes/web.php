@@ -11,7 +11,10 @@
 |
 */
 
-Route::group(['middleware'=>'web'], function(){
+Route::group(/**
+ *
+ */
+    ['middleware'=>'web'], function(){
 Route::get('/', 'IndexController@index')->name('index');
 //Route::get('article/{page}', 'IndexController@show')->name('articleShow');
 //Route::delete('page/delete/{article}', function(\App\Product $product) {
@@ -30,18 +33,31 @@ Route::get('loadcsv',['uses'=>'Admin\CsvloadController@index','as'=>'loadCsv']);
 Route::post('loadcsv','Admin\CsvloadController@store')->name('storeCsv');
 
 Route::get('category/{id}',['uses'=>'CategoryController@index','as'=>'category']);
-Route::get('product/{id}',['uses'=>'ProductController@index','as'=>'product']);
+//Route::get('product/{id}',['uses'=>'ProductController@index','as'=>'product']);
 
+//Route::match(['get,post'],'cart/{id}',['uses'=>'CartController@add','as'=>'addcart']);
 
+//Route::get('cart',['uses'=>'CartController@cartClear','as'=>'clear']);
+//Route::get('cart',['uses'=>'CartController@cartShow','as'=>'show']);
+//Route::post('cart',['uses'=>'CartController@cartView','as'=>'cartView']);
+//Route::get('cartParameters',['uses'=>'CartController@index']);
+//Route::get('cart/{id}',['uses'=>'CartController@DelItem','as'=>'delIt']);
 // стандартные маршруты  для аутенфикации
+    Route::group(['prefix'=>'product'], function() {
+        Route::get('/', ['uses'=>'ProductController@index', 'as'=>'product']);
 
+    });
+Route::get('addcartios',['uses'=>'CartController@index', 'as'=>'addcart']);
+Route::get('clear',['uses'=>'CartController@clear', 'as'=>'clearance']);
+Route::get('arrange',['uses'=>'CartController@cartView', 'as'=>'arrangeContract']);
+Route::post('order',['uses'=>'CartController@cartView', 'as'=>'contract']);
 
-    Auth::routes();
-    Route::get('/home', 'HomeController@index')->name('home');
+Route::get('delIt',['uses'=>'CartController@DelItem']);
 });
 
 
-
+Auth::routes();
+Route::get('/home', 'HomeController@index')->name('home');
 
 
 // Admin

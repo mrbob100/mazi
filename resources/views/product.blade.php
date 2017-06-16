@@ -3,9 +3,7 @@
 @section('content')
     <div class="new-product">
 
-<?php $sed=$product->img; echo($sed);
 
-?>
         <div class="col-md-5 zoom-grid">
             <div class="flexslider">
                 <ul class="slides">
@@ -57,7 +55,13 @@
                 <div class="clearfix"></div>
             </div>
             <div class="purchase">
-                <a href="#">Purchase Now</a>
+
+                <label for="qty" >количество:</label>
+                <p><input  type="text" name="qty"  value="1"  id="{{$product->id}}" class="btn btn-default"/> шт.</p>
+                <br/>
+                <a href="{{ asset('addcart',['id'=>$product->id]) }}  " data-id="{{$product->id}}" class="btn btn-default add-to-cart" style="text-decoration: none;"><i class="fa fa-shopping-cart"></i>Купить</a>
+                <!--a href="#"   data-id="{{--$product->id--}}" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Купить</a-->
+                    {{ csrf_field() }}
                 <div class="social-icons">
                     <ul>
                         <li><a class="facebook1" href="{{ asset('#') }}"></a></li>

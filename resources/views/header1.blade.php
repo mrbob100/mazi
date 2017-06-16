@@ -12,7 +12,7 @@
                     <a href="{{asset('checkout.html') }}">
                         <h3> <span class="simpleCart_total"> $0.00 </span> (<span id="simpleCart_quantity" class="simpleCart_quantity"> 0 </span>)<img src="images/bag.png" alt=""></h3>
                     </a>
-                    <p><a href="{{asset('javascript:;') }}" class="simpleCart_empty">Empty cart</a></p>
+                    <p><a href="{{route('clearance') }}" class="simpleCart_empty">Empty cart</a></p>
                     <div class="clearfix"> </div>
                 </div>
             </div>

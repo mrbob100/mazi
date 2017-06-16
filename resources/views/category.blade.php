@@ -1,8 +1,0 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: Vladymir
- * Date: 23.04.2017
- * Time: 9:48
- */
-echo ('ПРивет, это я');

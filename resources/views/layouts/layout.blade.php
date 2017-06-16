@@ -11,7 +11,7 @@
 	<link href="{{ asset('public/css/site.css') }}" rel="stylesheet">
 	<link href="{{ asset('public/css/jumbotron.css') }}" rel="stylesheet">
     <link href="{{ asset('public/css/animate.css') }}" rel="stylesheet">
-
+	<meta name="csrf-token" content="{!! csrf_token() !!}" />
 	<link href="{{ asset('public/css/component.css') }}" rel="stylesheet">
 	<link href="{{ asset('public/css/flexslider.css') }}" media="screen" rel="stylesheet">
 	<link href="{{ asset('public/css/style.css') }}" rel="stylesheet">
@@ -22,6 +22,27 @@
 
 </head>
 <body>
+
+
+<div class="modal fade" id="cart" role="dialog" data-backdrop="static" data-keyboard="false">
+	<div class="modal-dialog modal-lg " role="document" style="margin: 30px auto; width: 1000px;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title">Корзина</h4>
+			</div>
+			<div class="modal-body">
+				<p>One fine body&hellip;</p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Продолжить покупки</button>
+				<a href="{{ route('arrangeContract') }}" class="btn btn-success">Оформить заказ</a>
+				<button type="button" class="btn btn-danger" onclick="clearCart()">Очистить корзину</button>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
 	<!-- header-section-starts -->
 
 	@include('header1')
@@ -166,6 +187,9 @@
 			</div>
 		</div>
 		@include('footer')
+
+
+
 </body>
 <script type="text/javascript" src=" {!! asset('public/js/jquery.scrollUp.min.js') !!}  "  ></script>
 <script type="text/javascript" src=" {!! asset('public/js/jquery.cookie.js') !!}  "  ></script>

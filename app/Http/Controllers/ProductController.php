@@ -5,6 +5,7 @@ use App\Models\Product;
 use App\Widgets\MainWidget;
 use Cache;
 use Illuminate\Http\Request;
+
 class ProductController extends Controller
 {
    // public function index($id)
@@ -12,7 +13,6 @@ class ProductController extends Controller
     {
       // print_r($request->all());
          $id=$request->id;
-        // $path=$request->path();
 
         $akkord = new MainWidget();
         $akkord->init();
@@ -25,16 +25,20 @@ class ProductController extends Controller
         $alfa=substr($test1,2,10);
         $alfa2=$alfa+1;
         $alfa3=$alfa+2;
-        $base=substr($test1,0,$test2-1);
+        if($test2>3){
+            $base=substr($test1,0,$test2-2);
+        } else { $base=substr($test1,0,$test2-1); }
+
         $common1=$base.$alfa2.'.'.$lab1[1];
         $common2=$base.$alfa3.'.'.$lab1[1];
-        dump($product);
+       // dump($product);
         $sells=Cache::get('sells');
         if(!$sells) {
             $sells=Product::where('category_id',$id)->where('sale',true)->limit(8)->get();
             Cache::put('sells',$sells, 60);
         }
         
-        return view('product')->with(['akkordeon'=>$akkordeon ,'sells'=>$sells,'product'=>$product,'common1'=>$common1, 'common2'=>$common2]);
+       return view('product')->with(['akkordeon'=>$akkordeon ,'sells'=>$sells,'product'=>$product,'common1'=>$common1, 'common2'=>$common2]);
+       // return View::make('product', compact('akkordeon'),compact('sells'),compact('product'),compact('common1'),compact('common2'));
     }
 }

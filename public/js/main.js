@@ -16,7 +16,7 @@ function showCart(cart){
 
 function getCart(){
 	$.ajax({
-		url: 'http://localhost/ceil/web/cart/show',
+		url: 'show',
       //  url: 'http://pullsky.kretivz.pro/web/cart/show',
 		type: 'GET',
 		success: function(res){
@@ -35,10 +35,10 @@ $(function(){
 $(' .modal-body').on('click', '.del-item', function(){
 	//alert(123);
 	var id = $(this).data('id');
-    var cat = $(this).data('cat');
+  //  var cat = $(this).data('cat');
 	$.ajax({
-		url: 'http://localhost/ceil/web/cart/del-item',
-		data: {id: id, cat: cat},
+		url: 'delIt',
+		data: {id: id/*, cat: cat */},
 		type: 'GET',
 		success: function(res){
 			if(!res) alert('Ошибка!');
@@ -59,7 +59,7 @@ $(' .modal-body').on('click', '.del-item', function(){
 
 function clearCart(){
 	$.ajax({
-		url: 'http://localhost/ceil/web/cart/clear',
+		url: 'Clear',
 		type: 'GET',
 		success: function(res){
 			if(!res) alert('Выйдите из категории товара и повторите очистку!');
@@ -72,18 +72,24 @@ function clearCart(){
 }
 
 
-$(function(){
+$( document ).ready(function(){
 $('.add-to-cart').on('click', function (e) {
 	e.preventDefault();
 	var id = $(this).data('id'),
-	 qty=$('#qty').val();
+		// qty=$('#qty').val();
+        qty=1;
 	$.ajax({
 		//url: 'http://pullsky.kretivz.pro/web/cart/add',
-        url: 'http://localhost/ceil/web/cart/add',
+      url: "addcartios",
+	//	url: "<php echo URL::action('CartController@index')?>",
+		cache: false,
+		//contentType: false,
+      //  url: '/CartController/cartAdd',
 	//	url: '@web/cart/add',
-		data: {id: id, qty: qty},
+		data: {id: id, qty: qty, '_token': $('meta[name="csrf-token"]').attr('content')},
 		type: 'GET',
 		dataType: "text",
+
 		success: function(res){
 			if(!res) alert('Ошибка!');
 			showCart(res);
@@ -93,7 +99,9 @@ $('.add-to-cart').on('click', function (e) {
 		error: function(){
 			alert('Ошибка передачи!');
 		}
+
 	});
+
 });
 });
 

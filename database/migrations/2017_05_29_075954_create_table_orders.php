@@ -18,10 +18,14 @@ class CreateTableOrders extends Migration
             $table->integer('qty');
             $table->float('sum');
             $table->boolean('status',2)->nullable();
-            $table->integer('user_id')->unsigned();
+            $table->string('firstname')->nullable();
+            $table->string('secondname');
+            $table->string('email');
+            $table->string('phone');
+            $table->string('address');
             $table->timestamps();
             $table->string('comment',255)->nullable();
-            $table->foreign('user_id')->references('id')->on('users');
+
 
         });
     }

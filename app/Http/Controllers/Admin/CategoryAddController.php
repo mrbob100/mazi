@@ -22,7 +22,8 @@ class CategoryAddController extends Controller
            //валидация данных
            $validator=Validator::make($input,[
                'name'=>'required |unique:categories| max:255',
-               'parent_id'=>'min:0',
+               'parent_id'=>'min:0'
+
            ]);
            if( $validator->fails())
            {
