@@ -21,21 +21,29 @@ class MainWidget extends AbstractWidget
 
     protected $config=[];
 
-    public function init(){
+    public function init($a){
 
-        if( $this->tpl === null ){
+        if( $a === null ){
             $this->tpl = 'menu';
-            $this->config=['tpl'=>'menu.php'];
-        }
-        $this->tpl .= '.php';
+            $this->config=['tpl'=>$a];
+            $this->tpl = '.php';
+        } else {$this->tpl = $a; }
+
     }
 
     public function run()
     {
-        if(!$this->config)  $this->config=['tpl'=>'menu.php'];
+        if(!$this->config) {
+            $this->config=['tpl'=>'menu.php'];
+            $this->tpl='menu.php';
+        } else {
+            //    $this->config=['tpl'=>'select.php'];
+            $this->model= $this->config['model'];
+            $this->tpl='select.php';
+        }
         // get cache
 
-       if($this->tpl){
+       if($this->tpl=='menu.php'){
             $menu = Cache::get('menu');
            if($menu) return $menu;
         }
@@ -83,7 +91,9 @@ class MainWidget extends AbstractWidget
 
     protected function catToTemplate($category, $tab){
         ob_start();
+        $sas=$this->tpl;
         include __DIR__ . '/menu_tpl/' . $this->tpl;
+
         return ob_get_clean();
     }
 

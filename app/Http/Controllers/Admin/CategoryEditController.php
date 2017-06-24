@@ -5,8 +5,9 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
-use Illuminate\Support\Facades\DB;
+//use Illuminate\Support\Facades\DB;
 use Validator;
+use DB;
 class CategoryEditController extends Controller
 {
     public function index(Category $category, Request $request)
@@ -60,13 +61,22 @@ class CategoryEditController extends Controller
       //  $old=$category->toArray();
       //  dd($old);
 
+if($old->parent_id==0){
+    $parent='Самостоятельная категория';
+} else {
+   $parent= $old->getCategory->name;
+
+}
+$model=$old;
         if(view()->exists('admin.category_edit'))
         {
             $data=[
                 'title'=>'Редактирование категории -'.$old['name'],
-                'data'=>$old
+                'data'=>$old,
+                'parent'=> $parent,
+                'model'=>$model
             ];
-            return view('admin.category_edit',$data);
+            return view('admin.category_edit',$data,['model'=>$model]);
         }
         abort(404);
     }

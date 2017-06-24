@@ -23,7 +23,7 @@
                     <div class="row">
                         <div class="col-xs-6 col-sm-6 col-lg-6 col-xs-offset-3 col-sm-offset-3  col-lg-offset-3 ">
                             <ul class="multi-column-dropdown">
-                                {!!  $akkordeon !!}
+                                {{ Widget::run('MainWidget') }}
                             </ul>
                         </div>
 

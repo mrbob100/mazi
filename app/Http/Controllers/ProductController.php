@@ -14,9 +14,9 @@ class ProductController extends Controller
       // print_r($request->all());
          $id=$request->id;
 
-        $akkord = new MainWidget();
-        $akkord->init();
-        $akkordeon= $akkord->run();
+      //  $akkord = new MainWidget();
+      //  $akkord->init();
+      //  $akkordeon= $akkord->run();
         $product=Product::where('id',$id)->first();
 // добавление имен файлов в карусель flexslider
         $lab1= explode('.',$product->mini);
@@ -38,7 +38,7 @@ class ProductController extends Controller
             Cache::put('sells',$sells, 60);
         }
         
-       return view('product')->with(['akkordeon'=>$akkordeon ,'sells'=>$sells,'product'=>$product,'common1'=>$common1, 'common2'=>$common2]);
+       return view('product')->with(['sells'=>$sells,'product'=>$product,'common1'=>$common1, 'common2'=>$common2]);
        // return View::make('product', compact('akkordeon'),compact('sells'),compact('product'),compact('common1'),compact('common2'));
     }
 }

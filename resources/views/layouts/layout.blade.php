@@ -62,7 +62,7 @@
 
 			<div class="col-xs-7 col-sm-7 col-lg-7 col-xs-offset-2 col-sm-offset-2  col-lg-offset-2  ">
 				<ul class="catalog multi-column-dropdown " >
-					<div class="nav nav-pills  horizontal "> {!!  $akkordeon !!}    </div>
+					<div class="nav nav-pills  horizontal "> {{ Widget::run('MainWidget') }}   </div>
 
 
 				</ul>

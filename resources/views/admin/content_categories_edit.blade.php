@@ -34,9 +34,27 @@
         </div>
     </div-->
     <div class="form-group">
-        {!! Form::label('parent_id','ParentId',['class'=>'col-xs2 control-label']) !!}
+        {!! Form::label('parent_id','Родительская категория',['class'=>'col-xs2 control-label']) !!}
         <div class="col-xs8">
-            {!! Form::number('parent_id',$data['parent_id'],['class'=>'form-control','placeholder'=>'Родительская Id']) !!}
+            {{--$var=$data['parent_id']===0 ? 'самостоятельная категория' : $data->getCategory->name--}}
+
+            <div class="form-group field-category-parent_id has-success">
+                <!--label class="control-label" for="category-parent_id">Родительская категория</label
+                Для вывода виджета использован параметр config['model'] - это объект категории для выборки select.php- выпадающий список
+                -->
+
+                <select id="category-parent_id" class="form-control" name="Category[parent_id]">
+                    <option value="0">Самостоятельная категория</option>
+                    {{ $var=Widget::run('MainWidget',['tpl'=>'select.php','model'=>$model]) }}
+                    {!! Form::select('parent_id', $var,['class'=>'form-control','placeholder'=>'Родительская Id']) !!}
+                </select>
+            </div>
+
+
+
+
+
+
         </div>
     </div>
     <div class="form-group">
