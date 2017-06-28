@@ -57,7 +57,7 @@ Route::get('delIt',['uses'=>'CartController@DelItem']);
 
 
 Auth::routes();
-Route::get('/home', 'HomeController@index')->name('home');
+//Route::get('/home', 'HomeController@index')->name('home');
 
 
 // Admin
@@ -71,6 +71,13 @@ Route::group(['prefix'=>'admin','middleware'=>['web','auth']], function(){
 
     // Main page
     Route::get('/', function (){
+        $user=Auth::user();
+        if(!Auth::check()) {
+            return redirect()->back();
+        }
+
+
+        if($user['login']!='admin')  return redirect('');
      if(view()->exists('admin.index'))
          {
              $data=['title'=>'Панель администратора'];
