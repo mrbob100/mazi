@@ -11,11 +11,12 @@ class CategoryController extends Controller
 {
     public function index()
     {
-      if(view()->exists('admin.index'))
+      if(view()->exists('admin.categories.index'))
       {
         //  $categories=Category::simplePaginate(10);
 
           $categories=Category::with('getCategory')->simplePaginate(10);
+
           $data=[
             'title'=>'Категории',
               'categories'=>$categories
@@ -23,7 +24,7 @@ class CategoryController extends Controller
           ];
        //   return view('admin.index',$data);
 
-          return view('admin.index11',$data);
+          return view('admin.categories.index11',$data);
       }
       abort(404);
     }

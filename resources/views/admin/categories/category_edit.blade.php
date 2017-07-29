@@ -7,5 +7,5 @@
     @endsection
 
     @section('content')
-        @include ('admin.content_categories_edit')
+        @include ('admin.categories.content_categories_edit')
     @endsection

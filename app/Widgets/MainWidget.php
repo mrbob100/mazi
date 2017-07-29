@@ -39,7 +39,8 @@ class MainWidget extends AbstractWidget
         } else {
             //    $this->config=['tpl'=>'select.php'];
             $this->model= $this->config['model'];
-            $this->tpl='select.php';
+          if($this->config['tpl']=='select.php')   $this->tpl='select.php';
+            if($this->config['tpl']=='select_product.php')  $this->tpl='select_product.php';
         }
         // get cache
 

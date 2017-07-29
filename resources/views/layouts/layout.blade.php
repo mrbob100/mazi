@@ -8,6 +8,7 @@
     <link href="{{ asset('public/css/animate.css') }}" rel="stylesheet">
     <script type="text/javascript" src=" {!! asset('public/js/jquery.js')   !!}  "  ></script>
     <script type="text/javascript" src=" {!! asset('public/js/bootstrap.min.js') !!} "  ></script>
+
 	<link href="{{ asset('public/css/site.css') }}" rel="stylesheet">
 	<link href="{{ asset('public/css/jumbotron.css') }}" rel="stylesheet">
     <link href="{{ asset('public/css/animate.css') }}" rel="stylesheet">
@@ -145,7 +146,7 @@
 			<div class="main-content">
 				<div class="online-strip">
 					<div class="col-md-4 follow-us">
-						<h3>follow us : <a class="twitter" href="{{asset('#') }}"></a><a class="facebook" href="{{asset('#') }}"></a></h3>
+						<h3>follow us : @yield('js')</h3>
 					</div>
 					<div class="col-md-4 shipping-grid">
 						<div class="shipping">
@@ -191,6 +192,7 @@
 
 
 </body>
+
 <script type="text/javascript" src=" {!! asset('public/js/jquery.scrollUp.min.js') !!}  "  ></script>
 <script type="text/javascript" src=" {!! asset('public/js/jquery.cookie.js') !!}  "  ></script>
 <script type="text/javascript" src=" {!! asset('public/js/jquery.accordion.js') !!}  "  ></script>
@@ -202,4 +204,5 @@
 <script type="text/javascript" src=" {!! asset('public/js/responsiveslides.min.js') !!} "  ></script>
 <script type="text/javascript" src=" {!! asset('public/js/jquery.flexisel.js') !!} "  ></script>
 <script type="text/javascript" src=" {!! asset('public/js/main.js') !!} "  ></script>
+
 </html>

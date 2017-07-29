@@ -14,9 +14,9 @@ class Product extends Model
         return $this->belongsTo('App\User');
     }
 
-    public function categories()
+    public function getCategory()
     {
-        return  $this->belongsTo('App\Models\Category','id','category_id');
+        return  $this->belongsTo('App\Models\Category','category_id','id');
     }
 
     public function order_items()

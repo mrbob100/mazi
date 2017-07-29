@@ -75,9 +75,10 @@ function clearCart(){
 $( document ).ready(function(){
 $('.add-to-cart').on('click', function (e) {
 	e.preventDefault();
-	var id = $(this).data('id'),
-		// qty=$('#qty').val();
-        qty=1;
+	var id = $(this).data('id');
+	var	 qty=$('#qty').val();
+
+		// qty=1;
 	$.ajax({
 		//url: 'http://pullsky.kretivz.pro/web/cart/add',
       url: "addcartios",
@@ -89,7 +90,6 @@ $('.add-to-cart').on('click', function (e) {
 		data: {id: id, qty: qty, '_token': $('meta[name="csrf-token"]').attr('content')},
 		type: 'GET',
 		dataType: "text",
-
 		success: function(res){
 			if(!res) alert('Ошибка!');
 			showCart(res);
@@ -104,12 +104,6 @@ $('.add-to-cart').on('click', function (e) {
 
 });
 });
-
-
-
-
-
-
 
 
 

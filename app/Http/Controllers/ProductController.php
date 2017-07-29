@@ -5,14 +5,17 @@ use App\Models\Product;
 use App\Widgets\MainWidget;
 use Cache;
 use Illuminate\Http\Request;
-
+use Symfony\Component\Routing\RequestContext;
 class ProductController extends Controller
 {
    // public function index($id)
     public function index(Request $request)
     {
       // print_r($request->all());
+
          $id=$request->id;
+      //   $context= new RequestContext();
+      //  $context->fromRequest($request);
 
       //  $akkord = new MainWidget();
       //  $akkord->init();

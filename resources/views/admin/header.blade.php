@@ -1,6 +1,6 @@
 <div class="container portfolio_title">
     <div class="section-title">
-        <h5>{{$title}}</h5>
+        <h4>{{$title}}</h4>
     </div>
 </div>
 <div class="nav nav-pills  horizontal">

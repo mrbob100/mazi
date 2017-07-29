@@ -32,9 +32,11 @@ use Cache;
 );*/
 class CartController extends Controller
 {
+
+
+
     public function index(Request $request)
     {
-
         $id=$request->id;
         $qty =(int) $request->qty;
 
@@ -104,15 +106,23 @@ class CartController extends Controller
 
     public function cartView(Request $request)
     {
-        $akkord = new MainWidget();
+        /*$akkord = new MainWidget();
         $akkord->init();
         $akkordeon= $akkord->run();
-
+*/
 
 
         $session =session('cart');
         $order = new Order();
         if($request->isMethod('post')) {
+            $rules = [
+                'name'=>'required|max:255',
+                'email'=>'required|email',
+                'phone'=>'required||min:10',
+                'address'=>'required|max:255'
+            ];
+            $this->validate($request,$rules);
+
             $order->firstname=$request->name;
             $order->secondname=$request->secondname;
             $order->email=$request->email;
@@ -132,7 +142,7 @@ class CartController extends Controller
             }
         }
 
-        return view('cart.view', ['order'=>$order, 'akkordeon'=>$akkordeon ] );
+        return view('cart.view', ['order'=>$order ] );
     }
 
     protected function saveOrderItems($items, $order_id){

@@ -57,9 +57,9 @@
             <div class="purchase">
 
                 <label for="qty" >количество:</label>
-                <p><input  type="text" name="qty"  value="1"  id="{{$product->id}}" class="btn btn-default"/> шт.</p>
+                <p><input  type="text" id="qty"  value="1"   class="btn btn-default"/> шт.</p>
                 <br/>
-                <a href="{{ asset('addcart',['id'=>$product->id]) }}  " data-id="{{$product->id}}" class="btn btn-default add-to-cart" style="text-decoration: none;"><i class="fa fa-shopping-cart"></i>Купить</a>
+                <a href="{{ asset('#',['id'=>$product->id]) }}  " data-id="{{$product->id}}" class="btn btn-default add-to-cart" style="text-decoration: none;"><i class="fa fa-shopping-cart"></i>Купить</a>
                 <!--a href="#"   data-id="{{--$product->id--}}" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Купить</a-->
                     {{ csrf_field() }}
                 <div class="social-icons">

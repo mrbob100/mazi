@@ -23,11 +23,16 @@ class CategoryEditController extends Controller
         if($request->isMethod('post'))
         {
             $input=$request->except('_token');
+
             $validator=Validator::make($input,[
                 // уникальное поле в таблице categories, поле - которое игнорируется, по какому полю поиск
-                'name'=>'required | max:255  |unique:categories,name,'.$input['id'],
-                'parent_id'=>'required |min:0',
+                'name'=>'required | max:255 '.$input['id'],
+                'Category.parent_id'=>'required | min:0',
+                'keywords'=>'nullable',
+                'description'=>'nullable',
             ]);
+
+
             if( $validator->fails())
             {
                 return redirect()->route('categoryEdit',['id'=>$input['id']])->withErrors( $validator)->withInput();
@@ -45,9 +50,12 @@ class CategoryEditController extends Controller
                }
                unset($input['old_images']);  // удаление ячейки
         */
-            $category->fill($input); //заполнение полей
+          //  $ssa=$input["Category"];
+            $input['parent_id']=$input["Category"]['parent_id'];
+          //  $sdd=$input["Category"]['parent_id'];
 
-              //  dd($category);
+            $category->fill($input); //заполнение полей category значениями $input
+
            $cat=DB::table('categories')->where('id',$id)->update($category->toArray());
             if($cat)
             {
@@ -67,16 +75,17 @@ if($old->parent_id==0){
    $parent= $old->getCategory->name;
 
 }
-$model=$old;
-        if(view()->exists('admin.category_edit'))
+//$model=$old;
+        if(view()->exists('admin.categories.category_edit'))
         {
             $data=[
                 'title'=>'Редактирование категории -'.$old['name'],
                 'data'=>$old,
                 'parent'=> $parent,
-                'model'=>$model
+             //   'model'=>$model
+                'model'=>$old
             ];
-            return view('admin.category_edit',$data,['model'=>$model]);
+            return view('admin.categories.category_edit',$data,['model'=>$old]);
         }
         abort(404);
     }

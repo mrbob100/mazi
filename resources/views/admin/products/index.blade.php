@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-<div class="container">
+
 @section('header')
 
     @include('admin.header')
@@ -7,6 +7,5 @@
 @endsection
 
 @section('content')
-    @include ('admin.content_categories_add')
+    @include ('admin.products.content_products')
 @endsection
-</div>

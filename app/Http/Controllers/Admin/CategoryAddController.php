@@ -46,12 +46,12 @@ class CategoryAddController extends Controller
                return redirect('admin')->with('status','Категория добавлена');
            }
        }
-        if(view()->exists('admin.category_add'))
+        if(view()->exists('admin.categories.category_add'))
         {
             $data=[
              'title' =>'Новая страница'
             ];
-            return view('admin.category_add', $data);
+            return view('admin.categories.category_add', $data);
         }
         abort(404);
     }

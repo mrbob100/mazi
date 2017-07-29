@@ -33,15 +33,7 @@ Route::get('loadcsv',['uses'=>'Admin\CsvloadController@index','as'=>'loadCsv']);
 Route::post('loadcsv','Admin\CsvloadController@store')->name('storeCsv');
 
 Route::get('category/{id}',['uses'=>'CategoryController@index','as'=>'category']);
-//Route::get('product/{id}',['uses'=>'ProductController@index','as'=>'product']);
 
-//Route::match(['get,post'],'cart/{id}',['uses'=>'CartController@add','as'=>'addcart']);
-
-//Route::get('cart',['uses'=>'CartController@cartClear','as'=>'clear']);
-//Route::get('cart',['uses'=>'CartController@cartShow','as'=>'show']);
-//Route::post('cart',['uses'=>'CartController@cartView','as'=>'cartView']);
-//Route::get('cartParameters',['uses'=>'CartController@index']);
-//Route::get('cart/{id}',['uses'=>'CartController@DelItem','as'=>'delIt']);
 // стандартные маршруты  для аутенфикации
     Route::group(['prefix'=>'product'], function() {
         Route::get('/', ['uses'=>'ProductController@index', 'as'=>'product']);
@@ -53,18 +45,16 @@ Route::get('arrange',['uses'=>'CartController@cartView', 'as'=>'arrangeContract'
 Route::post('order',['uses'=>'CartController@cartView', 'as'=>'contract']);
 
 Route::get('delIt',['uses'=>'CartController@DelItem']);
+
+
+
+    Route::post('ulogin', ['uses'=>'UloginController@login', 'as'=>'ulogin']);
 });
 
 
+
 Auth::routes();
-//Route::get('/home', 'HomeController@index')->name('home');
-
-
-// Admin
-//These are the roures of the administrat0r's panel
-
-
-
+Route::get('home', 'HomeController@login')->name('home');
 
 
 Route::group(['prefix'=>'admin','middleware'=>['web','auth']], function(){
@@ -77,11 +67,13 @@ Route::group(['prefix'=>'admin','middleware'=>['web','auth']], function(){
         }
 
 
-        if($user['login']!='admin')  return redirect('');
-     if(view()->exists('admin.index'))
+        if($user['login']!='admin')  {
+            return redirect('ulogin');
+        }
+     if(view()->exists('admin.categories.index'))
          {
              $data=['title'=>'Панель администратора'];
-             return view('admin.index',$data);
+             return view('admin.categories.index',$data);
          }
     });
     // Actions

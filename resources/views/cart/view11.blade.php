@@ -72,31 +72,31 @@
     <div class="form-group">
         {!! Form::label('name','Имя',['class'=>'col-xs-2 control-label']) !!}
         <div class="col-xs-8">
-            {!! Form::text('name',old('name'),['class'=>'form-control','placeholder'=>'Ваше имя']) !!}
+            {!! Form::text('name',$order['name'],['class'=>'form-control','placeholder'=>'Ваше имя']) !!}
         </div>
     </div>
     <div class="form-group">
         {!! Form::label('secondname','Фамилия',['class'=>'col-xs-2 control-label']) !!}
         <div class="col-xs-8">
-            {!! Form::text('secondname',old('secondname'),['class'=>'form-control','placeholder'=>'Ваша фамилия']) !!}
+            {!! Form::text('secondname',$order['secondname'],['class'=>'form-control','placeholder'=>'Ваша фамилия']) !!}
         </div>
     </div>
     <div class="form-group">
         {!! Form::label('email','E-mail',['class'=>'col-xs-2 control-label']) !!}
         <div class="col-xs-8">
-            {!! Form::text('email',old('email'),['class'=>'form-control','placeholder'=>'Ваш E-mail']) !!}
+            {!! Form::text('email',$order['email'],['class'=>'form-control','placeholder'=>'Ваш E-mail']) !!}
         </div>
     </div>
     <div class="form-group">
         {!! Form::label('phone','Телефон',['class'=>'col-xs-2 control-label']) !!}
         <div class="col-xs-8">
-            {!! Form::text('phone',old('phone'),['class'=>'form-control','placeholder'=>'Телефон']) !!}
+            {!! Form::text('phone',$order['phone'],['class'=>'form-control','placeholder'=>'Телефон']) !!}
         </div>
     </div>
     <div class="form-group">
         {!! Form::label('address','Адрес',['class'=>'col-xs-2 control-label']) !!}
         <div class="col-xs-8">
-            {!! Form::text('address',old('address'),['class'=>'form-control','placeholder'=>'Ваш адрес']) !!}
+            {!! Form::text('address',$order['address'],['class'=>'form-control','placeholder'=>'Ваш адрес']) !!}
         </div>
     </div>
     <div class="form-group">
