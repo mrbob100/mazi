@@ -22,7 +22,7 @@ class ProductController extends Controller
       //  $akkordeon= $akkord->run();
         $product=Product::where('id',$id)->first();
 // добавление имен файлов в карусель flexslider
-        $lab1= explode('.',$product->mini);
+    /*    $lab1= explode('.',$product->mini);
         $test1=strval($lab1[0]);
         $test2=strlen($test1);
         $alfa=substr($test1,2,10);
@@ -35,13 +35,16 @@ class ProductController extends Controller
         $common1=$base.$alfa2.'.'.$lab1[1];
         $common2=$base.$alfa3.'.'.$lab1[1];
        // dump($product);
+    */
+
         $sells=Cache::get('sells');
         if(!$sells) {
             $sells=Product::where('category_id',$id)->where('sale',true)->limit(8)->get();
             Cache::put('sells',$sells, 60);
         }
         
-       return view('product')->with(['sells'=>$sells,'product'=>$product,'common1'=>$common1, 'common2'=>$common2]);
+      // return view('product')->with(['sells'=>$sells,'product'=>$product,'common1'=>$common1, 'common2'=>$common2]);
+        return view('product')->with(['sells'=>$sells,'product'=>$product]);
        // return View::make('product', compact('akkordeon'),compact('sells'),compact('product'),compact('common1'),compact('common2'));
     }
 }

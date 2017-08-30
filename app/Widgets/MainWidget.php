@@ -5,7 +5,7 @@ namespace App\Widgets;
 use Arrilot\Widgets\AbstractWidget;
 use Cache;
 use App\Models\Category;
-
+use DB;
 
 class MainWidget extends AbstractWidget
 {
@@ -50,6 +50,8 @@ class MainWidget extends AbstractWidget
         }
 
         $categories=Category::all();
+
+
         $keyd=$categories->keyBy('id');
         $this->data=$keyd->toArray();
        // dump($this->data);

@@ -84,7 +84,7 @@ Route::group(['prefix'=>'admin','middleware'=>['web','auth']], function(){
         //admin/product/edit/2
         Route::match(['get','post','delete'],'edit/{id}',['uses'=>'Admin\CategoryEditController@index','as'=>'categoryEdit']);
     });
-
+    
     // Actions
     Route::group(['prefix'=>'products'], function (){
         Route::get('/', ['uses'=>'Admin\ProductController@index','as'=>'products']);

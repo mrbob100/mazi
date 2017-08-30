@@ -38,11 +38,13 @@ class IndexController extends Controller
         }])->simplePaginate(6);
         $articles->load('products');  */
     //   $nan=$qweb->name;
-        $articles=DB::table('products')->where('category_id',$id)->where('sale','like',false)->simplePaginate(6);
-
+        $nams='products';
+        $articles=DB::table( $nams)->where('category_id',$id)->where('sale','like',false)->simplePaginate(6);
+        $gnow='Product';
         $sells=Cache::get('sells');
         if(!$sells) {
-        $sells=Product::where('category_id',$id)->where('sale',true)->limit(8)->get();
+       // $sells=Product::where('category_id',$id)->where('sale',true)->limit(8)->get();
+            $sells=DB::table( $nams)->where('category_id',$id)->where('sale',true)->limit(8)->get();
             Cache::put('sells',$sells, 60);
         }
        // $articles=Category::with('products')->where('id',$id)->simplePaginate(6)->get('category_id');

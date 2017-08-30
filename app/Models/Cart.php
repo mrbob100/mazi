@@ -56,7 +56,7 @@ class Cart extends Model
                         'cart.qty'=>$qty,
                         'cart.name'=>$product->name,
                         'cart.price'=> $product->price,
-                        'cart.img'=>$product->mini,
+                        'cart.img'=>$product->img,
 
                     ]);
             }
@@ -69,7 +69,7 @@ class Cart extends Model
                     'cart.qty'=>$qty,
                     'cart.name'=>$product->name,
                     'cart.price'=> $product->price,
-                    'cart.img'=>$product->mini,
+                    'cart.img'=>$product->img,
 
                     ]);
        }

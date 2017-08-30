@@ -64,7 +64,7 @@ class CartController extends Controller
 
        // }
       // $this->clear();
-       //  dump(session());
+         dump(session());
        return view('cart.cartModal')->with(['product'=>$product]);
        // echo ('Давайте работать !');
 
@@ -149,7 +149,7 @@ class CartController extends Controller
         foreach($items as $id => $item){
             $order_items = new Order_item();
             $order_items->order_id = $order_id;
-            $order_items->product_id = $id;
+            $order_items->product_id = $item['cart.id'];
             $order_items->name = $item['cart.name'];
             $order_items->price = $item['cart.price'];
             $order_items->qty_item = $item['cart.qty'];

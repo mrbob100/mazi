@@ -8,14 +8,14 @@
             <div class="flexslider">
                 <ul class="slides">
                     <!--li data-thumb="../public/images/miniatures/si1.jpg"-->
-                    <li data-thumb="{{asset('public/images/miniatures/'.$product->mini) }}   ">
-                        <div class="thumb-image"> <img src="{{ asset('/public/images/miniatures/'.$product->mini) }} " data-imagezoom="true" class="img-responsive" alt="перед" /> </div>
+                    <li data-thumb="{{asset('public/images/miniatures/'.$product->img) }}   ">
+                        <div class="thumb-image"> <img src="{{ asset('/public/images/miniatures/'.$product->img) }} " data-imagezoom="true" class="img-responsive" alt="вид анфас" /> </div>
                     </li>
-                    <li data-thumb="{{asset('public/images/miniatures/'.$common1)}}">
-                        <div class="thumb-image"> <img src="{{ asset('public/images/miniatures/'.$common1)}}" data-imagezoom="true" class="img-responsive" alt="зад" /> </div>
+                    <li data-thumb="{{asset('public/images/miniatures/'.$product->mini_side)}}">
+                        <div class="thumb-image"> <img src="{{ asset('public/images/miniatures/'.$product->mini_side)}}" data-imagezoom="true" class="img-responsive" alt="вид сбоку" /> </div>
                     </li>
-                    <li data-thumb="{{asset('public/images/miniatures/'.$common2)}}">
-                        <div class="thumb-image"> <img src="{{ asset('public/images/miniatures/'.$common2)}}" data-imagezoom="true" class="img-responsive" alt="большой" /> </div>
+                    <li data-thumb="{{asset('public/images/miniatures/'.$product->mini_back)}}">
+                        <div class="thumb-image"> <img src="{{ asset('public/images/miniatures/'.$product->mini_back)}}" data-imagezoom="true" class="img-responsive" alt="вид сзади" /> </div>
                     </li>
                 </ul>
             </div>

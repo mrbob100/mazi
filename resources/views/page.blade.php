@@ -17,7 +17,7 @@
 
                 <div class="col-md-4 product simpleCart_shelfItem text-center">
 
-                    <img src="{{ asset('public/images/'.$article->img) }}" width="350" alt="вывод изображения" />
+                    <img src="{{ asset('public/images/'.$article->img) }}"  alt="вывод изображения" />
                     <div class="mask">
                         <a href="{{route('product',['id'=>$article->id]) }}">Quick View</a>
                     </div>
