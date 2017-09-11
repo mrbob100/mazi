@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Widgets;
+namespace Corp\Widgets;
 
 use Arrilot\Widgets\AbstractWidget;
 use Cache;
-use App\Models\Category;
+use Corp\Models\Category;
 use DB;
 
 class MainWidget extends AbstractWidget

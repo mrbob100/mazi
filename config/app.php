@@ -168,15 +168,15 @@ return [
          */
         Laravel\Tinker\TinkerServiceProvider::class,
         Arrilot\Widgets\ServiceProvider::class,
-
+        'Lavary\Menu\ServiceProvider',
         /*
          * Application Service Providers...
          */
-        App\Providers\AppServiceProvider::class,
-        App\Providers\AuthServiceProvider::class,
-        // App\Providers\BroadcastServiceProvider::class,
-        App\Providers\EventServiceProvider::class,
-        App\Providers\RouteServiceProvider::class,
+        Corp\Providers\AppServiceProvider::class,
+        Corp\Providers\AuthServiceProvider::class,
+        // Corp\Providers\BroadcastServiceProvider::class,
+        Corp\Providers\EventServiceProvider::class,
+        Corp\Providers\RouteServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
     ],
 
@@ -230,6 +230,7 @@ return [
         'AsyncWidget'  => Arrilot\Widgets\AsyncFacade::class,
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
+        'Menu'       => 'Lavary\Menu\Facade',
     ],
 
 ];

@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Listeners;
+namespace Corp\Listeners;
 
-use App\Events\onAddOrderSocialEvent;
+use Corp\Events\onAddOrderSocialEvent;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use App\Models\Order;
+use Corp\Models\Order;
 
 class AddOrderSocialListener
 {

@@ -1,27 +1,56 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Corp\Http\Controllers;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\DBAL\Schema\Table;
-use Illuminate\Contracts\Session\Session;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\Models\Category;
-use App\Models\Product;
-use App\Widgets\MainWidget;
+use Corp\Models\Category;
+use Corp\Models\Product;
+use Corp\Widgets\MainWidget;
 use Cache;
-class IndexController extends Controller
+
+use Corp\Repositories\ProductsRepository;
+//use Corp\Repositories\PortfoliosRepository;
+use Illuminate\Http\Request;
+use Corp\Repositories\SlidersRepository;
+use Corp\Models\Menu;
+use Config;
+class IndexController extends SiteController
 {
 
-    protected $message;
-    protected $header;
-    protected $sells;
+
+    public function __construct(SlidersRepository $s_rep,  ProductsRepository $p_rep)
+    {
+        parent::__construct(new \Corp\Repositories\MenusRepositories(new \Corp\Models\Menu));
+        $this->s_rep=$s_rep; // slider
+        // $this->p_rep=$p_rep;  // portfolio
+        //  $this->p_rep=$p_rep;  // products
+        //   $this->bar='left'; // устанавливает сайт бар значения: left, right, no
+        $this->template=env('THEME').'.index';
+    }
 
 
 
     public function index($id=12)
     {
+
+        $sliderItems = $this->getSliders(); // пункты кадров слайдера
+
+        //  $articles=$this->getArticles(); // правый сайд бар
+        // dd($articles);
+        //   $this->contentRightBar=view(env('THEME').'.indexBar')->with('articles',$articles)->render();
+        // заголовок сайта
+        $headers=view(env('THEME') . '.header')->render();
+        $this->vars = array_add($this->vars, 'headers', $headers);
+
+        $sliders = view(env('THEME') . '.slider')->with('sliders', $sliderItems)->render();
+        $this->vars = array_add($this->vars, 'sliders', $sliders);
+
+        $this->keywords = 'Home Page';
+        $this->meta_desc = 'Home Page';
+        $this->title = 'Home Page';
+        // return view('welcome');
+        return $this->renderOutput();
+    }
      //   $categories=DB::table('categories')->toArray()->get();
        // $akkord = new MainWidget();
      //   $a='menu.php';
@@ -38,7 +67,7 @@ class IndexController extends Controller
         }])->simplePaginate(6);
         $articles->load('products');  */
     //   $nan=$qweb->name;
-        $nams='products';
+   /*     $nams='products';
         $articles=DB::table( $nams)->where('category_id',$id)->where('sale','like',false)->simplePaginate(6);
         $gnow='Product';
         $sells=Cache::get('sells');
@@ -53,6 +82,25 @@ class IndexController extends Controller
      //   dump($sells);
         return view('page')->with([ 'articles' => $articles ,'sells'=>$sells ] );
 
+    }*/
+
+    public function getSliders()
+    {
+        $sliders =$this->s_rep->get();
+        // dd($sliders);
+        if($sliders->isEmpty()) return false;
+        $sliders->transform( function ($item, $key){
+            $item->img =Config::get('settings.slider_path') .'/'.$item->path;
+            return $item;
+        });
+        // dd($sliders);
+        return $sliders;
+    }
+
+    protected function getArticles()
+    {
+        $articles= $this->a_rep->get(['title','created_at','img','alias'],Config::get('settings.home_articles_count'));
+        return $articles;
     }
 
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace Corp\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -12,11 +12,11 @@ class Order_item extends Model
 
     public function products()
     {
-        return $this->hasMany('App\Models\Product','id','product_id');
+        return $this->hasMany('Corp\Models\Product','id','product_id');
     }
 
     public function orders()
     {
-        return $this->belongsTo('App\Models\Order','order_id','id');
+        return $this->belongsTo('Corp\Models\Order','order_id','id');
     }
 }

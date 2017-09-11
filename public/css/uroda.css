@@ -1,5 +1,9 @@
 body {
-  font-family: Lato-Regular; }
+  font-family: Lato-Regular;
+  background-blend-mode: multiply;
+  background:url("../pink/images/banner_img.jpg") no-repeat 0px 0px !important;
+ /* background-image: url("../images/banner_img.jpg") !important;*/
+}
 
 .catalog {
   outline: none;

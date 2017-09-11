@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace Corp\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use Corp\Http\Controllers\Controller;
 
 class OrderItemsAddController extends Controller
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace Corp\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -12,7 +12,7 @@ class Order extends Model
 
     public function order_items()
     {
-        return $this->hasMany('App\Models\Order_item','order_id','id');
+        return $this->hasMany('Corp\Models\Order_item','order_id','id');
     }
 
 

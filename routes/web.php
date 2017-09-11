@@ -16,6 +16,8 @@ Route::group(/**
  */
     ['middleware'=>'web'], function(){
 Route::get('/', 'IndexController@index')->name('index');
+
+//Route::resource('/', 'IndexController', ['only' => 'index', 'names' => ['index' => 'home']]);
 //Route::get('article/{page}', 'IndexController@show')->name('articleShow');
 //Route::delete('page/delete/{article}', function(\App\Product $product) {
 

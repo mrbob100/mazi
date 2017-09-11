@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Corp\Http\Controllers;
 
-use App\Models\Product;
+use Corp\Models\Product;
 use Illuminate\Http\Request;
-use App\Models\Cart;
-use App\Models\Order;
-use App\Models\Order_item;
-use App\Widgets\MainWidget;
+use Corp\Models\Cart;
+use Corp\Models\Order;
+use Corp\Models\Order_item;
+use Corp\Widgets\MainWidget;
 use Session;
 use Cache;
 /*Array
@@ -30,7 +30,7 @@ use Cache;
     [qty] => QTY,
     [sum] => SUM
 );*/
-class CartController extends Controller
+class CartController extends SiteController
 {
 
 

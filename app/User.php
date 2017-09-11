@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace Corp;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -29,6 +29,6 @@ class User extends Authenticatable
 
     public function orders()
     {
-        return $this->hasMany('App\Models\Order','user_id','id');
+        return $this->hasMany('Corp\Models\Order','user_id','id');
     }
 }

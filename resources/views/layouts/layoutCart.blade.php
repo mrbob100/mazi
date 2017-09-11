@@ -45,7 +45,7 @@
 
 <!-- header-section-starts -->
 
-@include('header1')
+@include('pink.header1')
 <div class="container">
     <div class="row">
         <div class="col-xs-3 col-sm-3 col-lg-3 container-fluid ">
@@ -103,7 +103,7 @@
 </div>
 
 @yield('content')
-@include('footer')
+@include('pink.footer')
 
 
 

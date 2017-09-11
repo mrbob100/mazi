@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Corp\Http\Controllers;
 
 //use Illuminate\Support\Facades\Request;
 
-class CategoryController extends Controller
+class CategoryController extends SiteController
 {
     /**
      * Display a listing of the resource.

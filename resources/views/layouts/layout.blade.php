@@ -46,7 +46,7 @@
 
 	<!-- header-section-starts -->
 
-	@include('header1')
+	@include('pink.header1')
 	<div class="container">
 		<div class="row">
 			<div class="col-xs-3 col-sm-3 col-lg-3 container-fluid ">
@@ -74,7 +74,7 @@
 	</div>
 
 
-<div class="banner">
+<div class="banner banner_vol">
 	<div class="container">
 
 		<div class="banner-bottom">
@@ -171,7 +171,7 @@
 
 	@yield('content')
 
-	@include('slider')
+	@include('pink.slider')
 		<!-- content-section-ends-here -->
 		<div class="news-letter">
 			<div class="container">
@@ -187,7 +187,7 @@
 				</div>
 			</div>
 		</div>
-		@include('footer')
+		@include('pink.footer')
 
 
 

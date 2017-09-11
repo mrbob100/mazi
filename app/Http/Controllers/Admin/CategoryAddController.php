@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace Corp\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use Corp\Http\Controllers\Controller;
 use Validator;
-use App\Models\Category;
+use Corp\Models\Category;
 class CategoryAddController extends Controller
 {
     /**

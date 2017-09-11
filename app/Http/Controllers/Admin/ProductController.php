@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace Corp\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use Corp\Http\Controllers\Controller;
 //use DB;
-use App\Models\Product;
-use App\Models\Category;
+use Corp\Models\Product;
+use Corp\Models\Category;
 class ProductController extends Controller
 {
     public function index()

@@ -92,15 +92,16 @@ a.simpleCart_empty {
   margin-left: 8px;
   float: left;
 }
-.banner {
-	background:url("../images/banner_img.jpg") no-repeat 0px 0px;
-	background-size:cover;
-	-moz-background-size:cover;
-	-o-background-size:cover;
-	-ms-background-size:cover;
-	-webkit-background-size:cover;
+/*.banner {
+	 background:url("../images/banner_img.jpg") no-repeat 0px 0px;
+
+   background-size:cover;
+    -moz-background-size:cover;
+    -o-background-size:cover;
+    -ms-background-size:cover;
+    -webkit-background-size:cover;
 	min-height:705px;
-}
+} */
 .logo h1 a {
     color: #000;
     text-decoration: none;
@@ -492,7 +493,7 @@ width:300px;
 a.twitter {
 	width: 25px;
 	height: 25px;
-	background: url(../images/follow.png) no-repeat 0px 0px;
+	background: url(../pink/images/follow.png) no-repeat 0px 0px;
 	display: inline-block;
 	margin:0 1em;
 	  vertical-align: text-bottom;
@@ -503,7 +504,7 @@ a.twitter:hover,a.facebook:hover {
 a.facebook {
 	width: 25px;
 	height: 25px;
-	background: url(../images/follow.png) no-repeat -25px 0px;
+	background: url(../pink/images/follow.png) no-repeat -25px 0px;
 	display: inline-block;
 	  vertical-align: text-bottom;
 }
@@ -598,7 +599,7 @@ a.product_name {
 	color: #999;
 }
 .product p i {
-	background: url(../images/cart.png) no-repeat;
+	background: url(../pink/images/cart.png) no-repeat;
 	width: 20px;
 	height: 14px;
 	display: inline-block;
@@ -1911,7 +1912,7 @@ div#myTabContent {
 	width: 100%;
 }
 .close1, .close2,.close3 {
-	background: url('../images/close_1.png') no-repeat 0px 0px;
+	background: url('../pink/images/close_1.png') no-repeat 0px 0px;
 	cursor: pointer;
 	width: 28px;
 	height: 28px;
@@ -2145,7 +2146,7 @@ p.right {
 .social-icons  ul li a {
 	width:18px;
 	height:18px;
-	background:url('../images/s-icons.png') no-repeat 0px 0px;
+	background:url('../pink/images/s-icons.png') no-repeat 0px 0px;
 	display:inline-block;
 	margin: 0 5px;
 }
@@ -2772,13 +2773,13 @@ p.right {
 		margin: 0 0.3em;
 		width: 20px;
 		height: 20px;
-		background: url(../images/follow.png) no-repeat 0px 3px;
+		background: url(../pink/images/follow.png) no-repeat 0px 3px;
 		background-size: 35px;
 	}
 	a.facebook {
 		width: 20px;
 		height: 20px;
-		background: url(../images/follow.png) no-repeat -18px 2px;
+		background: url(../pink/images/follow.png) no-repeat -18px 2px;
 		background-size: 35px;
 	}
 	.online-strip h3 {

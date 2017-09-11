@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Corp\Http\Controllers;
 
-use App\Events\onAddOrderSocialEvent;
+use Corp\Events\onAddOrderSocialEvent;
 use Illuminate\Http\Request;
-use App\User;
-use App\Models\Order;
+use Corp\User;
+use Corp\Models\Order;
 use Auth;
 use Hash;
 use Redirect;
@@ -13,7 +13,7 @@ use Session;
 use Event;
 use Validator;
 
-class UloginController extends Controller
+class UloginController extends SiteController
 {
 
 

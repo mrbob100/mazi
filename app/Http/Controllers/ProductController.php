@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
-use App\Models\Product;
-use App\Widgets\MainWidget;
+namespace Corp\Http\Controllers;
+use Corp\Models\Product;
+use Corp\Widgets\MainWidget;
 use Cache;
 use Illuminate\Http\Request;
 use Symfony\Component\Routing\RequestContext;
-class ProductController extends Controller
+class ProductController extends SiteController
 {
    // public function index($id)
     public function index(Request $request)
