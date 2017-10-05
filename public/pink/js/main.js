@@ -17,6 +17,7 @@ function showCart(cart){
 function getCart(){
 	$.ajax({
 		url: 'show',
+        headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
       //  url: 'http://pullsky.kretivz.pro/web/cart/show',
 		type: 'GET',
 		success: function(res){
@@ -35,10 +36,12 @@ $(function(){
 $(' .modal-body').on('click', '.del-item', function(){
 	//alert(123);
 	var id = $(this).data('id');
+
   //  var cat = $(this).data('cat');
 	$.ajax({
 		url: 'delIt',
 		data: {id: id/*, cat: cat */},
+        headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
 		type: 'GET',
 		success: function(res){
 			if(!res) alert('Ошибка!');
@@ -61,6 +64,7 @@ function clearCart(){
 	$.ajax({
 		url: 'Clear',
 		type: 'GET',
+        headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
 		success: function(res){
 			if(!res) alert('Выйдите из категории товара и повторите очистку!');
 			showCart(res);
@@ -87,7 +91,8 @@ $('.add-to-cart').on('click', function (e) {
 		//contentType: false,
       //  url: '/CartController/cartAdd',
 	//	url: '@web/cart/add',
-		data: {id: id, qty: qty, '_token': $('meta[name="csrf-token"]').attr('content')},
+		data: {id: id, qty: qty},
+        headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
 		type: 'GET',
 		dataType: "text",
 		success: function(res){
@@ -159,3 +164,4 @@ $(document).ready(function(){
 		});
 	});
 });
+

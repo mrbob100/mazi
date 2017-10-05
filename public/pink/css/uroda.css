@@ -1,9 +1,12 @@
 body {
   font-family: Lato-Regular;
+background-image: url("../images/banner_img.jpg") !important;
+  background: no-repeat;
+
 
 }
 
-.catalog {
+/*.catalog {
   outline: none;
   display: inline;
   text-transform: uppercase;
@@ -13,16 +16,17 @@ body {
   z-index: 1000;
   padding: 0px 30px 0px 79px;
   /* text-align: center; */
-  margin: 0;
-  position: absolute; }
-  .catalog:hover {
+ /* margin: 0;
+  position: absolute; } */
+ /*.catalog:hover {
     display: inline;
     border: 1px solid rgba(0, 0, 0, 0.15);
     border-radius: 8px;
-    background-color: #fff;
+    background-color: #ffffff;
     padding: 0px 30px 0px 79px;
-    /* text-align: center; */
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175); }
+    text-align: center;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+} */
 
 .multi-column-dropdown li a {
   outline: none; }
@@ -40,3 +44,6 @@ body {
   color: #81626A !important; }
 
 /*# sourceMappingURL=uroda.css.map */
+.navbar{
+  margin-left: 80px;
+}

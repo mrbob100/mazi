@@ -1,9 +1,11 @@
+@extends(env('THEME').'.layouts.layoutCartEmpty')
 @if(session('cart'))
 <div class="table-responsive">
     <table class="table table-hover table-striped">
         <thead>
         <tr>
             <th>Фото</th>
+            <th>Код товара</th>
             <th>Наименование</th>
             <th>Кол-во</th>
             <th>Цена</th>
@@ -18,7 +20,8 @@
 
            {{-- csrf_field() --}}
         <tr>
-            <td> <img src="{{ asset('/public/images/miniatures/'.$item['cart.img']) }} " height="50" alt="картинка"/> </td>
+            <td> <img src="{{ asset('public/'.env('THEME')) }}/images/{{ $item['cart.img'] }}  " height="50" alt="картинка"/> </td>
+            <td>{!! $item['cart.code'] !!}    </td>
             <td>{!! $item['cart.name'] !!}    </td>
             <td>{!! $item['cart.qty'] !!} </td>
             <td>{!! $item['cart.price'] !!} </td>

@@ -23,7 +23,7 @@ class IndexController extends SiteController
         parent::__construct(new \Corp\Repositories\MenusRepositories(new \Corp\Models\Menu));
         $this->s_rep=$s_rep; // slider
         // $this->p_rep=$p_rep;  // portfolio
-        //  $this->p_rep=$p_rep;  // products
+          $this->p_rep=$p_rep;  // products
         //   $this->bar='left'; // устанавливает сайт бар значения: left, right, no
         $this->template=env('THEME').'.index';
     }
@@ -39,8 +39,7 @@ class IndexController extends SiteController
         // dd($articles);
         //   $this->contentRightBar=view(env('THEME').'.indexBar')->with('articles',$articles)->render();
         // заголовок сайта
-        $headers=view(env('THEME') . '.header')->render();
-        $this->vars = array_add($this->vars, 'headers', $headers);
+
 
         $sliders = view(env('THEME') . '.slider')->with('sliders', $sliderItems)->render();
         $this->vars = array_add($this->vars, 'sliders', $sliders);
@@ -90,8 +89,9 @@ class IndexController extends SiteController
         // dd($sliders);
         if($sliders->isEmpty()) return false;
         $sliders->transform( function ($item, $key){
-            $item->img =Config::get('settings.slider_path') .'/'.$item->path;
-            return $item;
+            $item->path =Config::get('settings.slider_path') .'/'.$item->path;
+
+           return $item;
         });
         // dd($sliders);
         return $sliders;

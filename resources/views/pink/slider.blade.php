@@ -4,10 +4,12 @@
         <ul id="flexiselDemo3">
             @foreach( $sliders as $slide)
                 @if($slide->path)
-                    <li><a href="{{route('product',['id'=>$slide->product_id]) }}"><img src="{{ asset('public'.env('THEME')) }}/images/.$slide->path"  class="img-responsive" alt="вывод изображения" /></a>
+                    <li><a href="{{route('product',['id'=>$slide->product_id]) }}"><img src="{!! asset($slide->path) !!}"  class="img-responsive" alt="вывод изображения" /></a>
                         <div class="product liked-product simpleCart_shelfItem">
                             <a class="like_name" href="{{route('product',['id'=>$slide->product_id]) }}">{!! $slide->title !!}</a>
-                            <p><a class="item_add" href="{{route('product',['id'=>$slide->product_id]) }}"><i></i> <span class=" item_price">${!!$slide->title   !!}</span></a></p>
+                            <!--p><a class="item_add" href="{--{route('product',['id'=>$slide->product_id]) }--}"><i></i> <span class=" item_price">${--!!$slide->title   !!--}</span></a></p-->
+
+
                         </div>
                     </li>
                @endif

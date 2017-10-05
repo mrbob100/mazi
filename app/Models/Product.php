@@ -9,7 +9,8 @@ class Product extends Model
 {
     protected $table='products';
     protected $primaryKey='id';
-    protected $fillable = ['id','category_id','name','content','price','keywords','description','img','label','hit','new','sale','mini_side','mini_back'];
+    protected $fillable = ['id','category_id','code','name','description','text','price','img','type','country','equipment','new','weightbrutto','sclad','ukvd',
+        'weightnetto','width','length','height','termGuarantee','class','company','created_at','updated_at','exactlyType1','exactlyType2','keywords','meta_desc'];
     public function user(){
         return $this->belongsTo('Corp\User');
     }

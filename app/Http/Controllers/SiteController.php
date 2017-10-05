@@ -19,7 +19,7 @@ class SiteController extends Controller
     protected $meta_desc;
     protected $title;
     protected $p_rep; // объект класса products
-
+    protected $p_cart=false; // вывод корзины
     protected $contentRightBar=false;
     protected $contentLeftBar=false;
 
@@ -29,33 +29,28 @@ class SiteController extends Controller
     }
     protected function renderOutput()
     {
-        $menu=$this->getMenu();
-        //  dd($menu);
-        $navigation=view(env('THEME').'.navigation')->with('menu',$menu)->render();
-        $this->vars=array_add($this->vars,'navigation', $navigation);  // вывод навигации меню
+       if(!$this->p_cart) {
+           $menu = $this->getMenu();
+           // dd($menu);
+           $navigation = view(env('THEME') . '.navigation')->with('menu', $menu)->render();
+           $this->vars = array_add($this->vars, 'navigation', $navigation);  // вывод навигации меню
 
-        if ($this->contentRightBar){  // если есть райт бар
-            $rightBar=view(env('THEME').'.rightBar')->with('content_rightbar',$this->contentRightBar)->render();
-            $this->vars=array_add($this->vars,'rightBar', $rightBar);
-        }
-
-        if ($this->contentLeftBar){  // если есть райт бар
-            $leftBar=view(env('THEME').'.leftBar')->with('content_leftBar',$this->contentLeftBar)->render();
-            $this->vars=array_add($this->vars,'leftBar', $leftBar);
-        }
-
-        $this->vars=array_add($this->vars,'bar', $this->bar);  // значение переменной bar в шаблон
-
-        // мета  тэги
-        $this->vars=array_add($this->vars,'keywords', $this->keywords);
-        $this->vars=array_add($this->vars,'meta_desc', $this->meta_desc);
-        $this->vars=array_add($this->vars,'title', $this->title);
+           $headers = view(env('THEME') . '.header')->render();
+           $this->vars = array_add($this->vars, 'headers', $headers);
+           // мета  тэги
+           $this->vars = array_add($this->vars, 'keywords', $this->keywords);
+           $this->vars = array_add($this->vars, 'meta_desc', $this->meta_desc);
+           $this->vars = array_add($this->vars, 'title', $this->title);
 
 
-        $footer=view(env('THEME').'.footer')->render();
-        $this->vars=array_add($this->vars,'footer', $footer);
+           $footer = view(env('THEME') . '.footer')->render();
+           $this->vars = array_add($this->vars, 'footer', $footer);
+       }
         return view($this->template)->with($this->vars); // template станавливается в дочернем классе
     }
+
+
+
     public function getMenu()
     {
         $menu=$this->m_rep->get();

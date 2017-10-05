@@ -19,10 +19,11 @@ body {
 }
 
 .menu li a {
-	color: white !important;
+	color: #816263 !important;
+
 }
 
 .navbar {
-	background-color:#2e6da4 !important;
+	background-color:white !important;
 }
 

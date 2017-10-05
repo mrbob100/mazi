@@ -3,6 +3,7 @@
 @section('headers')
     {!! $headers !!}
 @endsection
+
 @section('navigation')
     {!! $navigation !!}
 @endsection

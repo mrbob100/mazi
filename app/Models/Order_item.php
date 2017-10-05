@@ -8,7 +8,7 @@ class Order_item extends Model
 {
     protected $table='order_items';
     protected $primaryKey='id';
-    protected $fillable =['order_id','product_id','name','price','qty_item','sum_item','priznak'];
+    protected $fillable =['code','order_id','code','product_id','name','price','qty_item','sum_item','priznak'];
 
     public function products()
     {

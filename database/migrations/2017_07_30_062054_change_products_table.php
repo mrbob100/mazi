@@ -15,8 +15,7 @@ class ChangeProductsTable extends Migration
     {
         Schema::table('products', function (Blueprint $table) {
             $table->dropColumn('mini');
-            $table->string('mini_side',100)->nullable();
-            $table->string('mini_back',100)->nullable();
+
         });
     }
 

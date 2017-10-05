@@ -53,6 +53,7 @@ class Cart extends Model
             if(!$a){
                 Session::push('cart',
                     [  'cart.id'=>$product->id,
+                        'cart.code'=>$product->code,
                         'cart.qty'=>$qty,
                         'cart.name'=>$product->name,
                         'cart.price'=> $product->price,
@@ -66,6 +67,7 @@ class Cart extends Model
 
             Session::push('cart',
                    [  'cart.id'=>$product->id,
+                       'cart.code'=>$product->code,
                     'cart.qty'=>$qty,
                     'cart.name'=>$product->name,
                     'cart.price'=> $product->price,

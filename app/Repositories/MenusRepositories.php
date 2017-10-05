@@ -8,3 +8,4 @@ class MenusRepositories extends Repository
     $this->model=$menu;
   }
 }
+

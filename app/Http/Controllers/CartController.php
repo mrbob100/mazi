@@ -10,6 +10,7 @@ use Corp\Models\Order_item;
 use Corp\Widgets\MainWidget;
 use Session;
 use Cache;
+use DB;
 /*Array
 (
     [1] => Array
@@ -41,9 +42,17 @@ class CartController extends SiteController
         $qty =(int) $request->qty;
 
         $qty=!$qty ? 1 : $qty;
-        $product = Product::where('id',$id)->first();
+        $product = Product::where('id',$id)->select('id','name','code','description','img','price','category_id','keywords','meta_desc')->first();
+       // $product=DB::table('products')->where('id',$id)->select('id','name','code','description','img','price','category_id','keywords','meta_desc')->get();
         if(empty($product)) return false;
-        $qw=$product->id;
+        $products=json_decode($product->img);
+        $product->img=$products->mini;
+      /*  $products= $product->transform(function ($item, $key){
+            if(is_string($item->img) && is_object(json_decode($item->img))&& json_last_error()==JSON_ERROR_NONE)
+            {   $item->img=json_decode($item->img); }
+
+            return $item;
+        }); */
        //   dd($product);
      //   $cart = new Cart();
     //    $cart->addToCart($product, $qty);
@@ -64,7 +73,7 @@ class CartController extends SiteController
 
        // }
       // $this->clear();
-         dump(session());
+       //  dump(session());
        return view('cart.cartModal')->with(['product'=>$product]);
        // echo ('Давайте работать !');
 
@@ -151,6 +160,7 @@ class CartController extends SiteController
             $order_items->order_id = $order_id;
             $order_items->product_id = $item['cart.id'];
             $order_items->name = $item['cart.name'];
+            $order_items->code=$item['cart.code'];
             $order_items->price = $item['cart.price'];
             $order_items->qty_item = $item['cart.qty'];
             $order_items->sum_item = $item['cart.qty'] * $item['cart.price'];
