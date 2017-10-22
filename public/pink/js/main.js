@@ -16,7 +16,7 @@ function showCart(cart){
 
 function getCart(){
 	$.ajax({
-		url: 'show',
+		url: 'cartShow',
         headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
       //  url: 'http://pullsky.kretivz.pro/web/cart/show',
 		type: 'GET',
@@ -165,3 +165,76 @@ $(document).ready(function(){
 	});
 });
 
+$(function() {
+// блок реакции на выбор кнопок и селекта
+    var counter = 0;
+
+
+    $("#slider-range").slider({
+        range: true,
+        min: 300,
+        max: 80000,
+        step: 100,
+        values: [0, 80000],
+
+        slide: function (event, ui) {
+            $("#pricer").val("гр." + ui.values[0] + " - гр." + ui.values[1]);
+        }
+    });
+    $("#pricer").val("гр." + $("#slider-range").slider("values", 0) + " - гр." + $("#slider-range").slider("values", 1));
+
+   $(".selectValItem").on('slide',function(e){
+      //  e.preventDefault();
+    //   slider.slider('values', $(this).val());
+        counter++;
+
+        //  alert(counter);
+    });
+
+    $(".selectValItem").on('change',function(e){
+        e.preventDefault();
+        counter++;
+
+        //  alert(counter);
+    });
+
+        $("#selectMyFixing").on('submit',function(e){
+            $(this)
+    e.preventDefault();
+    var form= $(this);
+
+
+            if(counter) {
+	var data=$(form).serializeArray();
+	//alert(data);
+    $.ajax({
+
+		 url: form.attr('action'),
+
+        cache: false,
+        data: data,
+       /* beforeSend: function(data) { // сoбытиe дo oтпрaвки
+            form.find('input[type="submit"]').attr('disabled', 'disabled'); // нaпримeр, oтключим кнoпку, чтoбы нe жaли пo 100 рaз
+        }, */
+        headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+        type:form.attr('method') ,
+        dataType: "JSON",
+        success: function(res){
+            if(!res) alert('Ошибка!');
+
+			//$('.wrap_result').append('<br/><strong>Выборка выполнена !</strong>').delay(2000).fadeOut(500);
+            $('#mediumMine').empty();
+          // $('#mediumMine').replaceWith(res.content);
+            $('#mediumMine').append(res.content);
+
+        },
+        error: function(){
+            alert('Ошибка передачи slider и кнопок!');
+        }
+
+    });
+                      }
+
+});
+
+});

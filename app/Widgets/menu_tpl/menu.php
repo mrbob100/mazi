@@ -8,7 +8,7 @@
     </a>
     <?php if( isset($category['childs']) ): ?>
         <ul>
-            <?= $this->getMenuHtml($category['childs'])?>
+            <?= $this->getMenuHtml($category['childs'], $tab . '   ')?>
         </ul>
     <?php endif;?>
 </li>

@@ -94,7 +94,9 @@ class CartController extends SiteController
         }
 
         $this->layout = false;
-        return view('cart.cartModal');
+        return  view('cart.cartModal');
+        sleep(3);
+        return redirect('/');
     }
 
     public function DelItem(Request $request)

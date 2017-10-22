@@ -6,15 +6,15 @@
         </header>
  @if($products)
     @foreach($products as $prod)
-            <div class="col-md-4 product simpleCart_shelfItem text-center">
+            <div class="col-xs-4 product simpleCart_shelfItem text-center" >
 
-                <img src="{{ asset('public/'.env('THEME'))}}/images/{{ $prod->img->path }} "  alt="вывод изображения" />
+                <a href="{{route('product',['id'=>$prod->id]) }}"><img src="{{ asset('public/'.env('THEME'))}}/images/{{ $prod->img->max }}" style="height: 150px;" alt="вывод изображения" /></a>
                 <div class="mask">
-                    <a href="{{route('product',['id'=>$prod->id]) }}">Quick View</a>
+                    <a href="{{route('product',['id'=>$prod->id]) }}" >Quick View</a>
                 </div>
                 <div class="product liked-product simpleCart_shelfItem">
-                    <a class="like_name" href="{{route('product',['id'=>$prod->id]) }}">{!! $prod->name !!}</a>
-                    <p><a class="item_add" href="{{route('product',['id'=>$prod->id]) }}"><i></i> <span class=" item_price">{!!$prod->price  !!} гр.</span> </a></p>
+                    <a class="like_name" href="{{route('product',['id'=>$prod->id]) }}" style=" color: #816263;font-size: 0.7em;">{!! $prod->name !!}</a>
+                    <p><a class="item_add" href="{{route('product',['id'=>$prod->id]) }}" style=" color: #816263;font-size: 1.0em;"><i></i> <span class=" item_price">{!!$prod->price  !!} гр.</span> </a></p>
                 </div>
 
 
@@ -34,6 +34,11 @@
                 <!--/form-->
             </div>
      @endforeach
+@if($adopt)
+        {!! $products->render()  !!}
+@endif
+        @else
+            {!! Lang::get('ru.articles_no') !!}
  @endif
     </div>
 

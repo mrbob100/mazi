@@ -5,6 +5,7 @@ namespace Corp\Http\Controllers;
 use Illuminate\Http\Request;
 use Menu;
 use Corp\Repositories\MenusRepositories;
+use Cache;
 class SiteController extends Controller
 {
     // protected $p_rep; // объект класса portfolio
@@ -14,7 +15,7 @@ class SiteController extends Controller
     protected $c_rep; // коментарии
     protected $template;  // имя конкретного шаблона
     protected $vars; // массив передаваемых объектов в шаблон
-    protected $bar='no'; // есть ли side бар
+    protected $bar=false; // есть ли side бар
     protected $keywords;
     protected $meta_desc;
     protected $title;
@@ -22,7 +23,9 @@ class SiteController extends Controller
     protected $p_cart=false; // вывод корзины
     protected $contentRightBar=false;
     protected $contentLeftBar=false;
-
+    protected $category_id;
+     protected  $adopt=true;
+     protected $data;
     public function __construct(MenusRepositories $m_rep)
     {
         $this->m_rep=$m_rep;
@@ -30,6 +33,7 @@ class SiteController extends Controller
     protected function renderOutput()
     {
        if(!$this->p_cart) {
+
            $menu = $this->getMenu();
            // dd($menu);
            $navigation = view(env('THEME') . '.navigation')->with('menu', $menu)->render();
@@ -42,11 +46,20 @@ class SiteController extends Controller
            $this->vars = array_add($this->vars, 'meta_desc', $this->meta_desc);
            $this->vars = array_add($this->vars, 'title', $this->title);
 
+      if($this->bar==true)
+           {  // если есть райт бар
+               $bar=$this->bar;
+               $cat=$this->category_id;
+               $leftBar=view(env('THEME').'.left_bar_content')->with(['bar'=>$bar,'cat'=>$cat,'data'=>$this->data])->render();
+               $this->vars=array_add($this->vars,'leftBar', $leftBar);
+               $this->vars=array_add($this->vars,'bar', $bar);
+           }
 
            $footer = view(env('THEME') . '.footer')->render();
            $this->vars = array_add($this->vars, 'footer', $footer);
        }
-        return view($this->template)->with($this->vars); // template станавливается в дочернем классе
+
+        return view($this->template)->with($this->vars); // template устанавливается в дочернем классе
     }
 
 

@@ -23,6 +23,7 @@ abstract class Repository
     $result->transform(function ($item, $key){
         if(is_string($item->img) && is_object(json_decode($item->img))&& json_last_error()==JSON_ERROR_NONE)
         {   $item->img=json_decode($item->img); }
+
         if(is_string($item->exactlyType1) && is_object(json_decode($item->exactlyType1))&& json_last_error()==JSON_ERROR_NONE)
         {   $item->exactlyType1=json_decode($item->exactlyType1); }
     return $item;

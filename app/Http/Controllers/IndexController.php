@@ -34,9 +34,10 @@ class IndexController extends SiteController
     {
 
         $sliderItems = $this->getSliders(); // пункты кадров слайдера
+        $sliderItems->load('products');
 
         //  $articles=$this->getArticles(); // правый сайд бар
-        // dd($articles);
+        // dd($sliderItems);
         //   $this->contentRightBar=view(env('THEME').'.indexBar')->with('articles',$articles)->render();
         // заголовок сайта
 

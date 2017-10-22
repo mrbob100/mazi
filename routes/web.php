@@ -33,21 +33,27 @@ Route::get('/', 'IndexController@index')->name('index');
 
 Route::get('loadcsv',['uses'=>'Admin\CsvloadController@index','as'=>'loadCsv']);
 Route::post('loadcsv','Admin\CsvloadController@store')->name('storeCsv');
+Route::get('updateJson',['uses'=>'Admin\CsvloadController@updateJsonProduct','as'=>'jsonProduct']);
+
 
 Route::get('category/{id}',['uses'=>'CategoryController@index','as'=>'category']);
 
+//Route::match(['get','post'],'category',['uses'=>'PreciseController@Index','as'=>'resume']);
+Route::post('category',['uses'=>'CategoryController@resumeIndex','as'=>'resume']);
 // стандартные маршруты  для аутенфикации
     Route::group(['prefix'=>'product'], function() {
         Route::get('/', ['uses'=>'ProductController@index', 'as'=>'product']);
 
     });
 Route::get('addcartios',['uses'=>'CartController@index', 'as'=>'addcart']);
+ Route::get('cartShow',['uses'=>'CartController@cartShow', 'as'=>'cartShow']);
 Route::get('clear',['uses'=>'CartController@clear', 'as'=>'clearance']);
 Route::get('arrange',['uses'=>'CartController@cartView', 'as'=>'arrangeContract']);
 Route::post('order',['uses'=>'CartController@cartView', 'as'=>'contract']);
 
 Route::get('delIt',['uses'=>'CartController@DelItem']);
 
+ Route::get('search',['uses'=>'ProductController@actionSearch','as'=>'productSearch']);
 
 
     Route::post('ulogin', ['uses'=>'UloginController@login', 'as'=>'ulogin']);

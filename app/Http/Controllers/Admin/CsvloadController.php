@@ -7,8 +7,12 @@ use Corp\Http\Controllers\Controller;
 use Corp\Models\Product;
 
 use File;
+use Illuminate\Support\Facades\Storage;
 use Image;
 use Config;
+use Validator;
+
+
 class CsvloadController extends Controller
 {
     public function index()
@@ -79,11 +83,14 @@ class CsvloadController extends Controller
                     for($i=0; $i<$len-1; $i++)
                     {
                         if (!$str[$i]) {  // если нулевые значения строки json
-                            echo ('<pre>');
-                            echo ($str1[$i]);
-                             echo ('</pre>');
+                        //    echo ('<pre>');
+                        //    echo ($str1[$i]);
+                         //    echo ('</pre>');
+                            $serka="не строка json "."|".$str1[$i];
+                            Storage::prepend('file_error.txt',$serka);
                         } else { // работа с записями json
-                           selectJson($str[$i]) ;  // подпрограмма обработки записей
+
+                           $this->selectJson($str[$i]) ;  // подпрограмма обработки записей
 
 
 
@@ -124,6 +131,17 @@ class CsvloadController extends Controller
                 $add=str_replace("[\s]","", $sas);
                 //  $add=preg_replace("&#x20;","",$sas);
                 //  $add=str_replace("A","", $add3);
+            $validator=is_numeric($add);
+                if(!$validator)
+                {
+                    $add=0;
+                   /* echo ('<pre>');
+                    echo ("ошибка в цене");
+                    echo ($str2);
+                    echo ('</pre>'); */
+                    $serka="нулевое price "."|".$str2;
+                    Storage::prepend('file_error.txt',$serka);
+                }
                 $productsLine->price= $add;
             }
             // $productsLine->price=number_format($str2->price,2,'.','');
@@ -161,7 +179,7 @@ class CsvloadController extends Controller
             }
 //______________________________________________________________________________________________________________________
             // обработка картинок
-            $workImage='public/'.env('THEME').'/images/'.$str2->EAN_code.'.jpg';
+           $workImage='public/'.env('THEME').'/images/'.$str2->EAN_code.'.jpg';
             if(file_exists( $workImage))
             {
                 $obj= $this->workUpImages( $str2->EAN_code,$workImage);
@@ -729,7 +747,31 @@ class CsvloadController extends Controller
 
         }
 
+            public function updateJsonProduct()
+            {
+                $product=Product::get();
+                $cnt=count($product);
+                for($i=0;$i<$cnt; $i++)
+                {
+                    $prod=new Product;
+                    $sas=$product[$i];
+                    $prod->fill($sas->toArray());
+                    $prod->company='BOSCH';
+                    Product::where('id', $prod->id)->update($prod->toArray());
+                }
 
 
+              //  $prod=$this->objectToarray($product);
+               exit;
+            }
 
+   public function objectToarray($data)
+    {
+    $array=[]; $array=$data;
+        foreach($array as $key => &$field){
+
+            if(is_object($field))$field = $this->objectToarray($field);
+        }
+        return $array;
+    }
 }

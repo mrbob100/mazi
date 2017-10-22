@@ -4,9 +4,11 @@ namespace Corp\Http\Controllers;
 use Corp\Models\Product;
 use Corp\Widgets\MainWidget;
 use Cache;
+use Config;
 use Illuminate\Http\Request;
 use Symfony\Component\Routing\RequestContext;
 use Corp\Repositories\ProductsRepository;
+use Route;
 class ProductController extends SiteController
 {
 
@@ -18,6 +20,7 @@ class ProductController extends SiteController
         $this->p_rep=$p_rep;  // products
         //   $this->bar='left'; // устанавливает сайт бар значения: left, right, no
         $this->template=env('THEME').'.product';
+
     }
 
     // public function index($id)
@@ -32,9 +35,25 @@ class ProductController extends SiteController
         //  $akkord = new MainWidget();
         //  $akkord->init();
         //  $akkordeon= $akkord->run();
+        $rout=Route::currentRouteName();
         $products = $this->getProduct($id);
         //dd( $productItem);
-        $content = view(env('THEME') . '.product_content')->with('products', $products)->render();
+     /*   $products->transform(function ($item, $key){
+            if(is_string($item->exactlyType1) && is_object(json_decode($item->exactlyType1))&& json_last_error()==JSON_ERROR_NONE)
+            {   $item->exactlyType1=json_decode($item->exactlyType1); }
+            return $item;
+        }); */
+
+      /*  $sas=$products[0]['exactlyType1'];
+       // $sa1=$sas->power;
+        $adding= collect($sas)->all();
+        $sa=count($adding);
+        $qw=[]; $i=0;
+        foreach ($adding as $key=>$item){
+            $qw[$i]=$item;
+            $i++;
+    } */
+        $content = view(env('THEME') . '.product_content')->with(['products'=> $products,'adopt'=>$this->adopt])->render();
         $this->vars = array_add($this->vars, 'content', $content);
         
 
@@ -75,11 +94,33 @@ class ProductController extends SiteController
 
             $were=['id',$alias];
         }
-        $product= $this->p_rep->get(['id','name','code','description','img','price','type','country','new','weightbrutto','weightnetto', 'range','height','exactlyType1','category_id','keywords','meta_desc'], false,true,$were);
+        $product= $this->p_rep->get(['id','name','code','description','img','price','type','country','class','groupTools','new','weightbrutto','weightnetto', 'length','height','exactlyType1','category_id','keywords','meta_desc'], false,true,$were);
         // if($products) $articles->load('user','category','comments');
         //
         // dd( $product);
+     $product->load('typeTools');
         return $product;
+    }
+
+    public function actionSearch(Request $request)
+    {
+        $this->template=env('THEME').'.left_bar';
+        $this->bar=true;
+        $q=$request->q;
+        $p='%'.$q.'%';
+        $query=Product::select(['id','name','price','img','category_id'])->where('name','like',$p);
+
+       // $products=$query->paginate(Config::get('settings.paginate'));
+        $products=$query->get();
+        $this->adopt=false;
+        $products->transform(function ($item, $key){
+            if(is_string($item->img) && is_object(json_decode($item->img))&& json_last_error()==JSON_ERROR_NONE)
+            {   $item->img=json_decode($item->img); }
+            return $item;
+        });
+        $content = view(env('THEME') . '.products_content')->with(['products'=> $products,'adopt'=>$this->adopt])->render();
+        $this->vars = array_add($this->vars, 'content', $content);
+        return $this->renderOutput();
     }
 
 }

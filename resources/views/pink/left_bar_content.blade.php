@@ -1,46 +1,114 @@
-<form action="select1.php" method="post">
-    <p> <input type="text" id="amount" /></p>
+<!DOCTYPE html>
+<form  id="selectMyFixing" style="display: block; background-color: #DEDEDE; width: 240px; padding: 20px 20px;" action="{{route('resume')}}"   method="post">
+    <p> Диапазон цен:
+        <input type="text" style="width:200px; border:0; color:#f6931f;font-weight: bold;" id="pricer" class="selectValItem" name="pricer" /></p>
+    <br/>
+    <div name="slider-range" style="width:200px; border:0; color:#f6931f;font-weight: bold;" class="selectValItem" id="slider-range"></div>
+    <br/> <br/>
     <div id="slider2"></div>
-    <select name="menuFirms" size="1" id="menuFirms">
-        <option disabled>Производитель</option>
-        <option value="BOSCH">BOSCH</option>
-        <option value="DREMEL">DREMEL</option>
-        <option value="BAHCO">BAHCO</option>
-        <option value="FELCO">FELCO</option>
-        <option value="LOWE">LOWE</option>
-        <option value="FISCSRS">FISCSRS</option>
-        <option value="SILKY">SILKY</option>
-        <option value="ARS">ARS</option>
-        <option value="TINA">TINA</option>
-    </select>
+    {{ csrf_field() }}
 
-    <select name="menuCountries" size="1" id="menuCountries">
-        <option disabled>Страна производителя</option>
-        <option value="Германия">Германия</option>
-        <option value="Китай">Китай</option>
-        <option value="Малайзия">Малайзия</option>
-    </select>
 
-    <select name="menuPower" size="1" id="menuPower">
-        <option disabled>Потребляемая мощность</option>
-        <option value="170 Вт">170 Вт</option>
-        <option value="190 Вт">190 Вт</option>
-        <option value="110 Вт">110 Вт</option>
-    </select>
+    @if($data['companies'])
+    <select name="menuFirms"  style="width:200px;" size="1" id="menuFirms" class="selectValItem" >
+        <option  disabled selected>Производитель</option>
+        @foreach($data['companies'] as $company)
+        <option value="{{$company[1]}}">{{$company[1]}} - &nbsp;<span style="color:#f6931f; font-weight: bold;">({!!$company[2]!!})</span></option>
+        @endforeach
 
-    <select name="menuComplect" size="1" id="menuComplect">
-        <option disabled>Потребляемая мощность</option>
-        <option value="Чемодан">Чемодан</option>
-        <option value="Кейс">Кейс</option>
-        <option value="Картон">Картон</option>
     </select>
+    <br/> <br/>
+    @endif
 
-    <input type="checkbox" value="sh" name="dop_oprions" id="shlem_left" />
-    <label for="shlem-left">Ударная/безударная</label>
+    @if($data['countries'])
+    <select name="menuCountries" size="1" style="width:200px;"  id="menuCountries" class="selectValItem">
+   <table border="1" width="100%" cellpadding="5">
+       <tr>
+        <option disabled selected><td>Страна производителя</td><td></td></option>
+       </tr>
+     @foreach($data['countries'] as $country)
+       <tr>
+              <option value="{{$country[1]}}">
+                  <td> {{$country[1]}}</td>
+                  <td> - &nbsp;<span style="color:#f6931f; font-weight: bold;">({!!$country[2]!!})</span></td>
+              </option>
+       </tr>
+     @endforeach
+   </table>
+    </select>
+    <br/> <br/>
+    @endif
+
+
+    @if($data['powers'])
+    <select name="menuPower" size="1" style="width:200px;" id="menuPower" class="selectValItem">
+        <option disabled selected>Мощность</option>
+        @foreach($data['powers'] as $power)
+            <option value="{{$power[1]}}">"{{$power[1]}}- &nbsp;<span style="color:#f6931f; font-weight: bold;">({!!$power[2]!!})</span></option>
+        @endforeach
+    </select>
+    <br/> <br/>
+    @endif
+
+
+    @if($data['packs'])
+    <select name="menuComplect" size="1"  style="width:200px;" id="menuComplect" class="selectValItem">
+        <option disabled selected>Упаковка</option>
+        @foreach($data['packs'] as $pack)
+           <option value="{{$pack[1]}}">{{$pack[1]}}- &nbsp;<span style="color:#f6931f; font-weight: bold;">({!!$pack[2]!!})</span></option>
+        @endforeach
+    </select>
+    <br/> <br/>
+    @endif
+
+    @if($data['profile1'])
+    <select name="menuTools" size="1"  style="width:200px;" id="menuTools" class="selectValItem">
+        <option disabled selected>Профиль - пилы</option>
+        @foreach($data['profile1'] as $profile)
+         <option value="{{$profile[1]}}">{{$profile[1]}}- &nbsp;<span style="color:#f6931f; font-weight: bold;">({!!$profile[2]!!})</span></option>
+      @endforeach
+    </select>
+    <br/> <br/>
+    @endif
+    @if($data['profile2'])
+    <select name="menuTools2" size="1"  style="width:200px;" id="menuTools2" class="selectValItem">
+        <option disabled selected>Профиль - шлифмашины</option>
+        @foreach($data['profile2'] as $profile)
+           <option value="{{$profile[1]}}">{{$profile[1]}}- &nbsp;<span style="color:#f6931f; font-weight: bold;">({!!$profile[2]!!})</span></option>
+        @endforeach
+    </select>
+    <br/> <br/>
+    @endif
+    <br/>
+
+
+    @if($data['impact'])
+        @foreach($data['impact'] as $pack)
+    <input type="checkbox" value="{{$pack[1]}}" name="dop_options" id="shlem_left" class="selectValItem" />
+    <label for="shlem-left">Ударная</label>
+            -<span style="color:#f6931f; font-weight: bold;">{!!$pack[2]!!}</span>
+        @endforeach
+    @endif
+
+
+    @if($data['notImpact'])
+        @foreach($data['notImpact'] as $pack)
+            <input type="checkbox" value="{{$pack[1]}}" name="dop_options1" id="shlem_left1" class="selectValItem"/>
+             <label for="shlem-left1">Безударная</label>
+            -<span style="color:#f6931f; font-weight: bold;">{!!$pack[2]!!}</span>
+        @endforeach
+
+   @endif
+
+    <br/> <br/> <br/>
     <p><b>Тип инструмента</b></p>
-    <p><input name="dzen" type="radio" value="Электрический">Электрический</p>
-    <p><input name="dzen" type="radio" value="Аккумуляторный"> Аккумуляторный</p>
-    <p><input name="dzen" type="radio" value="Гидравлический">Гидравлический</p>
-
-    <input type="button" id="button_left" value="отправить" />
+    <p><input name="dzen" type="radio"  value="6" class="selectValItem">Электрический</p>
+    <p><input name="dzen" type="radio"  value="1" class="selectValItem" > Аккумуляторный</p>
+    <p><input name="dzen" type="radio"  value="6" class="selectValItem">Гидравлический</p>
+    <p><input name="dzen" type="radio"  value="2" class="selectValItem">Механический</p>
+    <p><input name="dzen" type="radio"  value="3" class="selectValItem">Пневматический</p>
+    <p><input name="dzen" type="radio"  value="4" class="selectValItem">Батарейки</p>
+    <p><input name="dzen" type="radio"  value="5" class="selectValItem">Импульсный</p>
+    <br/> <br/>
+    <input type="submit" id="button_left"  value="отправить" />
 </form>
