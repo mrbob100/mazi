@@ -1,10 +1,5 @@
-<script type='text/javascript' src='http://code.jquery.com/jquery-latest.min.js'></script>
-<link rel='stylesheet' id='zoom-css'  href='{{ asset('public/'.env('THEME')) }}/css/zoom.css' type='text/css' media='all' />
-<script type='text/javascript' src='{!! asset('public/'.env('THEME')) !!}/js/jquery.nicescroll.min.js'></script>
-<script type='text/javascript' src='{!! asset('public/'.env('THEME')) !!}/js/jquery.slider.js'></script>
-<script type='text/javascript' src='{!! asset('public/'.env('THEME')) !!}/js/jquery.mousewheel.js'></script>
-<script type='text/javascript' src='{!! asset('public/'.env('THEME')) !!}/js/touch.js'></script>
-<script type='text/javascript' src='{!! asset('public/'.env('THEME')) !!}/js/zoom.js'></script>
+<!--script type='text/javascript' src='http://code.jquery.com/jquery-latest.min.js'></script-->
+
 
 <!--div class="new-product"-->
 
@@ -75,12 +70,12 @@
         </div>
 
         <div class="purchase">
-            <label for="qty" >количество:</label>
+            <!--label for="qty" >количество:</label>
             <p><input  type="text" id="qty"  value="1"   class="btn btn-default"/> шт.</p>
-            <br/>
+            <br/-->
             <a href="{{ asset('#',['id'=>$product->id]) }}  " data-id="{{$product->id}}" class="btn btn-default add-to-cart" style="text-decoration: none;"><i class="fa fa-shopping-cart"></i>Купить</a>
         <!--a href="#"   data-id="{{--$product->id--}}" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Купить</a-->
-            {{ csrf_field() }}
+
 
         </div>
 

@@ -8,6 +8,7 @@ use Corp\Models\Cart;
 use Corp\Models\Order;
 use Corp\Models\Order_item;
 use Corp\Widgets\MainWidget;
+use Response;
 use Session;
 use Cache;
 use DB;
@@ -31,17 +32,16 @@ use DB;
     [qty] => QTY,
     [sum] => SUM
 );*/
-class CartController extends SiteController
+class CartController extends Controller
 {
-
-
 
     public function index(Request $request)
     {
         $id=$request->id;
-        $qty =(int) $request->qty;
+       // $qty =(int) $request->qty;
 
-        $qty=!$qty ? 1 : $qty;
+       // $qty=!$qty ? 1 : $qty;
+        $qty=1;
         $product = Product::where('id',$id)->select('id','name','code','description','img','price','category_id','keywords','meta_desc')->first();
        // $product=DB::table('products')->where('id',$id)->select('id','name','code','description','img','price','category_id','keywords','meta_desc')->get();
         if(empty($product)) return false;
@@ -65,7 +65,7 @@ class CartController extends SiteController
 
 
         //$session=session();
-        $len=count($request->session());
+     //   $len=count($request->session());
         //for($i=0; $i<$len; $i++)
        // foreach(session('cart') as $ses){
        //     $q1=$ses['name'];
@@ -74,19 +74,24 @@ class CartController extends SiteController
        // }
       // $this->clear();
        //  dump(session());
-       return view('cart.cartModal')->with(['product'=>$product]);
-       // echo ('Давайте работать !');
 
+
+        $content=view('cart.cartModal')->with('product',$product)->render();
+        return $content;
 
     }
+
+
+
+
 
     public function clear()
     {
         if(session('cart'))
         {
             Session::forget("cart");
-            Session::forget('cart.qty');
-            Session::forget('cart.sum');
+          //  Session::forget('cart.qty');
+          //  Session::forget('cart.sum');
             Session::forget('cardCommon.qty');
             Session::forget('cardCommon.sum');
             Session::flush();
@@ -113,6 +118,11 @@ class CartController extends SiteController
 
         $this->layout = false;
         return view('cart.cartModal');
+    }
+
+    public function cartRedirect()
+    {
+        return redirect('/');
     }
 
     public function cartView(Request $request)

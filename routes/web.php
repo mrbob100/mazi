@@ -16,7 +16,7 @@ Route::group(/**
  */
     ['middleware'=>'web'], function(){
 Route::get('/', 'IndexController@index')->name('index');
-
+    Route::get('redirect', 'CartController@cartRedirect')->name('redirectCart');
 //Route::resource('/', 'IndexController', ['only' => 'index', 'names' => ['index' => 'home']]);
 //Route::get('article/{page}', 'IndexController@show')->name('articleShow');
 //Route::delete('page/delete/{article}', function(\App\Product $product) {
@@ -39,13 +39,14 @@ Route::get('updateJson',['uses'=>'Admin\CsvloadController@updateJsonProduct','as
 Route::get('category/{id}',['uses'=>'CategoryController@index','as'=>'category']);
 
 //Route::match(['get','post'],'category',['uses'=>'PreciseController@Index','as'=>'resume']);
-Route::post('category',['uses'=>'CategoryController@resumeIndex','as'=>'resume']);
+Route::post('catRes',['uses'=>'CategoryController@resumeIndex','as'=>'resume']);
 // стандартные маршруты  для аутенфикации
     Route::group(['prefix'=>'product'], function() {
         Route::get('/', ['uses'=>'ProductController@index', 'as'=>'product']);
 
     });
 Route::get('addcartios',['uses'=>'CartController@index', 'as'=>'addcart']);
+Route::get('changeQty',['uses'=>'PreciseController@changeQuantity','as'=>'changeBuy']);
  Route::get('cartShow',['uses'=>'CartController@cartShow', 'as'=>'cartShow']);
 Route::get('clear',['uses'=>'CartController@clear', 'as'=>'clearance']);
 Route::get('arrange',['uses'=>'CartController@cartView', 'as'=>'arrangeContract']);

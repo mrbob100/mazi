@@ -202,6 +202,7 @@ class CategoryController extends SiteController  // выбор из боково
             'powers'=>$powers,
         ];
 
+
         $content=view(env('THEME').'.products_content')->with(['products'=>$products,'adopt'=>$this->adopt])->render();
         $this->vars=array_add($this->vars,  'content', $content);
 

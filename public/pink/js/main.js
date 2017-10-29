@@ -33,8 +33,9 @@ function getCart(){
 
 
 $(function(){
-$(' .modal-body').on('click', '.del-item', function(){
+$(' .modal-body').on('click', '.del-item', function(e){
 	//alert(123);
+    e.preventDefault();
 	var id = $(this).data('id');
 
   //  var cat = $(this).data('cat');
@@ -62,7 +63,7 @@ $(' .modal-body').on('click', '.del-item', function(){
 
 function clearCart(){
 	$.ajax({
-		url: 'Clear',
+		url: 'clear',
 		type: 'GET',
         headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
 		success: function(res){
@@ -76,11 +77,23 @@ function clearCart(){
 }
 
 
+/*function redirectCart(){
+    $.ajax({
+        url: 'redirect',
+        type: 'GET',
+        headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+
+        error: function(){
+            alert('Нет перехода на главную страницу!!!');
+        }
+    });
+} */
+
 $( document ).ready(function(){
 $('.add-to-cart').on('click', function (e) {
-	e.preventDefault();
+	//e.preventDefault();
 	var id = $(this).data('id');
-	var	 qty=$('#qty').val();
+//	var	 qty=$('#qty').val();
 
 		// qty=1;
 	$.ajax({
@@ -91,7 +104,7 @@ $('.add-to-cart').on('click', function (e) {
 		//contentType: false,
       //  url: '/CartController/cartAdd',
 	//	url: '@web/cart/add',
-		data: {id: id, qty: qty},
+		data: {id: id},
         headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
 		type: 'GET',
 		dataType: "text",
@@ -108,6 +121,39 @@ $('.add-to-cart').on('click', function (e) {
 	});
 
 });
+
+
+   $('.modal-body').on('focusout','#movieMaker', function(e){
+        e.preventDefault();
+
+        var id=$(this).data('id');
+        var qt=$(this).val();
+
+        $.ajax({
+            url: "changeQty",
+            cache: false,
+            data: { id: id,  qt: qt},
+            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+            type:'GET' ,
+            dataType: "JSON",
+            success: function(res){
+                if(!res) alert('Ошибка!');
+
+                //$('.wrap_result').append('<br/><strong>Выборка выполнена !</strong>').delay(2000).fadeOut(500);
+
+                $('.table-responsive').empty();
+                // $('#mediumMine').replaceWith(res.content);
+                $('.table-responsive').append(res.content);
+
+            },
+            error: function(){
+                alert('Ошибка передачи данных модального окна!');
+            }
+		});
+    });
+
+
+
 
     $("#flexiselDemo3").flexisel({
         visibleItems: 4,
@@ -170,7 +216,7 @@ $(function() {
     var counter = 0;
 
 
-    $("#slider-range").slider({
+   $("#slider-range").slider({
         range: true,
         min: 300,
         max: 80000,
@@ -215,7 +261,7 @@ $(function() {
         data: data,
        /* beforeSend: function(data) { // сoбытиe дo oтпрaвки
             form.find('input[type="submit"]').attr('disabled', 'disabled'); // нaпримeр, oтключим кнoпку, чтoбы нe жaли пo 100 рaз
-        }, */
+        },  здесь должен быть ограничитель  звездочеа и косая  */
         headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
         type:form.attr('method') ,
         dataType: "JSON",
@@ -237,4 +283,7 @@ $(function() {
 
 });
 
+
+
 });
+

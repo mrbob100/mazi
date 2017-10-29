@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+<script type="text/javascript" src=" {!! asset('public/'.env('THEME')) !!}/js/vue.min.js" charset="utf-8" ></script>
+
 <form  id="selectMyFixing" style="display: block; background-color: #DEDEDE; width: 240px; padding: 20px 20px;" action="{{route('resume')}}"   method="post">
     <p> Диапазон цен:
         <input type="text" style="width:200px; border:0; color:#f6931f;font-weight: bold;" id="pricer" class="selectValItem" name="pricer" /></p>
@@ -99,6 +101,8 @@
         @endforeach
 
    @endif
+
+
 
     <br/> <br/> <br/>
     <p><b>Тип инструмента</b></p>

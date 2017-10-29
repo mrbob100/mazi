@@ -4,9 +4,11 @@ namespace Corp\Http\Controllers;
 
 //use Illuminate\Http\Request;
 use Corp\Repositories\ProductsRepository;
+use Corp\Models\Cart;
 use Request;
 use Config;
 use Session;
+use Response;
 class PreciseController extends SiteController // контроллер отзыв jquery
 {
     public function __construct(  ProductsRepository $p_rep)
@@ -102,5 +104,63 @@ class PreciseController extends SiteController // контроллер отзы�
 
             return $this->renderOutput();
         }
+    }
+
+    public function changeQuantity()
+    {
+        $request=Request::createFromGlobals();
+        //Session::flush();
+        if($request->isMethod('get'))
+        {
+            $this->template=env('THEME').'.both_bars';
+            // $this->bar=false;
+            $input = $request->except('_token');
+
+         $am=trim($input['id'],'"');
+        $am1=trim($input['qt'],'"');
+          $obj=new Cart();
+            if(session('cart'))
+            {
+                $rez =Session::get('cart');
+                $rez1=count( $rez);
+                $i=0;
+                $sumQty=0;
+                $total=0;
+                do{
+                    $q1=$rez[$i]['cart.id'];
+                    if ($q1 == $am){
+                        $rez[$i]['cart.qty']=$am1;
+                    }
+                    $sumQty+=  $rez[$i]['cart.qty'];
+                    $total+=$rez[$i]['cart.qty']*$rez[$i]['cart.price'];
+                    $i++;
+                } while($i<$rez1);
+
+                Session::pull('cart');
+                Session::pull('cardCommon.qty');
+                Session::pull('cardCommon.sum');
+
+                Session::put(['cart'=>$rez]);
+            /*    if(session('cardCommon.qty')){
+                    $addqty=$am1; session(['cardCommon.qty'=>$addqty]);
+                } else{
+                    session(['cardCommon.qty'=>$am1]);
+                }
+                if(session('cardCommon.sum'))
+                {
+                    $addsum= $am1 *  $rez[$i]['cart.price'];
+                    session(['cardCommon.sum'=>$addsum]);
+                } else{
+                    session(['cardCommon.sum'=>$am1 * $rez[$i]['cart.price'] ]);
+                } */
+                session(['cardCommon.qty'=>$sumQty]);
+                session(['cardCommon.sum'=>$total]);
+            }
+
+
+          $content=view('cart.cartModal')->render();
+            return Response::json(['success'=>true, 'content'=>$content]);
+        }
+        exit();
     }
 }

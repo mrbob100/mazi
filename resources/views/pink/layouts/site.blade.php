@@ -17,6 +17,7 @@
     <link href="{{ asset('public/'.env('THEME')) }}/css/animate.css" rel="stylesheet">
 	<meta name="csrf-token" content="{!! csrf_token() !!}" />
 
+	<link rel='stylesheet' id='zoom-css'  href='{{ asset('public/'.env('THEME')) }}/css/zoom.css' type='text/css' media='all' />
 
 	<!--script type="text/javascript" src=" {--!! asset('public/'.env('THEME')) !!--}/js/jquery-ui.widget.js" charset="utf-8" ></script>
 	<script type="text/javascript" src=" {--!! asset('public/'.env('THEME')) !!--}/js/jquery-ui.mouse.js" charset="utf-8" ></script>
@@ -49,7 +50,7 @@
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Продолжить покупки</button>
 				<a href="{{ route('arrangeContract') }}" class="btn btn-success">Оформить заказ</a>
-				<button type="button" class="btn btn-danger" onclick="clearCart()">Очистить корзину</button>
+				<button type="button" class="btn btn-danger" onclick="clearCart();">Очистить корзину</button>
 			</div>
 		</div><!-- /.modal-content -->
 	</div><!-- /.modal-dialog -->
@@ -101,6 +102,8 @@
 						<!--li><a href="#"> Sale </a></li>
                         <li><a href="#"> Copmming soon </a></li>
                         <li><a href="#"> Contact us</a> </li-->
+
+						<!--  вывод меню навигаия - главная  О нас   Гарантии-->
 						<li>  @yield('navigation')</li>
 					</ul>
 				</div>
@@ -280,4 +283,10 @@
 <script type="text/javascript" src=" {!! asset('public/'.env('THEME')) !!}/js/main.js"  ></script>
 <script type="text/javascript" src=" {!! asset('public/'.env('THEME')) !!}/js/pushy.js"  ></script>
 <script type="text/javascript" src=" {!! asset('public/'.env('THEME')) !!}/js/jquery-ui.js" charset="utf-8" ></script>
+<!--script type="text/javascript" src=" {--!! asset('public/'.env('THEME')) !!--}/js/vue.min.js" charset="utf-8" ></script-->
+<script type='text/javascript' src='{!! asset('public/'.env('THEME')) !!}/js/jquery.nicescroll.min.js'></script>
+<script type='text/javascript' src='{!! asset('public/'.env('THEME')) !!}/js/jquery.slider.js'></script>
+<script type='text/javascript' src='{!! asset('public/'.env('THEME')) !!}/js/jquery.mousewheel.js'></script>
+<script type='text/javascript' src='{!! asset('public/'.env('THEME')) !!}/js/touch.js'></script>
+<script type='text/javascript' src='{!! asset('public/'.env('THEME')) !!}/js/zoom.js'></script>
 </html>

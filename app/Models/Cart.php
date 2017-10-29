@@ -14,23 +14,7 @@ class Cart extends Model
             $ses=[];
        /*  if((session('cart.id'))== $product->id) { */
         if(session('cart')){
-    /*   foreach(session('cart') as $ses) {
 
-               $q1 = $ses['cart.id'];
-
-               // if ($q1 == $product->id) {
-               if ($ses['cart.id'] == $product->id) {
-                   $sesAdd = $ses['cart.qty'] + $qty;
-                   $rez =Session::get('cart');
-                   Session::pull('cart',$ses);
-                   $ses['cart.qty'] = $sesAdd;
-                   echo('вывод после удаления элемента');
-                   dump($ses);
-                   // session(['qty' => $addqty]);
-                   $a = true;
-                   break;
-               }
-           } */
             $rez =Session::get('cart');
             $rez1=count( $rez);
             $i=0;
@@ -90,8 +74,6 @@ class Cart extends Model
             session(['cardCommon.sum'=>$qty * $product->price ]);
         }
 
-       // dump(session()->all());
-
     }
 
     public function recalc($id)
@@ -100,28 +82,76 @@ class Cart extends Model
         $rez =Session::get('cart');
         $rez1=count( $rez);
         Session::pull('cart');
+        Session::pull('cardCommon.qty');
+        Session::pull('cardCommon.sum');
         $i=0; $qty=0; $price=0;
+        $sumQty=0;
+        $total=0;
         do{
             $q1=$rez[$i]['cart.id'];
             if ($q1 == $id){
-                $qty=$rez[$i]['cart.qty'];
-                $price=$rez[$i]['cart.price'];
                unset( $rez[$i]);
-                $a=true;
-                break;
+
+                 break;
             }
             $i++;
-
         } while($i<$rez1);
-        if(session('cardCommon.qty')){
-            $addqty=session('cardCommon.qty')-$qty; session(['cardCommon.qty'=>$addqty]);
-        }
-        if(session('cardCommon.sum'))
+
+        $rez1=count( $rez);
+        $rez=$this->recoveryArray($rez1, $rez);
+
+
+        $rez1=count( $rez);
+
+        if( $rez)
         {
-            $addsum=session('cardCommon.sum')- $qty * $price;
-            session(['cardCommon.sum'=>$addsum]);
+            $i=0;
+            do{
+                $sumQty+=  $rez[$i]['cart.qty'];
+                $total+=$rez[$i]['cart.qty']*$rez[$i]['cart.price'];
+                $i++;
+            } while($i<$rez1);
+
+            Session::put(['cart'=>$rez]);
+            session(['cardCommon.qty'=>$sumQty]);
+            session(['cardCommon.sum'=>$total]);
         }
-        if(!$rez) return false;
-        Session::put(['cart'=>$rez]);
+
+
     }
+
+
+    public function recoveryArray($rez1, $rez)
+    {
+        $rez2=[];
+        while($rez)
+        {
+            $k=0;
+            for($j=0;$j<$rez1; $j++)
+            {
+                if(isset($rez[$j]))
+                {
+                    $rez2[$k]=$rez[$j]; unset($rez[$j]);
+                    $k++;
+                }
+                else
+                    {
+                        for($i=$j+1; $i<=$rez1; $i++)
+                        {
+                            if(isset($rez[$i]))
+                            {
+                                $rez2[$k]=$rez[$i];  unset($rez[$i]);
+                                $k++;
+                                break;
+                            }
+                        }
+
+                    }
+            }
+            $k++;
+        }
+        return $rez2;
+    }
+
+
 }
