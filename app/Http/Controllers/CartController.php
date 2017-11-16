@@ -8,10 +8,13 @@ use Corp\Models\Cart;
 use Corp\Models\Order;
 use Corp\Models\Order_item;
 use Corp\Widgets\MainWidget;
+use Corp\User;
+use Corp\Models\Role;
 use Response;
 use Session;
 use Cache;
 use DB;
+use Illuminate\Support\Facades\Hash;
 /*Array
 (
     [1] => Array
@@ -143,23 +146,35 @@ class CartController extends Controller
                 'address'=>'required|max:255'
             ];
             $this->validate($request,$rules);
+            $user= new User();
+            $user->login=$request->name;
+            $user->name=$request->name;
+            $user->secondname=$request->secondname;
+            $user->email=$request->email;
+            $user->phone=$request->phone;
+            $user->address=$request->address;
+            $user->password = Hash::make($user->phone);
 
-            $order->firstname=$request->name;
-            $order->secondname=$request->secondname;
-            $order->email=$request->email;
-            $order->phone=$request->phone;
-            $order->address=$request->address;
+           // $user->save();
+          // $role=new Role(['name'=>'Buyer']);
+
+         //   $user->roles()->save($role);
+          //  $role->users()->user_id->save( $user);
+
+            $role = Role::find(3);
+            $role->users()->save($user);
+            $order->user_id=$user->id;
             $order->qty = session('cardCommon.qty');
             $order->sum = session('cardCommon.sum');
             if($order->save()){
                 $this->saveOrderItems(session('cart'), $order->id);
-                Session::flash('success', 'Ваш заказ принят. Менеджер вскоре свяжется с Вами.');
+                Session::flash('status', 'Ваш заказ принят. Менеджер вскоре свяжется с Вами.');
                 Session::forget('cart');
                 Session::remove('cardCommon.qty');
                 Session::remove('cardCommon.sum');
-                Session::flash('success', 'Ваш заказ принят');
+                Session::flash('status', 'Ваш заказ принят');
             }else{
-                Session::flash('error', 'Ошибка оформления заказа');
+                Session::flash('errors', 'Ошибка оформления заказа');
             }
         }
 

@@ -1,11 +1,10 @@
-@extends('layouts.admin')
+@extends(env('THEME').'.admin.layouts.admin')
 
 @section('header')
 
-    @include('admin.header')
+    @include(env('THEME').'.admin.header')
 
 @endsection
-
 @section('content')
-    @include ('admin.products.content_products_edit')
+    @include (env('THEME').'.admin.products.content_products_edit')
 @endsection

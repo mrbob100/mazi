@@ -123,7 +123,7 @@ $('.add-to-cart').on('click', function (e) {
 });
 
 
-   $('.modal-body').on('focusout','#movieMaker', function(e){
+   $('.modal-body').on('blur','#movieMaker', function(e){
         e.preventDefault();
 
         var id=$(this).data('id');
@@ -283,7 +283,7 @@ $(function() {
 
 });
 
-
-
 });
+
+
 

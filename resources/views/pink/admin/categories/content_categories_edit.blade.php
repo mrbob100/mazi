@@ -1,4 +1,3 @@
-@extends('layouts.admin')
 @section('content')
     <div class="container">
 <div class="wrapper container-fluid">
@@ -10,6 +9,7 @@
         {!! Form::hidden('id',$data['id']) !!}
         {!! Form::label('name','Название',['class'=>'col-xs2 control-label']) !!}
         <div class="col-xs8">
+
             {!! Form::text('name',$data['name'],['class'=>'form-control','placeholder'=>' Название категории']) !!}
         </div>
     </div>
@@ -43,10 +43,10 @@
                 Для вывода виджета использован параметр config['model'] - это объект категории для выборки select.php- выпадающий список
                 -->
 
-                <select id="category-parent_id" class="form-control" name="Category[parent_id]">
+                <select id="category-parent_id" class="form-control"  name="Category[parent_id]">
                     <option value="0">Самостоятельная категория</option>
                     {{ $var=Widget::run('MainWidget',['tpl'=>'select.php','model'=>$model]) }}
-                    {!! Form::select('parent_id', $var,['class'=>'form-control','placeholder'=>'Родительская Id']) !!}
+                    {!! Form::select('parent_id', $var,['class'=>'form-control', 'placeholder'=>'Родительская Id']) !!}
                 </select>
             </div>
 
@@ -62,7 +62,7 @@
     <div class="form-group">
         {!! Form::label('description','Описание',['class'=>'col-xs2 control-label']) !!}
         <div class="col-xs8">
-            {!! Form::text('description',$data['description'],['class'=>'form-control','placeholder'=>'Описание']) !!}
+            {!! Form::text('description',$data['description'],['class'=>'form-control', 'placeholder'=>'Описание']) !!}
         </div>
     </div>
     <div class="form-group">

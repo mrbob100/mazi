@@ -59,7 +59,7 @@ class CategoryEditController extends Controller
            $cat=DB::table('categories')->where('id',$id)->update($category->toArray());
             if($cat)
             {
-                return redirect('admin')->with('status','Категория обновлена');
+                return redirect(env().'.admin')->with('status','Категория обновлена');
             }
             else abort(404);
         }
@@ -76,7 +76,7 @@ if($old->parent_id==0){
 
 }
 //$model=$old;
-        if(view()->exists('admin.categories.category_edit'))
+        if(view()->exists(env('THEME').'.admin.categories.category_edit'))
         {
             $data=[
                 'title'=>'Редактирование категории -'.$old['name'],
@@ -85,7 +85,7 @@ if($old->parent_id==0){
              //   'model'=>$model
                 'model'=>$old
             ];
-            return view('admin.categories.category_edit',$data,['model'=>$old]);
+            return view(env('THEME').'.admin.categories.category_edit',$data,['model'=>$old]);
         }
         abort(404);
     }

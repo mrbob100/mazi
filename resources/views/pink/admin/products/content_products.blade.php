@@ -1,4 +1,3 @@
-@extends('layouts.admin')
 @section('content')
     <div style="margin: 0px 50px 0px 50px;">
         @if($products)
@@ -23,10 +22,10 @@
 
                     <td>{{ $product->id }}</td>
 
-                    <td>{!! Html::image('public/images/'.$product->img,'',['class'=>'img-circle img-responsive', 'width'=>'50px',
-                   'data-buttonName'=>'btn-primary','data-placeholder'=>$product->img]) !!}</td>
+                    <td>{!! Html::image('public/'.env('THEME').'./images/'.$product->img->mini,'',['class'=>'img-circle img-responsive', 'width'=>'50px',
+                   'data-buttonName'=>'btn-primary','data-placeholder'=>$product->name]) !!}</td>
 
-                    <td>{{-- $parent_name[$j] }}{{' '--}}{{ $product->getCategory->name  }}</td>
+                    <td>{{-- $parent_name[$j] }}{{' '--}}{{ $product->categories->name  }}</td>
 
                     <td> {!! Html::link(route('productEdit',['product'=>$product->id]), $product->name,['alt'=>$product->name] ) !!}  </td>
                     <td> {{  $product->price }}</td>
@@ -43,13 +42,16 @@
             @endforeach
             </tbody>
         </table>
-        {!! Html::link(route('productAdd'),'Новый продукт',['class'=>'btn btn-success']) !!}
-        <br/>
-        {!! $products->render()  !!}
+            <br/> <br/>
+        {!! Html::link(route('productAdd'),'Новый продукт',['class'=>'btn btn-success','style'=>'background-color:#806052;color:white; font-size:18px; ']) !!}
+        <br/> <br/>
+
+            {!! $products->render()  !!}
 
     @endif
-
-
+            <br/> <br/>
+            <div class="clear"></div>
+           <!-- {--!! $products->render()  !!--} -->
 </div>
 
 @endsection

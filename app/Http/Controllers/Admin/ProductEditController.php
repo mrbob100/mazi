@@ -114,18 +114,21 @@ class ProductEditController extends Controller
         //$old=$sold->toArray();
        // dd($old);
        // $category= $old->getCategory->name;
-
-        if(view()->exists('admin.products.product_edit'))
+        $sas =json_decode($old->img);
+        $pic=$sas->path;
+        if(view()->exists(env('THEME').'.admin.products.product_edit'))
         {
             $data=[
                 'title'=>'Редактирование продукции -'.$old['name'],
                 'data'=>$old,
                 'model'=>$old,
+                'pic'=>$pic,
                // 'value'=>function($value){ return $value->categories->name; }
               //  'value'=> $category,
             ];
 
-            return view('admin.products.product_edit',$data,['old'=>$old, 'model'=>$old]);
+//dd($data);
+            return view(env('THEME').'.admin.products.product_edit',$data,['old'=>$old, 'model'=>$old]);
         }
         abort(404);
     }

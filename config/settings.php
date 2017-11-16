@@ -15,4 +15,19 @@ return [
                 'height'=>450
 
              ],
+    'perforator'=>[
+        'power','maxHole','voltage','capacity','impact','qntImpact',
+        'idle','rotationSpeed','speedIdle','cartridge'
+    ],
+    'grinders'=>[
+        'power','rotationSpeed','diametrDisk','spindle','performance'
+    ],
+    'jackhammers'=>[
+        'power','maxCapacity','airFlow'
+    ],
+    'saws' =>[
+        'power','metalCuttingDepth','pipeCuttingDepth','woodCuttingDepth','diametrDisk',
+        'vibrationLevel','cuttingDepth','angleCuttingDepth','frequency','workingWidth',
+        'cuttingEdgeWidth','rotationSpeed','strokeLength','grindingPlate'
+    ]
 ];

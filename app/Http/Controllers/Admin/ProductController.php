@@ -11,12 +11,19 @@ class ProductController extends Controller
 {
     public function index()
     {
-        if(view()->exists('admin.categories.index'))
+        if(view()->exists(env('THEME').'.admin.categories.index'))
         {
 
             $parent_name=[];
            // $products=DB::table('products')->simplePaginate(10);
-            $products=Product::with('getCategory')->paginate(10);
+            $products=Product::with('categories')->paginate(20);
+            $products->transform(function ($item, $key){
+                if(is_string($item->img) && is_object(json_decode($item->img))&& json_last_error()==JSON_ERROR_NONE)
+                {   $item->img=json_decode($item->img); }
+
+                return $item;
+            });
+           // $products->img=json_decode( $products->img);
           //  $products=Product::paginate(10);
          //   $category= $products->load('getCategory');
         /*     $j=0;
@@ -36,7 +43,7 @@ class ProductController extends Controller
                 'parent_name'=>$parent_name,
 
             ];
-            return view('admin.products.index',$data);
+            return view(env('THEME').'.admin.products.index',$data);
         }
     }
 }

@@ -46,4 +46,9 @@ background-image: url("../images/banner_img.jpg") !important;
 /*# sourceMappingURL=uroda.css.map */
 .navbar{
   margin-left: 80px;
+
+}
+.menu_21 {
+  margin: 0 auto;
+  text-align: center;
 }

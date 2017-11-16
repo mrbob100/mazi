@@ -11,11 +11,11 @@ class CategoryController extends Controller
 {
     public function index()
     {
-      if(view()->exists('admin.categories.index'))
+      if(view()->exists(env('THEME').'.admin.categories.index'))
       {
         //  $categories=Category::simplePaginate(10);
 
-          $categories=Category::with('getCategory')->simplePaginate(10);
+          $categories=Category::with('getCategory')->simplePaginate(20);
 
           $data=[
             'title'=>'Категории',
@@ -24,7 +24,7 @@ class CategoryController extends Controller
           ];
        //   return view('admin.index',$data);
 
-          return view('admin.categories.index11',$data);
+          return view(env('THEME').'.admin.categories.index11',$data);
       }
       abort(404);
     }

@@ -45,7 +45,7 @@
 
 <!-- header-section-starts -->
 
-@include('pink.header1')
+@include(env('THEME').'.header1')
 <div class="container">
     <div class="row">
         <div class="col-xs-3 col-sm-3 col-lg-3 container-fluid ">

@@ -11,7 +11,7 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Styles -->
-    <link href="{{ asset('public/css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('public/'.env('THEME').'/css/app.css') }}" rel="stylesheet">
 </head>
 <body>
     <div id="app">
@@ -75,7 +75,7 @@
     </div>
 
     <!-- Scripts -->
-    <script src="{!! asset('public/js/app.js')  !!}  "></script>
+    <script src="{!! asset('public/'.env('THEME').'/js/app.js')  !!}  "></script>
 
 </body>
 </html>

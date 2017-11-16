@@ -79,10 +79,10 @@ Route::group(['prefix'=>'admin','middleware'=>['web','auth']], function(){
         if($user['login']!='admin')  {
             return redirect('ulogin');
         }
-     if(view()->exists('admin.categories.index'))
+     if(view()->exists(env('THEME').'.admin.categories.index'))
          {
              $data=['title'=>'Панель администратора'];
-             return view('admin.categories.index',$data);
+             return view(env('THEME').'.admin.categories.index',$data);
          }
     });
     // Actions

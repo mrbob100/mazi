@@ -8,7 +8,7 @@ class Order extends Model
 {
     protected $table='orders';
     protected $primaryKey='id';
-    protected $fillable =['qty','sum','status','firstname','secondname','email','phone','address','comment'];
+    protected $fillable =['id','qty','sum','status','user_id','comment','created_at','updated_at'];
 
     public function order_items()
     {

@@ -1,4 +1,3 @@
-@extends('layouts.admin')
 @section('content')
     <div class="container">
         <div class="wrapper container-fluid">
@@ -13,7 +12,13 @@
                     {!! Form::text('name',$data['name'],['class'=>'form-control','placeholder'=>' Название продукта']) !!}
                 </div>
             </div>
+            <div class="form-group">
 
+                {!! Form::label('code','код',['class'=>'col-xs2 control-label']) !!}
+                <div class="col-xs8">
+                    {!! Form::text('code',$data['code'],['class'=>'form-control','placeholder'=>' Код продукта']) !!}
+                </div>
+            </div>
 
             <div class="form-group">
                 {!! Form::label('category_id','Категория',['class'=>'col-xs2 control-label']) !!}
@@ -43,20 +48,34 @@
                 </div>
             </div-->
             <div class="form-group">
-                {!! Form::label('content','Текст',['class'=>'col-xs2 control-label']) !!}
+                {!! Form::label('description','Краткое описание',['class'=>'col-xs2 control-label']) !!}
                 <div class="col-xs8">
-                    {!! Form::textarea('content',$data['content'],['id'=>'editor','class'=>'form-control','placeholder'=>'Введите текст']) !!}
+                    {!! Form::textarea('description',$data['description'],['id'=>'editor','class'=>'form-control','placeholder'=>'Краткое описание']) !!}
+                </div>
+            </div>
+
+            <div class="form-group">
+                {!! Form::label('text','Описание',['class'=>'col-xs2 control-label']) !!}
+                <div class="col-xs8">
+                    {!! Form::textarea('text',$data['text'],['id'=>'editor1','class'=>'form-control','placeholder'=>'Описание']) !!}
                 </div>
             </div>
 
 
             <div class="form-group">
+                {!! Form::label('price','Цена',['class'=>'col-xs2 control-label']) !!}
+                <div class="col-xs8">
+                    {!! Form::text('price',$data['price'],['class'=>'form-control','placeholder'=>'Цена']) !!}
+                </div>
+            </div>
+
+            <div class="form-group">
 
                {!! Form::label('old_images','Изображение:',['class'=>'col-xs2 control-label']) !!}
                <div class="col-xs-offset-2 col-xs10">
-                   {!! Html::image('public/images/'.$data['img'],'',['class'=>'img-circle img-responsive', 'width'=>'50px',
-                   'data-buttonName'=>'btn-primary','data-placeholder'=>$data['img']]) !!}
-                   {!! Form::hidden('old_images',$data['img']) !!}
+                   {!! Html::image('public/'.env('THEME').'/images/'.$pic,'',['class'=>'img-circle img-responsive', 'width'=>'250px',
+                   'data-buttonName'=>'btn-primary','data-placeholder'=>$pic]) !!}
+                   {!! Form::hidden('old_images',$pic) !!}
                </div>
            </div>
 
@@ -69,47 +88,121 @@
             </div>
 
             <div class="form-group">
-
-                {!! Form::label('old_mini_side','Изображение:',['class'=>'col-xs2 control-label']) !!}
-                <div class="col-xs-offset-2 col-xs10">
-                    {!! Html::image('public/images/miniatures/'.$data['mini_side'],'',['class'=>'img-circle img-responsive', 'width'=>'50px',
-                    'data-buttonName'=>'btn-primary','data-placeholder'=>$data['mini_side']]) !!}
-                    {!! Form::hidden('old_mini_side',$data['mini_side']) !!}
-                </div>
-            </div>
-
-            <div class="form-group">
-                {!! Form::label('mini_side','Вид сбоку:',['class'=>'col-xs2 control-label']) !!}
+                {!! Form::label('type','Тип',['class'=>'col-xs2 control-label']) !!}
                 <div class="col-xs8">
-                    {!! Form::file('mini_side',['class'=>'filestyle','data-buttonText'=>'Выберите mini изображение',
-                    'data-buttonName'=>'btn-primary','data-placeholder'=>'Файла нет']) !!}
+                    {!! Form::text('type',$data['type'],['class'=>'form-control','placeholder'=>'Тип']) !!}
                 </div>
             </div>
 
             <div class="form-group">
-
-                {!! Form::label('old_mini_back','Изображение:',['class'=>'col-xs2 control-label']) !!}
-                <div class="col-xs-offset-2 col-xs10">
-                    {!! Html::image('public/images/miniatures/'.$data['mini_back'],'',['class'=>'img-circle img-responsive', 'width'=>'50px',
-                    'data-buttonName'=>'btn-primary','data-placeholder'=>$data['mini_back']]) !!}
-                    {!! Form::hidden('old_mini_back',$data['mini_back']) !!}
-                </div>
-            </div>
-
-            <div class="form-group">
-                {!! Form::label('mini_back','Вид сзади:',['class'=>'col-xs2 control-label']) !!}
+                {!! Form::label('country','Страна',['class'=>'col-xs2 control-label']) !!}
                 <div class="col-xs8">
-                    {!! Form::file('mini_back',['class'=>'filestyle','data-buttonText'=>'Выберите mini изображение',
-                    'data-buttonName'=>'btn-primary','data-placeholder'=>'Файла нет']) !!}
+                    {!! Form::text('country',$data['country'],['class'=>'form-control','placeholder'=>'Страна']) !!}
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                {!! Form::label('groupTools','Группа',['class'=>'col-xs2 control-label']) !!}
+                <div class="col-xs8">
+                    {!! Form::text('groupTools',$data['groupTools'],['class'=>'form-control','placeholder'=>'Группа']) !!}
                 </div>
             </div>
 
             <div class="form-group">
-                {!! Form::label('price','Цена',['class'=>'col-xs2 control-label']) !!}
+                {!! Form::label('new','Признак',['class'=>'col-xs2 control-label']) !!}
                 <div class="col-xs8">
-                    {!! Form::text('price',$data['price'],['class'=>'form-control','placeholder'=>'Цена']) !!}
+                    {!! Form::text('new',$data['new'],['class'=>'form-control','placeholder'=>'Признак']) !!}
                 </div>
             </div>
+
+            <div class="form-group">
+                {!! Form::label('weightbrutto','Вес(брутто)',['class'=>'col-xs2 control-label']) !!}
+                <div class="col-xs8">
+                    {!! Form::text('weightbrutto',$data['weightbrutto'],['class'=>'form-control','placeholder'=>'Вес(брутто)']) !!}
+                </div>
+            </div>
+
+            <div class="form-group">
+                {!! Form::label('weightnetto','Вес(нетто)',['class'=>'col-xs2 control-label']) !!}
+                <div class="col-xs8">
+                    {!! Form::text('weightnetto',$data['weightnetto'],['class'=>'form-control','placeholder'=>'Вес(нетто)']) !!}
+                </div>
+            </div>
+
+            <div class="form-group">
+                {!! Form::label('width','ширина',['class'=>'col-xs2 control-label']) !!}
+                <div class="col-xs8">
+                    {!! Form::text('width',$data['width'],['class'=>'form-control','placeholder'=>'ширина']) !!}
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                {!! Form::label('length','длина',['class'=>'col-xs2 control-label']) !!}
+                <div class="col-xs8">
+                    {!! Form::text('length',$data['length'],['class'=>'form-control','placeholder'=>'длина']) !!}
+                </div>
+            </div>
+
+            <div class="form-group">
+                {!! Form::label('height','высота',['class'=>'col-xs2 control-label']) !!}
+                <div class="col-xs8">
+                    {!! Form::text('height',$data['height'],['class'=>'form-control','placeholder'=>'высота']) !!}
+                </div>
+            </div>
+
+            <div class="form-group">
+                {!! Form::label('termGuarantee','гарантия',['class'=>'col-xs2 control-label']) !!}
+                <div class="col-xs8">
+                    {!! Form::text('termGuarantee',$data['termGuarantee'],['class'=>'form-control','placeholder'=>'гарантия']) !!}
+                </div>
+            </div>
+
+            <div class="form-group">
+                {!! Form::label('class','класс',['class'=>'col-xs2 control-label']) !!}
+                <div class="col-xs8">
+                    {!! Form::text('class',$data['class'],['class'=>'form-control','placeholder'=>'класс']) !!}
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                {!! Form::label('packing','упаковка',['class'=>'col-xs2 control-label']) !!}
+                <div class="col-xs8">
+                    {!! Form::text('packing',$data['packing'],['class'=>'form-control','placeholder'=>'упаковка']) !!}
+                </div>
+            </div>
+
+            <div class="form-group">
+                {!! Form::label('company','Компания',['class'=>'col-xs2 control-label']) !!}
+                <div class="col-xs8">
+                    {!! Form::text('company',$data['company'],['class'=>'form-control','placeholder'=>'Компания']) !!}
+                </div>
+            </div>
+
+            <div class="form-group">
+                {!! Form::label('created_at','Дата создания',['class'=>'col-xs2 control-label']) !!}
+                <div class="col-xs8">
+                    {!! Form::text('created_at',$data['created_at'],['class'=>'form-control','placeholder'=>'Дата создания']) !!}
+                </div>
+            </div>
+
+            <div class="form-group">
+                {!! Form::label('updated_at','Последняя корректировка',['class'=>'col-xs2 control-label']) !!}
+                <div class="col-xs8">
+                    {!! Form::text('updated_at',$data['updated_at'],['class'=>'form-control','placeholder'=>'Последняя корректировка']) !!}
+                </div>
+            </div>
+
+            <div class="form-group">
+                {!! Form::label('exactlyType1','Характеристики',['class'=>'col-xs2 control-label']) !!}
+                <div class="col-xs8">
+                    {!! Form::text('exactlyType1',$data['exactlyType1'],['class'=>'form-control','placeholder'=>'Характеристики']) !!}
+                </div>
+            </div>
+
+
             <div class="form-group">
                 {!! Form::label('keywords','Ключевые слова',['class'=>'col-xs2 control-label']) !!}
                 <div class="col-xs8">
@@ -117,40 +210,34 @@
                 </div>
             </div>
             <div class="form-group">
-                {!! Form::label('description','Описание',['class'=>'col-xs2 control-label']) !!}
+                {!! Form::label('meta_desc','Мета описание',['class'=>'col-xs2 control-label']) !!}
                 <div class="col-xs8">
-                    {!! Form::text('description',$data['description'],['class'=>'form-control','placeholder'=>'Описание']) !!}
+                    {!! Form::text('meta_desc',$data['meta_desc'],['class'=>'form-control','placeholder'=>'Мета описание']) !!}
                 </div>
             </div>
 
             <div class="form-group">
-                {!! Form::label('label','Фасон',['class'=>'col-xs2 control-label']) !!}
+                {!! Form::label('sclad','склад',['class'=>'col-xs2 control-label']) !!}
                 <div class="col-xs8">
-                    {!! Form::text('label',$data['label'],['class'=>'form-control','placeholder'=>'Фасон']) !!}
+                    {!! Form::text('sclad',$data['sclad'],['class'=>'form-control','placeholder'=>'склад']) !!}
                 </div>
             </div>
 
 
 
 
-            <div class="form-group">
-                {!! Form::label('hit','Хит продаж',['class'=>'col-xs2 control-label']) !!}
+            <!--div class="form-group">
+                {--!! Form::label('sclad','Хит продаж',['class'=>'col-xs2 control-label']) !!--}
                 <div class="col-xs8">
 
-                    {!! Form::checkbox('hit',$data['hit'], $data['hit']  ,['class'=>'form-control','placeholder'=>'Хит']) !!}
+                    {--!! Form::checkbox('sclad',$data['sclad'], $data['sclad']  ,['class'=>'form-control','placeholder'=>'Хит']) !!--}
 
-                </div>
-            </div>
+                </div-->
+
             <div class="form-group">
-                {!! Form::label('new','Новый',['class'=>'col-xs2 control-label']) !!}
+                {!! Form::label('ukvd','код УКВД',['class'=>'col-xs2 control-label']) !!}
                 <div class="col-xs8">
-                    {!! Form::checkbox('new',$data['new'],$data['new'],['class'=>'form-control','placeholder'=>'Новый']) !!}
-                </div>
-            </div>
-            <div class="form-group">
-                {!! Form::label('sale','Распродажа',['class'=>'col-xs2 control-label']) !!}
-                <div class="col-xs8">
-                    {!! Form::checkbox('sale',$data['sale'],$data['sale'],['class'=>'form-control','placeholder'=>'Распродажа']) !!}
+                    {!! Form::text('ukvd',$data['ukvd'],['class'=>'form-control','placeholder'=>'код УКВД']) !!}
                 </div>
             </div>
 
@@ -166,6 +253,7 @@
             {!! Form::close() !!}
             <script>
                 CKEDITOR.replace('editor');
+                CKEDITOR.replace('editor1');
             </script>
         </div>
     </div>
