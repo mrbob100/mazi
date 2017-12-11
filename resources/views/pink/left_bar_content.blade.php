@@ -3,10 +3,13 @@
 
 <form  id="selectMyFixing" style="display: block; background-color: #DEDEDE; width: 240px; padding: 20px 20px;" action="{{route('resume')}}"   method="post">
     <p> Диапазон цен:
-        <input type="text" style="width:200px; border:0; color:#f6931f;font-weight: bold;" id="pricer" class="selectValItem" name="pricer" /></p>
+        <input type="text" style="width:200px; border:0; color:#f6931f;font-weight: bold;" id="pricer" class="selectValItem" name="pricer"  value="{{$data['maxValue']}}" data-min="{{$data['minValue']}}"/></p>
+
     <br/>
-    <div name="slider-range" style="width:200px; border:0; color:#f6931f;font-weight: bold;" class="selectValItem" id="slider-range"></div>
+    <div name="slider-range" style="width:200px; border:0; color:#f6931f;font-weight: bold;" class="selectValItem"  id="slider-range"></div>
+   <!--input type="hidden" id="zuzanna"  data-min="{--{$data['minValue']}--}" data-max="{--{$data['maxValue']}--}" /-->
     <br/> <br/>
+
     <div id="slider2"></div>
     {{ csrf_field() }}
 
@@ -108,7 +111,7 @@
     <p><b>Тип инструмента</b></p>
     <p><input name="dzen" type="radio"  value="6" class="selectValItem">Электрический</p>
     <p><input name="dzen" type="radio"  value="1" class="selectValItem" > Аккумуляторный</p>
-    <p><input name="dzen" type="radio"  value="6" class="selectValItem">Гидравлический</p>
+    <p><input name="dzen" type="radio"  value="7" class="selectValItem">Гидравлический</p>
     <p><input name="dzen" type="radio"  value="2" class="selectValItem">Механический</p>
     <p><input name="dzen" type="radio"  value="3" class="selectValItem">Пневматический</p>
     <p><input name="dzen" type="radio"  value="4" class="selectValItem">Батарейки</p>

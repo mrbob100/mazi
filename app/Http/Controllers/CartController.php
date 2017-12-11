@@ -14,6 +14,8 @@ use Response;
 use Session;
 use Cache;
 use DB;
+use Validator;
+use Auth;
 use Illuminate\Support\Facades\Hash;
 /*Array
 (
@@ -138,32 +140,79 @@ class CartController extends Controller
 
         $session =session('cart');
         $order = new Order();
-        if($request->isMethod('post')) {
-            $rules = [
-                'name'=>'required|max:255',
-                'email'=>'required|email',
-                'phone'=>'required||min:10',
-                'address'=>'required|max:255'
-            ];
-            $this->validate($request,$rules);
-            $user= new User();
-            $user->login=$request->name;
-            $user->name=$request->name;
-            $user->secondname=$request->secondname;
-            $user->email=$request->email;
-            $user->phone=$request->phone;
-            $user->address=$request->address;
-            $user->password = Hash::make($user->phone);
+        if($request->isMethod('post') ) {
+            if(!Auth::check())
+            {
+                $rules = [
+                    'name' => 'required|max:255',
+                    'secondname' => 'required|max:255',
+                    'password' => 'required|min:6',
+                    'email' => 'required|email',
+                    'phone' => 'required||min:10',
+                    'address' => 'required|max:255',
 
-           // $user->save();
-          // $role=new Role(['name'=>'Buyer']);
+                ];
 
-         //   $user->roles()->save($role);
-          //  $role->users()->user_id->save( $user);
+                $this->validate($request, $rules);
+            }
+            $qw=false;
 
-            $role = Role::find(3);
-            $role->users()->save($user);
-            $order->user_id=$user->id;
+            $user=Auth::user();
+            if(!Auth::check())
+            {
+                $user = new User();
+                $user->name = $request->name;
+                $user->email = $request->email;
+                $user->secondname = $request->secondname;
+                $user->phone = $request->phone;
+                $user->address = $request->address;
+                $user->password = bcrypt($request->password);
+                $user_id = 0;
+// блок подсчета и определения рейтинга
+//_________________________________________________
+
+                $user->status=session('cardCommon.sum');
+ //_______________________________________________
+                $role = Role::find(3);
+
+                if ($role->users()->save($user)) {
+                    $order->user_id = $user->id;
+                }
+
+            } else  // user зарегестрирован
+                {
+
+                  //  if(!$role->users()->role_id)
+
+                  foreach($user->roles as $ror)
+                    {
+                        // user не первый раз покупает у него определена роль
+                        $role = $ror->id;
+                        $qw=true;
+                        $xhor=0;
+                        $oldOrders=$user->orders()->user_id;
+                        foreach($oldOrders as $item)
+                        {
+                            $xhor+=$item->sum;
+                        }
+                        $user->status=$xhor; // выбрана общая сумма заказов
+
+                        break;
+                    }
+                    if(!$qw)  // user зарегестрирован но покупает 1-й раз
+                    {
+                        $role = Role::find(3);
+
+                        // сохранение роли пользователя
+                        $user->roles()->save($role);
+                            $user->status=session('cardCommon.sum');
+
+                    }
+                $user->where('id',$user->id)->update( $user->toArray());
+                    $order->user_id = $user->id;
+                }
+
+//  заполнение заказа
             $order->qty = session('cardCommon.qty');
             $order->sum = session('cardCommon.sum');
             if($order->save()){
@@ -176,9 +225,22 @@ class CartController extends Controller
             }else{
                 Session::flash('errors', 'Ошибка оформления заказа');
             }
+            return redirect('cabinet');
+        }
+        $data=[];
+        $user=Auth::user();
+        if(Auth::check()) {
+            $data=[
+               'name' =>$user->name,
+                'secondname'=>$user->secondname,
+                'phone'=>$user->phone,
+                'address'=>$user->address,
+                'email'=>$user->email,
+            ];
+
         }
 
-        return view('cart.view', ['order'=>$order ] );
+        return view('cart.view', ['order'=>$order,'data'=>$data  ] );
     }
 
     protected function saveOrderItems($items, $order_id){

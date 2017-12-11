@@ -2,29 +2,7 @@
 @section('content')
     <div class="container">
         <div class="wrapper container-fluid">
-            {!! Form::open(['url'=>route('productAdd'/*,['category'=>$category->id]*/ ), 'class'=>'form-horizontal',
-            'method'=>'POST','enctype'=>'multipart/form-data' ]) !!}
-            <div class="form-group">
-                {!! Form::label('name','Название',['class'=>'col-xs2 control-label']) !!}
-                <div class="col-xs8">
-                    {!! Form::text('name',old('name'),['class'=>'form-control','placeholder'=>'Введите название продукции']) !!}
-                </div>
-            </div>
 
-            <div class="form-group">
-
-                {!! Form::label('code','код',['class'=>'col-xs2 control-label']) !!}
-                <div class="col-xs8">
-                    {!! Form::text('code',old('code'),['class'=>'form-control','placeholder'=>' Код продукта']) !!}
-                </div>
-            </div>
-
-            <!--div class="form-group">
-                {--!! Form::label('category_id','Категория',['class'=>'col-xs2 control-label']) !!--}
-                <div class="col-xs8">
-                    {--!! Form::text('category_id',old('category_id'),['class'=>'form-control','placeholder'=>'Введите название категории']) !!--}
-                </div>
-            </div-->
             <input type="text" id="rqueze1" style="display: none;" value="{{$power}}"  />
             <input type="text" id="rqueze2" style="display: none;" value="{{$voltage}}"  />
             <input type="text" id="capacity" style="display: none;" value="{{$capacity}}"  />
@@ -56,6 +34,33 @@
 
 
 
+            {!! Form::open(['url'=>route('productAdd'/*,['category'=>$category->id]*/ ), 'class'=>'form-horizontal','style'=>'width:800px;',
+            'method'=>'POST','enctype'=>'multipart/form-data' ]) !!}
+            <div class="form-group">
+                {!! Form::label('name','Название',['class'=>'col-xs2 control-label']) !!}
+                <div class="col-xs8">
+                    {!! Form::text('name',old('name'),['class'=>'form-control','placeholder'=>'Введите название продукции']) !!}
+                </div>
+            </div>
+
+            <div class="form-group">
+
+                {!! Form::label('code','код',['class'=>'col-xs2 control-label']) !!}
+                <div class="col-xs8">
+                    {!! Form::text('code',old('code'),['class'=>'form-control','maxlength'=>10,'placeholder'=>' Код продукта']) !!}
+                </div>
+            </div>
+
+            <!--div class="form-group">
+                {--!! Form::label('category_id','Категория',['class'=>'col-xs2 control-label']) !!--}
+                <div class="col-xs8">
+                    {--!! Form::text('category_id',old('category_id'),['class'=>'form-control','placeholder'=>'Введите название категории']) !!--}
+                </div>
+            </div-->
+
+
+
+
 
 
         <div class="orderLine">
@@ -72,7 +77,7 @@
                                 Для вывода виджета использован параметр config['model'] - это объект категории для выборки select.php- выпадающий список
                                 -->
 
-                                <select id="product-category_id" class="form-control" name="Production[category_id]" v-model="category" >
+                                <select id="product-category_id" class="form-control" name="category_id" v-model="category" >
                                     <option value="0">Самостоятельная категория</option>
                                     {{ $var=Widget::run('MainWidget',['tpl'=>'select_product.php','model'=>$model]) }}
                                     {!! Form::select('category_id', $var,['class'=>'form-control','placeholder'=>'Категория']) !!}
@@ -243,16 +248,25 @@
             </div>
 
             <div class="form-group">
+                {!! Form::label('mini_side','Наложение',['class'=>'col-xs2 control-label']) !!}
+                <div class="col-xs8">
+                    {!! Form::file('mini_side',['class'=>'filestyle','data-buttonText'=>'Выберите изображение для наложения',
+                    'data-buttonName'=>'btn-primary','data-placeholder'=>'Файла нет']) !!}
+                </div>
+            </div>
+
+            <div class="form-group">
                 {!! Form::label('type','Тип',['class'=>'col-xs2 control-label']) !!}
                 <div class="col-xs8">
-                    {!! Form::text('type',old('type'),['class'=>'form-control','placeholder'=>'Тип']) !!}
+                   <!-- {--!! Form::text('type',old('type'),['class'=>'form-control','placeholder'=>'Тип']) !!--} -->
+                    {!! Form::select('type',$listTool,['class'=>'form-control','placeholder'=>'Тип']) !!}
                 </div>
             </div>
 
             <div class="form-group">
                 {!! Form::label('country','Страна',['class'=>'col-xs2 control-label']) !!}
                 <div class="col-xs8">
-                    {!! Form::text('country',old('country'),['class'=>'form-control','placeholder'=>'Страна']) !!}
+                    {!! Form::select('country',$countryT,['class'=>'form-control','placeholder'=>'Страна']) !!}
                 </div>
             </div>
 
@@ -260,7 +274,7 @@
             <div class="form-group">
                 {!! Form::label('groupTools','Группа',['class'=>'col-xs2 control-label']) !!}
                 <div class="col-xs8">
-                    {!! Form::text('groupTools',old('groupTools'),['class'=>'form-control','placeholder'=>'Группа']) !!}
+                    {!! Form::select('groupTools',$groupT,['class'=>'form-control','placeholder'=>'Группа']) !!}
                 </div>
             </div>
 
@@ -317,7 +331,7 @@
             <div class="form-group">
                 {!! Form::label('class','класс',['class'=>'col-xs2 control-label']) !!}
                 <div class="col-xs8">
-                    {!! Form::text('class',old('class'),['class'=>'form-control','placeholder'=>'класс']) !!}
+                    {!! Form::select('class',$classTo,['class'=>'form-control','placeholder'=>'класс']) !!}
                 </div>
             </div>
 
@@ -325,23 +339,23 @@
             <div class="form-group">
                 {!! Form::label('packing','упаковка',['class'=>'col-xs2 control-label']) !!}
                 <div class="col-xs8">
-                    {!! Form::text('packing',old('packing'),['class'=>'form-control','placeholder'=>'упаковка']) !!}
+                    {!! Form::select('packing',$packingTo,['class'=>'form-control','placeholder'=>'упаковка']) !!}
                 </div>
             </div>
 
             <div class="form-group">
                 {!! Form::label('company','Компания',['class'=>'col-xs2 control-label']) !!}
                 <div class="col-xs8">
-                    {!! Form::text('company',old('company'),['class'=>'form-control','placeholder'=>'Компания']) !!}
+                    {!! Form::select('company',$companyTo,['class'=>'form-control','placeholder'=>'Компания']) !!}
                 </div>
             </div>
 
-            <div class="form-group">
-                {!! Form::label('created_at','Дата создания',['class'=>'col-xs2 control-label']) !!}
+            <!--div class="form-group">
+                {--!! Form::label('created_at','Дата создания',['class'=>'col-xs2 control-label']) !!--}
                 <div class="col-xs8">
-                    {!! Form::text('created_at',old('created_at'),['class'=>'form-control','placeholder'=>'Дата создания']) !!}
+                    {--!! Form::text('created_at',old('created_at'),['class'=>'form-control','placeholder'=>'Дата создания']) !!--}
                 </div>
-            </div>
+            </div-->
 
 
 
@@ -382,6 +396,7 @@
             {!! Form::close() !!}
             <script>
                 CKEDITOR.replace('editor');
+                CKEDITOR.replace('editor1');
             </script>
         </div>
     </div>

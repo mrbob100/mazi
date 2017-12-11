@@ -44,6 +44,8 @@ class CategoryController extends SiteController  // выбор из боково
      //   dd($products);
         // блок перебора продукции и подсчета компаний , типов , фирм и т.д.
         $cnt=count($products);
+        $aree=[];
+
         $countries=[]; $profile1=[]; $companies=[]; $profile2=[];
         $impact=[]; $packs=[];
         $notImpact=[]; $powers=[];
@@ -51,6 +53,7 @@ class CategoryController extends SiteController  // выбор из боково
         for($i=0; $i<$cnt; $i++)
         {
             $sas=$products[$i];
+            $aree[$i]= $sas->price;
       //выбор страны
             if(isset($countries[$sas->country][1])&& ($countries[$sas->country][1]==$sas->country))
             {
@@ -190,6 +193,9 @@ class CategoryController extends SiteController  // выбор из боково
 
 
         }  // конец цикла for
+        $maxValue = collect($aree)->max();
+        $maxValue+=10;
+        $minValue=collect($aree)->min();
 
         $this->data=[
             'companies'=>$companies,
@@ -200,6 +206,8 @@ class CategoryController extends SiteController  // выбор из боково
             'notImpact'=> $notImpact,
             'packs'=>$packs,
             'powers'=>$powers,
+            'minValue'=>$minValue,
+            'maxValue'=>$maxValue
         ];
 
 
@@ -272,6 +280,7 @@ public function resumeIndex()
     //    $p_inp2=mb_substr($p_inp[1],3);
         $p_inp1=explode('.',$p_inp[0]);
         $p_inp2=explode('.',$p_inp[1]);
+
         $query=DB::table('products')->whereBetween('price',[$p_inp1[1],$p_inp2[1]])->select('*')->where('category_id',$id_cat[0]);
 
                if(isset($input['menuFirms']))

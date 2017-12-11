@@ -3,10 +3,14 @@
 namespace Corp\Http\Controllers\Admin;
 
 use Corp\Models\Airflow;
+use Corp\Models\Company;
 use Corp\Models\Cutdepth;
 use Corp\Models\Cutedgewidth;
 use Corp\Models\Defence;
 use Corp\Models\Frequency;
+use Corp\Models\Grouptool;
+use Corp\Models\Packing;
+use Corp\Models\TypeTool;
 use Illuminate\Http\Request;
 use Corp\Http\Controllers\Controller;
 use Corp\Models\Product;
@@ -33,6 +37,9 @@ use Corp\Models\Steel;
 use Corp\Models\Strokelength;
 use Corp\Models\Vibration;
 use Corp\Models\Workingwidth;
+use Corp\Models\Country;
+
+use Corp\Models\Csvload;
 
 use Validator;
 use Config;
@@ -46,30 +53,89 @@ class ProductAddController extends Controller
          $input=$request->except('_token');
          $validator=Validator::make($input,
              [
-             'name'=>'required | max:255 '.$input['id'],
+              'name'=>'required | max:255 ',
              'category_id'=>'required | min:0 | integer',
-             'content'=>'required',
+             'description'=>'required',
+             'text'=>'nullable',
              'price'=>'required|numeric | min:0',
-             'keywords'=>'nullable',
-             'description'=>'nullable',
              'img'=>'image|nullable',
-             'mini'=>'image|nullable',
-             'hit'=>'boolean',
-             'new'=>'boolean',
-             'sale'=>'boolean'
+                 'mini_side'=>'image|nullable',
+             'type'=>'digits:1 | nullable ',
+            'country'=>'required',
+            'groupTools'=>' nullable',
+            'new' =>'digits:1 | nullable',
+            'weightbrutto' => 'nullable',
+             'weightnetto' => 'nullable',
+             'width'  =>  'nullable',
+              'length' =>  'nullable',
+              'height'  =>  'nullable',
+              'termGuarantee' =>  'nullable',
+              'class' =>  'nullable',
+              'company' =>  'nullable',
+              'exactlyType1' =>  'nullable',
+              'exactlyType2' =>  'nullable',
+                'sclad' =>  'nullable',
+                 'ukvd' =>  'nullable',
+              'keywords'=>'nullable',
+              'meta_desc'=>'nullable',
+
             ]);
                if($validator->fails())
                  {
                      return redirect()->route('productAdd')->withErrors( $validator)->withInput();
                  }
          // загрузка изображений
-          if($request->hasFile('img'))
-          {
-           $file=$request->file('img');
-           $input['img']= $file->getClientOriginalName(); // вставка реального имени
-         // move - команда перемещения файла из временного хранилища в постоянное
-            $file->move(public_path().'/images',$input['img']);  // записывает в библиотеку public содержимое файла $input['images']
-          }
+         $file=false; $qw1=false;
+         if($request->hasFile('img'))
+         {
+             $file=$request->file('img');
+             if($file->isValid())
+             {
+                 $qw= $file->getClientOriginalName(); // вставка реального имени
+                 $qw1=explode('.',$qw);
+
+                 // $img = Image::make($file1)->resize(120,75);
+
+                 // move - команда перемещения файла из временного хранилища в постоянное
+                 //   $file->move(public_path().'/images',$input['img']);  // записывает в библиотеку public содержимое файла $input['images']
+             }
+         }
+
+         if($request->hasFile('mini_side'))
+         {
+             $file1=$request->file('mini_side');
+             if($file1->isValid())
+             {
+
+                 if (!isset($doblo))
+                 {
+                     $doblo= new Csvload();
+                 }
+
+
+                 //  $qw1=$input['old_images'];
+                 // $input['img']='{"mini":"'.$qw2.'","max":"'.$qw1.'","path":"'.$qw3.'"}';
+                 $obj = $doblo->mergeUpImages($qw1[0], $file,  $file1);
+                 // $obj= $this->workUpImages( $str2->EAN_code,$workImage);
+                 $input['img']=json_encode($obj);
+
+                 // move - команда перемещения файла из временного хранилища в постоянное
+                 //   $file->move(public_path().'/images',$input['img']);  // записывает в библиотеку public содержимое файла $input['images']
+             }
+         }
+         else
+             {
+                 if (!isset($doblo))
+                 {
+                     $doblo= new Csvload();
+                 }
+
+
+                 $obj = $doblo->workUpImages( $qw1[0], $file);
+                 // $obj= $this->workUpImages( $str2->EAN_code,$workImage);
+                 $input['img']=json_encode($obj);
+             }
+
 
 
                  $product=new Product();
@@ -81,7 +147,7 @@ class ProductAddController extends Controller
      }
 
         $model=DB::table('products')->first();
-
+        $model->category_id=0;
         // загрузка сопутствующих файлов
      $files=Config::get('settings.perforator');
     $capacity=Capacity::all();
@@ -112,6 +178,46 @@ class ProductAddController extends Controller
      $vibration=Vibration::all();
      $workingwidth=Workingwidth::all();
 
+
+     $typetools=TypeTool::all();
+     $countrys=Country::all();
+     $grouptools=Grouptool::all();
+     $companies=Company::all();
+     $packings=Packing::all();
+
+     $listTool=array();
+     $countryT=array();
+     $groupT=array();
+     $companyTo=array();
+     $packingTo=array();
+     $classTo=array();
+        $classTo[1]="профессиональный";
+        $classTo[2]="не профессиональный";
+         foreach( $typetools as $typetool)
+         {
+             $listTool[$typetool->id]=$typetool->name;
+         }
+
+        foreach( $countrys as $typetool)
+        {
+            $countryT[$typetool->name]=$typetool->name;
+        }
+
+        foreach( $grouptools as $typetool)
+        {
+            $groupT[$typetool->id]=$typetool->name;
+        }
+
+        foreach( $companies as $typetool)
+        {
+            $companyTo[$typetool->name]=$typetool->name;
+        }
+
+        foreach( $packings as $typetool)
+        {
+            $packingTo[$typetool->name]=$typetool->name;
+        }
+
         if(view()->exists(env('THEME').'.admin.products.product_add'))
         {
             $data=[
@@ -131,7 +237,6 @@ class ProductAddController extends Controller
                 'spindle'=>$spindle,
                 'voltage'=>$voltage,
                 'cartridge'=>$cartridge,
-
                 'airflow'=>$airflow,
                 'cutEdgeWidth'=>$cutEdgeWidth,
                 'defence'=>$defence,
@@ -144,7 +249,15 @@ class ProductAddController extends Controller
                 'steel'=>$steel,
                 'strokelength'=>$strokelength,
                 'vibration'=>$vibration,
-                'workingwidth'=>$workingwidth
+                'workingwidth'=>$workingwidth,
+
+                'typetools'=>$typetools,
+                'listTool'=>$listTool,
+                'countryT'=>$countryT,
+                'groupT'=>$groupT,
+                'companyTo'=>$companyTo,
+                'packingTo'=>$packingTo,
+                'classTo'=>$classTo
 
             ];
             return view(env('THEME').'.admin.products.product_add', $data);

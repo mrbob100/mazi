@@ -14,6 +14,8 @@ use Illuminate\Http\Request;
 use Corp\Repositories\SlidersRepository;
 use Corp\Models\Menu;
 use Config;
+use Auth;
+use Corp\User;
 class IndexController extends SiteController
 {
 
@@ -120,5 +122,64 @@ class IndexController extends SiteController
 
         ]);
 
+    }
+
+    public function identityUser()
+    {
+        $user=Auth::user();
+        if(!Auth::check()) {
+            return redirect()->home();
+        }
+        $request=Request::createFromGlobals();
+        //Session::flush();
+        if($request->isMethod('post'))
+        {
+            $input = $request->except('_token');
+            $rules = [
+                'name' => 'required|max:255',
+                'secondname' => 'required|max:255',
+             //   'password' => 'required|min:6|confirmed',
+                'email' => 'required|email|max:255|unique:users,email,'. $input['id'],
+                'phone' => 'required||min:10',
+                'address' => 'required|max:255',
+
+            ];
+
+            $this->validate($request, $rules);
+
+
+
+            $userx = new User();
+            $userx->id=$user->id;
+            $userx->name =$input['name'];
+            $userx->email =$input['email'];
+            $userx->secondname = $input['secondname'];
+            $userx->phone = $input['phone'];
+            $userx->address = $input['address'];
+
+           // $userx->password =  bcrypt($input['password']);
+            $userx->status=$user->status;
+            $user->where('id',$user->id)->update( $userx->toArray());
+
+                // $prod=DB::table('products')->where('id',$id)->update($product->toArray());
+            return redirect('cabinet');
+        }
+
+
+
+
+
+
+
+
+        $old=$user;
+        $this->template=env('THEME').'.change';
+        $headers = view(env('THEME') . '.header')->render();
+        $this->vars = array_add($this->vars, 'headers', $headers);
+        $footer = view(env('THEME') . '.footer')->render();
+        $this->vars = array_add($this->vars, 'footer', $footer);
+        $content = view(env("THEME") . ".changeIdentity")->with('old',$old)->render();
+        $this->vars = array_add($this->vars, 'content', $content);
+        return view($this->template)->with($this->vars); // template устанавливается в дочернем классе
     }
 }

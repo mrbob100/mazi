@@ -71,36 +71,50 @@
     @include('auth.social')
     {!! Form::open(['url'=>route('contract'),'class'=>'form-horizontal', 'method'=>'post']) !!}
     {{ csrf_field() }}
-    <div class="form-group">
-        {!! Form::label('name','Имя',['class'=>'col-xs-2 control-label']) !!}
-        <div class="col-xs-8">
-            {!! Form::text('name',old('name'),['class'=>'form-control','placeholder'=>'Ваше имя']) !!}
+
+    @if(!Auth::check())
+
+        <div class="form-group">
+            {!! Form::label('name','Имя',['class'=>'col-xs-2 control-label']) !!}
+            <div class="col-xs-8">
+                {!! Form::text('name',!isset($data['name']) ? old('name') : $data['name'] ,['class'=>'form-control','placeholder'=>'Ваше имя']) !!}
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        {!! Form::label('secondname','Фамилия',['class'=>'col-xs-2 control-label']) !!}
-        <div class="col-xs-8">
-            {!! Form::text('secondname',old('secondname'),['class'=>'form-control','placeholder'=>'Ваша фамилия']) !!}
+
+        <div class="form-group">
+            {!! Form::label('secondname','Фамилия',['class'=>'col-xs-2 control-label']) !!}
+            <div class="col-xs-8">
+                {!! Form::text('secondname',!isset($data['secondname']) ? old('secondname') : $data['secondname']  ,['class'=>'form-control','placeholder'=>'Ваша фамилия']) !!}
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        {!! Form::label('email','E-mail',['class'=>'col-xs-2 control-label']) !!}
-        <div class="col-xs-8">
-            {!! Form::text('email',old('email'),['class'=>'form-control','placeholder'=>'Ваш E-mail']) !!}
+
+            <div class="form-group">
+                {!! Form::label('password','Пароль',['class'=>'col-xs-2 control-label']) !!}
+                <div class="col-xs-8">
+                    {!! Form::text('password',old('password'),['class'=>'form-control','placeholder'=>'Пароль']) !!}
+                </div>
+            </div>
+
+        <div class="form-group">
+            {!! Form::label('email','E-mail',['class'=>'col-xs-2 control-label']) !!}
+            <div class="col-xs-8">
+                {!! Form::text('email',!isset($data['email']) ? old('email') : $data['email'] ,['class'=>'form-control','placeholder'=>'Ваш E-mail']) !!}
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        {!! Form::label('phone','Телефон',['class'=>'col-xs-2 control-label']) !!}
-        <div class="col-xs-8">
-            {!! Form::text('phone',old('phone'),['class'=>'form-control','placeholder'=>'Телефон']) !!}
+        <div class="form-group">
+            {!! Form::label('phone','Телефон',['class'=>'col-xs-2 control-label']) !!}
+            <div class="col-xs-8">
+                {!! Form::text('phone',!isset($data['phone']) ? old('phone') : $data['phone'] ,['class'=>'form-control','placeholder'=>'Телефон']) !!}
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        {!! Form::label('address','Адрес',['class'=>'col-xs-2 control-label']) !!}
-        <div class="col-xs-8">
-            {!! Form::text('address',old('address'),['class'=>'form-control','placeholder'=>'Ваш адрес']) !!}
+        <div class="form-group">
+            {!! Form::label('address','Адрес',['class'=>'col-xs-2 control-label']) !!}
+            <div class="col-xs-8">
+                {!! Form::text('address',!isset($data['address']) ?old('address') : $data['address']  ,['class'=>'form-control','placeholder'=>'Ваш адрес']) !!}
+            </div>
         </div>
-    </div>
+
+    @endif
     <div class="form-group">
         <div class="col-xs-8">
             {!! Form::button('Заказать',['class'=>'btn btn-primary','type'=>'submit']) !!}

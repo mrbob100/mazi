@@ -93,15 +93,15 @@ a.simpleCart_empty {
   float: left;
 }
 .banner {
-/*	background:url("../images/banner_img.jpg") no-repeat 0px 0px;
+	background:url("../images/banner_img.jpg") no-repeat ;
 
-   background-size:cover;
+  /* background-size:cover;
     -moz-background-size:cover;
     -o-background-size:cover;
     -ms-background-size:cover;
-    -webkit-background-size:cover;
-	min-height:705px;
-     */
+    -webkit-background-size:cover; */
+	min-height:650px;
+
 }
 .logo h1 a {
     color: #000;
@@ -3069,4 +3069,15 @@ p.right {
 	p.tab-text {
 		font-size: 13px;
 	}
+
+}
+.asdast {
+    display: none;
+}
+.asdast21 {
+    display: block;
+
+}
+.PinkerMain {
+    cursor: pointer;
 }

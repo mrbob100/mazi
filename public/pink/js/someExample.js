@@ -52,23 +52,12 @@ window.onload = function () {
     let vibration=JSON.parse(ee2);
     ee2 =document.getElementById('workingwidth').value;
     let workingwidth=JSON.parse(ee2);
-
+    ee2 =document.getElementById('product-category_id').value;
+    let category=JSON.parse(ee2);
 
   // let ee5=ee4[0].name;
-    console.log('ee1',ee1);
-    console.log('ee4',ee4);
-    console.log('capacity',capacity);
-    console.log('angleCuttingDepth',angleCuttingDepth);
-    console.log('cuttingDepth',cuttingDepth);
-    console.log('diametrdisk',diametrdisk);
-    console.log('idle',idle);
-    console.log('impact',impact);
-    console.log('maxhole',maxhole);
-    console.log('performance',performance);
-    console.log('qntimpact',qntimpact);
-    console.log('rotationspeed',rotationspeed);
-    console.log('spindle',spindle);
-    console.log('cartridge',cartridge);
+
+    console.log('category',category);
 
 
 
@@ -930,8 +919,14 @@ window.onload = function () {
         el: '.orderLine',
         data: {
             id_color: "",
-            category: ""
+            category: category
 
+        },
+        methods: {
+            Californiya: function(event)
+            {
+                this.category=event.target.value;
+            }
         }
 
 

@@ -7,7 +7,7 @@
                     {!! Form::text('q','',['class'=>'form-control','style'=>'height:20px; width:100px;','placeholder'=>' поиск']) !!}</p>
                     {!! Form::close() !!}
                    </li>
-                    <li><a href="{{asset('login') }}"><span class="glyphicon glyphicon-user"> </span>Login</a></li>
+                    <li><a href="{{asset('cabinet') }}"><span class="glyphicon glyphicon-user"> </span>Login</a></li>
                 </ul>
             </div>
             <div class="header-right">

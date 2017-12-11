@@ -75,12 +75,22 @@
             {!! Form::text('name',$order['name'],['class'=>'form-control','placeholder'=>'Ваше имя']) !!}
         </div>
     </div>
+
+
     <div class="form-group">
         {!! Form::label('secondname','Фамилия',['class'=>'col-xs-2 control-label']) !!}
         <div class="col-xs-8">
             {!! Form::text('secondname',$order['secondname'],['class'=>'form-control','placeholder'=>'Ваша фамилия']) !!}
         </div>
     </div>
+
+    <div class="form-group">
+        {!! Form::label('password','Пароль',['class'=>'col-xs-2 control-label']) !!}
+        <div class="col-xs-8">
+            {!! Form::text('password',old('password'),['class'=>'form-control','placeholder'=>'Пароль']) !!}
+        </div>
+    </div>
+
     <div class="form-group">
         {!! Form::label('email','E-mail',['class'=>'col-xs-2 control-label']) !!}
         <div class="col-xs-8">

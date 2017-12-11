@@ -8,35 +8,21 @@
 
   @foreach($products as $product)
         <script type="text/javascript">
-            jQuery(document).ready(function(){
-                jQuery('a#zoom1').swinxyzoom({mode:'dock', controls: false, size: '100%', dock: { position: 'right' } }); // dock window slippy lens
+            jQuery(function(){
 
-                jQuery('.views-gallery a').click(function(e) {
-                    e.preventDefault();
+                $("a#zoom1").imagezoomsl({
 
-
-                    var $this = jQuery(this),
-                        largeImage  = $this.attr('href');
-                    smallImage  = $this.data('easyzoom-source');
-
-                    if (!$this.parent().hasClass('thumbnail-active')) {
-                        jQuery('a#zoom1').swinxyzoom('load', smallImage,  largeImage);
-                        jQuery('.lightbox-btn').attr('href', largeImage);
-
-                        jQuery('.views-gallery .slide.thumbnail-active').removeClass('thumbnail-active');
-                        $this.parent().toggleClass('thumbnail-active');
-                    }
-
+                    zoomrange: [3, 3]
                 });
             });
         </script>
  <div class="container">
      <div class="row">
-            <div class="col-xs-4 col-sm-4 ">
+            <div class="col-xs-4 col-sm-4 " >
 
 
 
-            <div > <a itemprop="image" href="{{ asset('public/'.env('THEME')) }}/images/{{ $product->img->path }}" id="zoom1" class="zoom" title="62" style="position:relative;" > <img class="" src="{!! asset('public/'.env('THEME')) !!}/images/{{$product->img->max}}"  alt="NICE PROMO DRESS" /> </a> </div>
+                <div > <a itemprop="image" href="{{ asset('public/'.env('THEME')) }}/images/{{ $product->img->path }}" id="zoom1" class="zoom1" title="62" > <img class="" src="{!! asset('public/'.env('THEME')) !!}/images/{{$product->img->max}}"  alt="NICE PROMO DRESS" /> </a> </div>
 
 
 

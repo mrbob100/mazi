@@ -102,6 +102,8 @@ class ProductController extends SiteController
         return $product;
     }
 
+
+
     public function actionSearch(Request $request)
     {
         $this->template=env('THEME').'.left_bar';
@@ -121,6 +123,37 @@ class ProductController extends SiteController
         $content = view(env('THEME') . '.products_content')->with(['products'=> $products,'adopt'=>$this->adopt])->render();
         $this->vars = array_add($this->vars, 'content', $content);
         return $this->renderOutput();
+    }
+
+
+
+    public function adminSearch(Request $request)
+    {
+       // $this->template=env('THEME').'.admin_search';
+     //   $this->bar=true;
+        $q=$request->q;
+        $p='%'.$q.'%';
+        $query=Product::select(['id','code','name','price','img','category_id'])->where('code','like',$p);
+        $parent_name=[];
+        // $products=$query->paginate(Config::get('settings.paginate'));
+        $products=$query->get();
+        $products->load('categories');
+        $this->adopt=false;
+        $products->transform(function ($item, $key){
+            if(is_string($item->img) && is_object(json_decode($item->img))&& json_last_error()==JSON_ERROR_NONE)
+            {   $item->img=json_decode($item->img); }
+            return $item;
+        });
+     //   $content = view(env('THEME') . '.products_content')->with(['products'=> $products,'adopt'=>$this->adopt])->render();
+    //    $this->vars = array_add($this->vars, 'content', $content);
+     //   return $this->renderOutput();
+        $data=[
+            'title'=>'Продукты',
+            'products'=>$products,
+            'parent_name'=>$parent_name,
+
+        ];
+        return view(env('THEME').'.admin.products.search',$data);
     }
 
 }

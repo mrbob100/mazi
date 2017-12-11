@@ -11,7 +11,7 @@ class ProductController extends Controller
 {
     public function index()
     {
-        if(view()->exists(env('THEME').'.admin.categories.index'))
+        if(view()->exists(env('THEME').'.admin.products.index'))
         {
 
             $parent_name=[];

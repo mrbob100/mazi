@@ -13,6 +13,7 @@ class SiteController extends Controller
     protected $a_rep; // объект класса articles
     protected $m_rep; // объект класса menu
     protected $c_rep; // коментарии
+    protected $o_rep; // заказы
     protected $template;  // имя конкретного шаблона
     protected $vars; // массив передаваемых объектов в шаблон
     protected $bar=false; // есть ли side бар
@@ -26,6 +27,8 @@ class SiteController extends Controller
     protected $category_id;
      protected  $adopt=true;
      protected $data;
+     protected $barCabinet=false; // если работа с кабинетом
+
     public function __construct(MenusRepositories $m_rep)
     {
         $this->m_rep=$m_rep;
@@ -54,6 +57,7 @@ class SiteController extends Controller
                $this->vars=array_add($this->vars,'leftBar', $leftBar);
                $this->vars=array_add($this->vars,'bar', $bar);
            }
+
 
            $footer = view(env('THEME') . '.footer')->render();
            $this->vars = array_add($this->vars, 'footer', $footer);

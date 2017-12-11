@@ -27,15 +27,15 @@
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('login') ? ' has-error' : '' }}">
-                            <label for="login" class="col-md-4 control-label">Login</label>
+                        <div class="form-group{{ $errors->has('secondname') ? ' has-error' : '' }}">
+                            <label for="secondname" class="col-md-4 control-label">secondname</label>
 
                             <div class="col-md-6">
-                                <input id="login" type="text" class="form-control" name="login" value="{{ old('login') }}" required autofocus>
+                                <input id="secondname" type="text" class="form-control" name="secondname" value="{{ old('secondname') }}" required autofocus>
 
-                                @if ($errors->has('login'))
+                                @if ($errors->has('secondname'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('login') }}</strong>
+                                        <strong>{{ $errors->first('secondname') }}</strong>
                                     </span>
                                 @endif
                             </div>
@@ -50,6 +50,34 @@
                                 @if ($errors->has('email'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('email') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('phone') ? ' has-error' : '' }}">
+                            <label for="phone" class="col-md-4 control-label">Phone</label>
+
+                            <div class="col-md-6">
+                                <input id="phone" type="text" class="form-control" name="phone" value="{{ old('phone') }}" required autofocus>
+
+                                @if ($errors->has('phone'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('phone') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('address') ? ' has-error' : '' }}">
+                            <label for="address" class="col-md-4 control-label">Address</label>
+
+                            <div class="col-md-6">
+                                <input id="address" type="text" class="form-control" name="address" value="{{ old('address') }}" required autofocus>
+
+                                @if ($errors->has('address'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('address') }}</strong>
                                     </span>
                                 @endif
                             </div>
@@ -79,7 +107,7 @@
 
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-primary cobzov">
                                     Register
                                 </button>
                             </div>

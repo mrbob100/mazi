@@ -43,7 +43,7 @@
                 <h1  ><a href="{{ route('index')  }} "><span>Bosch</span> </a></h1>
             </div>
         </div>
-
-
+    </div>
+</div>
 </body>
 </html>

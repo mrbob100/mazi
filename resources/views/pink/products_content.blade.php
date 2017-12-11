@@ -8,7 +8,7 @@
     @foreach($products as $prod)
             <div class="col-xs-4 product simpleCart_shelfItem text-center" >
 
-                <img src="{{ asset('public/'.env('THEME'))}}/images/{{ $prod->img->max }}" style="height: 150px;" alt="вывод изображения" />
+                <a href="{{route('product',['id'=>$prod->id]) }}"> <img src="{{ asset('public/'.env('THEME'))}}/images/{{ $prod->img->max }}" style="height: 150px;" alt="вывод изображения" /></a>
                 <div class="mask">
                     <a href="{{route('product',['id'=>$prod->id]) }}" >Quick View</a>
                 </div>

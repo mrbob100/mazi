@@ -22,6 +22,7 @@
 	<!--script type="text/javascript" src=" {--!! asset('public/'.env('THEME')) !!--}/js/jquery-ui.widget.js" charset="utf-8" ></script>
 	<script type="text/javascript" src=" {--!! asset('public/'.env('THEME')) !!--}/js/jquery-ui.mouse.js" charset="utf-8" ></script>
 	<script type="text/javascript" src=" {--!! asset('public/'.env('THEME')) !!--}/js/jquery-ui.slider.js" charset="utf-8" ></script-->
+
 	<link href="{{ asset('public/'.env('THEME')) }}/css/component.css" rel="stylesheet">
 	<link href="{{ asset('public/'.env('THEME')) }}/css/flexslider.css" media="screen" rel="stylesheet">
 	<link href="{{ asset('public/'.env('THEME')) }}/css/normalize.css" rel="stylesheet">
@@ -31,6 +32,7 @@
     <link href="{{ asset('public/'.env('THEME')) }}/css/jquery-ui.css" rel="stylesheet" type="text/css"/>
 	<link href="{{ asset('public/'.env('THEME')) }}/css/jquery-ui.theme.min.css" rel="stylesheet" type="text/css"/>
 	<link href="{{ asset('public/'.env('THEME')) }}/css/jquery-ui.structure.min.css" rel="stylesheet" type="text/css"/>
+	<script type='text/javascript' src='{!! asset('public/'.env('THEME')) !!}/js/zoomsl.js'></script>
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 
 </head>
@@ -60,7 +62,7 @@
 
 	@yield('headers')
 
-	<div class="container">
+	<div class="container suizi">
 		<div class="row">
 			<div class="col-xs-3 col-sm-3 col-lg-3 container-fluid ">
 
@@ -116,7 +118,7 @@
 		</div>
 	</div>
 
-
+@if(Route::currentRouteName()=='index')
 <div class="banner banner_vol">
 	<div class="container">
 
@@ -168,22 +170,31 @@
 			    });
 			  </script>
 
-			<div class="clearfix"> </div>
-		<div class="row">
-			<div class="col-xs-4 col-sm-4 col-lg-4 col-xs-offset-5 col-sm-offset-5  col-lg-offset-5  ">
-				<div class="shop">
-					<!--a href="{--{asset('single.html') }--}">SHOP COLLECTION NOW</a-->
-					<button class="menu-btn" style="margin-top: 25px;color: #81626A;font-family: 'Lato-Regular';
+	     <div class="clearfix"> </div>
+
+
+
+
+	  </div>
+	</div>
+@else
+<script>
+	document.body.style.backgroundimage="none";
+    document.body.style.font= "Lato-Regular";
+</script>
+@endif
+<div class="row">
+	<div class="col-xs-4 col-sm-4 col-lg-4 col-xs-offset-5 col-sm-offset-5  col-lg-offset-5  ">
+		<div class="shop">
+			<!--a href="{--{asset('single.html') }--}">SHOP COLLECTION NOW</a-->
+			<button class="menu-btn" style="margin-top: 25px;color: #81626A;font-family: 'Lato-Regular';
   font-size: 20px;font-style: italic;"> НАЧНИ ВЫБОР ПРЯМО СЕЙЧАС !</button></li>
 
 
 
-				</div>
-			</div>
 		</div>
-	  </div>
 	</div>
-
+</div>
 		<!-- content-section-starts-here -->
 		<div class="container">
 			<div class="main-content">
@@ -288,5 +299,4 @@
 <script type='text/javascript' src='{!! asset('public/'.env('THEME')) !!}/js/jquery.slider.js'></script>
 <script type='text/javascript' src='{!! asset('public/'.env('THEME')) !!}/js/jquery.mousewheel.js'></script>
 <script type='text/javascript' src='{!! asset('public/'.env('THEME')) !!}/js/touch.js'></script>
-<script type='text/javascript' src='{!! asset('public/'.env('THEME')) !!}/js/zoom.js'></script>
 </html>

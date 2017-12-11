@@ -17,6 +17,12 @@ Route::group(/**
     ['middleware'=>'web'], function(){
 Route::get('/', 'IndexController@index')->name('index');
     Route::get('redirect', 'CartController@cartRedirect')->name('redirectCart');
+
+ Route::post('cabanal',['uses'=>'CabinetController@caboption','as'=>'cabAnalize']);
+
+//Route::get('cabinet', 'CabinetController@index')->name('cabinet');
+Route::match(['post','get'],'cabinet',['uses'=> 'CabinetController@index','as'=>'cabinet']);
+    Route::match(['post','get'],'change',['uses'=> 'IndexController@identityUser','as'=>'change']);
 //Route::resource('/', 'IndexController', ['only' => 'index', 'names' => ['index' => 'home']]);
 //Route::get('article/{page}', 'IndexController@show')->name('articleShow');
 //Route::delete('page/delete/{article}', function(\App\Product $product) {
@@ -55,9 +61,9 @@ Route::post('order',['uses'=>'CartController@cartView', 'as'=>'contract']);
 Route::get('delIt',['uses'=>'CartController@DelItem']);
 
  Route::get('search',['uses'=>'ProductController@actionSearch','as'=>'productSearch']);
+ Route::get('admsearch',['uses'=>'ProductController@adminSearch','as'=>'admSearch']);
 
-
-    Route::post('ulogin', ['uses'=>'UloginController@login', 'as'=>'ulogin']);
+    Route::get('ulogin', ['uses'=>'UloginController@login', 'as'=>'ulogina']);
 });
 
 
@@ -74,9 +80,18 @@ Route::group(['prefix'=>'admin','middleware'=>['web','auth']], function(){
         if(!Auth::check()) {
             return redirect()->back();
         }
-
-
-        if($user['login']!='admin')  {
+        $role_id=0;
+        $roleIds=$user->roles;
+        foreach( $roleIds as $role)
+        {
+            $item = $role->id;
+            $alias = $role->name;
+            if ($item == 1) {
+                $role_id = 1;
+                break;
+            }
+        }
+        if( $role_id!=1)  {
             return redirect('ulogin');
         }
      if(view()->exists(env('THEME').'.admin.categories.index'))
@@ -114,9 +129,9 @@ Route::group(['prefix'=>'admin','middleware'=>['web','auth']], function(){
 
     // Actions
     Route::group(['prefix'=>'orderItems'], function (){
-        Route::get('/', ['uses'=>'Admin\OrderItemsController@index','as'=>'ordertItems']);
+      //  Route::get('/', ['uses'=>'Admin\OrderItemsController@index','as'=>'orderItems']);
         //admin/products/add
-        Route::match(['get','post'],'/add',['uses'=>'Admin\OrderItemsAddController@index', 'as'=>'orderItemsAdd']);
+        Route::match(['get','post'],'/',['uses'=>'Admin\OrderItemsController@index', 'as'=>'orderItems']);
         //admin/product/edit/2
         Route::match(['get','post','delete'],'edit/{id}',['uses'=>'Admin\OrderItemsEditController@index','as'=>'orderItemsEdit']);
     });

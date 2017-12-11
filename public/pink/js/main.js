@@ -211,23 +211,41 @@ $(document).ready(function(){
 	});
 });
 
-$(function() {
+jQuery(document).ready(function($) {
 // блок реакции на выбор кнопок и селекта
-    var counter = 0;
+    let counter = 0;
+    let minVal=0;
+    let maxVal=80000;
 
+ /*  $("#slider-range").on('slider',function(e){
+        e.preventDefault();
+      //  alert('Шла Саша по шоссе');
+        minVal =$("#pricer").data('min');
+        maxVal=$("#pricer").data('max');
+        alert('min', minVal);
+    });
+    $(window).load(function () {
+        $("#slider-range").trigger('slider');
+    }); */
 
    $("#slider-range").slider({
         range: true,
-        min: 300,
-        max: 80000,
-        step: 100,
-        values: [0, 80000],
+    //    min: 300,
+    //    max: 80000,
+       min:$("input#pricer dataMin").data('min'),
+       max: $("input#pricer").val(),
+        step: 10,
+        values: [$("input#pricer").data('min'),$("input#pricer").val()],
+    //   values: [0, 80000],
 
         slide: function (event, ui) {
+
             $("#pricer").val("гр." + ui.values[0] + " - гр." + ui.values[1]);
         }
+
     });
     $("#pricer").val("гр." + $("#slider-range").slider("values", 0) + " - гр." + $("#slider-range").slider("values", 1));
+
 
    $(".selectValItem").on('slide',function(e){
       //  e.preventDefault();
@@ -245,13 +263,13 @@ $(function() {
     });
 
         $("#selectMyFixing").on('submit',function(e){
-            $(this)
+           // $(this)
     e.preventDefault();
-    var form= $(this);
+    let form= $(this);
 
 
             if(counter) {
-	var data=$(form).serializeArray();
+	let data=$(form).serializeArray();
 	//alert(data);
     $.ajax({
 
@@ -284,6 +302,92 @@ $(function() {
 });
 
 });
+
+
+// всплывающий блок продукции
+jQuery(document).ready(function() {
+    let flag = 'true';
+    $('.PinkerMain ').on('keypress',function(e){
+        e.preventDefault();
+
+       // let id=$(this).data('id');
+
+        if (flag) {
+            flag = false;
+            func1.call(this);
+        }else {
+            flag = true;
+            func2.call(this);
+        }
+        return false;
+
+    });
+    function func1(){
+
+        $("tr.asdast").fadeOut(1000)};
+
+
+    function func2(){
+
+        $("tr.asdast").fadeIn(1000)};
+
+});
+
+
+// выбор опций статуса заказа - в работе, завершен ...
+jQuery(document).ready(function() {
+//let str="";
+    let str=[];
+    $('.PinkerMain select').on('change',function(e) {
+    let id=$(this).data('id');
+        //  e.stopPropagation();
+    //    e.preventDefault();
+        $('.PinkerMain select option:selected').each(function(){
+            let strProm=$( this ).text();
+            if(strProm!='статус'){
+ //           str +=id + $( this ).text() + " ";
+                str[id]=id + ' '+ $( this ).text();
+
+            }
+        });
+
+        alert(str[id]);
+
+    });
+$('#selectMyOptions').on('submit',function(){
+
+
+   let data=str.serializeArray();
+    console.log('data',data);
+        $.ajax({
+            url: form.attr('action'),
+            //  url: "cabinetItems",
+            cache: false,
+            data: data,
+            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+            type: form.attr('method'),
+            dataType: "JSON",
+            success: function (json) {
+                if (!json) alert("Ошибка!");
+                //$('.wrap_result').append('<br/><strong>Выборка выполнена !</strong>').delay(2000).fadeOut(500);
+                $("#mediumMine").empty();
+                // $('#mediumMine').replaceWith(res.content);
+                $("#mediumMine").append(json.content);
+
+
+            },
+            error: function () {
+                alert("Ошибка передачи id !");
+            }
+
+        });
+        return false;
+
+});
+});
+
+
+
 
 
 
