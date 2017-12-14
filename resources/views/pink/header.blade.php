@@ -7,7 +7,11 @@
                     {!! Form::text('q','',['class'=>'form-control','style'=>'height:20px; width:100px;','placeholder'=>' поиск']) !!}</p>
                     {!! Form::close() !!}
                    </li>
+                    @if(!Auth::check())
                     <li><a href="{{asset('cabinet') }}"><span class="glyphicon glyphicon-user"> </span>Login</a></li>
+                        @else
+                        <li><a href="{{asset('cabinet') }}"><span class="glyphicon glyphicon-user"> </span>Кабинет</a></li>
+                    @endif
                 </ul>
             </div>
             <div class="header-right">

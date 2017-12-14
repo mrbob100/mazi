@@ -67,7 +67,7 @@
 
                     <p>Тел: &nbsp     {{ Session::get('Author.phone')}}</p>
                     <p>Адрес:  &nbsp  {{ Session::get('Author.address')}}</p>
-
+                    <p>Оборот(месячный):  &nbsp  {{ Session::get('Author.status')}}.00 гр</p>
 
                 </div>
                 <form>

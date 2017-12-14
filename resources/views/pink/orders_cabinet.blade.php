@@ -7,9 +7,10 @@
         @if($orders)
             @php
                 $j=0;
+            $as="";
             @endphp
         <div class="col-xs-9  text-center PinkerMain" >
-        <form  id="selectMyOptions" action="{{route('cabinet')}}"   method="post">
+        <form  id="selectMyOptions" action="{{route('cabinet')}}" name="myform"  method="post">
         {{ csrf_field() }}
       <!--  {--!! Form::open(['url'=>route('cabinet' ), 'class'=>'form-horizontal', 'id'=>'zluka', 'method'=>'POST' ]) !!--} -->
 
@@ -17,7 +18,7 @@
 
 
 
-                    <table class="table table-hover table-stripped">
+                    <table class="table table-hover table-stripped ">
 
                                 <thead>
                                 <tr>
@@ -30,6 +31,9 @@
                                     <th>Количество</th>
                                     <th>Сумма</th>
                                     <th>Статус</th>
+                                @if($priznak==1)
+                                        <th>выбор</th>
+                                    @endif
                                     <!--th>Менеджер</th-->
                                     <th>дата заказа</th>
 
@@ -53,35 +57,49 @@
                         <td> {{  $order->sum }}</td>
 
                         @if($priznak!=1)
-                            @if($order->status==3)
+                            @if($order->status==2)
                                 <td style="background: yellow;"> отправлен </td>
                              @endif
-                            @if($order->status==2)
-                                <td style="background: greenyellow;"> завершен </td>
+                            @if($order->status==3)
+                                <td style="background:greenyellow;"> завершен </td>
                             @endif
                             @if($order->status==1)
                                 <td style="background: coral;">в работе</td>
                             @endif
                             @if($order->status==0)
                                 <td style="background: red;">Не выбран</td>
-                                @endif
-                    @else
-<td>
+                            @endif
+                       @else
+                        @if($order->status==2)
+                            <td style="background: yellow;"> отправлен </td>
+                        @endif
+                        @if($order->status==3)
+                            <td style="background:greenyellow;"> завершен </td>
+                        @endif
+                        @if($order->status==1)
+                            <td style="background: coral;">в работе</td>
+                        @endif
+                        @if($order->status==0)
+                            <td style="background: red;">Не выбран</td>
+                        @endif
+                  <td>
                         <select name="optionTools" size="1"  style="width:90px;" data-id="{{ $order->id }}" class="selectStatus">
-                            <option disabled selected>статус</option>
+
+                                <option disabled selected>статус</option>
                             @foreach($optionTool as $profile)
                                 <option value="{{$profile[0]}}">{!!$profile!!}</option>
                             @endforeach
-                        </select>
-</td>
 
-                    @endif
+                        </select>
+                  </td>
+
+                       @endif
                        <!--td>{--{$order->manager}--}</td-->
 
 
 
                         <!--td>    { !! Html::link(route('cabinet',['id'=>$order->id]),$order->created_at->toDateString() ,['alt'=>'номер заказа' ,'class'=>'azopa' ] ) !!}  </td-->
-                    <td>{{$order->created_at->toDateString()}}</td>
+                    <td><a class="subboth" href="#">{{$order->created_at->toDateString()}}</a></td>
 
                     </tr>
 
@@ -125,7 +143,9 @@
 
 
 <br/><br/><br/>
+            @if($priznak==1)
                 <input type="submit" id="button_left" class="btn btn-danger" value="отправить" />
+            @endif
         </form>
 </div>
   @endif

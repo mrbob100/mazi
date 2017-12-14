@@ -307,8 +307,8 @@ jQuery(document).ready(function($) {
 // всплывающий блок продукции
 jQuery(document).ready(function() {
     let flag = 'true';
-    $('.PinkerMain ').on('keypress',function(e){
-        e.preventDefault();
+    $('.PinkerMain .subboth').on('click',function(e){
+       e.preventDefault();
 
        // let id=$(this).data('id');
 
@@ -337,6 +337,7 @@ jQuery(document).ready(function() {
 // выбор опций статуса заказа - в работе, завершен ...
 jQuery(document).ready(function() {
 //let str="";
+ let usd=[];
     let str=[];
     $('.PinkerMain select').on('change',function(e) {
     let id=$(this).data('id');
@@ -344,35 +345,37 @@ jQuery(document).ready(function() {
     //    e.preventDefault();
         $('.PinkerMain select option:selected').each(function(){
             let strProm=$( this ).text();
-            if(strProm!='статус'){
- //           str +=id + $( this ).text() + " ";
-                str[id]=id + ' '+ $( this ).text();
+            if((strProm!='статус')){
+
+                usd[id]=id + ': '+ $( this ).text();
 
             }
         });
-
-        alert(str[id]);
+     str.push(usd[id]);
+        alert(str);
 
     });
 $('#selectMyOptions').on('submit',function(){
 
+let form=$(this);
 
-   let data=str.serializeArray();
-    console.log('data',data);
+
+
+    console.log('str',str);
         $.ajax({
             url: form.attr('action'),
             //  url: "cabinetItems",
             cache: false,
-            data: data,
+            data: {str: str},
             headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
             type: form.attr('method'),
             dataType: "JSON",
             success: function (json) {
                 if (!json) alert("Ошибка!");
                 //$('.wrap_result').append('<br/><strong>Выборка выполнена !</strong>').delay(2000).fadeOut(500);
-                $("#mediumMine").empty();
+             //   $("#mediumMine").empty();
                 // $('#mediumMine').replaceWith(res.content);
-                $("#mediumMine").append(json.content);
+            //    $("#mediumMine").append(json.content);
 
 
             },
