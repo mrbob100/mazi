@@ -25,12 +25,15 @@
 }
 .pushy ul:first-child {
   margin-top: 10px;
+
 }
 .pushy.pushy-left {
   left: 0;
+
 }
 .pushy.pushy-right {
   right: 0;
+
 }
 
 .pushy-content {
@@ -62,6 +65,7 @@
   -webkit-transform: translate3d(-200px, 0, 0);
   -ms-transform: translate3d(-200px, 0, 0);
   transform: translate3d(-200px, 0, 0);
+
 }
 
 .pushy-open-left .pushy,
@@ -103,6 +107,7 @@
   background-color: rgba(0, 0, 0, 0.5);
   -webkit-animation: fade 500ms;
   animation: fade 500ms;
+
 }
 
 @keyframes fade {
@@ -125,13 +130,16 @@
 .pushy-submenu {
   /* Submenu Buttons */
   /* Submenu Icon */
+
 }
 .pushy-submenu ul {
   padding-left: 15px;
   transition: max-height 0.2s ease-in-out, visibility 0.2s ease-in-out;
+
 }
 .pushy-submenu ul .pushy-link {
   transition: opacity 0.2s ease-in-out;
+
 }
 .pushy-submenu button {
   width: 100%;
@@ -140,13 +148,16 @@
   text-align: left;
   background: transparent;
   border: 0;
+
 }
 .pushy-submenu button:hover {
   color: #FFF;
+
 }
 .pushy-submenu > a,
 .pushy-submenu > button {
   position: relative;
+
 }
 .pushy-submenu > a::after,
 .pushy-submenu > button::after {
@@ -157,11 +168,12 @@
   position: absolute;
   top: 50%;
   right: 15px;
-  background: url("../img/arrow.svg") no-repeat;
+  background: url("../images/arrow.svg") no-repeat;
   -webkit-transform: translateY(-50%);
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
   transition: transform 0.2s;
+
 }
 
 /* Submenu Movement */
@@ -176,19 +188,23 @@
 
 .pushy-submenu-open {
   /* Submenu Icon */
+
 }
 .pushy-submenu-open ul {
   max-height: 1000px;
   visibility: visible;
+
 }
 .pushy-submenu-open .pushy-link {
   opacity: 1;
+
 }
 .pushy-submenu-open a::after,
 .pushy-submenu-open button::after {
   -webkit-transform: translateY(-50%) rotate(90deg);
   -ms-transform: translateY(-50%) rotate(90deg);
   transform: translateY(-50%) rotate(90deg);
+
 }
 
 /*# sourceMappingURL=pushy.css.map */

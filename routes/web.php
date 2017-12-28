@@ -14,7 +14,7 @@
 Route::group(/**
  *
  */
-    ['middleware'=>'web'], function(){
+    [], function(){
 Route::get('/', 'IndexController@index')->name('index');
     Route::get('redirect', 'CartController@cartRedirect')->name('redirectCart');
 
@@ -40,6 +40,14 @@ Route::match(['post','get'],'cabinet',['uses'=> 'CabinetController@index','as'=>
 Route::get('loadcsv',['uses'=>'Admin\CsvloadController@index','as'=>'loadCsv']);
 Route::post('loadcsv','Admin\CsvloadController@store')->name('storeCsv');
 Route::get('updateJson',['uses'=>'Admin\CsvloadController@updateJsonProduct','as'=>'jsonProduct']);
+
+
+//________________________________________________________________________________________________
+// временная вставка маршрутов для отладки CSV
+    Route::get('import', 'ImportController@getImport')->name('import');
+    Route::post('/import_parse', 'ImportController@parseImport')->name('import_parse');
+    Route::post('/import_process', 'ImportController@processImport')->name('import_process');
+//________________________________________________________________________________________________
 
 
 Route::get('category/{id}',['uses'=>'CategoryController@index','as'=>'category']);
@@ -68,8 +76,20 @@ Route::get('delIt',['uses'=>'CartController@DelItem']);
 
 
 
+
+
+
 Auth::routes();
 Route::get('home', 'HomeController@login')->name('home');
+// Activation user.
+//Route::get('activate/{id}/{token}', 'Auth/RegisterController@activation')->name('activation');
+
+
+Route::get('get_captcha/{config?}', function (\Mews\Captcha\Captcha $captcha, $config = 'default') {
+    return $captcha->src($config);
+});
+
+
 
 
 Route::group(['prefix'=>'admin','middleware'=>['web','auth']], function(){
@@ -97,9 +117,20 @@ Route::group(['prefix'=>'admin','middleware'=>['web','auth']], function(){
      if(view()->exists(env('THEME').'.admin.categories.index'))
          {
              $data=['title'=>'Панель администратора'];
-             return view(env('THEME').'.admin.categories.index',$data);
+            return view(env('THEME').'.admin.categories.index',$data);
+           //  return redirect()->route('handbooks');
          }
     });
+
+//Excel
+    Route::get('excelitem', ['uses'=>'Admin\ExcelitemController@index','as'=>'excelIt']);
+    Route::match(['get','post'],'excelitem/import', ['uses'=>'Admin\ExcelitemController@import','as'=>'importIt']);
+    Route::get('excelitem/export', ['uses'=>'Admin\ExcelitemController@export','as'=>'exportIt']);
+
+
+
+
+
     // Actions
     Route::group(['prefix'=>'categories'], function (){
         Route::get('/', ['uses'=>'Admin\CategoryController@index','as'=>'categories']);
@@ -135,6 +166,24 @@ Route::group(['prefix'=>'admin','middleware'=>['web','auth']], function(){
         //admin/product/edit/2
         Route::match(['get','post','delete'],'edit/{id}',['uses'=>'Admin\OrderItemsEditController@index','as'=>'orderItemsEdit']);
     });
+
+    Route::group(['prefix'=>'directories'], function (){
+        Route::get('/', ['uses'=>'Admin\DirectoryController@index','as'=>'directories']);
+        //admin/products/add
+        Route::match(['get','post'],'/add',['uses'=>'Admin\DirectoryAddController@index', 'as'=>'directoriesAdd']);
+        //admin/product/edit/2
+        Route::match(['get','post','delete'],'edit/{id}',['uses'=>'Admin\DirectoryEditController@index','as'=>'directoriesEdit']);
+    });
+
+    Route::group(['prefix'=>'handbooks'], function (){
+        Route::get('/', ['uses'=>'Admin\HandbookController@index','as'=>'handbooks']);
+
+        //admin/products/add
+        Route::match(['get','post'],'/add',['uses'=>'Admin\HandbookAddController@index', 'as'=>'handbooksAdd']);
+        //admin/product/edit/2
+        Route::match(['get','post','delete'],'edit/{id}',['uses'=>'Admin\HandbookEditController@index','as'=>'handbooksEdit']);
+    });
+
 });
 
 

@@ -80,7 +80,7 @@
 	 <!-- Pushy Menu -->
 
 				<section id="button" >
-					<nav class="pushy pushy-left" >
+					<nav class="pushy pushy-left" style="width: 218px;" >
 						<div class="pushy-content">
 							<ul class="menurastr catalog ">
 								<!-- Submenu -->
@@ -188,7 +188,7 @@
 		<div class="shop">
 			<!--a href="{--{asset('single.html') }--}">SHOP COLLECTION NOW</a-->
 			<button class="menu-btn" style="margin-top: 25px;color: #81626A;font-family: 'Lato-Regular';
-  font-size: 20px;font-style: italic;"> НАЧНИ ВЫБОР ПРЯМО СЕЙЧАС !</button></li>
+  font-size: 20px;font-style: italic;"> НАЧНИ ВЫБОР ПРЯМО СЕЙЧАС !</button>
 
 
 

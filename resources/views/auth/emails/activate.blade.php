@@ -1,0 +1,1 @@
+<p>Log in to MyApp here: <a href="{{ $activationLink }}">Перейдите по ссылке link</a></p>

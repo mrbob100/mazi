@@ -7,6 +7,10 @@ use Corp\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
+use Corp\Mail\ActivateAccount;
+use Illuminate\Http\Request;
+
+use Mail;
 class RegisterController extends Controller
 {
     /*
@@ -59,8 +63,10 @@ class RegisterController extends Controller
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|min:6|confirmed',
             'phone'=>'required|max:12',
-            'address' => 'required|max:255'
+            'address' => 'required|max:255',
+            'captcha' => 'required|captcha',
         ]);
+
     }
 
     /**
@@ -79,5 +85,41 @@ class RegisterController extends Controller
             'phone'=>$data['phone'],
             'address' => $data['address']
         ]);
+
     }
+
+ /*   protected function registered(Request $request, $user)
+    {
+      return  Mail::to($user)->send(new ActivateAccount($user));
+
+    }
+
+
+
+    public function activation($userId, $token)
+    {
+        $user = User::findOrFail($userId);
+
+        // Check token in user DB. if null then check data (user make first activation).
+        if (is_null($user->remember_token)) {
+            // Check token from url.
+            if ( bcrypt($user->email) == $token) {
+                // Change status and login user.
+                $user->status = 1;
+                $user->save();
+
+                \Session::flash('flash_message', trans('interface.ActivatedSuccess'));
+
+                // Make login user.
+                Auth::login($user, true);
+            } else {
+                // Wrong token.
+                \Session::flash('flash_message_error', trans('interface.ActivatedWrong'));
+            }
+        } else {
+            // User was activated early.
+            \Session::flash('flash_message_error', trans('interface.ActivatedAlready'));
+        }
+        return redirect('/');
+    } */
 }

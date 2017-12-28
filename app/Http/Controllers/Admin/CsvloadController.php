@@ -62,25 +62,7 @@ class CsvloadController extends Controller
                         $pos=0; $pos1=0;
                     $str1=json_decode( $stroka);
                     $len=count( $str1);
-                  /*  $str1=explode('},',$stroka);
-                    $len=count( $str1);
-                    $str1[0]=mb_substr($str1[0],3);
-                    $str1[0]='{'. $str1[0];
-                   // unset($str1[$len-1]);  // только в случае когда все данные в массиве - [...]
 
-                    for($i=0; $i<$len-1; $i++)
-                    {
-                        $str1[$i] = mb_substr($str1[$i], 0, -1);
-                        $str1[$i].='"}';
-
-                    }
-
-                    for($i=0; $i<$len-1; $i++)
-                    {
-                        $str[$i]=json_decode($str1[$i]);
-
-
-                    } */
                   $categories=Category::all();
                   $catLength=count( $categories);
                      //   $this->squareJson($stroka,$pos,$pos1);
@@ -89,9 +71,7 @@ class CsvloadController extends Controller
                     {
                         $katVibor=0;
                         if (!$str1[$i]) {  // если нулевые значения строки json
-                        //    echo ('<pre>');
-                        //    echo ($str1[$i]);
-                         //    echo ('</pre>');
+
                             $serka="не строка json "."|".$str1[$i];
                             Storage::prepend('file_error.txt',$serka);
                         } else { // работа с записями json
@@ -181,9 +161,7 @@ class CsvloadController extends Controller
             $productsLine->weightbrutto=$str2->weightBrutto;
             $productsLine->weightnetto=$str2->weightNetto;
 
-            // $productsLine->ttd;
-            //$productsLine->EAN_code;
-            //
+
 //______________________________________________________________________________________________________________________
 //______________________________ проверка регулярных выражений
 

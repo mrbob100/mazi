@@ -1,5 +1,4 @@
-@extends('layouts.app')
-
+@extends('pink.layouts.siteCabinet')
 @section('content')
 <div class="container">
     <div class="row">
@@ -105,6 +104,21 @@
                             </div>
                         </div>
 
+
+                        <div class="form-group">
+                            <label for="capras" class="col-md-4 control-label"></label>
+                            <div class="col-md-6">
+                                <p> <img src="{{ captcha_src() }}" id="capras" alt="captcha" class="captcha-img" data-refresh-config="default"><a href="#" id="refresh"><span class="glyphicon glyphicon-refresh"></span></a></p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="capras1" class="col-md-4 control-label">Капча</label>
+                            <div class="col-md-6">
+                              <input class="form-control" id="capras1" type="text" name="captcha"/>
+                            </div>
+                        </div>
+
+
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary cobzov">
@@ -116,11 +130,26 @@
                     </form>
 
 
+                    <script>
+                        $('#refresh').on('click',function(){
+                            let captcha = $('img.captcha-img');
+                            let config = captcha.data('refresh-config');
+                            $.ajax({
+                                method: 'GET',
+                                url: 'get_captcha/' + config,
+                            }).done(function (response) {
+                                captcha.prop('src', response);
 
+                            });
+                        });
+                    </script>
 
                 </div>
             </div>
         </div>
     </div>
 </div>
+<script type="text/javascript" src=" {!! asset('public/js/script.js') !!}  " charset="utf-8" ></script>
+
+
 @endsection

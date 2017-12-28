@@ -5,6 +5,7 @@ namespace Corp\Widgets;
 use Arrilot\Widgets\AbstractWidget;
 use Cache;
 use Corp\Models\Category;
+use Corp\Models\Directory;
 use DB;
 
 class MainWidget extends AbstractWidget
@@ -18,6 +19,7 @@ class MainWidget extends AbstractWidget
     public $data;
     public $tree;
     public $menuHtml;
+    protected $myClass;
 
     protected $config=[];
 
@@ -38,7 +40,15 @@ class MainWidget extends AbstractWidget
             $this->tpl='menu.php';
         } else {
             //    $this->config=['tpl'=>'select.php'];
+            if(isset($this->config['model'])) {
             $this->model= $this->config['model'];
+            }
+            if(isset($this->config['class'])) {
+            $this->myClass=$this->config['class'];
+            }
+            if(isset($this->config['tpl'])) {
+                $this->tpl=$this->config['tpl'];
+            }
           if($this->config['tpl']=='select.php')   $this->tpl='select.php';
             if($this->config['tpl']=='select_product.php')  $this->tpl='select_product.php';
         }
@@ -48,8 +58,10 @@ class MainWidget extends AbstractWidget
             $menu = Cache::get('menu');
            if($menu) return $menu;
         }
-
-        $categories=Category::all();
+if( $this->myClass!='Directory') {
+    $categories=Category::all();
+}
+       else  $categories=Directory::all();
 
 
         $keyd=$categories->keyBy('id');

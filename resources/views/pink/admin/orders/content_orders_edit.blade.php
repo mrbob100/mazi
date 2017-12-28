@@ -70,7 +70,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                        @foreach($qww as $item)
+                        @foreach($data->order_items as $item)
                             <tr>
                                  <td>  {!! Form::text('name',$item->name,['class'=>'form-control','placeholder'=>'Наименование товара']) !!} </td>
                                  <td>  {!! Form::text('price',$item->price,['class'=>'form-control ','placeholder'=>'Цена']) !!} </td>

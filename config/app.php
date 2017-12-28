@@ -169,6 +169,8 @@ return [
         Laravel\Tinker\TinkerServiceProvider::class,
         Arrilot\Widgets\ServiceProvider::class,
         'Lavary\Menu\ServiceProvider',
+        Maatwebsite\Excel\ExcelServiceProvider::class,
+        Mews\Captcha\CaptchaServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -232,6 +234,11 @@ return [
         'Html' => Collective\Html\HtmlFacade::class,
         'Menu'       => 'Lavary\Menu\Facade',
         'Image' => Intervention\Image\Facades\Image::class,
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+        'Captcha'=>Mews\Captcha\Facades\Captcha::class,
     ],
+    'db_fields'=>[
+        'firstname','lastname','email'
+    ]
 
 ];

@@ -68,7 +68,6 @@ class OrderEditController extends Controller
         $old=Order::find($id);
         $old->load('users','order_items');
 
-        $qww=$old->order_items;
         //$old=$sold->toArray();
         // dd($old);
         // $category= $old->getCategory->name;
@@ -77,7 +76,6 @@ class OrderEditController extends Controller
             $data=[
                 'title'=>'Редактирование продукции -'.$old['name'],
                 'data'=>$old,
-                'qww'=>$qww,
                 'status'=>$status
 
 

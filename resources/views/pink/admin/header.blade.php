@@ -30,10 +30,27 @@
             </a>
         </li>
         <li>
+            <a href="{{route('importIt')}}">
+                <h4>Загрузка таблицы продукции CSV</h4>
+            </a>
+        </li>
+        <li>
+            <a href="{{route('importIt')}}">
+                <h4>Выгрузка прайса на Hotline XMS</h4>
+            </a>
+        </li>
+
+        <li>
             <a href="{{route('index')}}">
                 <h4>Перейти на сайт</h4>
             </a>
         </li>
+
+
+              <div class="catalog">
+               <li>  {{Widget::run('MainWidget',['class'=>'Directory','tpl'=>'menuSpr.php'])}}</li>
+              </div>
+
     </ul>
 </div>
 </div>

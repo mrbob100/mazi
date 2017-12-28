@@ -28,6 +28,7 @@ class SiteController extends Controller
      protected  $adopt=true;
      protected $data;
      protected $barCabinet=false; // если работа с кабинетом
+    protected $sp_rep;
 
     public function __construct(MenusRepositories $m_rep)
     {
