@@ -17,11 +17,14 @@
     <link href="{{ asset('public/'.env('THEME')) }}/css/animate.css" rel="stylesheet">
 	<meta name="csrf-token" content="{!! csrf_token() !!}" />
 
-	<link rel='stylesheet' id='zoom-css'  href='{{ asset('public/'.env('THEME')) }}/css/zoom.css' type='text/css' media='all' />
+	<!--link rel='stylesheet' id='zoom-css'  href='{--{ asset('public/'.env('THEME')) }--}/css/zoom.css' type='text/css' media='all' /-->
 
 	<!--script type="text/javascript" src=" {--!! asset('public/'.env('THEME')) !!--}/js/jquery-ui.widget.js" charset="utf-8" ></script>
 	<script type="text/javascript" src=" {--!! asset('public/'.env('THEME')) !!--}/js/jquery-ui.mouse.js" charset="utf-8" ></script>
 	<script type="text/javascript" src=" {--!! asset('public/'.env('THEME')) !!--}/js/jquery-ui.slider.js" charset="utf-8" ></script-->
+
+
+	<script type="text/javascript" src=" {!! asset('public/'.env('THEME')) !!} /js/imagezoom.js "  ></script>
 
 	<link href="{{ asset('public/'.env('THEME')) }}/css/component.css" rel="stylesheet">
 	<link href="{{ asset('public/'.env('THEME')) }}/css/flexslider.css" media="screen" rel="stylesheet">
@@ -32,7 +35,11 @@
     <link href="{{ asset('public/'.env('THEME')) }}/css/jquery-ui.css" rel="stylesheet" type="text/css"/>
 	<link href="{{ asset('public/'.env('THEME')) }}/css/jquery-ui.theme.min.css" rel="stylesheet" type="text/css"/>
 	<link href="{{ asset('public/'.env('THEME')) }}/css/jquery-ui.structure.min.css" rel="stylesheet" type="text/css"/>
-	<script type='text/javascript' src='{!! asset('public/'.env('THEME')) !!}/js/zoomsl.js'></script>
+
+
+
+
+
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 
 </head>
@@ -286,10 +293,12 @@
 <script type="text/javascript" src=" {!! asset('public/'.env('THEME')) !!}/js/price-range.js" charset="utf-8" ></script>
 
 <script type="text/javascript" src=" {!! asset('public/'.env('THEME')) !!}/js/script.js" charset="utf-8" ></script>
-
+<script type='text/javascript' src='{!! asset('public/'.env('THEME')) !!}/js/imagezoom.js'></script>
 <script type="text/javascript" src=" {!! asset('public/'.env('THEME')) !!}/js/simpleCart.min.js"  ></script>
 <script type="text/javascript" src=" {!! asset('public/'.env('THEME')) !!}/js/responsiveslides.min.js"  ></script>
 <script type="text/javascript" src=" {!! asset('public/'.env('THEME')) !!}/js/jquery.flexisel.js"  ></script>
+<script type="text/javascript" src=" {!! asset('public/'.env('THEME')) !!}/js/jquery.flexslider.js"  ></script>
+
 
 <script type="text/javascript" src=" {!! asset('public/'.env('THEME')) !!}/js/main.js"  ></script>
 <script type="text/javascript" src=" {!! asset('public/'.env('THEME')) !!}/js/pushy.js"  ></script>

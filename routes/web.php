@@ -75,7 +75,9 @@ Route::get('delIt',['uses'=>'CartController@DelItem']);
 });
 
 
-
+Route::get('ckeditor-demo',function(){
+    return view('ckeditor.index');
+});
 
 
 
@@ -183,6 +185,21 @@ Route::group(['prefix'=>'admin','middleware'=>['web','auth']], function(){
         //admin/product/edit/2
         Route::match(['get','post','delete'],'edit/{id}',['uses'=>'Admin\HandbookEditController@index','as'=>'handbooksEdit']);
     });
+
+    Route::group(['prefix'=>'users'], function (){
+        // пользовате с кодом =3
+        Route::get('/{id?}', ['uses'=>'Admin\UsersOnController@index','as'=>'userson']);
+        Route::match(['get','post','delete'],'/work/{id?}',['uses'=>'Admin\UsersShowController@index', 'as'=>'showup']);
+
+    });
+    Route::group(['prefix'=>'sliders'], function (){
+        // пользовате с кодом =3
+        Route::get('/', ['uses'=>'Admin\SliderController@index','as'=>'slider']);
+        Route::match(['get','post'],'/add',['uses'=>'Admin\SliderAddController@index', 'as'=>'sliderAdd']);
+        Route::match(['get','post','delete'],'edit/{id?}',['uses'=>'Admin\SliderEditController@index', 'as'=>'sliderEdit']);
+
+    });
+
 
 });
 

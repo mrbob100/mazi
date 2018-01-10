@@ -10,6 +10,7 @@ use Corp\Models\Order_item;
 use Corp\Widgets\MainWidget;
 use Corp\User;
 use Corp\Models\Role;
+use Corp\Models\Discount;
 use Response;
 use Session;
 use Cache;
@@ -52,15 +53,12 @@ class CartController extends Controller
         if(empty($product)) return false;
         $products=json_decode($product->img);
         $product->img=$products->mini;
-      /*  $products= $product->transform(function ($item, $key){
-            if(is_string($item->img) && is_object(json_decode($item->img))&& json_last_error()==JSON_ERROR_NONE)
-            {   $item->img=json_decode($item->img); }
+        $newprice=Session::get('Price');
+        if($newprice)  // установка новой цены
+        {
+            $product->price=$newprice[0]['newprice'];
+        }
 
-            return $item;
-        }); */
-       //   dd($product);
-     //   $cart = new Cart();
-    //    $cart->addToCart($product, $qty);
         $this->layout = false;
         $cart = new Cart();
         $cart->addToCart($product, $qty);
@@ -130,13 +128,12 @@ class CartController extends Controller
         return redirect('/');
     }
 
+
+
+
+   //__________________________________________________________________________________________________________________
     public function cartView(Request $request)
     {
-        /*$akkord = new MainWidget();
-        $akkord->init();
-        $akkordeon= $akkord->run();
-*/
-
 
         $session =session('cart');
         $order = new Order();
@@ -167,48 +164,58 @@ class CartController extends Controller
                 $user->phone = $request->phone;
                 $user->address = $request->address;
                 $user->password = bcrypt($request->password);
-                $user_id = 0;
+              //  $user_id = 0;
 // блок подсчета и определения рейтинга
 //_________________________________________________
 
-                $user->status=session('cardCommon.sum');
+// блок расчета ранга пользователя
+
+                $saa=new Discount();
+                $status=$saa->discounts($user,0,session('cardCommon.sum'));
+
+                $user->status=$status['status'];
  //_______________________________________________
                 $role = Role::find(3);
 
                 if ($role->users()->save($user)) {
-                    $order->user_id = $user->id;
+                   $order->user_id = $user->id;
+                  //  Auth::login($user, true);
                 }
 
             } else  // user зарегестрирован
                 {
 
-                  //  if(!$role->users()->role_id)
+                    //if(!$role->users()->role_id)
 
-                  foreach($user->roles as $ror)
-                    {
-                        // user не первый раз покупает у него определена роль
-                        $role = $ror->id;
-                        $qw=true;
-                        $xhor=0;
-                        $oldOrders=$user->orders()->user_id;
-                        foreach($oldOrders as $item)
-                        {
-                            $xhor+=$item->sum;
-                        }
-                        $user->status=$xhor; // выбрана общая сумма заказов
 
-                        break;
-                    }
+
+                  foreach($user->roles as $ror) {
+                      // user не первый раз покупает у него определена роль
+                      $role = $ror->id;
+
+                      $qw = true;
+                      $xhor = 0;
+                  }
+
+
                     if(!$qw)  // user зарегестрирован но покупает 1-й раз
                     {
                         $role = Role::find(3);
 
-                        // сохранение роли пользователя
-                        $user->roles()->save($role);
-                            $user->status=session('cardCommon.sum');
-
                     }
-                $user->where('id',$user->id)->update( $user->toArray());
+                     $newprice=Session::pull('Price');
+                  if($newprice)
+                  {   $summa=$newprice[0]['summa']; }
+                  else $summa=0;
+                    $saa=new Discount();
+                    $status=$saa->discounts($user,0,session('cardCommon.sum')+$summa);
+
+                    // $user->status=session('cardCommon.sum');
+                    $user->status=$status['status'];
+                            User::find($user->id)->update( $user->toArray());
+
+
+               // $user->where('id',$user->id)->update( $user->toArray());
                     $order->user_id = $user->id;
                 }
 
@@ -221,11 +228,13 @@ class CartController extends Controller
                 Session::forget('cart');
                 Session::remove('cardCommon.qty');
                 Session::remove('cardCommon.sum');
-                Session::flash('status', 'Ваш заказ принят');
+
             }else{
                 Session::flash('errors', 'Ошибка оформления заказа');
             }
+            Auth::login($user);
             return redirect('cabinet');
+
         }
         $data=[];
         $user=Auth::user();

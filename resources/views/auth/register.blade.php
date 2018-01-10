@@ -108,7 +108,7 @@
                         <div class="form-group">
                             <label for="capras" class="col-md-4 control-label"></label>
                             <div class="col-md-6">
-                                <p> <img src="{{ captcha_src() }}" id="capras" alt="captcha" class="captcha-img" data-refresh-config="default"><a href="#" id="refresh"><span class="glyphicon glyphicon-refresh"></span></a></p>
+                                <p> <img src="{{ captcha_src() }}" id="capras" alt="captcha" class="captcha-img" data-refresh-config="default"><a href="#" id="refresh">&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-refresh"></span></a></p>
                             </div>
                         </div>
                         <div class="form-group">

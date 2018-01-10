@@ -5,10 +5,15 @@ use Corp\Models\Product;
 use Corp\Widgets\MainWidget;
 use Cache;
 use Config;
+use Corp\User;
 use Illuminate\Http\Request;
+use PhpParser\Node\Stmt\Foreach_;
 use Symfony\Component\Routing\RequestContext;
 use Corp\Repositories\ProductsRepository;
+use Corp\Models\Discount;
 use Route;
+use Auth;
+use Session;
 class ProductController extends SiteController
 {
 
@@ -27,58 +32,39 @@ class ProductController extends SiteController
     public function index(Request $request)
     {
         // print_r($request->all());
-
         $id = $request->id;
-        //   $context= new RequestContext();
-        //  $context->fromRequest($request);
 
-        //  $akkord = new MainWidget();
-        //  $akkord->init();
-        //  $akkordeon= $akkord->run();
         $rout=Route::currentRouteName();
         $products = $this->getProduct($id);
-        //dd( $productItem);
-     /*   $products->transform(function ($item, $key){
-            if(is_string($item->exactlyType1) && is_object(json_decode($item->exactlyType1))&& json_last_error()==JSON_ERROR_NONE)
-            {   $item->exactlyType1=json_decode($item->exactlyType1); }
-            return $item;
-        }); */
+        $discount=0;
+        // Блок расчета скидок
+        $user=Auth::user();
+        if(Auth::check())
+        {
+           $orders=$user->orders;
 
-      /*  $sas=$products[0]['exactlyType1'];
-       // $sa1=$sas->power;
-        $adding= collect($sas)->all();
-        $sa=count($adding);
-        $qw=[]; $i=0;
-        foreach ($adding as $key=>$item){
-            $qw[$i]=$item;
-            $i++;
-    } */
-        $content = view(env('THEME') . '.product_content')->with(['products'=> $products,'adopt'=>$this->adopt])->render();
+           if($orders) // заказы есть их выбираем
+           {
+             $saa=new Discount();
+               $data=$saa->discounts($user, $orders);
+
+           }
+            $discount=$data['status'];
+           $summa=$data['summa'];
+            $newprice=$products[0]->price * $discount/100;
+            $newprice=$products[0]->price - $newprice;
+            $pric=explode('.',$newprice);
+            $newprice=$pric[0].'.00';
+            Session::pull('Price');
+            if(!session('Price')) Session::push('Price',['newprice'=>$newprice,'summa'=>$summa]);
+        }
+        else { $newprice=0; $discount=0;  $summa=0;}
+
+
+        $content = view(env('THEME') . '.product_content')->with(['products'=> $products,'adopt'=>$this->adopt,'discount'=>$discount,'newprice'=>$newprice,'summa'=>$summa])->render();
         $this->vars = array_add($this->vars, 'content', $content);
         
 
-     /*   $products=$this->getProducts($id);
-        //dd($productItems);
-        $content=view(env('THEME').'.products_content')->with('products',$products)->render();
-        $this->vars=array_add($this->vars,  'content', $content); */
-// добавление имен файлов в карусель flexslider
-        /*    $lab1= explode('.',$product->mini);
-            $test1=strval($lab1[0]);
-            $test2=strlen($test1);
-            $alfa=substr($test1,2,10);
-            $alfa2=$alfa+1;
-            $alfa3=$alfa+2;
-            if($test2>3){
-                $base=substr($test1,0,$test2-2);
-            } else { $base=substr($test1,0,$test2-1); }
-
-            $common1=$base.$alfa2.'.'.$lab1[1];
-            $common2=$base.$alfa3.'.'.$lab1[1];
-           // dump($product);
-    */
-    //    $this->keywords =  $products->keywords;
-    //    $this->meta_desc = $products->meta_desc;
-    //    $this->title = $products->name;
 
         return $this->renderOutput();
     }
@@ -89,14 +75,11 @@ class ProductController extends SiteController
         $were=false;
         if($alias) {
 
-            //  $id=Category::select('id')->where('id',$alias)->first()->id;
-            //  $id=DB::table('categories')->select('id')->where('alias',$alias)->get();
 
             $were=['id',$alias];
         }
         $product= $this->p_rep->get(['id','name','code','description','img','price','type','country','class','groupTools','new','weightbrutto','weightnetto', 'length','height','exactlyType1','category_id','keywords','meta_desc'], false,true,$were);
-        // if($products) $articles->load('user','category','comments');
-        //
+
         // dd( $product);
      $product->load('typeTools');
         return $product;

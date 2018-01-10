@@ -54,10 +54,11 @@
 
             </div>
             <br/><br/><br/>
-            <h2>Добро пожаловать в личный кабинет</h2>
+
             @if(session('status'))
+
                 <div class="alert alert-success">
-                    {!! session('status') !!}
+                    <h3>{!! session('status') !!}</h3>
                 </div>
             @endif
             @if(session('Author'))
@@ -67,7 +68,9 @@
 
                     <p>Тел: &nbsp     {{ Session::get('Author.phone')}}</p>
                     <p>Адрес:  &nbsp  {{ Session::get('Author.address')}}</p>
-                    <p>Оборот(месячный):  &nbsp  {{ Session::get('Author.status')}}.00 гр</p>
+                    <p>Оборот(месячный):  &nbsp  {!! session('Turnover') !!}.00 гр</p>
+                    <h2>Скидка на товары :  &nbsp {{ Session::get('Author.status')}}%</h2>
+                    <h3>Скидка зависит от объема закупок</h3>
 
                 </div>
                 <form>
@@ -98,13 +101,13 @@
                     <img src="{{ asset('public/'.env('THEME')) }}/images/shipping.png" alt="" />
                 </div>
                 <div class="shipping-text">
-                    <h3>Free Shipping</h3>
-                    <p>on orders over $ 199</p>
+                    <h3>Бесплатная доставка</h3>
+                    <p>от 2000 гр.</p>
                 </div>
                 <div class="clearfix"></div>
             </div>
             <div class="col-md-4 online-order">
-                <p>Order online</p>
+                <p>Гарячая линия</p>
                 <h3>Tel:999 4567 8902</h3>
             </div>
             <div class="clearfix"></div>

@@ -4,6 +4,7 @@ namespace Corp\Http\Controllers;
 use Corp\Models\Order;
 
 use Corp\Models\Orderoption;
+use Corp\Models\Selectorder;
 use Corp\Repositories\OrdersRepository;
 use Illuminate\Http\Request;
 use Corp\User;
@@ -13,6 +14,7 @@ use Carbon\Carbon;
 use Session;
 use Response;
 use DB;
+
 use Illuminate\Database\Query\Builder;
 class CabinetController extends SiteController
 {
@@ -30,11 +32,11 @@ class CabinetController extends SiteController
 
     public function index()
     {
-
         $user=Auth::user();
-        if(!Auth::check()) {
-            return redirect()->home();
-        }
+            if(!Auth::check()) {
+                return redirect()->home();
+            }
+
         $options=OrderOption::all();
         $optionTool=array();
 
@@ -51,6 +53,8 @@ class CabinetController extends SiteController
         {
             $input = $request->except('_token');
             $this->template=env('THEME').'.both_barsCab';
+            $lines=isset($input['str']);
+            if(!$lines || !($input['str'])) return redirect()->back();
             $lines=$input['str'];
             $prom=[];
             $j=0;
@@ -91,7 +95,12 @@ class CabinetController extends SiteController
                 }
 
               $xorOrder->status=$r;
-            $xorOrder->manager=$user->secondname;
+                if($r==0)
+                {
+                    $xorOrder->manager='';
+                } else {
+                        $xorOrder->manager = $user->secondname;
+                       }
                $xorOrder->created_at=$orders->created_at;
                 $xorOrder->comment=$orders->comment;
               $xorOrder->where('orders.id',$id)->update( $xorOrder->toArray());
@@ -103,7 +112,7 @@ class CabinetController extends SiteController
 
             $role_id=2;
             $alias=$user->secondname;
-            $orders=Order::where("status",NULL)->orWhere('manager',$alias)->simplePaginate();
+            $orders=Order::where("status",0)->orWhere('manager',$alias)->simplePaginate();
             $priznak=1;
             $content = view(env("THEME") . ".orders_cabinet")->with(["orders"=> $orders,'optionTool'=>$optionTool,'priznak' =>$priznak])->render();
 
@@ -141,36 +150,42 @@ class CabinetController extends SiteController
 
 
        if($role_id==2){
-           $orders=Order::where("status",NULL)->orWhere('manager',$alias)->simplePaginate();
+           $orders=Order::where("status",0)->orWhere('manager',$alias)->orderBy('status','asc')->simplePaginate();
            $priznak=1;
        }
          else {
 
           $orders=$this->getOrders($role_id,$alias);
+
+
+
       }
 
-      $orders->load('users','order_items');
+       if($orders)
+       {
+               $orders->load('users','order_items');
+       } else {  // внесение статуса пользователя в поле tatus
+           if($role_id==0)
+           {
+               $role = Role::find(3);  // внесение записи в таблицу role_user категории 3
+               $role->users()->save($user);
+
+           }
+
+
+       }
        $zikname= $user->name.' '.$user->secondname;
 
-     //   Session::pull('ozuhenvey');
-      //  if(!session('ozuhenvey')) Session::push('ozuhenvey', $zikname);
         $points=[]; $j=0;
 
-        $data=$this->countData( $orders,$priznak);
 
 
-      /*     $data=[
-               'orders'=> $orders,
-               'qntDay'=> $qntDay,
-               'worked'=>$worked,
-                'priznak' =>$priznak,
-           ]; */
-/*$data1=[
-    'zikname'=>$zikname,
-    'email'=>$user->email,
-    'address'=>$user->address,
-    'phone'=>$user->phone
-]; */
+        $point_user= new User();
+          $data= $point_user->countData( $orders,$priznak);
+
+
+
+
 // загрузка страницы
         $content = view(env('THEME') . '.orders_cabinet')->with(['orders'=> $orders,'priznak' =>$priznak,'optionTool'=>$optionTool])->render();
         $this->vars = array_add($this->vars, 'content', $content);
@@ -185,9 +200,12 @@ class CabinetController extends SiteController
         $this->vars = array_add($this->vars, 'headers', $headers);
         // фоотер
        session()->flash('status',$zikname);
-       $user->status=$data['turnOver'];
+
+       $turn=$data['turnOver'];
         Session::pull('Author');
         if(!session('Author')) Session::flash('Author',$user);
+        Session::flash('Turnover',$turn);
+
       // session()->keep(['zikname'=>$zikname,'email'=>$user->email,'address'=>$user->address,'phone'=>$user->phone]);
       //  Session::pull('Author');
        // if(!session('Author')) Session::push('Author',['user'=>$user]);
@@ -213,8 +231,9 @@ class CabinetController extends SiteController
         }
         else{
             $were=['user_id',$alias];
+            $samp='created_at';
            }
-        $orders= $this->o_rep->get(['id','user_id','qty','sum','status','manager','created_at','comment'], false,true,$were);
+        $orders= $this->o_rep->get(['id','user_id','qty','sum','status','manager','created_at','comment'], false,true,$were,$samp);
         // if($products) $articles->load('user','category','comments');
         // dd($id);
 
@@ -224,8 +243,7 @@ class CabinetController extends SiteController
 
 
 
-    // функция перенаправляет по jax запросу в личный кабинет при выборе менеджером заказов по дате размещения
-    // и стадии выполнения из CabinetController
+// программа приним ающая ajax запрос
     public function caboption()
     {
         $user=Auth::user();
@@ -234,66 +252,10 @@ class CabinetController extends SiteController
         {
             $input = $request->except('_token');
 
-            $timeDay=Carbon::now();
-            $timeDay2=Carbon::now();
-            $wq=$timeDay2->format('m-d');
-          //  $timeDay2->toDateTimeString();
-            $timeDay= $timeDay->timestamp/86400; // количество дней
-            $timeDay=explode('.',$timeDay);
-            // $timeDay= $timeDay->toDateString();
-           // $timeDay= $timeDay->timestamp/86400; // количество дней
-          //  $timeDay=explode('.',$timeDay);
-            $qntDay=[0,0,0,0,0]; $worked=[0,0,0,0];
-            $turnOver=0;
 
-            $query=Order::where('manager',$user->secondname)->select('*');
-           if(isset($input['dzen']))
-            {
+             $orders=$this->viborOrders($input, $user);
 
-               $optChoise=explode('=',$input['dzen']);
-               $sas=$optChoise;
-              if($optChoise[0]=='день')
-              {
-                $query->addSelect('created_at')->whereDate('created_at','=',Carbon::today()->toDateTimeString());
-              }
-                if($optChoise[0]=='неделя')
-                {
-                    $query->addSelect('created_at')->whereDate('created_at','>=',Carbon::today()->subDays(7));
-                }
-                if($optChoise[0]=='месяц')
-                {
-                    $query->addSelect('created_at')->whereMonth('created_at','>=', Carbon::today()->subDays(30));
-                }
-                if($optChoise[0]=='год')
-                {
-                    $query->addSelect('created_at')->whereYear('created_at','>=',Carbon::today()->subYear());
-                }
 
-             }
-            if(isset($input['sent']))
-            {
-                $query->addSelect('status')->where('status',2);
-            }
-            if(isset($input['notchoise']))
-            {
-                $query->addSelect('status')->where('status',0);
-            }
-            if(isset($input['finished']))
-            {
-                $query->addSelect('status')->where('status',3);
-            }
-            if(isset($input['inworks']))
-            {
-                $query->addSelect('status')->where('status',1);
-            }
-
-            $orders=$query->paginate(20);
-            $orders->load('users','order_items');
-        //    $orders->load('users','order_items');
-  // конец загрузки таблицы orders
-            //
-            //
-            // выборка селекта cстатусов
             $options=OrderOption::all();
             $optionTool=array();
 
@@ -337,100 +299,5 @@ class CabinetController extends SiteController
 
 
 
-
-
-    public function countData($orders, $priznak=0)
-    {
-        $timeDay=Carbon::now();
-        // $timeDay= $timeDay->toDateString();
-        $timeDay= $timeDay->timestamp/86400; // количество дней
-        $timeDay=explode('.',$timeDay);
-        $qntDay=[0,0,0,0,0]; $worked=[0,0,0,0];
-        $turnOver=0;
-        foreach($orders as $order)
-        {
-            $dt = Carbon::parse($order->created_at);
-            $dst =$dt->timestamp/86400; // количество дней
-            $dst=explode('.',$dst);
-
-            // за текущий день
-            if($timeDay[0]== $dst[0])
-            {
-                $qntDay[0]++;
-                if($priznak==1)
-                {
-                    if($order->status)
-                    {
-                        $turnOver+=$order->sum;
-                    }
-                } else {
-                        $turnOver+=$order->sum;
-                      }
-            }
-            // за неделю
-
-            if ($dst[0]<=$timeDay[0]-1 && $dst[0]>=$timeDay[0]-7)
-            {
-                $qntDay[1]++;
-                if($priznak==1)
-                {
-                    if($order->status)
-                    {
-                        $turnOver+=$order->sum;
-                    }
-                } else {
-                        $turnOver+=$order->sum;
-                       }
-            }
-            //за текущий месяц
-            elseif ($dst[0]<=$timeDay[0]-8 && $dst[0]>=$timeDay[0]-30)
-            {
-                $qntDay[2]++;
-                if($priznak==1)
-                {
-                   if($order->status)
-                   {
-                       $turnOver+=$order->sum;
-                   }
-                } else {
-                        $turnOver+=$order->sum;
-                       }
-            }
-            // за три месяца
-            elseif ($dst[0]<=$timeDay[0] && $dst[0]>=$timeDay[0]-90 )
-            {
-                $qntDay[3]++;
-            }
-            // за год
-            elseif($dst[0]<=$timeDay[0] && $dst[0]>=$timeDay[0]-360)
-            {
-                $qntDay[4]++;
-            }
-            if($order->status==NULL)
-            {
-                $worked[0]++;
-            }
-            if($order->status==1)
-            {
-                $worked[1]++;
-            }
-            if($order->status==2)
-            {
-                $worked[2]++;
-            }
-            if($order->status==3)
-            {
-                $worked[3]++;
-            }
-
-        }
-        $data=[
-            'qntDay'=> $qntDay,
-            'worked'=>$worked,
-            'turnOver'=>$turnOver
-
-        ];
-        return $data;
-    }
 
 }

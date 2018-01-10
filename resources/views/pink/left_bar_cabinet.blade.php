@@ -13,14 +13,14 @@
                     -<span style="color:#f6931f; font-weight: bold;">{!!$data['worked'][1]!!}</span>
                 @endif
                 @if($data['worked'][2])
-                    <input type="checkbox" value="Завершен" name="finished" id="shlem_left2" class="selectValItem" />
+                    <input type="checkbox" value="Отправлен" name="finished" id="shlem_left2" class="selectValItem" />
                     <label for="shlem-left2">Завершен</label>
-                    -<span style="color:#f6931f; font-weight: bold;">{!!$data['worked'][2]!!}</span>
+                    -<span style="color:#f6931f; font-weight: bold;">{!!$data['worked'][3]!!}</span>
                 @endif
                 @if($data['worked'][3])
-                    <input type="checkbox" value="Отправлен" name="sent" id="shlem_left3" class="selectValItem" />
+                    <input type="checkbox" value="Завершен" name="sent" id="shlem_left3" class="selectValItem" />
                     <label for="shlem-left3">Отправлен</label>
-                    -<span style="color:#f6931f; font-weight: bold;">{!!$data['worked'][3]!!}</span>
+                    -<span style="color:#f6931f; font-weight: bold;">{!!$data['worked'][2]!!}</span>
                 @endif
 
 

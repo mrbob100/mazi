@@ -11,7 +11,9 @@
     <script type="text/javascript" src=" {!! asset('public/'.env('THEME')) !!} /js/jquery.js "  ></script>
     <script type="text/javascript" src=" {!! asset('public/'.env('THEME')) !!} /js/bootstrap.min.js"  ></script>
      <script type="text/javascript" src="{!! asset('public/'.env('THEME')) !!}/js/bootstrap-filestyle.min.js" ></script>
-    <script type="text/javascript" src="{!! asset('public/'.env('THEME')) !!}/js/ckeditor/ckeditor.js "  ></script>
+    <!--script type="text/javascript" src="{--!! asset('public/'.env('THEME')) !!--}/js/ckeditor/ckeditor.js "  ></script-->
+    <script src="{{asset('public/ckeditor/ckeditor/ckeditor.js')}}"> </script>
+
     <link href="{{ asset('public/'.env('THEME')) }}/css/site.css" rel="stylesheet">
     <link href="{{ asset('public/'.env('THEME')) }}/css/jumbotron.css" rel="stylesheet">
     <link href="{{ asset('public/'.env('THEME')) }}/css/animate.css" rel="stylesheet">

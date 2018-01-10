@@ -248,18 +248,17 @@ jQuery(document).ready(function($) {
 
 
    $(".selectValItem").on('slide',function(e){
-      //  e.preventDefault();
-    //   slider.slider('values', $(this).val());
+
         counter++;
 
-        //  alert(counter);
+
     });
 
     $(".selectValItem").on('change',function(e){
         e.preventDefault();
         counter++;
 
-        //  alert(counter);
+
     });
 
         $("#selectMyFixing").on('submit',function(e){
@@ -307,90 +306,33 @@ jQuery(document).ready(function($) {
 // всплывающий блок продукции
 jQuery(document).ready(function() {
     let flag = 'true';
-    $('.PinkerMain .subboth').on('click',function(e){
+  //  $('.PinkerMain .subboth').on('click',function(e){
+     $.listen('click','.PinkerMain .subboth',function(e){
        e.preventDefault();
 
-       // let id=$(this).data('id');
+        let id=$(this).data('id');
 
         if (flag) {
             flag = false;
-            func1.call(this);
+            func1.call(this,id);
         }else {
             flag = true;
-            func2.call(this);
+            func2.call(this,id);
         }
         return false;
 
     });
-    function func1(){
+    function func1(id){
 
-        $("tr.asdast").fadeOut(1000)};
-
-
-    function func2(){
-
-        $("tr.asdast").fadeIn(1000)};
-
-});
+      //  $("tr.asdast").fadeOut(1000);
+        $(".asdast").fadeOut(1000);
+    };
 
 
-// выбор опций статуса заказа - в работе, завершен ...
-jQuery(document).ready(function() {
-//let str="";
- let usd=[];
-    let str=[];
-    $('.PinkerMain select').on('change',function(e) {
-    let id=$(this).data('id');
-        //  e.stopPropagation();
-    //    e.preventDefault();
-        $('.PinkerMain select option:selected').each(function(){
-            let strProm=$( this ).text();
-            if((strProm!='статус')){
+    function func2(id){
 
-                usd[id]=id + ': '+ $( this ).text();
+        $(".asdast").fadeIn(1000);
 
-            }
-        });
-     str.push(usd[id]);
-        alert(str);
-
-    });
-$('#selectMyOptions').on('submit',function(){
-
-let form=$(this);
-
-
-
-    console.log('str',str);
-        $.ajax({
-            url: form.attr('action'),
-            //  url: "cabinetItems",
-            cache: false,
-            data: {str: str},
-            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-            type: form.attr('method'),
-            dataType: "JSON",
-            success: function (json) {
-                if (!json) alert("Ошибка!");
-                //$('.wrap_result').append('<br/><strong>Выборка выполнена !</strong>').delay(2000).fadeOut(500);
-             //   $("#mediumMine").empty();
-                // $('#mediumMine').replaceWith(res.content);
-            //    $("#mediumMine").append(json.content);
-
-
-            },
-            error: function () {
-                alert("Ошибка передачи id !");
-            }
-
-        });
-        return false;
+    };
 
 });
-});
-
-
-
-
-
-

@@ -7,34 +7,47 @@
 
 
   @foreach($products as $product)
-        <script type="text/javascript">
-            jQuery(function(){
+      <script type="text/javascript">
+          jQuery(document).ready(function(){
+              jQuery('a#zoom1').swinxyzoom({mode:'dock', controls: false, size: '100%', dock: { position: 'right' } }); // dock window slippy lens
+              jQuery('.views-gallery a').click(function(e) {
+                  e.preventDefault();
+                  var $this = jQuery(this),
+                      largeImage  = $this.attr('href');
+                  smallImage  = $this.data('easyzoom-source');
+                  if (!$this.parent().hasClass('thumbnail-active')) {
+                      jQuery('a#zoom1').swinxyzoom('load', smallImage,  largeImage);
+                      jQuery('.lightbox-btn').attr('href', largeImage);
+                      jQuery('.views-gallery .slide.thumbnail-active').removeClass('thumbnail-active');
+                      $this.parent().toggleClass('thumbnail-active');
+                  }
+              });
+          });
+      </script>
+      <div class="container">
+          <div class="row">
+              <div class="col-xs-4 col-sm-4 ">
 
-                $("a#zoom1").imagezoomsl({
-
-                    zoomrange: [3, 3]
-                });
-            });
-        </script>
- <div class="container">
-     <div class="row">
-            <div class="col-xs-4 col-sm-4 " >
 
 
-
-                <div > <a itemprop="image" href="{{ asset('public/'.env('THEME')) }}/images/{{ $product->img->path }}" id="zoom1" class="zoom1" title="62" > <img class="" src="{!! asset('public/'.env('THEME')) !!}/images/{{$product->img->max}}"  alt="NICE PROMO DRESS" /> </a> </div>
+                  <div > <a itemprop="image" href="{{ asset('public/'.env('THEME')) }}/images/{{ $product->img->path }}" id="zoom1" class="zoom" title="62" style="position:relative;" > <img class="" src="{!! asset('public/'.env('THEME')) !!}/images/{{$product->img->max}}"  alt="NICE PROMO DRESS" /> </a> </div>
 
 
 
 
 
-             </div>
+              </div>
+
 
 
     <div class="col-xs-8 dress-info" >
         <div class="dress-name">
             <h3>{!! $product->name !!}</h3>
-            <span style="color:#816263; font-weight: bold;">{!! $product->price !!} гр.</span>
+            @if($discount>0)
+                <span style="color:#816263; font-weight: bold;"><s>{!! $product->price !!} гр.</s></span><span style="color:#816263; font-weight: bold;">{!! $newprice !!} гр.</span>
+            @else
+                <span style="color:#816263; font-weight: bold;">{!! $product->price !!} гр.</span>
+            @endif
             <div class="clearfix"></div>
             <p style=" color: #816263;font-size: 1.0em;">{!! $product->description !!}</p>
             <p></p>

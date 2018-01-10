@@ -221,7 +221,9 @@ class ProductEditController extends Controller
 
             $product->fill($input);
             $product['category_id'] = $input['category_id'];
-
+            array_key_exists('hit',$input) ?  $product['hit']=1 : $product['hit']=0;
+            array_key_exists('new',$input) ?  $product['new']=1: $product['new']=0;
+            array_key_exists('sale',$input) ?  $product['sale']=1 : $product['sale']=0;
 
            $prod=DB::table('products')->where('id',$id)->update($product->toArray());
 

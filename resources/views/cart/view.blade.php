@@ -88,6 +88,13 @@
             </div>
         </div>
 
+        <div class="form-group">
+            {!! Form::label('email','E-mail',['class'=>'col-xs-2 control-label']) !!}
+            <div class="col-xs-8">
+                {!! Form::text('email',!isset($data['email']) ? old('email') : $data['email'] ,['class'=>'form-control','placeholder'=>'Ваш E-mail']) !!}
+            </div>
+        </div>
+
             <div class="form-group">
                 {!! Form::label('password','Пароль',['class'=>'col-xs-2 control-label']) !!}
                 <div class="col-xs-8">
@@ -95,12 +102,7 @@
                 </div>
             </div>
 
-        <div class="form-group">
-            {!! Form::label('email','E-mail',['class'=>'col-xs-2 control-label']) !!}
-            <div class="col-xs-8">
-                {!! Form::text('email',!isset($data['email']) ? old('email') : $data['email'] ,['class'=>'form-control','placeholder'=>'Ваш E-mail']) !!}
-            </div>
-        </div>
+
         <div class="form-group">
             {!! Form::label('phone','Телефон',['class'=>'col-xs-2 control-label']) !!}
             <div class="col-xs-8">

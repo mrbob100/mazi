@@ -41,12 +41,29 @@
         </li>
 
         <li>
-            <a href="{{route('index')}}">
-                <h4>Перейти на сайт</h4>
+            <a href="{{route('userson',['id'=>2])}}">
+                <h4>Работа с менеджерами</h4>
+            </a>
+        </li>
+
+        <li>
+            <a href="{{route('userson')}}">
+                <h4>Работа с пользователями</h4>
+            </a>
+        </li>
+
+        <li>
+            <a href="{{route('slider')}}">
+                <h4>Работа со слайдером</h4>
             </a>
         </li>
 
 
+        <li>
+            <a href="{{route('index')}}">
+                <h4>Перейти на сайт</h4>
+            </a>
+        </li>
               <div class="catalog">
                <li>  {{Widget::run('MainWidget',['class'=>'Directory','tpl'=>'menuSpr.php'])}}</li>
               </div>

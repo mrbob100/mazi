@@ -286,12 +286,25 @@
             </div>
 
 
+
+
             <div class="form-group">
-                {!! Form::label('new','Признак',['class'=>'col-xs2 control-label']) !!}
+                {!! Form::label('new','Новый',['class'=>'col-xs2 control-label']) !!}
                 <div class="col-xs8">
-                    {!! Form::text('признак',$old['new'],['class'=>'form-control','placeholder'=>'Признак']) !!}
+                    {!! Form::checkbox('new',$old['new'],$old['new'],['class'=>'form-control','placeholder'=>'Новый']) !!}
                 </div>
             </div>
+            <div class="form-group">
+                {!! Form::label('hit','Хит',['class'=>'col-xs2 control-label']) !!}
+                <div class="col-xs8">
+                    {!! Form::checkbox('hit',$old['hit'],$old['hit'],['class'=>'form-control','placeholder'=>'Хит']) !!}
+                </div>
+            </div>
+            {!! Form::label('','Распродажа',['class'=>'col-xs2 control-label']) !!}
+            <div class="col-xs8">
+                {!! Form::checkbox('sale',$old['sale'],$old['sale'],['class'=>'form-control','placeholder'=>'Распродажа']) !!}
+            </div>
+        </div>
 
             <div class="form-group">
                 {!! Form::label('weightbrutto','Вес(брутто)',['class'=>'col-xs2 control-label']) !!}

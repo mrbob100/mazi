@@ -5,7 +5,7 @@ namespace Corp\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use Corp\Http\Controllers\Controller;
 use Corp\Repositories\DirectoriesRepository;
-use Corp\Models\Directory;
+use Corp\Repositories\UsersRepository;
 use Menu;
 
 class adminSiteController extends Controller
@@ -13,10 +13,12 @@ class adminSiteController extends Controller
     protected $sp_rep;
     protected $template;  // имя конкретного шаблона
     protected $vars; // массив передаваемых объектов в шаблон
+    protected $user_rep;
 
     public function __construct(DirectoriesRepository $sp_rep)
     {
         $this->sp_rep=$sp_rep;
+
         $this->template=env('THEME').'.admin.handbooks.index';
     }
     protected function renderOutput()

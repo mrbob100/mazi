@@ -7,6 +7,8 @@ use Corp\Http\Controllers\Controller;
 use Corp\Models\Excelitem;
 use Excel;
 use DB;
+use Storage;
+use Corp\Models\Product;
 class ExcelitemController extends Controller
 {
     public function index()
@@ -74,8 +76,9 @@ class ExcelitemController extends Controller
      */
     public function export()
     {
-        $items = Excelitem::all();
-        Excel::create('items', function($excel) use($items) {
+        $items = Product::all();
+
+        Excel::create('priceXML', function($excel) use($items) {
             $excel->sheet('ExportFile', function($sheet) use($items) {
                 $sheet->fromArray($items);
             });
