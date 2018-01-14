@@ -1,6 +1,6 @@
 <?php
 return [
- 'slider_path'=>'public/pink/images/slider',
+ 'slider_path'=>'public/pink/images',
   'galary_path'=>'public/pink/images/galary',
     'home_port_count'=>5,
     'home_articles_count'=>3,

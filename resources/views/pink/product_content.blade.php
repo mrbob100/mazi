@@ -6,7 +6,7 @@
     @if($products)
 
 
-  @foreach($products as $product)
+
       <script type="text/javascript">
           jQuery(document).ready(function(){
               jQuery('a#zoom1').swinxyzoom({mode:'dock', controls: false, size: '100%', dock: { position: 'right' } }); // dock window slippy lens
@@ -30,7 +30,7 @@
 
 
 
-                  <div > <a itemprop="image" href="{{ asset('public/'.env('THEME')) }}/images/{{ $product->img->path }}" id="zoom1" class="zoom" title="62" style="position:relative;" > <img class="" src="{!! asset('public/'.env('THEME')) !!}/images/{{$product->img->max}}"  alt="NICE PROMO DRESS" /> </a> </div>
+                  <div > <a itemprop="image" href="{{ asset('public/'.env('THEME')) }}/images/{{ $products[0]->img->path }}" id="zoom1" class="zoom" title="62" style="position:relative;" > <img class="" src="{!! asset('public/'.env('THEME')) !!}/images/{{$products[0]->img->max}}"  alt="NICE PROMO DRESS" /> </a> </div>
 
 
 
@@ -42,29 +42,29 @@
 
     <div class="col-xs-8 dress-info" >
         <div class="dress-name">
-            <h3>{!! $product->name !!}</h3>
+            <h3>{!! $products[0]->name !!}</h3>
             @if($discount>0)
-                <span style="color:#816263; font-weight: bold;"><s>{!! $product->price !!} гр.</s></span><span style="color:#816263; font-weight: bold;">{!! $newprice !!} гр.</span>
+                <span style="color:#816263; font-weight: bold;"><s>{!! $products[0]->price !!} гр.</s></span><span style="color:#816263; font-weight: bold;">{!! $newprice !!} гр.</span>
             @else
-                <span style="color:#816263; font-weight: bold;">{!! $product->price !!} гр.</span>
+                <span style="color:#816263; font-weight: bold;">{!! $products[0]->price !!} гр.</span>
             @endif
             <div class="clearfix"></div>
-            <p style=" color: #816263;font-size: 1.0em;">{!! $product->description !!}</p>
+            <p style=" color: #816263;font-size: 1.0em;">{!! $products[0]->description !!}</p>
             <p></p>
         </div>
         <div class="span span1">
             <p class="left">Тип товара</p>
-            <p class="right" style=" color: #816263;font-size: 1.0em;">{!! $product->typeTools->name !!}</p>
+            <p class="right" style=" color: #816263;font-size: 1.0em;">{!! $products[0]->typeTools->name !!}</p>
             <div class="clearfix"></div>
         </div>
         <div class="span span2">
             <p class="left">MADE IN</p>
-            <p class="right" style=" color: #816263;font-size: 1.0em;">{!! $product->country !!}</p>
+            <p class="right" style=" color: #816263;font-size: 1.0em;">{!! $products[0]->country !!}</p>
             <div class="clearfix"></div>
         </div>
         <div class="span span3">
             <p class="left">Класс</p>
-            <p class="right" style=" color: #816263;font-size: 1.0em;">{{$product->class}}</p>
+            <p class="right" style=" color: #816263;font-size: 1.0em;">{{$products[0]->class}}</p>
             <div class="clearfix"></div>
         </div>
 
@@ -72,7 +72,7 @@
             <!--label for="qty" >количество:</label>
             <p><input  type="text" id="qty"  value="1"   class="btn btn-default"/> шт.</p>
             <br/-->
-            <a href="{{ asset('#',['id'=>$product->id]) }}  " data-id="{{$product->id}}" class="btn btn-default add-to-cart" style="text-decoration: none;"><i class="fa fa-shopping-cart"></i>Купить</a>
+            <a href="{{ asset('#',['id'=>$products[0]->id]) }}  " data-id="{{$products[0]->id}}" class="btn btn-default add-to-cart" style="text-decoration: none;"><i class="fa fa-shopping-cart"></i>Купить</a>
         <!--a href="#"   data-id="{{--$product->id--}}" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Купить</a-->
 
 
@@ -96,7 +96,7 @@
 $j=0;
 @endphp
         <div class="tab-pane active" name="how-to" id="how-to" >
-            @foreach($product->exactlyType1 as $item)
+            @foreach($products[0]->exactlyType1 as $item)
               <p class="tab-text" style=" color: #816263;font-size: 1.0em;" > {!! $item !!}</p>
                 @php
                     $j++;
@@ -115,7 +115,7 @@ $j=0;
 
 
 
-        @endforeach
+
     </div>
 </div>
     </div>

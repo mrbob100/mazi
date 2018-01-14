@@ -19,7 +19,11 @@ class UsersShowController extends adminSiteController
     {
         $request=Request::createFromGlobals();
         $input = $request->except('_token');
-
+        $priznak= isset($input['priznak']);
+        if($priznak)
+        {
+            $priznak= $input['priznak'];
+        }
         $id= $sp;
         if($request->isMethod('delete'))
         {

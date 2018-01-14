@@ -29,15 +29,19 @@
                 <h4>Загрузка файлов JSON</h4>
             </a>
         </li>
+
         <li>
-            <a href="{{route('importIt')}}">
-                <h4>Загрузка таблицы продукции CSV</h4>
-            </a>
-        </li>
-        <li>
-            <a href="{{route('importIt')}}">
+            <a href="{{route('excelIt')}}">
                 <h4>Выгрузка прайса на Hotline XMS</h4>
             </a>
+        </li>
+
+        <li>
+
+            <a href="{{asset('storage')}}">
+            <h4>Ссылка на файл для Hotline XMS</h4>
+            </a>
+
         </li>
 
         <li>

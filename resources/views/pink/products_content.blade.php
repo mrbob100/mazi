@@ -34,12 +34,12 @@
                 <!--/form-->
             </div>
      @endforeach
-@if($adopt)
-        {!! $products->render()  !!}
-@endif
-        @else
-            {!! Lang::get('ru.articles_no') !!}
- @endif
+            @if($adopt)
+                    {!! $products->render()  !!}
+            @endif
+  @else
+   {!! Lang::get('ru.articles_no') !!}
+  @endif
     </div>
 
     <hr>
