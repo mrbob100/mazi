@@ -14,6 +14,7 @@ class adminSiteController extends Controller
     protected $template;  // имя конкретного шаблона
     protected $vars; // массив передаваемых объектов в шаблон
     protected $user_rep;
+    protected $c_rep; // категории
 
     public function __construct(DirectoriesRepository $sp_rep)
     {

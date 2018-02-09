@@ -31,17 +31,21 @@
         </li>
 
         <li>
-            <a href="{{route('excelIt')}}">
-                <h4>Выгрузка прайса на Hotline XMS</h4>
+            <a href="{{route('contfile')}}">
+                <h4>Смотреть фал ошибок ввода при загрузке JSON</h4>
             </a>
         </li>
 
         <li>
-
-            <a href="{{asset('storage')}}">
-            <h4>Ссылка на файл для Hotline XMS</h4>
+            <a href="{{route('excelIt')}}">
+                <h4>Выгрузка прайса для Hotline XMS</h4>
             </a>
+        </li>
 
+
+
+        <li>
+                {{link_to('storage/app/public/priceXML.xls')}}
         </li>
 
         <li>

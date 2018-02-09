@@ -16,21 +16,7 @@ return [
                 'height'=>450
 
              ],
-    'perforator'=>[
-        'power','maxHole','voltage','capacity','impact','qntImpact',
-        'idle','rotationSpeed','speedIdle','cartridge'
-    ],
-    'grinders'=>[
-        'power','rotationSpeed','diametrDisk','spindle','performance'
-    ],
-    'jackhammers'=>[
-        'power','maxCapacity','airFlow'
-    ],
-    'saws' =>[
-        'power','metalCuttingDepth','pipeCuttingDepth','woodCuttingDepth','diametrDisk',
-        'vibrationLevel','cuttingDepth','angleCuttingDepth','frequency','workingWidth',
-        'cuttingEdgeWidth','rotationSpeed','strokeLength','grindingPlate'
-    ],
+
 
     'handbook'=>[
 
@@ -72,5 +58,22 @@ return [
         '37'=>[ 'name'=>'Corp\Models\Country'],
         '38'=>[ 'name'=>'Corp\Models\Orderoption'],
 
-                ]
+                ],
+    'category' => [
+    '302'=>[
+        'power','maxHole','voltage','capacity','impact','qntImpact',
+        'idle','rotationSpeed','speedIdle','cartridge'
+    ],
+    '46'=>[
+        'power','rotationSpeed','diametrDisk','spindle','performance'
+    ],
+    '19'=>[
+        'power','maxCapacity','airFlow'
+    ],
+    '234' =>[
+        'power','metalCuttingDepth','pipeCuttingDepth','woodCuttingDepth','diametrDisk',
+        'vibrationLevel','cuttingDepth','angleCuttingDepth','frequency','workingWidth',
+        'cuttingEdgeWidth','rotationSpeed','strokeLength','grindingPlate'
+    ],
+              ]
 ];

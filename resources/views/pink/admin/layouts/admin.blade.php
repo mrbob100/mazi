@@ -33,8 +33,7 @@
     <link href="{{ asset('public/'.env('THEME')) }}/css/jquery-ui.css" rel="stylesheet" type="text/css"/>
     <link href="{{ asset('public/'.env('THEME')) }}/css/jquery-ui.theme.min.css" rel="stylesheet" type="text/css"/>
     <link href="{{ asset('public/'.env('THEME')) }}/css/jquery-ui.structure.min.css" rel="stylesheet" type="text/css"/>
-	 <script type="text/javascript" src=" {!! asset('public/'.env('THEME')) !!}/js/vue.min.js" charset="utf-8" ></script>
-    <script type="text/javascript" src=" {!! asset('public/'.env('THEME')) !!}/js/someExample.js" charset="utf-8" ></script>
+
 	
     <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 
@@ -96,6 +95,8 @@
 <script type='text/javascript' src='{!! asset('public/'.env('THEME')) !!}/js/jquery.slider.js'></script>
 <script type='text/javascript' src='{!! asset('public/'.env('THEME')) !!}/js/jquery.mousewheel.js'></script>
 <script type='text/javascript' src='{!! asset('public/'.env('THEME')) !!}/js/touch.js'></script>
+<script type="text/javascript" src=" {!! asset('public/'.env('THEME')) !!}/js/vue.min.js" charset="utf-8" ></script>
+<script type="text/javascript" src=" {!! asset('public/'.env('THEME')) !!}/js/someExample.js" charset="utf-8" ></script>
 </html>
 
 

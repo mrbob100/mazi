@@ -37,6 +37,7 @@ class CategoryController extends SiteController  // выбор из боково
       if(!session('Category')) Session::push('Category',['id'=>$id]);
         $this->category_id=$id;
         $products=$this->getProducts($id);
+        If(!$products) return redirect('/');
         $prod=$products[0];
         $prod->load('categories');
 

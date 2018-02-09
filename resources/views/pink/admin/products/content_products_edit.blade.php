@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends(env('THEME').'.admin.layouts.admin')
 @section('content')
     <div class="container">
         <div class="wrapper container-fluid">
@@ -7,8 +7,9 @@
             <input type="text" id="rqueze2" style="display: none;" value="{{$voltage}}"  />
             <input type="text" id="capacity" style="display: none;" value="{{$capacity}}"  />
             <input type="text" id="angleCuttingDepth" style="display: none;" value="{{$angleCuttingDepth}}"  />
-            <input type="text" id="cuttingDepth" style="display: none;" value="{{ $cuttingDepth}}"  />
-            <input type="text" id="diametrDisk" style="display: none;" value="{{ $diametrDisk}}"  />
+            <input type="text" id="cuttingDepth" style="display: none;" value="{{$cuttingDepth}}"  />
+            <input type="text" id="cutmatdepth" style="display: none;" value="{{$cutmatdepth}}"  />
+            <input type="text" id="diametrDisk" style="display: none;" value="{{$diametrDisk}}"  />
             <input type="text" id="idle" style="display: none;" value="{{$idle}}"  />
             <input type="text" id="impact" style="display: none;" value="{{$impact}}"  />
             <input type="text" id="maxHole" style="display: none;" value="{{$maxHole}}"  />
@@ -31,6 +32,41 @@
             <input type="text" id="strokelength" style="display: none;" value="{{$strokelength}}"  />
             <input type="text" id="vibration" style="display: none;" value="{{$vibration}}"  />
             <input type="text" id="workingwidth" style="display: none;" value="{{$workingwidth}}"  />
+
+            <input type="text" id="accumulatortype" style="display: none;" value="{{$accumulatortype}}"/>
+            <input type="text" id="accuracy" style="display: none;" value="{{$accuracy}}"/>
+            <input type="text" id="accuracyslope" style="display: none;" value="{{$accuracyslope}}"/>
+            <input type="text" id="android" style="display: none;" value="{{$android}}"/>
+            <input type="text" id="angle" style="display: none;" value="{{$angle}}"/>
+            <input type="text" id="brightness" style="display: none;" value="{{$brightness}}"  />
+            <input type="text" id="calculation" style="display: none;" value="{{$calculation}}"  />
+            <input type="text" id="chargetime" style="display: none;" value="{{$chargetime}}"  />
+            <input type="text" id="containervol" style="display: none;" value="{{$containervol}}"  />
+            <input type="text" id="crownlength" style="display: none;" value="{{$crownlength}}"  />
+            <input type="text" id="display" style="display: none;" value="{{$display}}"  />
+            <input type="text" id="fixture" style="display: none;" value="{{$fixture}}"  />
+            <input type="text" id="functional" style="display: none;" value="{{$functional}}"  />
+            <input type="text" id="gluediameter" style="display: none;" value="{{$gluediameter}}"  />
+            <input type="text" id="gluelength" style="display: none;" value="{{$gluelength}}"  />
+            <input type="text" id="goaldistance" style="display: none;" value="{{$goaldistance}}"  />
+            <input type="text" id="holediameter" style="display: none;" value="{{$holediameter}}"  />
+            <input type="text" id="ignition" style="display: none;" value="{{$ignition}}"  />
+            <input type="text" id="iphone" style="display: none;" value="{{$iphone}}"  />
+            <input type="text" id="laserclass" style="display: none;" value="{{$laserclass}}"  />
+            <input type="text" id="magnificate" style="display: none;" value="{{$magnificate}}"  />
+            <input type="text" id="measurange" style="display: none;" value="{{$measurange}}"  />
+            <input type="text" id="measurenumber" style="display: none;" value="{{$measurenumber}}"  />
+            <input type="text" id="oscillationangle" style="display: none;" value="{{$oscillationangle}}"  />
+            <input type="text" id="powersupply" style="display: none;" value="{{$powersupply}}"  />
+            <input type="text" id="screw" style="display: none;" value="{{$screw}}"  />
+            <input type="text" id="strokeqnt" style="display: none;" value="{{$strokeqnt}}"  />
+            <input type="text" id="turbinpower" style="display: none;" value="{{$turbinpower}}"  />
+            <input type="text" id="typeaccuracy" style="display: none;" value="{{$typeaccuracy}}"  />
+            <input type="text" id="unit" style="display: none;" value="{{$unit}}"  />
+            <input type="text" id="wheeldiameter" style="display: none;" value="{{$wheeldiameter}}"  />
+            <input type="text" id="worktime" style="display: none;" value="{{$worktime}}"  />
+            <input type="text" id="temperature" style="display: none;" value="{{$temperature}}"  />
+            <input type="text" id="thread" style="display: none;" value="{{$thread}}"  />
 
 
 
@@ -98,12 +134,12 @@
 
 
                     <div class="btn" v-if="category==10 || category==20 || category==12 || category==32">
-                        <div class="col-xs-2">
+                        <div class="col-xs-3">
                             power
-                            <power-container></power-container>
+                            <power-container title="Привет"></power-container>
 
                         </div>
-                        <div class="col-xs-2">
+                        <div class="col-xs-3">
                             <!--product-container1  v-on:message-saved="handleCategory"></product-container1-->
                             voltage
                             <voltage-container></voltage-container>
@@ -114,14 +150,11 @@
                             <capacity-container></capacity-container>
                         </div>
 
-                        <div class="col-xs-2">
+                        <div class="col-xs-3">
                             impact
                             <impact-container></impact-container>
                         </div>
-                        <div class="col-xs-2">
-                            idle
-                            <idle-container></idle-container>
-                        </div>
+
 
                     </div>
                 </div>
@@ -130,7 +163,7 @@
                     <div class="btn" v-if="category==10 ||category==20 || category==12 || category==32">
 
 
-                        <div class="col-xs-2">
+                        <div class="col-xs-3">
                             spindle
                             <spindle-container></spindle-container>
                         </div>
@@ -154,6 +187,10 @@
                         <div class="col-xs-2">
                             qntImpact
                             <qntimpact-container></qntimpact-container>
+                        </div>
+                        <div class="col-xs-4">
+                            idle
+                            <idle-container></idle-container>
                         </div>
                     </div>
                 </div>
@@ -210,6 +247,971 @@
                     </div>
                 </div>
 
+                <div class="btn" v-if="category==16">
+                    <div class="row">
+                        <div class="col-xs-4">
+                            voltage
+                            <voltage-container></voltage-container>
+                        </div>
+                        <!--div class="col-xs-4">
+                            oscillationangle
+                            <oscillationangle-container></oscillationangle-container>
+                        </div-->
+                        <div class="col-xs-4">
+                            idle
+                            <idle-container></idle-container>
+                        </div>
+
+
+                    </div>
+                </div>
+
+                <div class="btn" v-if="category==55">
+                    <div class="row">
+                        <div class="col-xs-4">
+                            power
+                            <power-container></power-container>
+
+                        </div>
+                        <div class="col-xs-4">
+                            airflow
+                            <airflow-container></airflow-container>
+                        </div>
+
+
+                    </div>
+                </div>
+
+                <div class="btn" v-if="category==99">
+                    <div class="row">
+                        <div class="col-xs-4">
+                            power
+                            <power-container></power-container>
+                        </div>
+                        <div class="col-xs-4">
+                            voltage
+                            <voltage-container></voltage-container>
+                        </div>
+                        <div class="col-xs-4">
+                            capacity
+                            <capacity-container></capacity-container>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="btn" v-if="category==100">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            power
+                            <power-container></power-container>
+                        </div>
+                        <div class="col-xs-3">
+                            voltage
+                            <voltage-container></voltage-container>
+                        </div>
+                        <div class="col-xs-3">
+                            capacity
+                            <capacity-container></capacity-container>
+                        </div>
+                        <div class="col-xs-3">
+                            brightness
+                            <brightness-container></brightness-container>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="btn" v-if="category==230 || category==235">
+                    <div class="row">
+
+                        <div class="col-xs-3">
+                            voltage
+                            <voltage-container></voltage-container>
+                        </div>
+                        <div class="col-xs-3">
+                            capacity
+                            <capacity-container></capacity-container>
+                        </div>
+                        <div class="col-xs-3">
+                            diametrdisk
+                            <diametrdisk-container></diametrdisk-container>
+                        </div>
+                        <div class="col-xs-3">
+                            spindle
+                            <spindle-container></spindle-container>
+                        </div>
+
+                    </div>
+                    <div class="row">
+
+                        <div class="col-xs-4">
+                            rotationspeed
+                            <rotationspeed-container></rotationspeed-container>
+                        </div>
+                        <div class="col-xs-4">
+                            idle
+                            <idle-container></idle-container>
+                        </div>
+                    </div>
+                </div>
+
+            <div class="btn" v-if="category==302">
+                <div class="row">
+                    <div class="col-xs-3">
+                        power
+                        <power-container></power-container>
+                    </div>
+                    <div class="col-xs-3">
+                        impact
+                        <impact-container></impact-container>
+                    </div>
+                    <div class="col-xs-3">
+                        capacity
+                        <capacity-container></capacity-container>
+                    </div>
+                    <div class="col-xs-3">
+                        qntimpact
+                        <qntimpact-container></qntimpact-container>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3">
+                        frequency
+                        <frequency-container></frequency-container>
+                    </div>
+
+
+                    <div class="col-xs-3">
+                        cartridge
+                        <cartridge-container></cartridge-container>
+                    </div>
+                    <div class="col-xs-3">
+                        vibration
+                        <vibration-container></vibration-container>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3">
+                        holediameter
+                        <holediameter-container></holediameter-container>
+                    </div>
+
+                    <div class="col-xs-4">
+                        idle
+                        <idle-container></idle-container>
+                    </div>
+                </div>
+
+            </div>
+
+                <div class="btn" v-if="category==305">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            power
+                            <power-container></power-container>
+                        </div>
+                        <div class="col-xs-3">
+                            rotationspeed
+                            <rotationspeed-container></rotationspeed-container>
+                        </div>
+                        <div class="col-xs-3">
+                            screw
+                            <screw-container></screw-container>
+                        </div>
+                        <div class="col-xs-3">
+                            cartridge
+                            <cartridge-container></cartridge-container>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-4">
+                            spindle
+                            <spindle-container></spindle-container>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="btn" v-if="category==15">
+                    <div class="row">
+                        <div class="col-xs-4">
+                            power
+                            <power-container></power-container>
+                        </div>
+                        <div class="col-xs-4">
+                            strokelength
+                            <strokelength-container></strokelength-container>
+                        </div>
+                        <div class="col-xs-4">
+                            strokeqnt
+                            <strokeqnt-container></strokeqnt-container>
+                        </div>
+                        <!--div class="col-xs-3">
+                            cuttingDepth
+                            <cuttingDepth-container></cuttingDepth-container>
+                        </div-->
+                        <!--div class="col-xs-3">
+                            angleCuttingDepth
+                            <angleCuttingDepth-container></angleCuttingDepth-container>
+                        </div-->
+                    </div>
+                    <div class="row">
+
+
+                        <div class="col-xs-4">
+                            cutmatDepth
+                            <cutmatdepth-container></cutmatdepth-container>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-4">
+                            workingwidth
+                            <workingwidth-container></workingwidth-container>
+                        </div>
+                        <div class="col-xs-4">
+                            idle
+                            <idle-container></idle-container>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="btn" v-if="category==34">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            power
+                            <power-container></power-container>
+                        </div>
+                        <div class="col-xs-3">
+                            diametrdisk
+                            <diametrdisk-container></diametrdisk-container>
+                        </div>
+                        <!--div class="col-xs-3">
+                            cuttingDepth
+                            <cuttingdepth-container></cuttingdepth-container>
+                        </div-->
+                        <div class="col-xs-3">
+                            strokelength
+                            <strokelength-container></strokelength-container>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-4">
+                            grindplate
+                            <grindplate-container></grindplate-container>
+                        </div>
+                        <div class="col-xs-4">
+                            workingwidth
+                            <workingwidth-container></workingwidth-container>
+                        </div>
+                        <div class="col-xs-4">
+                            holestand
+                            <holestand-container></holestand-container>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="btn" v-if="category==102">
+                    <div class="row">
+                        <div class="col-xs-4">
+                            power
+                            <power-container></power-container>
+                        </div>
+                        <div class="col-xs-4">
+                            rotationspeed
+                            <rotationspeed-container></rotationspeed-container>
+                        </div>
+                    </div>
+                </div>
+                <div class="btn" v-if="category==18">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            power
+                            <power-container></power-container>
+                        </div>
+                        <div class="col-xs-3">
+                            idle
+                            <idle-container></idle-container>
+                        </div>
+                        <div class="col-xs-3">
+                            steel
+                            <steel-container></steel-container>
+                        </div>
+                        <div class="col-xs-3">
+                            oscillationangle
+                            <oscillationangle-container></oscillationangle-container>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-4">
+                            rotationspeed
+                            <rotationspeed-container></rotationspeed-container>
+                        </div>
+                        <div class="col-xs-4">
+                            diametrdisk
+                            <diametrdisk-container></diametrdisk-container>
+                        </div>
+                        <div class="col-xs-4">
+                            performance
+                            <performance-container></performance-container>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="btn" v-if="category==7">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            power
+                            <power-container></power-container>
+                        </div>
+                        <div class="col-xs-3">
+                            rotationspeed
+                            <rotationspeed-container></rotationspeed-container>
+                        </div>
+                        <div class="col-xs-3">
+                            diametrdisk
+                            <diametrdisk-container></diametrdisk-container>
+                        </div>
+                        <div class="col-xs-3">
+                            spindle
+                            <spindle-container></spindle-container>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <!--div class="col-xs-4">
+                            cuttingdepth
+                            <cuttingdepth-container></cuttingdepth-container>
+                        </div-->
+
+                    </div>
+                </div>
+
+                <div class="btn" v-if="category==9">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            power
+                            <power-container></power-container>
+                        </div>
+                        <div class="col-xs-3">
+                            rotationspeed
+                            <rotationspeed-container></rotationspeed-container>
+                        </div>
+                        <!--div class="col-xs-3">
+                            cuttingdepth
+                            <cuttingdepth-container></cuttingdepth-container>
+                        </div-->
+                        <div class="col-xs-3">
+                            holediameter
+                            <holediameter-container></holediameter-container>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="btn" v-if="category==13">
+                    <div class="row">
+                        <div class="col-xs-4">
+                            power
+                            <power-container></power-container>
+                        </div>
+                        <div class="col-xs-4">
+                            rotationspeed
+                            <rotationspeed-container></rotationspeed-container>
+                        </div>
+
+                        <div class="col-xs-4">
+                            cartridge
+                            <cartridge-container></cartridge-container>
+                        </div>
+                    </div>
+                    <div class="row">
+
+                        <div class="col-xs-4">
+                            holediameter
+                            <holediameter-container></holediameter-container>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="btn" v-if="category==23">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            power
+                            <power-container></power-container>
+                        </div>
+                        <div class="col-xs-3">
+                            rotationspeed
+                            <rotationspeed-container></rotationspeed-container>
+                        </div>
+                        <!--div class="col-xs-3">
+                            cuttingdepth
+                            <cuttingdepth-container></cuttingdepth-container>
+                        </div-->
+                        <div class="col-xs-3">
+                            cutmatdepth
+                            <cutmatdepth-container></cutmatdepth-container>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-4">
+                            cutedgewidth
+                            <cutedgewidth-container></cutedgewidth-container>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="btn" v-if="category==26">
+                    <div class="row">
+                        <div class="col-xs-4">
+                            power
+                            <power-container></power-container>
+                        </div>
+                        <div class="col-xs-4">
+                            voltage
+                            <voltage-container></voltage-container>
+                        </div>
+                        <div class="col-xs-4">
+                            airflow
+                            <airflow-container></airflow-container>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-4">
+                            turbinpower
+                            <turbinpower-container></turbinpower-container>
+                        </div>
+                        <div class="col-xs-4">
+                            containervol
+                            <containervol-container></containervol-container>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="btn" v-if="category==27">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            power
+                            <power-container></power-container>
+                        </div>
+                        <div class="col-xs-3">
+                            rotationspeed
+                            <rotationspeed-container></rotationspeed-container>
+                        </div>
+                        <div class="col-xs-3">
+                            diametrdisk
+                            <diametrdisk-container></diametrdisk-container>
+                        </div>
+                        <div class="col-xs-3">
+                            spindle
+                            <spindle-container></spindle-container>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="btn" v-if="category==28">
+                    <div class="row">
+                        <div class="col-xs-4">
+                            power
+                            <power-container></power-container>
+                        </div>
+
+                        <div class="col-xs-4">
+                            airflow
+                            <airflow-container></airflow-container>
+                        </div>
+                    </div>
+                     <div class="row">
+                            <div class="col-xs-4">
+                                temperature
+                                <temperature-container></temperature-container>
+                            </div>
+                     </div>
+                 </div>
+
+                <div class="btn" v-if="category==37">
+                    <div class="row">
+                        <div class="col-xs-4">
+                            calculation
+                            <calculation-container></calculation-container>
+                        </div>
+                        <div class="col-xs-4">
+                            measurange
+                            <measurange-container></measurange-container>
+                        </div>
+                        <div class="col-xs-4">
+                            accuracy
+                            <accuracy-container></accuracy-container>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                            <div class="col-xs-4">
+                                accuracyslope
+                                <accuracyslope-container></accuracyslope-container>
+                            </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-4">
+                            goaldistance
+                            <goaldistance-container></goaldistance-container>
+                        </div>
+                    </div>
+                    <div class="row">
+
+                        <div class="col-xs-4">
+                            defence
+                            <defence-container></defence-container>
+                        </div>
+                        <div class="col-xs-4">
+                            measurenumber
+                            <measurenumber-container></measurenumber-container>
+                        </div>
+                        <div class="col-xs-4">
+                            typeaccuracy
+                            <typeaccuracy-container></typeaccuracy-container>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-4">
+                            display
+                            <display-container></display-container>
+                        </div>
+                        <div class="col-xs-4">
+                            unit
+                            <unit-container></unit-container>
+                        </div>
+                        <div class="col-xs-4">
+                            android
+                            <android-container></android-container>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-4">
+                            iphone
+                            <iphone-container></iphone-container>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="btn" v-if="category==38">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            functional
+                            <functional-container></functional-container>
+                        </div>
+                        <div class="col-xs-3">
+                            measurange
+                            <measurange-container></measurange-container>
+                        </div>
+                        <div class="col-xs-3">
+                            accuracy
+                            <accuracy-container></accuracy-container>
+                        </div>
+                        <div class="col-xs-3">
+                            display
+                            <display-container></display-container>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-4">
+                            goaldistance
+                            <goaldistance-container></goaldistance-container>
+                        </div>
+                        <div class="col-xs-4">
+                            defence
+                            <defence-container></defence-container>
+                        </div>
+                        <div class="col-xs-4">
+                            powersupply
+                            <powersupply-container></powersupply-container>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="btn" v-if="category==39">
+                    <div class="row">
+                        <div class="col-xs-4">
+                            measurange
+                            <measurange-container></measurange-container>
+                        </div>
+                        <div class="col-xs-4">
+                            accuracy
+                            <accuracy-container></accuracy-container>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="btn" v-if="category==40">
+                    <div class="row">
+                        <div class="col-xs-4">
+                            display
+                            <display-container></display-container>
+                        </div>
+                        <div class="col-xs-4">
+                            accuracy
+                            <accuracy-container></accuracy-container>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-4">
+                            wheeldiameter
+                            <wheeldiameter-container></wheeldiameter-container>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="btn" v-if="category==41">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            defence
+                            <defence-container></defence-container>
+                        </div>
+                        <div class="col-xs-3">
+                            measurange
+                            <measurange-container></measurange-container>
+                        </div>
+                        <div class="col-xs-3">
+                            accuracy
+                            <accuracy-container></accuracy-container>
+                        </div>
+                        <div class="col-xs-3">
+                            angle
+                            <angle-container></angle-container>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-4">
+                            display
+                            <display-container></display-container>
+                        </div>
+
+                        <div class="col-xs-4">
+                            shankrange
+                            <shankrange-container></shankrange-container>
+                        </div>
+                        <div class="col-xs-4">
+                            powersupply
+                            <powersupply-container></powersupply-container>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="btn" v-if="category==42 || category==106">
+                    <div class="row">
+                        <div class="col-xs-4">
+                            measurange
+                            <measurange-container></measurange-container>
+                        </div>
+                        <div class="col-xs-4">
+                            accuracy
+                            <accuracy-container></accuracy-container>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="btn" v-if="category==43">
+                    <div class="row">
+                        <div class="col-xs-4">
+                            thread
+                            <thread-container></thread-container>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="btn" v-if="category==54">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            qntimpact
+                            <qntimpact-container></qntimpact-container>
+                        </div>
+                        <div class="col-xs-6">
+                            gluediameter
+                            <gluediameter-container></gluediameter-container>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="btn" v-if="category==56">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            power
+                            <power-container></power-container>
+                        </div>
+                        <div class="col-xs-3">
+                            idle
+                            <idle-container></idle-container>
+                        </div>
+                        <div class="col-xs-3">
+                            voltage
+                            <voltage-container></voltage-container>
+                        </div>
+                        <div class="col-xs-3">
+                            rotationspeed
+                            <rotationspeed-container></rotationspeed-container>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-4">
+                            oscillationangle
+                            <oscillationangle-container></oscillationangle-container>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="btn" v-if="category==57">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            capacity
+                            <capacity-container></capacity-container>
+                        </div>
+                        <div class="col-xs-3">
+                            idle
+                            <idle-container></idle-container>
+                        </div>
+                        <div class="col-xs-3">
+                            voltage
+                            <voltage-container></voltage-container>
+                        </div>
+                        <div class="col-xs-3">
+                            diametrdisk
+                            <diametrdisk-container></diametrdisk-container>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-4">
+                            oscillationangle
+                            <oscillationangle-container></oscillationangle-container>
+                        </div>
+                        <div class="col-xs-4">
+                            spindle
+                            <spindle-container></spindle-container>
+                        </div>
+                        <div class="col-xs-4">
+                            vibration
+                            <vibration-container></vibration-container>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="btn" v-if="category==59">
+                    <div class="row">
+                        <div class="col-xs-4">
+                            ignition
+                            <ignition-container></ignition-container>
+                        </div>
+                        <div class="col-xs-4">
+                            temperature
+                            <temperature-container></temperature-container>
+                        </div>
+                        <div class="col-xs-4">
+                            rotationspeed
+                            <rotationspeed-container></rotationspeed-container>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="btn" v-if="category==60 || category==74 ">
+                    <div class="row">
+                        <div class="col-xs-4">
+                            power
+                            <power-container></power-container>
+                        </div>
+                        <div class="col-xs-4">
+                            rotationspeed
+                            <rotationspeed-container></rotationspeed-container>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="btn" v-if="category==62">
+                    <div class="row">
+                        <div class="col-xs-4">
+                            voltage
+                            <voltage-container></voltage-container>
+                        </div>
+                        <div class="col-xs-4">
+                            capacity
+                            <capacity-container></capacity-container>
+                        </div>
+                        <div class="col-xs-4">
+                            chargetime
+                            <chargetime-container></chargetime-container>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="btn" v-if="category==78">
+                    <div class="row">
+                        <div class="col-xs-4">
+                            power
+                            <power-container></power-container>
+                        </div>
+                        <div class="col-xs-4">
+                            containervol
+                            <containervol-container></containervol-container>
+                        </div>
+                        <div class="col-xs-4">
+                            powersupply
+                            <powersupply-container></powersupply-container>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-4">
+                            turbinpower
+                            <turbinpower-container></turbinpower-container>
+                        </div>
+                        <div class="col-xs-4">
+                           chargetime
+                            <chargetime-container></chargetime-container>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="btn" v-if="category==86">
+                    <div class="row">
+                        <div class="col-xs-4">
+                            containervol
+                            <containervol-container></containervol-container>
+                        </div>
+                        <div class="col-xs-4">
+                            gluelength
+                            <gluelength-container></gluelength-container>
+                        </div>
+                        <div class="col-xs-4">
+                            gluediameter
+                            <gluediameter-container></gluediameter-container>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="btn" v-if="category==103">
+                    <div class="row">
+                        <div class="col-xs-4">
+                            power
+                            <power-container></power-container>
+                        </div>
+                        <div class="col-xs-4">
+                            holestand
+                            <holestand-container></holestand-container>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="btn" v-if="category==315">
+                    <div class="row">
+                        <div class="col-xs-4">
+                            power
+                            <power-container></power-container>
+                        </div>
+                        <div class="col-xs-4">
+                            rotationspeed
+                            <rotationspeed-container></rotationspeed-container>
+                        </div>
+
+                        <div class="col-xs-4">
+                            voltage
+                            <voltage-container></voltage-container>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-3">
+                            containervol
+                            <containervol-container></containervol-container>
+                        </div>
+                        <div class="col-xs-3">
+                            gluelength
+                            <gluelength-container></gluelength-container>
+                        </div>
+                        <div class="col-xs-3">
+                            accumulatortype
+                            <accumulatortype-container></accumulatortype-container>
+                        </div>
+                        <div class="col-xs-3">
+                            temperature
+                            <temperature-container></temperature-container>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-4">
+                            performance
+                            <performance-container></performance-container>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="btn" v-if="category==24">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            power
+                            <power-container></power-container>
+                        </div>
+                        <div class="col-xs-3">
+                            rotationspeed
+                            <rotationspeed-container></rotationspeed-container>
+                        </div>
+                        <div class="col-xs-3">
+                            strokelength
+                            <strokelength-container></strokelength-container>
+                        </div>
+                        <div class="col-xs-3">
+                            grindplate
+                            <grindplate-container></grindplate-container>
+                        </div>
+
+                     </div>
+                    <div class="row">
+                        <div class="col-xs-3">
+                            idle
+                            <idle-container></idle-container>
+                        </div>
+                        <div class="col-xs-3">
+                            capacity
+                            <capacity-container></capacity-container>
+                        </div>
+                        <div class="col-xs-3">
+                            holestand
+                            <holestand-container></holestand-container>
+                        </div>
+                        <div class="col-xs-3">
+                            diametrdisk
+                            <diametrdisk-container></diametrdisk-container>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-4">
+                            cutmatdepth
+                            <cutmatdepth-container></cutmatdepth-container>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="btn" v-if="category==31">
+                    <div class="row">
+                        <div class="col-xs-4">
+                            power
+                            <power-container></power-container>
+                        </div>
+                        <div class="col-xs-4">
+                            rotationspeed
+                            <rotationspeed-container></rotationspeed-container>
+                        </div>
+                        <div class="col-xs-4">
+                            strokelength
+                            <strokelength-container></strokelength-container>
+                        </div>
+                    </div>
+                </div>
+
+
+
 
             </div> <!-- конец блока vue.js-->
 
@@ -218,7 +1220,7 @@
 
             <div class="form-group">
                 {!! Form::label('exactlyType1','Характеристики',['class'=>'col-xs2 control-label']) !!}
-                <div class="col-xs8">
+                <div class="col-xs8" >
                     {!! Form::text('exactlyType1',$old['exactlyType1'],['class'=>'form-control','placeholder'=>'Характеристики','id'=>'exactly']) !!}
                 </div>
             </div>
@@ -300,11 +1302,12 @@
                     {!! Form::checkbox('hit',$old['hit'],$old['hit'],['class'=>'form-control','placeholder'=>'Хит']) !!}
                 </div>
             </div>
-            {!! Form::label('','Распродажа',['class'=>'col-xs2 control-label']) !!}
-            <div class="col-xs8">
-                {!! Form::checkbox('sale',$old['sale'],$old['sale'],['class'=>'form-control','placeholder'=>'Распродажа']) !!}
-            </div>
-        </div>
+            <div class="form-group">
+                {!! Form::label('','Распродажа',['class'=>'col-xs2 control-label']) !!}
+                <div class="col-xs8">
+                    {!! Form::checkbox('sale',$old['sale'],$old['sale'],['class'=>'form-control','placeholder'=>'Распродажа']) !!}
+                </div>
+           </div>
 
             <div class="form-group">
                 {!! Form::label('weightbrutto','Вес(брутто)',['class'=>'col-xs2 control-label']) !!}

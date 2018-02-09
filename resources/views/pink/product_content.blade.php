@@ -54,7 +54,9 @@
         </div>
         <div class="span span1">
             <p class="left">Тип товара</p>
+            @if($products[0]->typeTools )
             <p class="right" style=" color: #816263;font-size: 1.0em;">{!! $products[0]->typeTools->name !!}</p>
+            @endif
             <div class="clearfix"></div>
         </div>
         <div class="span span2">
@@ -64,7 +66,9 @@
         </div>
         <div class="span span3">
             <p class="left">Класс</p>
+            @if($products[0]->class )
             <p class="right" style=" color: #816263;font-size: 1.0em;">{{$products[0]->class}}</p>
+            @endif
             <div class="clearfix"></div>
         </div>
 
@@ -96,12 +100,14 @@
 $j=0;
 @endphp
         <div class="tab-pane active" name="how-to" id="how-to" >
-            @foreach($products[0]->exactlyType1 as $item)
-              <p class="tab-text" style=" color: #816263;font-size: 1.0em;" > {!! $item !!}</p>
-                @php
-                    $j++;
-                @endphp
-            @endforeach
+            @if($products[0]->exactlyType1)
+                @foreach($products[0]->exactlyType1 as $item)
+                  <p class="tab-text" style=" color: #816263;font-size: 1.0em;" > {!! $item !!}</p>
+                    @php
+                        $j++;
+                    @endphp
+                @endforeach
+            @endif
             <hr/>
         </div>
         <div class="tab-pane" name="features" id="features">

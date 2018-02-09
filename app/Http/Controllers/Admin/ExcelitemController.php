@@ -9,17 +9,19 @@ use Excel;
 use DB;
 use Storage;
 use Corp\Models\Product;
-
+use Corp\Repositories\CategoriesRepository;
 use Corp\Repositories\ProductsRepository;
+use Menu;
 class ExcelitemController extends adminSiteController
 {
 
-    public function __construct(  ProductsRepository $p_rep)
+    public function __construct(  ProductsRepository $p_rep, CategoriesRepository $c_rep)
     {
         parent::__construct(new \Corp\Repositories\DirectoriesRepository(new \Corp\Models\Directory));
         // $this->s_rep=$s_rep; // slider
         // $this->p_rep=$p_rep;  // portfolio
         $this->p_rep=$p_rep;  // products
+        $this->c_rep=$c_rep;
         //   $this->bar='left'; // устанавливает сайт бар значения: left, right, no
 
 
@@ -112,7 +114,7 @@ class ExcelitemController extends adminSiteController
     {
         $request=Request::createFromGlobals();
         $inputs = $request->except('_token');
-        $items = Product::all();
+      //  $items = Product::all();
         if ($request->isMethod('post'))
         {
             $cnt=count($inputs);
@@ -149,13 +151,13 @@ class ExcelitemController extends adminSiteController
             }
 
 
+            $this->optionCategories();
 
 
-
-            // $items=$query->get();
+             $items=$query->get();
             //  $items=$this->p_rep->get($select,false,false ,false);
             //   $items=DB::table('products')->select($str)->get();
-            $items=Product::all();
+          //  $items=Product::all();
          //   $url=Storage::url('priceXML.xls');
             Excel::create('priceXML', function($excel) use($items) {
                 $excel->sheet('ExportFile', function ($sheet) use ($items) {
@@ -170,6 +172,30 @@ class ExcelitemController extends adminSiteController
     }
 
 
+     public function optionCategories()
+     {
+         $categoty=$this->c_rep->get();
+         $mBuilder=Menu::make('MyNav', function ($m) use ($categoty) {
+             foreach($categoty as $item)
+             {
+                 if($item->parent==0)
+                 {
+                     $m->add($item->title,$item->path)->id($item->id); // в пункт меню присваиваеется title , путь и id
+                 }
+                 else {
+                     if($m->find($item->parent))  // поиск родительского элемента и он существует
+                     {
+                         $m->find($item->parent)->add($item->title,$item->path)->id($item->id);
+                     }
+
+                 }
+             }
+         });
+         $navigation = view(env('THEME') . '.admin.categories.navigation_category')->with('category',$categoty)->render();
+         $this->vars = array_add($this->vars, 'navigation', $navigation);  // вывод навигации меню
+         return $mBuilder;
+
+     }
 
 
 }

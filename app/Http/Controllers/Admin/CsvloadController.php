@@ -18,7 +18,7 @@ class CsvloadController extends Controller
 {
     public function index()
     {
-        return view('loadcsv');
+        return view(env('THEME').'.admin.excels.loadcsv');
     }
 
 
@@ -33,6 +33,15 @@ class CsvloadController extends Controller
     {
         if(isset($_FILES['my_file']))
         {
+           $priznakShort=null;
+            $request=Request::createFromGlobals();
+            if($request->isMethod('post')) {
+                $input = $request->except('_token');
+                $usl=isset($input['dzek']);
+                if($usl && $input['dzek']==1) {$priznakShort='yes'; }
+                else $priznakShort=null;
+            }
+
             $req = false;
             // Приведём полученную информацию в удобочитаемый вид
             ob_start();
@@ -76,13 +85,15 @@ class CsvloadController extends Controller
                             Storage::prepend('file_error.txt',$serka);
                         } else { // работа с записями json
                             $name=$str1[$i]->halfsegment;
-                            $name_first=explode(' ',$name);
-                            $name_first=mb_strtolower($name_first[0]);
+                           // $name_first=explode(' ',$name);
+                           // $name_first=mb_strtolower($name_first[0]);
+                            $name_first=trim(mb_strtolower($name));
                             $kat=0;
 
                             foreach($categories as $category){
-                                $name_cat=explode(' ',$category->name);
-                                $name_cat=mb_strtolower($name_cat[0]);
+                            //    $name_cat=explode(' ',$category->name);
+                                $name_cat=$category->name;
+                                $name_cat=trim(mb_strtolower($name_cat));
                                 If($name_first==$name_cat)
                                 {
                                     $kat++;
@@ -92,7 +103,7 @@ class CsvloadController extends Controller
 
                             }
                            if(!$kat)$katVibor=9999;
-                           $dcl=$this->selectJson($str1[$i],$katVibor) ;  // подпрограмма обработки записей
+                           $dcl=$this->selectJson($str1[$i],$katVibor,$priznakShort) ;  // подпрограмма обработки записей
                            if(!$dcl) continue;
 
 
@@ -100,14 +111,16 @@ class CsvloadController extends Controller
                     }
                 }
 
-                    echo ('\'<br/><br/>выборка в БД закончена<br/>');
+
+
+
 
          }
+        return redirect('admin')->with('status', 'выборка в БД закончена.');
 
-            exit;
 
         }
-    public function selectJson($str2,$katVibor)
+    public function selectJson($str2,$katVibor,$priznakShort)
     {
         if(($str2->code)&&($str2->code!='-')) // если товар зарегестрирован
         {
@@ -116,10 +129,12 @@ class CsvloadController extends Controller
             $productsLine->name=$str2->halfsegment;
             $productsLine->code=$str2->code;
             $productsLine->category_id=$katVibor;
-            $productsLine->description=$str2->description;
-            $productsLine->name.=' '.$str2->name;
-            $productsLine->packing=$str2->pack;
-
+            if($priznakShort!='yes')
+                {
+                $productsLine->description=$str2->description;
+                $productsLine->name.=' '.$str2->name;
+                $productsLine->packing=$str2->pack;
+                }
             if($str2->price)
             {
                 $sas=[];
@@ -149,56 +164,58 @@ class CsvloadController extends Controller
                 $productsLine->price= $add;
             }
             // $productsLine->price=number_format($str2->price,2,'.','');
-            $productsLine->sclad=$str2->warehouse;
-            $productsLine->description=$str2->description;
-            // $productsLine->exactlyType1=json_encode($str2->ttd);
-            $productsLine->country=$str2->country;
-            $productsLine->ukvd=$str2->ukvd;
-            $productsLine->length=$str2->length;
-            $productsLine->width=$str2->width;
-            $productsLine->height=$str2->height;
+         if($priznakShort!='yes')
+            {
+                $productsLine->sclad=$str2->warehouse;
+                $productsLine->description=$str2->description;
+                // $productsLine->exactlyType1=json_encode($str2->ttd);
+                $productsLine->country=$str2->country;
+                $productsLine->ukvd=$str2->ukvd;
+                $productsLine->length=$str2->length;
+                $productsLine->width=$str2->width;
+                $productsLine->height=$str2->height;
 
-            $productsLine->weightbrutto=$str2->weightBrutto;
-            $productsLine->weightnetto=$str2->weightNetto;
+                $productsLine->weightbrutto=$str2->weightBrutto;
+                $productsLine->weightnetto=$str2->weightNetto;
 
 
 //______________________________________________________________________________________________________________________
 //______________________________ проверка регулярных выражений
 
-            if(($str2->ttd)!="" && ($str2->ttd)!="-")
-                // if(isset($str2->ttd))
-            {
-                $proximi=explode(',',$str2->ttd);
-                $cnt=count($proximi);
-                if($cnt)
+                if(($str2->ttd)!="" && ($str2->ttd)!="-")
+                    // if(isset($str2->ttd))
                 {
-                    //  $str='"impact":'.
-                    $data = $this->regularCheck($proximi, $cnt); // проверка регулярных выражений
+                    $proximi=explode(',',$str2->ttd);
+                    $cnt=count($proximi);
+                    if($cnt)
+                    {
+                        //  $str='"impact":'.
+                        $data = $this->regularCheck($proximi, $cnt); // проверка регулярных выражений
 
-                    $productsLine->exactlyType1 = $data; // ввод json строки в столбец
+                        $productsLine->exactlyType1 = $data; // ввод json строки в столбец
+                    }
                 }
-            }
 //______________________________________________________________________________________________________________________
             // обработка картинок
-           $workImage='public/'.env('THEME').'/images/'.$str2->EAN_code.'.jpg';
-            if(file_exists( $workImage))
-            {
-              if (!isset($doblo))
-               {
-                   $doblo= new Csvload();
-               }
+                   $workImage='public/'.env('THEME').'/images/'.$str2->EAN_code.'.jpg';
+                    if(file_exists( $workImage))
+                    {
+                      if (!isset($doblo))
+                       {
+                           $doblo= new Csvload();
+                       }
 
-                $obj = $doblo->workUpImages( $str2->EAN_code,$workImage);
-               // $obj= $this->workUpImages( $str2->EAN_code,$workImage);
-                $productsLine->img=json_encode($obj);
+                        $obj = $doblo->workUpImages( $str2->EAN_code,$workImage);
+                       // $obj= $this->workUpImages( $str2->EAN_code,$workImage);
+                        $productsLine->img=json_encode($obj);
+
+                    }
+                    else
+                         {
+                        $productsLine->img='{"mini":"no-image.png","max":"no-image.png","path":"no-image.png"}';
+                          }
 
             }
-            else
-                 {
-                $productsLine->img='{"mini":"no-image.png","max":"no-image.png","path":"no-image.png"}';
-                  }
-
-
 
 //______________________________________________________________________________________________________________________
 
@@ -326,6 +343,9 @@ class CsvloadController extends Controller
                   //  $obj->impact='"impact":'.'"'. $proximi[$i].'"';
                     $obj->impact=$proximi[$i];continue;
                 }
+                if(preg_match("/(М|м)ощность турбины/iu",$proximi[$i])) {
+                    $obj->turbinepower=$proximi[$i];continue;
+                }
                 if(preg_match("/мощност(ь|и)/iu",$proximi[$i])) {
                     $obj->power=$proximi[$i];continue;
                 }
@@ -379,7 +399,7 @@ class CsvloadController extends Controller
                     $obj->maxCapacity=$proximi[$i];continue;
                 }
 
-                if(preg_match("/макс(.|имальный) *поток *возд(.|уха)|(П|п)оток воздуха/iu",$proximi[$i])) {
+                if(preg_match("/макс(.|имальный) *поток *возд(.|уха)|(П|п)оток воздуха|(В|в)оздушный поток/iu",$proximi[$i])) {
                     $obj->airFlow=$proximi[$i];continue;
                 }
 
@@ -629,6 +649,17 @@ class CsvloadController extends Controller
                 if(preg_match("/глубина\/ширина/iu",$proximi[$i])) {
                     $obj->depthHight=$proximi[$i];continue;
                 }
+
+                if(preg_match("/(Г|г)лубина сгорания/iu",$proximi[$i])) {
+                    $obj->combustiondepth=$proximi[$i];continue;
+                }
+                if(preg_match("/(Г|г)лубина выборки/iu",$proximi[$i])) {
+                    $obj->optiondepth=$proximi[$i];continue;
+                }
+                if(preg_match("/(Г|г)лубина фрезеровки/iu",$proximi[$i])) {
+                    $obj->depthmilling=$proximi[$i];continue;
+                }
+
               /*  if(preg_match("/(Т|т)очность/iu",$proximi[$i])) {
                     $obj->precise=$proximi[$i];
                 }*/
@@ -866,6 +897,39 @@ class CsvloadController extends Controller
                 }
                 if(preg_match("/ОРМ|OPM/iu",$proximi[$i])) {
                     $obj->orm=$proximi[$i];continue;
+                }
+                if(preg_match("/(Р|р)ежущее кольцо/iu",$proximi[$i])) {
+                    $obj->cuttingring=$proximi[$i];continue;
+                }
+                if(preg_match("/(М|м)аксимальная высота/iu",$proximi[$i])) {
+                    $obj->maxheight=$proximi[$i];continue;
+                }
+                if(preg_match("/(Л|л)инейка с ограничителем/iu",$proximi[$i])) {
+                    $obj->rulerwithstop=$proximi[$i];continue;
+                }
+                if(preg_match("/(П|п)оперечный распил/iu",$proximi[$i])) {
+                    $obj->crosssection=$proximi[$i];continue;
+                }
+                if(preg_match("/(Ш|ш)ирина распила/iu",$proximi[$i])) {
+                $obj->sawingwidth=$proximi[$i];continue;
+            }
+                if(preg_match("/(Д|д)лина рабочего стола/iu",$proximi[$i])) {
+                    $obj->lengthworktable=$proximi[$i];continue;
+                }
+                if(preg_match("/(В|в)ысота рабочего стола/iu",$proximi[$i])) {
+                    $obj->heighthworktable=$proximi[$i];continue;
+                }
+                if(preg_match("/(З|з)арядное устройство/iu",$proximi[$i])) {
+                    $obj->charger=$proximi[$i];continue;
+                }
+                if(preg_match("/(С|с)ветодиодный индикатор/iu",$proximi[$i])) {
+                    $obj->ledindicator=$proximi[$i];continue;
+                }
+                if(preg_match("/(В|в)оспламенение/iu",$proximi[$i])) {
+                    $obj->ignition=$proximi[$i];continue;
+                }
+                if(preg_match("/Quick Fit/iu",$proximi[$i])) {
+                    $obj->quickfit=$proximi[$i];continue;
                 }
 
 

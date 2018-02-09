@@ -33,7 +33,9 @@
 
                 <!--/form-->
             </div>
+
      @endforeach
+        <div class="clearfix"></div>
             @if($adopt)
                     {!! $products->render()  !!}
             @endif

@@ -336,3 +336,7 @@ jQuery(document).ready(function() {
     };
 
 });
+
+jQuery(document).ready(function() {
+    $('#product-category_id').on('input')
+});

@@ -3,15 +3,50 @@
 namespace Corp\Http\Controllers\Admin;
 
 
+use Corp\Models\Accumulatortype;
+use Corp\Models\Accuracy;
+use Corp\Models\Accuracyslope;
 use Corp\Models\Airflow;
+use Corp\Models\Android;
+use Corp\Models\Angle;
+use Corp\Models\Brightness;
+use Corp\Models\Calculation;
+use Corp\Models\Chargetime;
 use Corp\Models\Company;
+use Corp\Models\Containervol;
+use Corp\Models\Crownlength;
 use Corp\Models\Cutdepth;
+use Corp\Models\Cutmatdepth;
 use Corp\Models\Cutedgewidth;
 use Corp\Models\Defence;
+use Corp\Models\Display;
+use Corp\Models\Fixture;
 use Corp\Models\Frequency;
+use Corp\Models\Functional;
+use Corp\Models\Gluediameter;
+use Corp\Models\Gluelength;
+use Corp\Models\Goaldistance;
 use Corp\Models\Grouptool;
+use Corp\Models\Holediameter;
+use Corp\Models\Ignition;
+use Corp\Models\Iphone;
+use Corp\Models\Laserclass;
+use Corp\Models\Magnificate;
+use Corp\Models\Measurange;
+use Corp\Models\Measurenumber;
+use Corp\Models\Oscillationangle;
 use Corp\Models\Packing;
+use Corp\Models\Powersupply;
+use Corp\Models\Screw;
+use Corp\Models\Strokeqnt;
+use Corp\Models\Temperature;
+use Corp\Models\Thread;
+use Corp\Models\Turbinpower;
+use Corp\Models\Typeaccuracy;
 use Corp\Models\TypeTool;
+use Corp\Models\Unit;
+use Corp\Models\Wheeldiameter;
+use Corp\Models\Worktime;
 use Illuminate\Http\Request;
 use Corp\Http\Controllers\Controller;
 use Corp\Models\Product;
@@ -68,6 +103,7 @@ class ProductEditController extends Controller
         $cartridge=Cartridge::all();
         $airflow=Airflow::all();
         $cutEdgeWidth=Cutedgewidth::all();
+        $cutmatdepth=Cutmatdepth::all();
         $defence=Defence::all();
         $frequency=Frequency::all();
         $grindplate=Grindingplate::all();
@@ -79,6 +115,41 @@ class ProductEditController extends Controller
         $strokelength=Strokelength::all();
         $vibration=Vibration::all();
         $workingwidth=Workingwidth::all();
+
+        $accumulatortype=Accumulatortype::all();
+        $accuracy=Accuracy::all();
+        $accuracyslope=Accuracyslope::all();
+        $android=Android::all();
+        $angle=Angle::all();
+        $brightness=Brightness::all();
+        $calculation=Calculation::all();
+        $chargetime=Chargetime::all();
+        $containervol=Containervol::all();
+        $crownlength=Crownlength::all();
+        $display=Display::all();
+        $fixture=Fixture::all();
+        $functional=Functional::all();
+        $gluediameter=Gluediameter::all();
+        $gluelength=Gluelength::all();
+        $goaldistance=Goaldistance::all();
+        $holediameter=Holediameter::all();
+        $ignition=Ignition::all();
+        $iphone=Iphone::all();
+        $laserclass=Laserclass::all();
+        $magnificate=Magnificate::all();
+        $measurange=Measurange::all();
+        $measurenumber=Measurenumber::all();
+        $oscillationangle=Oscillationangle::all();
+        $powersupply=Powersupply::all();
+        $screw=Screw::all();
+        $strokeqnt=Strokeqnt::all();
+        $temperature=Temperature::all();
+        $thread=Thread::all();
+        $turbinpower=Turbinpower::all();
+        $typeaccuracy=Typeaccuracy::all();
+        $unit=Unit::all();
+        $wheeldiameter=Wheeldiameter::all();
+        $worktime=Worktime::all();
 
 
         $typetools=TypeTool::all();
@@ -252,6 +323,7 @@ class ProductEditController extends Controller
                 'capacity'=>$capacity,
                 'angleCuttingDepth'=>$angleCuttingDepth,
                 'cuttingDepth'=>$cuttingDepth,
+                'cutmatdepth'=>$cutmatdepth,
                 'diametrDisk'=>$diametrDisk,
                 'idle'=>$idle,
                 'impact'=>$impact,
@@ -276,6 +348,41 @@ class ProductEditController extends Controller
                 'strokelength'=>$strokelength,
                 'vibration'=>$vibration,
                 'workingwidth'=>$workingwidth,
+
+                'accumulatortype'=>$accumulatortype,
+                 'accuracy'=>$accuracy,
+                'accuracyslope'=> $accuracyslope,
+                'android'=>$android,
+                'angle'=>$angle,
+                'brightness'=>$brightness,
+                'calculation'=>$calculation,
+                'chargetime'=> $chargetime,
+                'containervol'=>$containervol,
+                'crownlength'=> $crownlength,
+                'display'=>$display,
+                'fixture'=>$fixture,
+                'functional'=>$functional,
+                'gluediameter'=> $gluediameter,
+                'gluelength'=>$gluelength,
+                'goaldistance'=> $goaldistance,
+                'holediameter'=> $holediameter,
+                'ignition'=>$ignition,
+                'iphone'=> $iphone,
+                'laserclass'=> $laserclass,
+                'magnificate'=>$magnificate,
+                'measurange'=> $measurange,
+                'measurenumber'=> $measurenumber,
+                'oscillationangle'=> $oscillationangle,
+                'powersupply'=>$powersupply,
+                'screw'=>$screw,
+                'strokeqnt'=>$strokeqnt,
+                'temperature'=> $temperature,
+                'thread'=>$thread,
+                'turbinpower'=> $turbinpower,
+                'typeaccuracy'=>$typeaccuracy,
+                'unit'=> $unit,
+                'wheeldiameter'=>$wheeldiameter,
+                'worktime'=>$worktime,
 
                 'typetools'=>$typetools,
                 'listTool'=>$listTool,
