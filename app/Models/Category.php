@@ -9,7 +9,7 @@ class Category extends Model
     protected $primaryKey='id';
     public $timestamps = false;
     //  protected $guarded=['name'];  / '*' по умолчанию запрещает запись во все поля
-    protected $fillable = ['id','parent_id','name','keywords','description'];
+    protected $fillable = ['id','parent_id','name','img','text','number','keywords','description'];
    // protected $guarded=['created_at','updated_at'];
    public function products()
     {

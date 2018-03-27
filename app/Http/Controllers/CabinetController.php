@@ -137,9 +137,9 @@ class CabinetController extends SiteController
                $alias=$user->secondname;
                break;
            }
-            if($item==3)
+            if($item>2)
             {
-                $role_id=3;
+                $role_id=$item;
                 $alias=$user->id;
                 break;
             }

@@ -43,8 +43,8 @@ class UsersShowController extends adminSiteController
                 'email' => 'required|email|max:255',
                 'phone'=>'required|max:12',
                 'text'=>'nullable',
-                'status'=>'nullable'
-
+                'status'=>'nullable',
+                'discount'=>'numeric|nullable',
 
             ]);
 
@@ -52,17 +52,20 @@ class UsersShowController extends adminSiteController
             {
                 return redirect()->route('showup',['id'=>$input['id']])->withErrors( $validator)->withInput();
             }
-            $users= User::where('id',$id)->first();
-            $users->name=$input['name'];
-            $users->secondname=$input['secondname'];
-            $users->email=$input['email'];
-            $users->status=$input['status'];
+            $user= User::where('id',$id)->first();
+            $user->name=$input['name'];
+            $user->secondname=$input['secondname'];
+            $user->email=$input['email'];
+            $user->status=$input['status'];
+            $roliek=DB::table('roles')->where('name',$input['status'])->first();
+            $rl_id=$roliek->id;
+            $role=Role::find($rl_id);
+           $roles=DB::table('role_user')->where('user_id',$id)->delete();
+            $user->roles()->save($role);
+
+            $prod=DB::table('users')->where('id',$id)->update($user->toArray());
 
 
-
-            $prod=DB::table('users')->where('id',$id)->update($users->toArray());
-
-            // $prod=Product::where('id',$id)->update($product->toArray());
             if($prod)
             {
                 return redirect('admin')->with('status','Информация обновлена');
@@ -100,7 +103,8 @@ class UsersShowController extends adminSiteController
                     'secondname'=>$users->secondname,
                     'email'=>$users->email,
                     'phone'=>$users->phone,
-                    'status'=>$users->status
+                    'status'=>$users->status,
+                    'discount'=>$users->discount,
                 ];
 
 
@@ -120,12 +124,30 @@ class UsersShowController extends adminSiteController
                     'email'=>$users->email,
                    'phone'=>$users->phone,
                     'status'=>$users->status,
-
+                    'discount'=>$users->discount,
                 ];
                 $i=0;
 
             }
+            if($role==4 || $role==5 ) // обычный пользователь
+            {
+                $priznak=0;
+                $pr=0; // признак запроса get
+                $orders=Order::where('user_id',$users->id)->get();
+                $dat=$users->countData($orders,  $pr);
+                $data=[
+                    'title' =>'Таблица диллеров',
+                    'data'=>$dat,
+                    'name'=>$users->name,
+                    'secondname'=>$users->secondname,
+                    'email'=>$users->email,
+                    'phone'=>$users->phone,
+                    'status'=>$users->status,
+                    'discount'=>$users->discount,
+                ];
+                $i=0;
 
+            }
             //    $users=$this->getUsers();
 
             //   $sas=$users->roles()->where('id',3);

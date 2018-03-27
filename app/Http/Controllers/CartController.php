@@ -173,10 +173,15 @@ class CartController extends Controller
                 $saa=new Discount();
                 $status=$saa->discounts($user,0,session('cardCommon.sum'));
 
-                $user->status=$status['status'];
+                $user->discount=$status['discount'];
  //_______________________________________________
                 $role = Role::find(3);
-
+                $user->status=$role->name;
+                $prochaker= User::where([['email',$user->email],['password',$user->pasword]])->first();
+                if($prochaker )
+                {
+                    return redirect('/');
+                }
                 if ($role->users()->save($user)) {
                    $order->user_id = $user->id;
                   //  Auth::login($user, true);
@@ -188,7 +193,7 @@ class CartController extends Controller
                     //if(!$role->users()->role_id)
 
 
-
+                    $role =0;
                   foreach($user->roles as $ror) {
                       // user не первый раз покупает у него определена роль
                       $role = $ror->id;
@@ -211,9 +216,11 @@ class CartController extends Controller
                     $status=$saa->discounts($user,0,session('cardCommon.sum')+$summa);
 
                     // $user->status=session('cardCommon.sum');
-                    $user->status=$status['status'];
+                    if($role==3)  // если простой покупатель
+                    {
+                    $user->discount=$status['discount'];
                             User::find($user->id)->update( $user->toArray());
-
+                    }
 
                // $user->where('id',$user->id)->update( $user->toArray());
                     $order->user_id = $user->id;

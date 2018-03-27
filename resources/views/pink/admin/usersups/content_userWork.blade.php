@@ -30,9 +30,15 @@
                 </div>
             </div>
             <div class="form-group">
-                {!! Form::label('status','Ранг пользователя',['class'=>'col-xs2 control-label']) !!}
+                {!! Form::label('status','Статус',['class'=>'col-xs2 control-label']) !!}
                 <div class="col-xs-8">
-                    {!! Form::text('status',$data['status'],['class'=>'form-control','placeholder'=>'Ранг пользователя']) !!}
+                    {!! Form::text('status',$data['status'],['class'=>'form-control','placeholder'=>'Статус пользователя']) !!}
+                </div>
+            </div>
+            <div class="form-group">
+                {!! Form::label('discount','Скидка',['class'=>'col-xs2 control-label']) !!}
+                <div class="col-xs-8">
+                    {!! Form::text('discount',$data['discount'],['class'=>'form-control','placeholder'=>'Скидка пользователя']) !!}
                 </div>
             </div>
             <div class="form-group">

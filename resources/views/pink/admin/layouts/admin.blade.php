@@ -76,8 +76,15 @@
    </header>
       <div class="col-xs-9">
           <br/><br/> <br/><br/>
+
           @yield('content')
+          @if(Route::currentRouteName()=='excelIt')
+              <ul class="catlog">
+                  {{ Widget::run('MainWidget') }}
+              </ul>
+          @endif
       </div>
+
 </div>
 </div>
 </body>

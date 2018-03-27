@@ -216,6 +216,8 @@ class ProductEditController extends Controller
                 'description'=>'required',
                 'text'=>'nullable',
                 'price'=>'required|numeric | min:0',
+                'pricedealer1'=>'required|numeric | min:0',
+                'pricedealer2'=>'required|numeric | min:0',
                 'img'=>'image|nullable',
                 'type'=>'digits:1 | nullable ',
                 'country'=>'required',
@@ -276,7 +278,7 @@ class ProductEditController extends Controller
                      //  $file1 =file_get_contents('/public/'.env('THEME').'/images/'. $input['old_images']);
                     //   $img = Image::make($file1)->resize(120,75);
 
-                       $sa=strval($qw1[1]);
+                       $sa=strval($qw1[2]);
                        $as=explode('.',$sa);
 
                        $qw2=$qw1[0]."_mini.".$as[1];

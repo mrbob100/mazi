@@ -27,10 +27,10 @@ class Discount extends Model
                 $j++;
             }
         }
-        if($j>0)  { $user->status=$discounts[$j-1]->discount; }
+        if($j>0)  { $user->discount=$discounts[$j-1]->discount; }
         $data=[
            'summa' =>$summa,
-            'status'=>$user->status
+            'discount'=>$user->discount
         ];
         return $data;
     }

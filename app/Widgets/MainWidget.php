@@ -59,7 +59,8 @@ class MainWidget extends AbstractWidget
            if($menu) return $menu;
         }
 if( $this->myClass!='Directory') {
-    $categories=Category::all();
+    //$categories=Category::all();
+    $categories=Category::where('id','!=',9999)->get();
 }
        else  $categories=Directory::all();
 

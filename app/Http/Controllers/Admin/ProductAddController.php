@@ -96,6 +96,8 @@ class ProductAddController extends Controller
              'description'=>'required',
              'text'=>'nullable',
              'price'=>'required|numeric | min:0',
+                 'pricedealer1'=>'required|numeric | min:0',
+                 'pricedealer2'=>'required|numeric | min:0',
              'img'=>'image|nullable',
                  'mini_side'=>'image|nullable',
              'type'=>'digits:1 | nullable ',

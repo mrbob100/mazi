@@ -1239,7 +1239,19 @@
                     {!! Form::number('price',old('price'),['class'=>'form-control','placeholder'=>'Цена']) !!}
                 </div>
             </div>
+            <div class="form-group">
+                {!! Form::label('pricedealer1','Цена диллера 1',['class'=>'col-xs2 control-label']) !!}
+                <div class="col-xs8">
+                    {!! Form::number('pricedealer1',old('pricedealer1'),['class'=>'form-control','placeholder'=>'Цена диллера 1']) !!}
+                </div>
+            </div>
 
+            <div class="form-group">
+                {!! Form::label('pricedealer2','Цена диллера 2',['class'=>'col-xs2 control-label']) !!}
+                <div class="col-xs8">
+                    {!! Form::number('pricedealer2',old('pricedealer2'),['class'=>'form-control','placeholder'=>'Цена диллера 2']) !!}
+                </div>
+            </div>
             <div class="form-group">
                 {!! Form::label('img','Изображение:',['class'=>'col-xs2 control-label']) !!}
                 <div class="col-xs8">

@@ -43,7 +43,7 @@
 
             @foreach(session('cart') as $item )
 
-                <tr>
+                <tr class="tabOwl">
                     <td> <img src="{{ asset('public/'.env('THEME')) }}/images/{{ $item['cart.img'] }}  " height="50" alt="картинка"/> </td>
                     <td>{!! $item['cart.code'] !!}    </td>
                     <td>{!! $item['cart.name'] !!}    </td>

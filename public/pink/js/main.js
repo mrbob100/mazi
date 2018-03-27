@@ -57,7 +57,29 @@ $(' .modal-body').on('click', '.del-item', function(e){
 });
 
 
+$(function(){
+    $('.tabOwl').on('click', '.del-item', function(e){
+        //alert(123);
+        e.preventDefault();
+        let id = $(this).data('id');
 
+        //  var cat = $(this).data('cat');
+        $.ajax({
+            url: 'delIt',
+            data: {id: id/*, cat: cat */},
+            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+            type: 'GET',
+            success: function(res){
+                if(!res) alert('Ошибка!');
+                showCart(res);
+            },
+            error: function(){
+                alert('Error!');
+            }
+        });
+    });
+
+});
 
 
 
@@ -155,12 +177,17 @@ $('.add-to-cart').on('click', function (e) {
 
 
 
+
     $("#flexiselDemo3").flexisel({
         visibleItems: 4,
-        animationSpeed: 1000,
+        animationSpeed: 500,
         autoPlay: true,
         autoPlaySpeed: 3000,
         pauseOnHover: true,
+        itemsToScroll: 3,
+
+        infinite: true,
+        navigationTargetSelector:true,
         enableResponsiveBreakpoints: true,
         responsiveBreakpoints: {
             portrait: {
@@ -177,6 +204,31 @@ $('.add-to-cart').on('click', function (e) {
             }
         }
     });
+
+    $('.slick-slider').slick({
+        infinite: true,
+        speed: 350,
+// определяем скорость перелистывания
+        slidesToShow: 4,
+//количество слайдов для показа
+        slidesToScroll: 2,
+//сколько слайдов за раз перелистнется
+        responsive: [
+            {
+                breakpoint: 600,
+//сообщает, при какой ширине экрана нужно включать настройки
+                settings: {
+                    slidesToShow: 4,
+                    slidesToScroll: 2,
+                    infinite: true,
+                }
+            }
+        ]
+
+    });
+
+
+
 
 });
 
@@ -250,53 +302,55 @@ jQuery(document).ready(function($) {
    $(".selectValItem").on('slide',function(e){
 
         counter++;
-
+       $("#selectMyFixing").submit();
 
     });
 
     $(".selectValItem").on('change',function(e){
         e.preventDefault();
         counter++;
-
+        $("#selectMyFixing").submit();
 
     });
 
-        $("#selectMyFixing").on('submit',function(e){
+       $("#selectMyFixing").on('submit',function(e){
            // $(this)
-    e.preventDefault();
-    let form= $(this);
+
+            e.preventDefault();
+            let form= $(this);
 
 
-            if(counter) {
-	let data=$(form).serializeArray();
-	//alert(data);
-    $.ajax({
+           if(counter)
+           {
+            let data=$(form).serializeArray();
+            //alert(data);
+            $.ajax({
 
-		 url: form.attr('action'),
+                 url: form.attr('action'),
 
-        cache: false,
-        data: data,
-       /* beforeSend: function(data) { // сoбытиe дo oтпрaвки
-            form.find('input[type="submit"]').attr('disabled', 'disabled'); // нaпримeр, oтключим кнoпку, чтoбы нe жaли пo 100 рaз
-        },  здесь должен быть ограничитель  звездочеа и косая  */
-        headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-        type:form.attr('method') ,
-        dataType: "JSON",
-        success: function(res){
-            if(!res) alert('Ошибка!');
+                cache: false,
+                data: data,
+               /* beforeSend: function(data) { // сoбытиe дo oтпрaвки
+                    form.find('input[type="submit"]').attr('disabled', 'disabled'); // нaпримeр, oтключим кнoпку, чтoбы нe жaли пo 100 рaз
+                },  здесь должен быть ограничитель  звездочеа и косая  */
+                headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                type:form.attr('method') ,
+                dataType: "JSON",
+                success: function(res){
+                    if(!res) alert('Ошибка!');
 
-			//$('.wrap_result').append('<br/><strong>Выборка выполнена !</strong>').delay(2000).fadeOut(500);
-            $('#mediumMine').empty();
-          // $('#mediumMine').replaceWith(res.content);
-            $('#mediumMine').append(res.content);
+                    //$('.wrap_result').append('<br/><strong>Выборка выполнена !</strong>').delay(2000).fadeOut(500);
+                    $('#mediumMine').empty();
+                  // $('#mediumMine').replaceWith(res.content);
+                    $('#mediumMine').append(res.content);
 
-        },
-        error: function(){
-            alert('Ошибка передачи slider и кнопок!');
-        }
+                },
+                error: function(){
+                    alert('Ошибка передачи slider и кнопок!');
+                }
 
-    });
-                      }
+            });
+    }
 
 });
 

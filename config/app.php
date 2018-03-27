@@ -166,11 +166,16 @@ return [
         /*
          * Package Service Providers...
          */
-        Laravel\Tinker\TinkerServiceProvider::class,
+
         Arrilot\Widgets\ServiceProvider::class,
         'Lavary\Menu\ServiceProvider',
         Maatwebsite\Excel\ExcelServiceProvider::class,
         Mews\Captcha\CaptchaServiceProvider::class,
+        // dev
+        Barryvdh\Debugbar\ServiceProvider::class,
+        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
+        // prod
+        Laravel\Tinker\TinkerServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -236,6 +241,8 @@ return [
         'Image' => Intervention\Image\Facades\Image::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
         'Captcha'=>Mews\Captcha\Facades\Captcha::class,
+        // dev
+        'Debugbar' => Barryvdh\Debugbar\Facade::class,
     ],
     'db_fields'=>[
         'firstname','lastname','email'

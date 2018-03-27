@@ -12,6 +12,10 @@
     {!! $sliders !!}
 @endsection
 
+@section('newProducts')
+    {!! $newProducts !!}
+@endsection
+
 @section('footer')
     {!! $footer !!}
 @endsection

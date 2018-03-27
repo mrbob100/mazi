@@ -1,0 +1,426 @@
+
+/* remember to define focus styles! */
+* {
+    box-sizing: border-box;
+}
+body {width: 100%;
+
+background-color: #ededed;
+}
+
+main {
+    width: 75%;  margin: 0 auto;
+    background-color: #fff;
+font-family: "Playfair Display",Arial,Helvetica,sans-serif!important;
+    color: #000;
+}
+
+nav .line {
+
+    background-image:   url( https://www.bosch-professional.com/resources/img/brand/supergraphic_horizontal.svg);
+    background-position: 0 -100px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    content: "";
+    display: table;
+    height: 15px;
+    width: 100%;
+    top: 0;
+    left: 0;
+    position: relative;
+   margin: 10px 0 30px 0;
+    z-index: 1030;
+
+}
+
+.wrap {
+    display: flex;
+    display: -webkit-flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+.wrap .logo .ltitle{
+    width: 250px;
+}
+
+
+.menu-call .menu-wrap{
+    display: flex; align-items: center;
+    display: -webkit-flex;
+}
+
+.wrap .menu-call p {
+    padding: 10px 10px 0 0;
+}
+.menu-call .menu-wrap .search {
+    display: inline-block;
+    height: 22px;
+    border: 0px solid #fff;
+    border-bottom: 1px solid #ccc;
+    width:250px;
+    cursor: pointer;
+padding-left: 5px;
+    margin-left: 45px;
+}
+/* .menu-search-window span {
+     content: ''; width: 300px;
+     height: 1px; background-color: #0c0c0c;
+     display: inline-block;
+    margin: 0 10px 0 0;
+     line-height: 0;
+     font-size: 0;
+ } */
+
+/*.menu-search-art i:before{
+    content: ''; width: 100px;
+    height: 1px; background-color: #0c0c0c;
+    display: inline-block;
+    margin-right:10PX;
+} *
+
+
+/* меню синяя полоса - главная */
+nav .wrap1 menu1 {
+   margin: 0px 0px 10px 0;
+    text-decoration: none;
+
+    align-items: center;
+   background-color: #005691;
+    /*   background-image: linear-gradient(to top, rgba(30,87,153,0), rgba(30,87,153,0.8), rgba(30,87,153,1),
+      rgba(30,87,153,1), rgba(41,137,216,1), rgba(30,87,153,1), rgba(30,87,153,1),
+      rgba(30,87,153,0.8),rgba(30,87,153,0));
+      color: #fff; padding: 10px;*/
+      flex-wrap: wrap;
+      display: flex;
+
+    justify-content: space-between;
+    list-style-type: none;
+    padding: 0 10px ;
+}
+
+
+.wrap1 menu1 li a{
+    color: #fff;
+    text-decoration: none;
+}
+.wrap1 menu1 .pointer:hover{
+    background-color: white;
+
+     padding: 9px 0 8px 0;
+}
+
+.wrap1 menu1 .pointer p:hover {
+color: #005691;
+}
+.wrap1 menu1 .pointer1:hover{
+    background-color: white;
+
+    padding: 8px 0 8px 0px;
+}
+.wrap1 menu1 .pointer1 a:hover {
+    color: #005691;
+}
+/* конец  меню синяя полоса - главная */
+
+
+@media all and (max-width: 560px){
+    nav .logo{ text-align: center;}
+}
+
+
+/* панель каталог ...*/
+section.profit .container-wrap{
+    display: flex; flex-direction: row;
+    display: -webkit-flex;
+    flex-wrap: wrap;
+}
+/*section.profit .container-wrap .container-wrap-row {
+    background-image: url(../images/features/images0012.jpg);
+    background-repeat: no-repeat;
+    background-blend-mode: color, screen;
+    min-width: 10%;
+   z-index: 10;
+    opacity:0.95;
+} */
+
+
+
+section.profit .container-wrap-row .catalog {
+   border: 1px solid lightblue;
+width: 270px; min-height: 200px;
+
+
+    display: flex; flex-direction: column;
+    justify-content: space-between;
+font-size:15px ;
+
+}
+
+section.profit .container-wrap-row .catalog li {
+list-style-type:none; /* Убираем маркеры */
+text-decoration: none;
+
+}
+
+li ul{
+    background-color:#F3F8FD;
+padding-left: 65px;
+
+}
+li a .azone-first {
+   margin-top: 10px;
+}
+/* первое боковое меню */
+
+.azone{
+
+    padding: 0;
+    margin-top: -3px;
+}
+
+.azone .material-icons {
+    display: block;
+    height: 100%;
+}
+
+
+section.profit .container-wrap-row .catalog li a{
+    color:black;
+
+
+}
+/* конец первого бокового меню */
+
+/*Второе боковое меню выборка уточнений*/
+#selectMyFixing {
+    padding: 10px 10px;
+    font-size:12px ;
+
+}
+.container-wrap-row .text {
+    min-width: 250px; min-height: 200px;
+    max-width: 300px;
+    border: 1px solid lightblue;
+    margin: 10px 0 10px 0;
+}
+
+
+/*Конец Второго бокового меню */
+
+/* Баннер  */
+.container-wrap-banner {
+    background: url(../images/features/banner_001.jpg) no-repeat;
+min-width: 75%;
+    background-size: cover;
+   height:600px;
+    padding: 10% 10% ;
+
+
+}
+
+/* Конец Баннера  */
+
+
+/* Слайдер*/
+
+.flexslider #flexiselDemo3{
+
+    align-items: flex-end;
+    flex-direction: row;
+    display: flex;
+    display: -webkit-flex;
+    flex-wrap: wrap;
+    min-width: 97%;
+    overflow: hidden;
+    background-color:#FCF9F8;
+    padding: 30px 0 50px 10px;
+    margin-top: 45px;
+    margin-left: 20px;
+    height: 300px;
+    width: 100px;
+    justify-content: space-around;
+
+
+}
+.slider h1 {
+    margin-top: 50px;
+    font-size: 20px;
+}
+.flexslider #flexiselDemo3 .sliderIn{
+    min-width: 10%; height: 250px;
+    max-width:20%;
+    margin: 20px 10px;
+    color: black;font-size: 1em;
+    font-family: 'Playfair Display', serif;
+   /* text-align: center; */
+    justify-content: space-around;
+    font-size: 14px;
+}
+
+@media all and (max-width: 560px){
+.flexslider #flexiselDemo3 .sliderIn{ text-align: center;
+    max-width: 100%;}
+}
+
+.flexslider #flexiselDemo3 .sliderIn a img .img-responsive{
+    max-height: 150px; max-width: 200px;
+    margin-left: 10px;
+}
+
+
+.sliderIn a.like_name {
+    color: black;font-size: 1em;
+}
+.item_add {
+    color:black;font-size: 1.2em;
+}
+.flexslider #flexiselDemo3 .sliderIn a img{
+    height: 170px;
+}
+/*  Конец Слайдера*/
+
+/* секция новых продуктов*/
+.slick-slider {
+    display: flex;
+    flex-wrap: wrap; flex-direction: row;
+
+
+}
+
+.slick-slider .productsLine {
+
+    /* max-width: 25%; */
+    min-width: 150px;
+    max-width: 20%;
+
+    justify-content: space-around;
+    padding: 20px 5px 80px 5px;
+
+    background-color:#FCF9F8 ;
+    margin: 10px ;
+    position: relative;
+    max-height: 300px;
+}
+/* подгрузка new*/
+.slick-slider .productsLine .layer02 {
+    position: absolute; /* Абсолютное позиционирование */
+    top: 0px; /* Положение от нижнего края */
+    left: 0px; /* Положение от правого края */
+    line-height: 1px;
+}
+
+.slick-slider .productsLine .dopContent {
+    color: #816263;font-size: 0.7em;
+}
+.biglike{
+    text-align: center;
+
+    font-size: 20px;
+}
+
+@media all and (max-width: 560px){
+    .slick-slider { text-align: center;
+
+    max-width: 130px;}
+}
+@media screen and (device-width: 1024px) {
+    div {
+        width: 980px;
+    }
+}
+    /* секция products_content */
+
+.wrapProd  {
+
+    display: flex;
+    display: -webkit-flex;
+    flex-direction:row;
+    flex-wrap: wrap;
+    /*    min-width: 10%; height: 250px;
+        max-width:20%; */
+    max-width: 1080px;
+    min-width: 450px;
+    min-height:300px;
+    /*  height:500px;
+   height: 1800px; */
+    align-items: center;
+   justify-content: space-around;
+    /* min-width: 10%; */
+flex-grow: 1;
+    flex-basis: 220px;flex-shrink: 0;
+}
+
+.wrapProd .productsin {
+    position: relative;
+    min-height: 315px;
+   padding: 10px 5px 10px 5px;
+ justify-content: flex-start;
+align-items: center;
+    min-width: 225px;
+    text-align: center;
+    /* border: 3px solid blue; */
+    z-index: 0;
+    margin: 7px 20px 10px 20px;
+    -moz-border-radius: 10px; /* закругление для старых Mozilla Firefox */
+    -webkit-border-radius: 10px; /* закругление для старых Chrome и Safari */
+    -khtml-border-radius:10px; /* закругл. для браузера Konquerer системы Linux */
+    border-radius: 10px; /* закругление углов для всех, кто понимает */
+}
+.wrapProd .productsin a img{
+    max-height: 150px; max-width: 200px;
+}
+
+
+
+
+
+@media all and (max-width: 1069px){
+    .wrapProd{ text-align: center;
+        max-width: 900px;}
+}
+
+
+
+
+
+@media all and (max-width: 560px){
+   .wrapProd{ text-align: justify;}
+}
+/* вставка признака sale или new */
+.wrapProd .productsin .layer02, .layer03 {
+    position: absolute; /* Абсолютное позиционирование */
+    top: 0px; /* Положение от нижнего края */
+    left: 0px; /* Положение от правого края */
+    line-height: 1px;
+}
+
+.text-center {
+    margin: 40px 0;
+    text-align: center;
+    font-size: 20px;
+}
+.productsin .dopContent {
+    position: absolute;
+    display: none;
+  /*  width: 350px; */
+
+}
+.productsin:hover{
+    background: #fff;
+    border: 3px solid red;
+
+
+
+}
+.productsin:hover .dopContent{
+    display: block;
+
+
+}
+
+.coral {
+    text-align: center;
+}
+.liked-product {
+    text-align: center;
+}

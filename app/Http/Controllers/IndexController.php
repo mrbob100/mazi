@@ -7,11 +7,12 @@ use Corp\Models\Category;
 use Corp\Models\Product;
 use Corp\Widgets\MainWidget;
 use Cache;
-
+use Corp\Models\Newproduct;
 use Corp\Repositories\ProductsRepository;
 //use Corp\Repositories\PortfoliosRepository;
 use Illuminate\Http\Request;
 use Corp\Repositories\SlidersRepository;
+use Corp\Repositories\NewproductRepository;
 use Corp\Models\Menu;
 use Config;
 use Auth;
@@ -20,12 +21,13 @@ class IndexController extends SiteController
 {
 
 
-    public function __construct(SlidersRepository $s_rep,  ProductsRepository $p_rep)
+    public function __construct(SlidersRepository $s_rep,  ProductsRepository $p_rep,  NewproductRepository $new_rep)
     {
         parent::__construct(new \Corp\Repositories\MenusRepositories(new \Corp\Models\Menu));
         $this->s_rep=$s_rep; // slider
         // $this->p_rep=$p_rep;  // portfolio
           $this->p_rep=$p_rep;  // products
+        $this->new_rep=$new_rep; // новые продукты
         //   $this->bar='left'; // устанавливает сайт бар значения: left, right, no
         $this->template=env('THEME').'.index';
     }
@@ -37,6 +39,8 @@ class IndexController extends SiteController
 
         $sliderItems = $this->getSliders(); // пункты кадров слайдера
         $sliderItems->load('products');
+        $newProducts=$this->getNew();
+        $newProducts->load('products');
 
         //  $articles=$this->getArticles(); // правый сайд бар
         // dd($sliderItems);
@@ -46,6 +50,8 @@ class IndexController extends SiteController
 
         $sliders = view(env('THEME') . '.slider')->with('sliders', $sliderItems)->render();
         $this->vars = array_add($this->vars, 'sliders', $sliders);
+        $newProducts=view(env('THEME') . '.newsell')->with(['newProducts'=> $newProducts])->render();
+        $this->vars = array_add($this->vars, 'newProducts', $newProducts);  // новые продажи
 
         $this->keywords = 'Home Page';
         $this->meta_desc = 'Home Page';
@@ -123,6 +129,27 @@ class IndexController extends SiteController
         ]);
 
     }
+
+
+
+    public function getNew()
+    {
+        $newproduct=$this->new_rep->get();
+        if($newproduct->isEmpty()) return false;
+        $newproduct->transform( function ($item, $key){
+            $item->path =Config::get('settings.newproduct') .'/'.$item->path;
+
+            return $item;
+        });
+        // dd($sliders);
+        return $newproduct;
+    }
+
+
+
+
+
+
 
     public function identityUser()
     {

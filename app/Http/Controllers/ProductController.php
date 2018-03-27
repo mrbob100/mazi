@@ -36,27 +36,39 @@ class ProductController extends SiteController
 
         $rout=Route::currentRouteName();
         $products = $this->getProduct($id);
-        $discount=0;
+        $discount=0; $summa=0; $newprice=0;
+        $data=[];
         // Блок расчета скидок
         $user=Auth::user();
         if(Auth::check())
         {
-           $orders=$user->orders;
+          if(($user->status!='dealer1')and($user->status!='dealer2'))
+          {
+               $orders=$user->orders;
 
-           if($orders) // заказы есть их выбираем
-           {
-             $saa=new Discount();
-               $data=$saa->discounts($user, $orders);
+               if($orders) // заказы есть их выбираем
+               {
+                 $saa=new Discount();
+                   $data=$saa->discounts($user, $orders);
 
-           }
-            $discount=$data['status'];
-           $summa=$data['summa'];
-            $newprice=$products[0]->price * $discount/100;
-            $newprice=$products[0]->price - $newprice;
-            $pric=explode('.',$newprice);
-            $newprice=$pric[0].'.00';
-            Session::pull('Price');
-            if(!session('Price')) Session::push('Price',['newprice'=>$newprice,'summa'=>$summa]);
+               }
+                    $discount=$data['discount'];
+                   $summa=$data['summa'];
+                    $newprice=$products[0]->price * $discount/100;
+                    $newprice=$products[0]->price - $newprice;
+                    $pric=explode('.',$newprice);
+                    $newprice=$pric[0].'.00';
+                    Session::pull('Price');
+                    if(!session('Price')) Session::push('Price',['newprice'=>$newprice,'summa'=>$summa]);
+          }
+            else {
+                  if($user->status=='dealer1') $newprice=$products[0]->pricedealer1;
+                  if($user->status=='dealer2') $newprice=$products[0]->pricedealer2;
+                $discount=$newprice;
+                Session::pull('Price');
+                if(!session('Price')) Session::push('Price',['newprice'=>$newprice,'summa'=>$newprice]);
+                  }
+
         }
         else { $newprice=0; $discount=0;  $summa=0;}
 
@@ -78,7 +90,8 @@ class ProductController extends SiteController
 
             $were=['id',$alias];
         }
-        $product= $this->p_rep->get(['id','name','code','description','img','price','type','country','class','groupTools','new','weightbrutto','weightnetto', 'length','height','exactlyType1','category_id','keywords','meta_desc'], false,true,$were);
+        $product= $this->p_rep->get(['id','name','code','description','img','price','pricedealer1','pricedealer2','type','country','class','groupTools','new','weightbrutto','weightnetto',
+            'length','height','exactlyType1','category_id','keywords','meta_desc'], false,true,$were);
 
         // dd( $product);
      $product->load('typeTools');

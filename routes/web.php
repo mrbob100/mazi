@@ -124,9 +124,9 @@ Route::group(['prefix'=>'admin','middleware'=>['web','auth']], function(){
          }
     });
 
-
-
-
+    Route::match(['get','post'],'/images','Admin\ImageController@create')->name('images');
+    Route::match(['get','post'],'/store','Admin\ImageController@store')->name('store');
+    Route::get('img',['uses'=>'Admin\ImageController@index','as'=>'image']);
 //Excel
     Route::get('excelitem', ['uses'=>'Admin\ExcelitemController@index','as'=>'excelIt']);
     Route::match(['get','post'],'excelitem/import', ['uses'=>'Admin\ExcelitemController@import','as'=>'importIt']);
@@ -224,7 +224,7 @@ Route::group(['prefix'=>'admin','middleware'=>['web','auth']], function(){
 
     });
 
-    Route::match(['get','post'],'/work/{id?}',['uses'=>'Admin\UsersShowController@index', 'as'=>'showup']);
+    Route::match(['get','post','delete'],'/work/{id?}',['uses'=>'Admin\UsersShowController@index', 'as'=>'showup']);
     Route::match(['get','post'],'/show',['uses'=>'Admin\UsersShowController@index', 'as'=>'usershow']);
     Route::match(['get','post','delete'],'up/{id}',['uses'=>'Admin\UsersUpController@index','as'=>'userup']);
 

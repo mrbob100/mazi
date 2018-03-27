@@ -1,0 +1,41 @@
+ul{
+  margin: 0;
+  padding: 0;
+}
+ul.bender li {
+
+  background: #005691;
+ /* border: 1px solid #FFFFFF; */
+  z-index: 2;
+  list-style: none;
+  width: 200px;         /*ширина блока меню*/
+}
+ul.bender li a {
+  text-decoration: none;
+  display: block;
+  padding: 5px 5px 5px 15px;
+  color: white;
+}
+ul.bender li ul {
+  display: none;	/*скрываем вложенные пункты*/
+}
+ 
+/*Выпадающее меню*/
+ 
+ul.bender li:hover {
+  /* позиционирование вложенных элементов
+   * будет расчитыватьться относительно
+   * родительского элемента
+   */
+  position: relative;
+  background: grey;
+}
+ul.bender li:hover > ul {
+  display: block;
+}
+ul.bender li:hover ul{
+  position: absolute;
+  top: 0;       /*Задаём координаты для вложенных пунктов*/
+  /*left: 200px; */ /*меню раскрывается вправо*/
+  left: 120px;
+}

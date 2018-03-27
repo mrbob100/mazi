@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <script type="text/javascript" src=" {!! asset('public/'.env('THEME')) !!}/js/vue.min.js" charset="utf-8" ></script>
 
-<form  id="selectMyFixing" style="display: block; background-color: #DEDEDE; width: 240px; padding: 20px 20px;" action="{{route('resume')}}"   method="post">
+<form  id="selectMyFixing" style="display: block;  width: 250px; padding: 20px 20px;" action="{{route('resume')}}"   method="post">
     <p> Диапазон цен:
         <input type="text" style="width:200px; border:0; color:#f6931f;font-weight: bold;" id="pricer" class="selectValItem" name="pricer"  value="{{$data['maxValue']}}" data-min="{{$data['minValue']}}"/></p>
 
@@ -44,17 +44,32 @@
     <br/> <br/>
     @endif
 
+    @if($data['typeProducts'])
+        @foreach($data['typeProducts'] as $k=>$type)
 
-    @if($data['powers'])
+
+        <select name="{{$k}}" size="1" style="width:200px;" id="menuPower" class="selectValItem">
+            <option disabled selected>{!!$k !!}</option>
+            @foreach($type as $item)
+
+                <option value="{{$item[1]}}">"{{$item[1]}}- &nbsp;<span style="color:#f6931f; font-weight: bold;">{!!$item[2]  !!}</span></option>
+             @endforeach
+        </select>
+            <br/> <br/>
+        @endforeach
+      @endif
+
+
+  <!--  @if($data['powers'])
     <select name="menuPower" size="1" style="width:200px;" id="menuPower" class="selectValItem">
         <option disabled selected>Мощность</option>
         @foreach($data['powers'] as $power)
-            <option value="{{$power[1]}}">"{{$power[1]}}- &nbsp;<span style="color:#f6931f; font-weight: bold;">({!!$power[2]!!})</span></option>
+            <option value="{--{$power[1]}--}">"{--{$power[1]}--}- &nbsp;<span style="color:#f6931f; font-weight: bold;">({--!!$power[2]!!--})</span></option>
         @endforeach
     </select>
     <br/> <br/>
     @endif
-
+-->
 
     @if($data['packs'])
     <select name="menuComplect" size="1"  style="width:200px;" id="menuComplect" class="selectValItem">
@@ -107,7 +122,7 @@
 
 
 
-    <br/> <br/> <br/>
+    <!--br/> <br/> <br/>
     <p><b>Тип инструмента</b></p>
     <p><input name="dzen" type="radio"  value="6" class="selectValItem">Электрический</p>
     <p><input name="dzen" type="radio"  value="1" class="selectValItem" > Аккумуляторный</p>
@@ -116,6 +131,6 @@
     <p><input name="dzen" type="radio"  value="3" class="selectValItem">Пневматический</p>
     <p><input name="dzen" type="radio"  value="4" class="selectValItem">Батарейки</p>
     <p><input name="dzen" type="radio"  value="5" class="selectValItem">Импульсный</p>
-    <br/> <br/>
-    <input type="submit" id="button_left"  value="отправить" />
+    <br/> <br/-->
+    <input type="hidden" id="button_left"  value="отправить" />
 </form>

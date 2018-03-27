@@ -1,12 +1,19 @@
 <?php
 
+/*
+ * Taken from
+ * https://github.com/laravel/framework/blob/5.3/src/Illuminate/Auth/Console/stubs/make/controllers/HomeController.stub
+ */
+
 namespace Corp\Http\Controllers;
 
+use Corp\Http\Requests;
 use Illuminate\Http\Request;
-use Auth;
-use Corp\User;
-use Hash;
-use Redirect;
+
+/**
+ * Class HomeController
+ * @package App\Http\Controllers
+ */
 class HomeController extends Controller
 {
     /**
@@ -16,17 +23,17 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-       $this->middleware('auth');
+        $this->middleware('auth');
     }
 
     /**
      * Show the application dashboard.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function login()
     {
-        return view('home');
+       /* return view('adminlte::home'); */
+       return view('home');
     }
-
 }

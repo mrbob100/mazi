@@ -1,48 +1,69 @@
-<div class="container">
-    <!-- Example row of columns -->
-    <div class="row">
+@if($products)
         <header>
-            <h3 class="head text-center">Latest Products</h3>
+            <h1 class="head text-center">{!! $products[0]->categories->name !!}</h1>
         </header>
- @if($products)
-    @foreach($products as $prod)
-            <div class="col-xs-4 product simpleCart_shelfItem text-center" >
-
-                <a href="{{route('product',['id'=>$prod->id]) }}"> <img src="{{ asset('public/'.env('THEME'))}}/images/{{ $prod->img->max }}" style="height: 150px;" alt="вывод изображения" /></a>
-                <div class="mask">
-                    <a href="{{route('product',['id'=>$prod->id]) }}" >Quick View</a>
-                </div>
-                <div class="product liked-product simpleCart_shelfItem">
-                    <a class="like_name" href="{{route('product',['id'=>$prod->id]) }}" style=" color: #816263;font-size: 0.7em;">{!! $prod->name !!}</a>
-                    <p><a class="item_add" href="{{route('product',['id'=>$prod->id]) }}" style=" color: #816263;font-size: 1.0em;"><i></i> <span class=" item_price">{!!$prod->price  !!} гр.</span> </a></p>
-                </div>
 
 
-            <!--p><a class="btn btn-default" href="{{-- route('articleShow',['id'=>$article->id]) --}}" role="button">Подробнее &raquo;</a></p-->
+             <div class="wrapProd">
+                    @foreach($products as $prod)
 
-            <!--form action="{{-- route('articleDelete',['article' => $article->id]) --}}" method="post"-->
 
-                <!-- <input type="hidden" name="_method" value="DELETE">-->
+                             <div class="productsin">
 
-            {{--method_field('DELETE')--}}
+                                 <a href="{{route('product',['id'=>$prod->id]) }}"> <img src="{{ asset('public/'.env('THEME'))}}/images/{{ $prod->img->max }}"  alt="вывод изображения" /></a>
 
-            {{-- csrf_field() --}}
-            <!--button type="submit" class="btn btn-danger">
-                        Delete
-                    </button-->
+                                    @if($prod->new)
+                                     <div class="layer02">
+                                         <img src="{{ asset('public/'.env('THEME')) }}/images/features/new01.jpg" alt="" />
+                                     </div>
+                                      @elseif($prod->sale)
+                                     <div class="layer03">
+                                         <img src="{{ asset('public/'.env('THEME')) }}/images/features/sale.png" alt="" />
+                                     </div>
+                                        @endif
 
-                <!--/form-->
-            </div>
+                                <div class="liked-product simpleCart_shelfItem">
 
-     @endforeach
-        <div class="clearfix"></div>
-            @if($adopt)
-                    {!! $products->render()  !!}
-            @endif
-  @else
-   {!! Lang::get('ru.articles_no') !!}
-  @endif
-    </div>
+                                    <a class="like_name" href="{{route('product',['id'=>$prod->id]) }}" style=" color: #816263;font-size: 0.7em;">{{str_limit($prod->name,32)}}  </a>
+                                    <p><a class="item_add" href="{{route('product',['id'=>$prod->id]) }}" style=" color: #816263;font-size: 1.0em; padding-left: 40px"><i></i> <span class=" item_price">{!!$prod->price  !!} гр.</span> </a></p>
+                                    <div class="mask">
+                                        <a href="{{route('product',['id'=>$prod->id]) }}" >Купить</a>
+                                    </div>
+                                    <div class="dopContent">
+                                        <div class="tab-pane active" name="how-to" id="how-to" >
+                                            @if($prod->exactlyType1)
+                                                @foreach($prod->exactlyType1 as $item)
+                                                    <!--p class="tab-text" style=" color: #816263;font-size: 0.7em;" > {--!! $item !!--}</p-->
+                                                    <p class="tab-text" style=" color: #816263;font-size: 0.7em;" > {{str_limit($item,32)}}</p>
 
-    <hr>
-</div>
+                                                @endforeach
+                                            @endif
+
+                                        </div>
+                                    </div>
+
+                                </div>
+
+
+                             </div>
+
+
+                    @endforeach
+             </div>
+
+
+
+
+                        @if($adopt)
+                            <div class="coral">
+                           <p > {!! $products->render() !!}</p>
+                            </div>
+                        @endif
+
+
+          @else
+           {!! Lang::get('ru.articles_no') !!}
+          @endif
+
+
+

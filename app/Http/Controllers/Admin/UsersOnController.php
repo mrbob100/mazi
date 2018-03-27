@@ -13,7 +13,7 @@ use Corp\Models\Order_item;
 use Corp\User;
 use Config;
 use DB;
-
+use Illuminate\Database\Eloquent\Collection;
 use PhpParser\Node\Stmt\Foreach_;
 
 class UsersOnController extends adminSiteController
@@ -71,13 +71,54 @@ class UsersOnController extends adminSiteController
                 }
 
             }
+
+            elseif ($id==3)
+            {
+                $role = Role::find(4);
+                $data=[
+                    'title' =>'Таблица диллеров'
+                ];
+
+                $users=$role->users()->get();
+                $role = Role::find(5);
+                $users1=$role->users()->get();
+
+
+                $collection=new Collection();
+                $users=$collection->merge($users)->merge($users1);
+                $users->load('orders');
+
+
+
+                $i=0;
+                foreach($users as $user)
+                {
+
+                    $summits=isset($user->orders);
+                    if($summits){
+                        $summit=$user->orders;
+                        $sum=0;
+                        foreach($summit as $item)
+                        {
+                            $sum+=$item->sum;
+                        }
+                        array_push($sumUser,$sum);
+                    } else  array_push($sumUser,0);
+
+
+                }
+                $content = view(env('THEME').'.admin.usersups.content_users_not')->with(['data'=> $data,'users'=>$users,'sumUser'=>$sumUser,'priznak'=> $priznak])->render();
+                $this->vars = array_add($this->vars, 'content', $content);  // вывод навигации меню
+                return $this->renderOutput();
+            }
+
         else
             {
                 $role = Role::find(3);
                 $data=[
                     'title' =>'Таблица пользователей'
                 ];
-
+// загрузка пользователей с ролью 3
                 $users=$role->users()->paginate(Config::get('settings.paginate'));
                 $users->load('orders');
 

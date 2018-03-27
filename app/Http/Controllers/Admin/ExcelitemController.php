@@ -30,21 +30,25 @@ class ExcelitemController extends adminSiteController
 
     public function index()
     {
-        if(view()->exists(env('THEME').'.admin.handbooks.index'))
+        if(view()->exists(env('THEME').'.admin.excels.index'))
         {
 
             $data=[
                 'title'=>'Таблица выбора фильтров продукции'
             ];
 
-
+            $this->template=env('THEME').'.admin.excels.index';
             //    $users=$this->getUsers();
 
             //   $sas=$users->roles()->where('id',3);
 
+           // $menu=$this->getMenu();
 
+            // dd($menu);
+          //  $navigation = view(env('THEME') . '.admin.categories.navigation_category')->with('menu',$menu)->render();
+          //  $this->vars = array_add($this->vars, 'navigation', $navigation);  // вывод навигации меню
             $content = view(env('THEME').'.admin.excels.inputCSV')->with(['data'=>$data])->render();
-            $this->vars = array_add($this->vars, 'content', $content);  // вывод навигации меню
+           $this->vars = array_add($this->vars, 'content', $content);  // вывод навигации меню
             return $this->renderOutput();
 
         }
@@ -123,38 +127,22 @@ class ExcelitemController extends adminSiteController
 
             foreach($inputs as $k=>$input)
             {
+                if(isset($k)) {
+                    if($k=='img')
+                    {
+                        $k='img->max';
+                    }
+                    $query->addSelect($k);
+                }
 
-                if($k=='category_id')$query->addSelect('category_id');
-                if($k=='name')$query->addSelect('name');
-                if($k=='description')$query->addSelect('description');
-                if($k=='text')$query->addSelect('text');
-                if($k=='price')$query->addSelect('price');
-                if($k=='img')$query->addSelect('img');
-                if($k=='type')$query->addSelect('type');
-                if($k=='country')$query->addSelect('country');
-                if($k=='groupTools')$query->addSelect('groupTools');
-                if($k=='new')$query->addSelect('new');
-                if($k=='hit')$query->addSelect('hit');
-                if($k=='sale')$query->addSelect('sale');
-                if($k=='weightbrutto')$query->addSelect('weightbrutto');
-                if($k=='weightnetto')$query->addSelect('weightnetto');
-                if($k=='width')$query->addSelect('width');
-                if($k=='length')$query->addSelect('length');
-                if($k=='height')$query->addSelect('height');
-                if($k=='termGuarantee')$query->addSelect('termGuarantee');
-                if($k=='class')$query->addSelect('class');
-                if($k=='packing')$query->addSelect('packing');
-                if($k=='company')$query->addSelect('company');
-                if($k=='exactlyType1')$query->addSelect('exactlyType1');
-                if($k=='sclad')$query->addSelect('sclad');
-                if($k=='ukvd')$query->addSelect('ukvd');
             }
 
 
-            $this->optionCategories();
+
 
 
              $items=$query->get();
+
             //  $items=$this->p_rep->get($select,false,false ,false);
             //   $items=DB::table('products')->select($str)->get();
           //  $items=Product::all();
@@ -172,30 +160,27 @@ class ExcelitemController extends adminSiteController
     }
 
 
-     public function optionCategories()
-     {
-         $categoty=$this->c_rep->get();
-         $mBuilder=Menu::make('MyNav', function ($m) use ($categoty) {
-             foreach($categoty as $item)
-             {
-                 if($item->parent==0)
-                 {
-                     $m->add($item->title,$item->path)->id($item->id); // в пункт меню присваиваеется title , путь и id
-                 }
-                 else {
-                     if($m->find($item->parent))  // поиск родительского элемента и он существует
-                     {
-                         $m->find($item->parent)->add($item->title,$item->path)->id($item->id);
-                     }
 
-                 }
-             }
-         });
-         $navigation = view(env('THEME') . '.admin.categories.navigation_category')->with('category',$categoty)->render();
-         $this->vars = array_add($this->vars, 'navigation', $navigation);  // вывод навигации меню
-         return $mBuilder;
+    public function getMenu()
+    {
+        $menu=$this->c_rep->get();
+        $mBuilder=Menu::make('MyNav1', function ($m) use ($menu) {
+            foreach($menu as $item)
+            {
+                if($item->parent_id==0)
+                {
+                    $m->add($item->name,null)->id($item->id); // в пункт меню присваиваеется title , путь и id
+                }
+                else {
+                    if($m->find($item->parent_id))  // поиск родительского элемента и он существует
+                    {
+                        $m->find($item->parent_id)->add($item->name,null)->id($item->id);
+                    }
 
-     }
-
+                }
+            }
+        });
+        return $mBuilder;
+    }
 
 }

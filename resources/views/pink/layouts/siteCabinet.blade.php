@@ -30,6 +30,9 @@
     <link href="{{ asset('public/'.env('THEME')) }}/css/jquery-ui.css" rel="stylesheet" type="text/css"/>
     <link href="{{ asset('public/'.env('THEME')) }}/css/jquery-ui.theme.min.css" rel="stylesheet" type="text/css"/>
     <link href="{{ asset('public/'.env('THEME')) }}/css/jquery-ui.structure.min.css" rel="stylesheet" type="text/css"/>
+    <link href="{{ asset('public/'.env('THEME')) }}/css/smart.css" rel="stylesheet">
+    <link href="{{ asset('public/'.env('THEME')) }}/css/Lucky.css" rel="stylesheet">
+
     <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 
 </head>
@@ -39,108 +42,79 @@
 
 
 <!-- header-section-starts -->
-
+<div>
 @yield('headers')
-
-<div class="container">
-    <div class="row">
-        <div class="col-xs-3 col-sm-3 col-lg-3 container-fluid ">
+</div>
 
 
 
 
-            <div class="logo" >
-                <h1  ><a href="{{ route('index')  }} "><span>Bosch</span> </a></h1>
 
-            </div>
-            <br/><br/><br/>
 
+
+ <section class="cabinet">
+     <div class="secondwrap-01">
             @if(session('status'))
 
                 <div class="alert alert-success">
+                    <h2> Личный кабинет</h2>
                     <h3>{!! session('status') !!}</h3>
                 </div>
             @endif
             @if(session('Author'))
-                <div class="alert alert-success">
+                    <div class="alert alert-success">
+                        <h1>Статус:&nbsp  {{ Session::get('Author.status')}}</h1>
+                         <p>E-mail:&nbsp  {{ Session::get('Author.email')}}</p>
 
-                     <p>E-mail:&nbsp  {{ Session::get('Author.email')}}</p>
+                        <p>Тел: &nbsp     {{ Session::get('Author.phone')}}</p>
+                        <p>Адрес:  &nbsp  {{ Session::get('Author.address')}}</p>
+                        <p>Оборот(месячный):  &nbsp  {!! session('Turnover') !!}.00 гр</p>
+                        @if(Session::get('Author.status')!='dealer1' && Session::get('Author.status')!='dealer2')
+                            <h2>Скидка на товары :  &nbsp {{ Session::get('Author.discount')}}%</h2>
+                            <h3>Скидка зависит от объема закупок</h3>
+                        @endif
 
-                    <p>Тел: &nbsp     {{ Session::get('Author.phone')}}</p>
-                    <p>Адрес:  &nbsp  {{ Session::get('Author.address')}}</p>
-                    <p>Оборот(месячный):  &nbsp  {!! session('Turnover') !!}.00 гр</p>
-                    <h2>Скидка на товары :  &nbsp {{ Session::get('Author.status')}}%</h2>
-                    <h3>Скидка зависит от объема закупок</h3>
 
-                </div>
-                <form>
-                    <input type="button" class="alert alert-danger" value="Изменить параметры авторизации" onClick='location.href="{{ route('change') }}"'>
-                </form>
+
+                    </div>
+                    <form>
+                        <input type="button" class="alert alert-danger" value="Изменить параметры авторизации" onClick='location.href="{{ route('change') }}"'>
+                    </form>
             @endif
-
-
-        </div>
-
-
-
-    </div>
-</div>
+     </div>
 
 
 
 
-<!-- content-section-starts-here -->
-<div class="container">
-    <div class="main-content">
-        <div class="online-strip">
-            <div class="col-md-4 follow-us">
-                <h3>follow us : @yield('js')</h3>
-            </div>
-            <div class="col-md-4 shipping-grid">
-                <div class="shipping">
-                    <img src="{{ asset('public/'.env('THEME')) }}/images/shipping.png" alt="" />
-                </div>
-                <div class="shipping-text">
-                    <h3>Бесплатная доставка</h3>
-                    <p>от 2000 гр.</p>
-                </div>
-                <div class="clearfix"></div>
-            </div>
-            <div class="col-md-4 online-order">
-                <p>Гарячая линия</p>
-                <h3>Tel:999 4567 8902</h3>
-            </div>
-            <div class="clearfix"></div>
-        </div>
-
-    </div>
-
-</div>
 
 
 
-@if(Route::currentRouteName()=='cabinet'||Route::currentRouteName()=='cabinetItems')
-    <div class="container">
-        <div class="row">
-
-            <div class="col-xs-3">
-                @yield('leftBar')
-            </div>
-            <div class=" col-xs-9"   >
-                <div id="mediumMine">@yield('content')</div>
-            </div>
-        </div>
-    </div>
-@else
-
-    <!-- content-section-I am in col xs-12 -->
-
-    <div >@yield('content')</div>
 
 
-@endif
+
+                 <div class="secondwrap-02">
 
 
+                        @if(Route::currentRouteName()=='cabinet'||Route::currentRouteName()=='cabinetItems')
+
+                                <div class="rockwel-01">
+                                        @yield('leftBar')
+                                 </div>
+                                    <div class=" rockwel-02"   >
+                                        <div id="mediumMine">@yield('content')</div>
+                                    </div>
+                                </div>
+
+                        @else
+
+                            <!-- content-section-I am in col xs-12 -->
+
+                            <div >@yield('content')</div>
+
+
+                        @endif
+                  </div>
+  </section>
 
 
 

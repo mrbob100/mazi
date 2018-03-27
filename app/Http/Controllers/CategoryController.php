@@ -3,6 +3,7 @@
 namespace Corp\Http\Controllers;
 
 //use Illuminate\Support\Facades\Request;
+use Corp\Repositories\NewproductRepository;
 use Corp\Repositories\ProductsRepository;
 use Corp\Repositories\SlidersRepository;
 use Corp\Models\Category;
@@ -25,6 +26,7 @@ class CategoryController extends SiteController  // выбор из боково
         $this->s_rep=$s_rep;
         $this->template=env('THEME').'.left_bar';
         $this->bar=true;  // устанавливает сайт бар значения: left, right, no
+
     }
 
     public function index($id)
@@ -50,6 +52,7 @@ class CategoryController extends SiteController  // выбор из боково
         $countries=[]; $profile1=[]; $companies=[]; $profile2=[];
         $impact=[]; $packs=[];
         $notImpact=[]; $powers=[];
+        $typeProducts=[];
 
         for($i=0; $i<$cnt; $i++)
         {
@@ -175,8 +178,21 @@ class CategoryController extends SiteController  // выбор из боково
                     return $item;
                 });*/
 
+                    foreach ($sas->exactlyType1 as $k=>$type)
+                    {
+                        if (isset($typeProducts[$k][$type])) {
+                            $typeProducts[$k][$type][2] += 1;
 
-                if(isset($sas->exactlyType1->power)) // если описана мощность
+                        } else
+                            {
+
+                                $typeProducts[$k][$type][1] = $type;
+                                $typeProducts[$k][$type][2] = 1;
+                            }
+
+                    }
+
+             /*   if(isset($sas->exactlyType1->power)) // если описана мощность
                 {
                     if(isset( $powers[$sas->exactlyType1->power][1])&& ( $powers[$sas->exactlyType1->power][1]==$sas->exactlyType1->power))
                     {
@@ -187,7 +203,7 @@ class CategoryController extends SiteController  // выбор из боково
                         $powers[$sas->exactlyType1->power][1]=$sas->exactlyType1->power;
                         $powers[$sas->exactlyType1->power][2]=1;
                     }
-                }
+                } */
             }
 
 
@@ -208,7 +224,9 @@ class CategoryController extends SiteController  // выбор из боково
             'packs'=>$packs,
             'powers'=>$powers,
             'minValue'=>$minValue,
-            'maxValue'=>$maxValue
+            'maxValue'=>$maxValue,
+            'typeProducts'=>$typeProducts,
+
         ];
 
 
@@ -283,15 +301,17 @@ public function resumeIndex()
         $p_inp2=explode('.',$p_inp[1]);
 
         $query=DB::table('products')->whereBetween('price',[$p_inp1[1],$p_inp2[1]])->select('*')->where('category_id',$id_cat[0]);
-
+        unset($input['pricer']);
                if(isset($input['menuFirms']))
                 {
                    $query->addSelect('company')->where('company',$input['menuFirms']);
+                  unset($input['menuFirms']);
                 }
                 if(isset($input['menuCountries']))
                 {
                   // $counterer=mb_strtolower($input['menuCountries'],'UTF-8');
                     $query->addSelect('country')->where('country',$input['menuCountries']);
+                    unset($input['menuCountries']);
                 }
 
 
@@ -299,29 +319,43 @@ public function resumeIndex()
                 {
                     //$counterer=mb_strtolower($input['menuComplect'],'UTF-8');
                     $query->addSelect('packing')->where('packing',$input['menuComplect']);
+                    unset($input['menuComplect']);
                 }
                 if(isset($input['menuTools']))  // пилы
                 {
                     $query->addSelect('groupTools')->where('groupTools',$input['menuTools']);
+                    unset($input['menuTools']);
                 }
 
                 if(isset($input['menuTools2'])) // вибромашины
                 {
                     $query->addSelect('groupTools')->where('groupTools',$input['menuTools2']);
+                   unset($input['menuTools2']);
                 }
 
                 if(isset($input['dop_options'])) // ударные
                 {
                     $query->addSelect('groupTools')->where('groupTools',6);
+                    unset($input['dop_options']);
                 }
                 if(isset($input['dop_options1'])) //  и безударные
                 {
                     $query->addSelect('groupTools')->where('groupTools',7);
+                    unset($input['dop_options1']);
                 }
+     /*   if(isset($input['dzen'])) //  типы электрическая. батарейки...
+        {
+            $query->addSelect('type')->where('type',$input['dzen']);
+            unset($input['dzen']);
+        } */
+
 
 
      //   $products=$query->get(['id','name','code','description','img','price','type','country','groupTools','new','weightbrutto','weightnetto', 'length','height','exactlyType1','category_id','keywords','meta_desc']);
         $productsItem=$query->get();
+
+       // $productsItem->load('categories');
+
 
       //  $products=$this->getProducts( $id_cat);
        // dd($productsItem);
@@ -333,34 +367,44 @@ public function resumeIndex()
             {   $item->exactlyType1=json_decode($item->exactlyType1); }
             return $item;
         });
-
-
-        if(isset($input['menuPower']))
+        $vars=[];
+       // $inputSave=$input;
+        if($input)
         {
-            $razbor=explode('В',$input['menuPower']);
-            $s1=mb_stristr($razbor[0],'-');
-            if($s1)
-            {$razbor=explode('-',$razbor[0]); }
-            else{$razbor=explode(' ',$razbor[0]); }
-            $rez1=trim($razbor[1]);
 
-            $cnt=count( $productsItem);
-            for($i=0; $i<$cnt; $i++)
-
+            foreach($input as $k=>$item)
             {
-              $razbor=explode('В',$productsItem[$i]->exactlyType1->power);
-              $s1=mb_stristr($razbor[0],'-');
-              if($s1)
-              {$razbor=explode('-',$razbor[0]); }
-                else{$razbor=explode(' ',$razbor[0]); }
-                $rez=trim($razbor[1]);
-               if( $rez1!=$rez)
-               {
-                   unset($productsItem[$i]);
-               }
-            }
+                   foreach($productsItem as $product)
+                   {
+
+
+
+                        $sa=$item;
+
+                        if((isset($product->exactlyType1->$k))&&($item==$product->exactlyType1->$k))
+                        {
+                            $sas=$product->exactlyType1->$k;
+                            array_push($vars,$product);
+                        }
+
+                  }
+                $productsItem=$vars;
+                $vars=[];
+           }
         }
-        $content=view(env('THEME').'.products_choise')->with('productsItem',$productsItem)->render();
+       /* $cnt=count($vars);
+        $productsIt=[];
+      if($cnt>0)
+      {
+          for($j=0; $j<$cnt; $j++)
+          {
+              $productsIt[$j]=array_pop($vars);
+          }
+      }
+        $productsItem=$productsIt; */
+
+$category=Category::where('id', $id_cat)->first();
+        $content=view(env('THEME').'.products_choise')->with(['productsItem'=>$productsItem,'category'=>$category])->render();
        // $this->vars=array_add($this->vars,  'content', $content);
 
         /* $articles=$this->getArticles($cat_alias);

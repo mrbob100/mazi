@@ -1,6 +1,6 @@
 @if($menu)
-    <div class="menu classic ">
-        <ul id="nav" class="menu nav navbar-nav  horizontal">
+    <div class="classic">
+        <ul id="nav" class="menu nav ">
             @include(env('THEME').'.customMenuItems',['items'=>$menu->roots()])
         </ul>
     </div>

@@ -11,11 +11,11 @@ class Csvload extends Model
     {
 
 
-            $line=str_random(7);
+           // $line=str_random(7);
             $obj= new \stdClass;
-            $obj->mini=$line.$myImage.'_mini.jpg';
-            $obj->max=$line.$myImage.'_max.jpg';
-            $obj->path=$line.$myImage.'_path.jpg';
+            $obj->mini=$myImage.'_mini.jpg';
+            $obj->max=$myImage.'_max.jpg';
+            $obj->path=$myImage.'_path.jpg';
             $img=Image::make($workImage);
             //   $img->resize(null, 600, function ($constraint) {
             //      $constraint->aspectRatio();
