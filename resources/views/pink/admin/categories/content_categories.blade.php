@@ -8,6 +8,7 @@
                     <th>№ п/п</th>
                     <th>Родительская категория</th>
                     <th>Категория</th>
+                    <th>Изображение</th>
                     <th>Удалить</th>
                 </tr>
 
@@ -20,6 +21,8 @@
                         <td>{{ $category->id }}</td>
                         <td>{{ $category->parent_id==0 ?  'Самостоятельная категория' :   $category->getCategory->name  }}</td>
                         <td> {!! Html::link(route('categoryEdit',['category'=>$category->id]), $category->name,['alt'=>$category->name, 'style'=>'background-image: url("/public/pink/images/admin/icn_edit.png")'] ) !!}</td>
+                        <td>{!! Html::image('public/'.env('THEME').'./images/'.$category->img,'',['class'=>'img-circle img-responsive', 'width'=>'50px',
+                   'data-buttonName'=>'btn-primary','data-placeholder'=>$category->name]) !!}</td>
                    <td> {!! Form::open(['url'=>route('categoryEdit',['category'=>$category->id] ), 'class'=>'form-horizontal', 'method'=>'POST']) !!}
 
                        {{ method_field('DELETE') }}

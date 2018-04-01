@@ -148,8 +148,6 @@ section.profit .container-wrap{
 section.profit .container-wrap-row .catalog {
    border: 1px solid lightblue;
 width: 270px; min-height: 200px;
-
-
     display: flex; flex-direction: column;
     justify-content: space-between;
 font-size:15px ;
@@ -183,6 +181,9 @@ li a .azone-first {
     height: 100%;
 }
 
+li a .azone .material-icons{
+    font-size: small; padding-top: 5px;
+}
 
 section.profit .container-wrap-row .catalog li a{
     color:black;
@@ -202,18 +203,26 @@ section.profit .container-wrap-row .catalog li a{
     max-width: 300px;
     border: 1px solid lightblue;
     margin: 10px 0 10px 0;
+    display: block;
 }
+.container-wrap-row .text{
+    margin: 20px 10px;
+}
+.container-wrap-row .text p{
+    padding: 10px 10px 0 20px;
 
+}
 
 /*Конец Второго бокового меню */
 
 /* Баннер  */
-.container-wrap-banner {
-    background: url(../images/features/banner_001.jpg) no-repeat;
-min-width: 75%;
-    background-size: cover;
-   height:600px;
-    padding: 10% 10% ;
+.container-wrap-banner img{
+   /* background: url(../images/features/banner_001.jpg) no-repeat; */
+min-width: 25%;
+    max-width: 1000px;
+
+   height:575px;
+
 
 
 }
@@ -223,6 +232,11 @@ min-width: 75%;
 
 /* Слайдер*/
 
+
+
+.flexslider {
+    margin: 0;
+}
 .flexslider #flexiselDemo3{
 
     align-items: flex-end;
@@ -230,14 +244,15 @@ min-width: 75%;
     display: flex;
     display: -webkit-flex;
     flex-wrap: wrap;
-    min-width: 97%;
+    min-width: 77%;
     overflow: hidden;
     background-color:#FCF9F8;
     padding: 30px 0 50px 10px;
     margin-top: 45px;
-    margin-left: 20px;
+   /* margin-left: 20px; */
+
     height: 300px;
-    width: 100px;
+    width: 1000px;
     justify-content: space-around;
 
 
@@ -245,6 +260,7 @@ min-width: 75%;
 .slider h1 {
     margin-top: 50px;
     font-size: 20px;
+
 }
 .flexslider #flexiselDemo3 .sliderIn{
     min-width: 10%; height: 250px;
@@ -278,6 +294,11 @@ min-width: 75%;
     height: 170px;
 }
 /*  Конец Слайдера*/
+.profit1{
+  /*  margin-top: 50px; */
+    width:1000px;
+    min-width: 100px;
+}
 
 /* секция новых продуктов*/
 .slick-slider {
@@ -296,11 +317,17 @@ min-width: 75%;
     justify-content: space-around;
     padding: 20px 5px 80px 5px;
 
+
     background-color:#FCF9F8 ;
     margin: 10px ;
     position: relative;
-    max-height: 300px;
+    height: 250px;
 }
+.slick-slider .productsLine a img{
+    height: auto; width: 150px;
+display: block;
+}
+
 /* подгрузка new*/
 .slick-slider .productsLine .layer02 {
     position: absolute; /* Абсолютное позиционирование */
@@ -320,8 +347,8 @@ min-width: 75%;
 
 @media all and (max-width: 560px){
     .slick-slider { text-align: center;
-
-    max-width: 130px;}
+  min-width: 17%;
+    max-width: 100px;}
 }
 @media screen and (device-width: 1024px) {
     div {
@@ -338,13 +365,13 @@ min-width: 75%;
     flex-wrap: wrap;
     /*    min-width: 10%; height: 250px;
         max-width:20%; */
-    max-width: 1080px;
+   max-width: 1060px;
     min-width: 450px;
     min-height:300px;
     /*  height:500px;
    height: 1800px; */
     align-items: center;
-   justify-content: space-around;
+   justify-content: flex-start;
     /* min-width: 10%; */
 flex-grow: 1;
     flex-basis: 220px;flex-shrink: 0;
@@ -354,7 +381,7 @@ flex-grow: 1;
     position: relative;
     min-height: 315px;
    padding: 10px 5px 10px 5px;
- justify-content: flex-start;
+/* justify-content: flex-start;   */
 align-items: center;
     min-width: 225px;
     text-align: center;
@@ -423,4 +450,40 @@ align-items: center;
 }
 .liked-product {
     text-align: center;
+}
+
+/* вывод категорий по History API */
+.wrapCat {
+    margin: 0;
+    display: flex;
+    display: -webkit-flex;
+    flex-direction:row;
+    flex-wrap: wrap;
+    max-width: 1080px;
+    text-align: center;
+    justify-content: space-around;
+}
+.wrapCat .categoriesin a img{
+    max-height: 110px; max-width: 200px;
+}
+
+.wrapCat .categoriesin {
+    position: relative;
+    min-height: 200px;
+    padding: 30px 5px 10px 5px;
+    /* justify-content: flex-start;   */
+    align-items: center;
+    min-width: 225px;
+    text-align: center;
+    background-color:#EDEDED ;
+     margin: 10px;
+
+}
+
+/* Вывод описания категорий из таблицы categories */
+
+#contentText {
+    display: block;
+    max-width:950px; margin: 100px 20px 20px 60px;
+    min-width:250px ;
 }

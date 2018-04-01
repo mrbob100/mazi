@@ -106,16 +106,17 @@
                         <!--i class="material-icons"><p>home</p></i-->
 
                     </li>
-                    <li class="pointer " style="margin: 0 20px 0 -80px;"><a href="#" ><p >&nbsp;Каталог&nbsp;</p></a></li>
-                    <li class="pointer"><a href="#"><p>&nbsp;Акция&nbsp;</p></a></li>
-                    <li class="pointer"><a href="#"><p>&nbsp;Оплата&nbsp;</p></a></li>
-                    <li class="pointer" ><a href="#"><p>&nbsp;Доставка&nbsp;</p></a></li>
-                    <li class="pointer" ><a href="#"><p>&nbsp;Гарантия&nbsp;</p></a></li>
+                    <li class="pointer historyAPI" style="margin: 0 20px 0 -80px;" data-href="{{URL::to('categoryMain')}}"><a href="#" ><p >&nbsp;Каталог&nbsp;</p></a></li>
+
+                    <li class="pointer historyAPI"><a href="#"><p>&nbsp;Акция&nbsp;</p></a></li>
+                    <li class="pointer historyAPI"><a href="#"><p>&nbsp;Оплата&nbsp;</p></a></li>
+                    <li class="pointer  historyAPI" ><a href="#"><p>&nbsp;Доставка&nbsp;</p></a></li>
+                    <li class="pointer  historyAPI" ><a href="#"><p>&nbsp;Гарантия&nbsp;</p></a></li>
 
                     @if(!Auth::check())
-                        <li class="pointer1 sem">&nbsp;&nbsp;<a href="{{asset('cabinet') }}"><span class="glyphicon glyphicon-user"> </span>&nbsp;Войти&nbsp;&nbsp;</a></li>
+                        <li class="pointer1  sem">&nbsp;&nbsp;<a href="{{route('cabinet') }}"><span class="glyphicon glyphicon-user"> </span>&nbsp;Войти&nbsp;&nbsp;</a></li>
                     @else
-                        <li class="pointer1 sem">&nbsp;&nbsp;<a href="{{asset('cabinet') }}"><span class="glyphicon glyphicon-user"> </span>&nbsp;Кабинет</a>&nbsp;&nbsp;</li>
+                        <li class="pointer1  sem">&nbsp;&nbsp;<a href="{{route('cabinet') }}"><span class="glyphicon glyphicon-user"> </span>&nbsp;Кабинет</a>&nbsp;&nbsp;</li>
                     @endif
 
 
@@ -129,11 +130,18 @@
 <!-- секция боковой каталог -->
 
 <section class="profit">
-    <div class="container-wrap">
+    <div class="container-wrap"><!-- flex: row-->
+
         <div class="container-wrap-row">
                 <div class=" catalog" >
                     <p>  {{ Widget::run('MainWidget') }}</p>
-                    <!--p>  {--{ dd(Widget::run('MainWidget')) }--}</p-->
+                </div>
+
+                <div class=" text" > <!-- второй левый боковой -->
+                    <ul>
+                        <li><a href="#"><p>Статьи </p></a></li>
+                        <li><a href="#"><p>Обзоры</p></a></li>
+                    </ul>
                 </div>
             @if(Route::currentRouteName()!='index')
                 <div class="item">
@@ -143,34 +151,42 @@
                     </div>
                 </div>
             @endif
-        </div>
-   @if(Route::currentRouteName()=='index')
-        <div class="container-wrap-banner">    <!-- вывод баннера-->
-        </div>
-    @else
-        <div class="item" id="mediumMine">
-                @yield('content')
-        </div>
-        @endif
+        </div>  <!-- конец боковых меню-->
+        <div class="container-right-wpap">
+           @if(Route::currentRouteName()=='index')
+                <div class="container-wrap-banner">    <!-- вывод баннера-->
+                    <img src="{{ asset('public/'.env('THEME')) }}/images/features/banner_001.jpg" alt="banner" />
+                </div>
+                <div class="slider">
+                    @yield('sliders')
+                </div>
+                <div class="profit1">
+                    <div class="wrap_01">
+                        @yield('newProducts')
+                    </div>
+                </div>
 
+
+               @else
+                <div class="item" id="mediumMine">
+
+                        @yield('content')
+                </div>
+                @endif
+               <div class="piza"  style="background-color: white;"  id="contentHolder">
+                   <!--вставка html кода из синего меню IP history -->
+               </div>
+               <div class="pizaText"  style="background-color: white;"  id="contentText">
+                   <!--вставка html кода из синего меню IP history -->
+               </div>
+        </div>
     </div>
 
 </section>
 
-<section class="slider">
-    @yield('sliders')
-</section>
-
-<section class="profit1">
-
-           <div class="wrap_01">
-               @if(Route::currentRouteName()=='index')
 
 
-                   @yield('newProducts')
-               @endif
-           </div>
-</section>
+
 
 
 <!-- Секция новых продуктов -->
@@ -187,7 +203,7 @@
 <script type="text/javascript" src=" {!! asset('public/'.env('THEME')) !!}/js/script.js" charset="utf-8" ></script>
 
 
-<script type="text/javascript" src=" {!! asset('public/'.env('THEME')) !!}/js/main.js"  ></script>
+
 
 <script type="text/javascript" src=" {!! asset('public/'.env('THEME')) !!}/js/jquery-ui.js" charset="utf-8" ></script>
 <!--script type="text/javascript" src=" {--!! asset('public/'.env('THEME')) !!--}/js/vue.min.js" charset="utf-8" ></script-->
@@ -197,6 +213,8 @@
 <script type='text/javascript' src='{!! asset('public/'.env('THEME')) !!}/js/touch.js'></script>
 <script type='text/javascript' src='{!! asset('public/'.env('THEME')) !!}/js/imagesloaded.pkgd.min.js'></script>
 <script type='text/javascript' src='{!! asset('public/'.env('THEME')) !!}/js/slick.js'></script>
+   <script type='text/javascript' src='{!! asset('public/'.env('THEME')) !!}/js/history.js'></script>
    <script type='text/javascript' src='{!! asset('public/'.env('THEME')) !!}/js/jquery-migrate-1.2.1.min.js'></script>
+   <script type="text/javascript" src=" {!! asset('public/'.env('THEME')) !!}/js/main.js"  ></script>
 </body>
 </html>

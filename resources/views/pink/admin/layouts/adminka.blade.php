@@ -14,7 +14,7 @@
     <link href="{{ asset('public/'.env('THEME')) }}/css/site.css" rel="stylesheet">
     <link href="{{ asset('public/'.env('THEME')) }}/css/jumbotron.css" rel="stylesheet">
     <link href="{{ asset('public/'.env('THEME')) }}/css/animate.css" rel="stylesheet">
-    <meta name="csrf-token" content="{!! csrf_token() !!}" />
+
 
     <link rel='stylesheet' id='zoom-css'  href='{{ asset('public/'.env('THEME')) }}/css/zoom.css' type='text/css' media='all' />
 

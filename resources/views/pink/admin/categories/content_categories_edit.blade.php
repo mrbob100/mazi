@@ -53,6 +53,31 @@
 
         </div>
     </div>
+
+    @if(isset($pic))
+        {!! Form::label('old_images','Изображение:',['class'=>'col-xs2 control-label']) !!}
+        <div class="col-xs-offset-2 col-xs10">
+            {!! Html::image(asset('public/'.env('THEME')).'/images/'. $pic ,'',['class'=>'img-circle img-responsive', 'width'=>'100px',
+            'data-buttonName'=>'btn-primary','data-placeholder'=>$pic ]) !!}
+            {!! Form::hidden('old_images',$pic ) !!}
+        </div>
+    @endif
+    <div class="form-group">
+        {!! Form::label('img','Изображение:',['class'=>'col-xs2 control-label']) !!}
+        <div class="col-xs8">
+            {!! Form::file('img',['class'=>'filestyle','data-buttonText'=>'Выберите изображение',
+            'data-buttonName'=>'btn-primary','data-placeholder'=>'Файла нет']) !!}
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        {!! Form::label('text','Описание',['class'=>'col-xs2 control-label']) !!}
+        <div class="col-xs8">
+            {!! Form::textarea('text',$data['text'],['id'=>'editor1','class'=>'form-control','placeholder'=>'Описание']) !!}
+        </div>
+    </div>
+
     <div class="form-group">
         {!! Form::label('keywords','Ключевые слова',['class'=>'col-xs2 control-label']) !!}
         <div class="col-xs8">
@@ -73,7 +98,7 @@
     </div>
     {!! Form::close() !!}
     <script>
-        CKEDITOR.replace('editor');
+        CKEDITOR.replace('editor1');
     </script>
 </div>
 </div>

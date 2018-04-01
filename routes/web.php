@@ -93,6 +93,12 @@ Route::get('get_captcha/{config?}', function (\Mews\Captcha\Captcha $captcha, $c
 
 
 
+// маршруты для синего меню
+Route::get('categoryMain', ['uses'=>'CategoryMainController@index', 'as'=>'catmain']);
+Route::get('categorysub', ['uses'=>'CategorySubController@index', 'as'=>'catsub']);
+
+
+
 
 Route::group(['prefix'=>'admin','middleware'=>['web','auth']], function(){
 

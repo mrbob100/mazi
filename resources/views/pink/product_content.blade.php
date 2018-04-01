@@ -26,7 +26,7 @@
       </script>
      <div class="wrap_02">
          <div class="right_side1">
-             <div > <a itemprop="image" href="{{ asset('public/'.env('THEME')) }}/images/{{ $products[0]->img->path }}" id="zoom1" class="zoom" title="62" style="position:relative;" > <img class="" src="{!! asset('public/'.env('THEME')) !!}/images/{{$products[0]->img->max}}"  alt="NICE PROMO DRESS" /> </a> </div>
+             <div > <a itemprop="image" href="{{ asset('public/'.env('THEME')) }}/images/{{ $products[0]->img->path }}" id="zoom1" class="zoom" title="62" style="position:relative; " > <img class="slidek" src="{!! asset('public/'.env('THEME')) !!}/images/{{$products[0]->img->max}}"  alt="NICE PROMO DRESS" /> </a> </div>
          </div>
              <div class="right_side2">
                  <div class="dress-name">
@@ -135,6 +135,9 @@
            /*   background-color: #EBE8E7; */
               margin: 20px 20px 80px 90px;
 
+          }
+          .slidek {
+              width: 220px; height: auto;
           }
       </style>
 

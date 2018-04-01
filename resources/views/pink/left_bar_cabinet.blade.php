@@ -1,4 +1,5 @@
 <form  id="selectMyFixing" style="display: block; background-color: #DEDEDE; width: 240px; padding: 20px 20px;" action="{{route('cabAnalize')}}"   method="post">
+    {{ csrf_field() }}
     @if($data['worked'])
         <p><b>Заказы по стадии выполнения</b></p>
 

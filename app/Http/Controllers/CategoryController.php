@@ -2,7 +2,7 @@
 
 namespace Corp\Http\Controllers;
 
-//use Illuminate\Support\Facades\Request;
+use Illuminate\Http\Request;
 use Corp\Repositories\NewproductRepository;
 use Corp\Repositories\ProductsRepository;
 use Corp\Repositories\SlidersRepository;
@@ -10,7 +10,7 @@ use Corp\Models\Category;
 use Corp\Models\Product;
 //use GuzzleHttp\Psr7\Response;
 use Response;
-use Request;
+//use Request;
 use Config;
 use Session;
 use DB;
@@ -29,12 +29,13 @@ class CategoryController extends SiteController  // выбор из боково
 
     }
 
-    public function index($id)
+    public function index(Request $request)
     {
       /*  $sliderItems = $this->getSliders(); // пункты кадров слайдера
         $sliders = view(env('THEME') . '.slider')->with('sliders', $sliderItems)->render();
         $this->vars = array_add($this->vars, 'sliders', $sliders);
 */
+       $id=$request->id;
         Session::pull('Category');
       if(!session('Category')) Session::push('Category',['id'=>$id]);
         $this->category_id=$id;

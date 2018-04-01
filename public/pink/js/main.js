@@ -391,6 +391,76 @@ jQuery(document).ready(function() {
 
 });
 
+
 jQuery(document).ready(function() {
     $('#product-category_id').on('input')
+});
+
+
+
+// Функции history API
+
+jQuery('document').ready(function(){
+    jQuery('.historyAPI').on('click', function(e){
+        e.preventDefault();
+        let href = $(this).data('href');
+        // Getting Content
+       let $ss=getContent(href, true);
+        jQuery('.historyAPI').removeClass('active');
+        $(this).addClass('active');
+
+    });
+
+});
+
+// Adding popstate event listener to handle browser back button
+window.addEventListener("popstate", function(e) {
+    // Get State value using e.state
+    $pat=location.pathname;
+    getContent(location.pathname, false);
+});
+window.addEventListener('hashchange', function(e) {
+    // Get State value using e.state
+
+    getContent(location.pathname, false);
+});
+
+
+function getContent(url, addEntry, id=0) {
+    $.get(url,{id: id})
+        .done(function( data ) {
+            // Updating Content on Page
+            $('.container-wrap-banner').empty();
+            $('.slider').empty();
+            $('.profit1').empty();
+            $('#mediumMine').empty();
+            $('#contentHolder').empty();
+            $('#contentText').empty();
+            $('#contentHolder').append(data.content);
+            $('#contentText').append(data.sigma);
+          //  $('#contentHolder').html(data);
+      // alert('Загрузка завершена.');
+            $pas=url.split('/');
+            url= $pas.pop();
+            console.log('data',data);
+            if(addEntry == true) {
+                // Add History Entry using pushState
+                history.pushState(null, null, url);
+
+            }
+        });
+}
+
+jQuery('document').ready(function(){
+    jQuery('#contentHolder').on('click','.like_name', function(e){
+        e.preventDefault();
+        let href = $(this).data('href');
+        let id=$(this).data('id');
+        // Getting Content
+        let $ss=getContent(href, true, id);
+        jQuery('.like_name').removeClass('active');
+        $(this).addClass('active');
+    });
+
+
 });

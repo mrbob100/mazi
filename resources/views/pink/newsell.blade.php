@@ -5,7 +5,7 @@
 <br/>
 @if($newProducts)
 
-    <div class="slick-slider" data-slick='{"slidesToShow": 4, "slidesToScroll": 2}'>
+    <div class="slick-slider" data-slick='{"slidesToShow": 4, "slidesToScroll": 1}'>
 
 
 
@@ -17,7 +17,7 @@
 
             <div class="productsLine">
 
-                        <a href="{{route('product',['id'=>$prod->product_id]) }}"> <img src="{{  asset($prod->path) }}" style="height: 150px; width: 200px;" alt="вывод изображения" /></a>
+                        <a href="{{route('product',['id'=>$prod->product_id]) }}"> <img src="{{  asset($prod->path) }}"  alt="вывод изображения" /></a>
 
                         <div class="layer02">
                             <img src="{{ asset('public/'.env('THEME')) }}/images/features/new012.png" alt="" />
