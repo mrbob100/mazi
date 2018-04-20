@@ -176,6 +176,7 @@ return [
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
         // prod
         Laravel\Tinker\TinkerServiceProvider::class,
+        DaveJamesMiller\Breadcrumbs\ServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -241,8 +242,10 @@ return [
         'Image' => Intervention\Image\Facades\Image::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
         'Captcha'=>Mews\Captcha\Facades\Captcha::class,
+        'Breadcrumbs' => DaveJamesMiller\Breadcrumbs\Facade::class,
         // dev
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
+
     ],
     'db_fields'=>[
         'firstname','lastname','email'

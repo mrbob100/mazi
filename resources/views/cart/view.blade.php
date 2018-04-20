@@ -1,8 +1,8 @@
 @extends(env('THEME').'.layouts.site')
-@section('content')
+@section('content1')
 
 @if(session('cart'))
-    <div class="container">
+    <div class="container101">
 
     <header id="header_wrapper">
 
@@ -24,7 +24,7 @@
                 {{session('status')}}
             </div>
         @endif
-     <h3> Ваш заказ</h3> <br/>
+     <span style="font-weight:900; font-size: 24px; margin: 10px;">Ваш заказ</span> <br/>
     </header>
     <div class="table-responsive">
         <table class="table table-hover table-striped">

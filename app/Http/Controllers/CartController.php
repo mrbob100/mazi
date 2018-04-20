@@ -52,7 +52,7 @@ class CartController extends Controller
        // $product=DB::table('products')->where('id',$id)->select('id','name','code','description','img','price','category_id','keywords','meta_desc')->get();
         if(empty($product)) return false;
         $products=json_decode($product->img);
-        $product->img=$products->mini;
+        $product->img=$products->max;
         $newprice=Session::get('Price');
         if($newprice)  // установка новой цены
         {
@@ -79,9 +79,10 @@ class CartController extends Controller
        //  dump(session());
 
 
-        $content=view('cart.cartModal')->with('product',$product)->render();
-        return $content;
-
+      //  $content=view('cart.cartModal')->with('product',$product)->render();
+       // return $content;
+        $commonSum=view(env('THEME').'.right_bar_buttom')->render();
+        return Response::json(['success'=>true, 'commonSum'=>$commonSum]);
     }
 
 
@@ -127,10 +128,6 @@ class CartController extends Controller
     {
         return redirect('/');
     }
-
-
-
-
    //__________________________________________________________________________________________________________________
     public function cartView(Request $request)
     {
@@ -255,8 +252,8 @@ class CartController extends Controller
             ];
 
         }
-
-        return view('cart.view', ['order'=>$order,'data'=>$data  ] );
+        $content= view('cart.view', ['order'=>$order,'data'=>$data  ] )->render();
+        return view('cart.view', ['order'=>$order,'data'=>$data,'content'=>$content  ] );
     }
 
     protected function saveOrderItems($items, $order_id){

@@ -14,6 +14,7 @@ use Corp\Models\Discount;
 use Route;
 use Auth;
 use Session;
+use Response;
 class ProductController extends SiteController
 {
 
@@ -71,14 +72,18 @@ class ProductController extends SiteController
 
         }
         else { $newprice=0; $discount=0;  $summa=0;}
+        $name=$products[0]->name;
+        $str=mb_strpos($name, " ");
+        $row=mb_substr($name, 0, $str);
+        $row1=mb_substr($name,$str);
 
-
-        $content = view(env('THEME') . '.product_content')->with(['products'=> $products,'adopt'=>$this->adopt,'discount'=>$discount,'newprice'=>$newprice,'summa'=>$summa])->render();
-        $this->vars = array_add($this->vars, 'content', $content);
+        $content = view(env('THEME') . '.product_content')->with(['products'=> $products,'adopt'=>$this->adopt,'discount'=>$discount,'newprice'=>$newprice,'summa'=>$summa,'row'=>$row,'row1'=>$row1])->render();
+       // $this->vars = array_add($this->vars, 'content', $content);
         
 
 
-        return $this->renderOutput();
+     //  return $this->renderOutput();
+        return Response::json(['success'=>true, 'content'=>$content]);
     }
 
     protected function getProduct($alias=false)

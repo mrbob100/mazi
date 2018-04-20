@@ -11,7 +11,7 @@ background-color: #ededed;
 main {
     width: 75%;  margin: 0 auto;
     background-color: #fff;
-font-family: "Playfair Display",Arial,Helvetica,sans-serif!important;
+font-family:"Bosch Sans Light","Helvetica Neue",Helvetica,Arial,sans-serif!important;
     color: #000;
 }
 
@@ -29,7 +29,7 @@ nav .line {
     left: 0;
     position: relative;
    margin: 10px 0 30px 0;
-    z-index: 1030;
+    z-index: 10;
 
 }
 
@@ -50,7 +50,7 @@ nav .line {
 }
 
 .wrap .menu-call p {
-    padding: 10px 10px 0 0;
+    padding: 10px 10px 2px 0;
 }
 .menu-call .menu-wrap .search {
     display: inline-block;
@@ -61,6 +61,12 @@ nav .line {
     cursor: pointer;
 padding-left: 5px;
     margin-left: 45px;
+    font-size: 12px;
+}
+
+.menu-call a {
+    color: black;
+    text-decoration: none;
 }
 /* .menu-search-window span {
      content: ''; width: 300px;
@@ -132,6 +138,7 @@ color: #005691;
 section.profit .container-wrap{
     display: flex; flex-direction: row;
     display: -webkit-flex;
+    width:100%;
     flex-wrap: wrap;
 }
 /*section.profit .container-wrap .container-wrap-row {
@@ -196,9 +203,9 @@ section.profit .container-wrap-row .catalog li a{
 #selectMyFixing {
     padding: 10px 10px;
     font-size:12px ;
-
+   /* background-color:#F5F6FF ; */
 }
-.container-wrap-row .text {
+.container-wrap-row .text ul{
     min-width: 250px; min-height: 200px;
     max-width: 300px;
     border: 1px solid lightblue;
@@ -206,22 +213,31 @@ section.profit .container-wrap-row .catalog li a{
     display: block;
 }
 .container-wrap-row .text{
-    margin: 20px 10px;
+    margin-top: 20px;
 }
 .container-wrap-row .text p{
     padding: 10px 10px 0 20px;
 
 }
 
-/*Конец Второго бокового меню */
 
+
+/*Конец Второго бокового меню */
+.container-right-wpap {
+    display: block;
+width: 100%;
+    max-width: 800px;
+    min-width:600px;
+    flex-grow: 1;
+}
 /* Баннер  */
+
 .container-wrap-banner img{
    /* background: url(../images/features/banner_001.jpg) no-repeat; */
 min-width: 25%;
     max-width: 1000px;
 
-   height:575px;
+   height:500px;
 
 
 
@@ -283,7 +299,15 @@ min-width: 25%;
     margin-left: 10px;
 }
 
+.slider header .text-center {
 
+   /* background-color: #ffffff; */
+    width: 1000px;
+   text-align: left;
+    padding-left: 231px;
+ margin-left: -2px;
+    margin-top: 20px;
+}
 .sliderIn a.like_name {
     color: black;font-size: 1em;
 }
@@ -328,6 +352,12 @@ min-width: 25%;
 display: block;
 }
 
+.wrap_01 .text-center {
+    text-align: left;
+    padding-left: 231px;
+    margin-left: -2px;
+    margin-top: 20px;
+}
 /* подгрузка new*/
 .slick-slider .productsLine .layer02 {
     position: absolute; /* Абсолютное позиционирование */
@@ -357,133 +387,266 @@ display: block;
 }
     /* секция products_content */
 
-.wrapProd  {
 
-    display: flex;
-    display: -webkit-flex;
-    flex-direction:row;
-    flex-wrap: wrap;
-    /*    min-width: 10%; height: 250px;
-        max-width:20%; */
-   max-width: 1060px;
-    min-width: 450px;
-    min-height:300px;
-    /*  height:500px;
-   height: 1800px; */
-    align-items: center;
-   justify-content: flex-start;
-    /* min-width: 10%; */
-flex-grow: 1;
-    flex-basis: 220px;flex-shrink: 0;
-}
-
-.wrapProd .productsin {
-    position: relative;
-    min-height: 315px;
-   padding: 10px 5px 10px 5px;
-/* justify-content: flex-start;   */
-align-items: center;
-    min-width: 225px;
-    text-align: center;
-    /* border: 3px solid blue; */
-    z-index: 0;
-    margin: 7px 20px 10px 20px;
-    -moz-border-radius: 10px; /* закругление для старых Mozilla Firefox */
-    -webkit-border-radius: 10px; /* закругление для старых Chrome и Safari */
-    -khtml-border-radius:10px; /* закругл. для браузера Konquerer системы Linux */
-    border-radius: 10px; /* закругление углов для всех, кто понимает */
-}
-.wrapProd .productsin a img{
-    max-height: 150px; max-width: 200px;
-}
-
-
-
-
-
-@media all and (max-width: 1069px){
-    .wrapProd{ text-align: center;
-        max-width: 900px;}
-}
-
-
-
-
-
-@media all and (max-width: 560px){
-   .wrapProd{ text-align: justify;}
-}
-/* вставка признака sale или new */
-.wrapProd .productsin .layer02, .layer03 {
-    position: absolute; /* Абсолютное позиционирование */
-    top: 0px; /* Положение от нижнего края */
-    left: 0px; /* Положение от правого края */
-    line-height: 1px;
-}
-
-.text-center {
-    margin: 40px 0;
-    text-align: center;
-    font-size: 20px;
-}
-.productsin .dopContent {
-    position: absolute;
-    display: none;
-  /*  width: 350px; */
-
-}
-.productsin:hover{
-    background: #fff;
-    border: 3px solid red;
-
-
-
-}
-.productsin:hover .dopContent{
-    display: block;
-
-
-}
-
-.coral {
-    text-align: center;
-}
-.liked-product {
-    text-align: center;
-}
 
 /* вывод категорий по History API */
 .wrapCat {
-    margin: 0;
-    display: flex;
+
+    display: inline-flex !important;
     display: -webkit-flex;
     flex-direction:row;
     flex-wrap: wrap;
-    max-width: 1080px;
+    width: 100%;
+ max-width: 1100px !important;
+    min-width:600px;
     text-align: center;
-    justify-content: space-around;
+    height: auto;
+   /* background-color:#FCF9F8 ; */
+    background: linear-gradient(to bottom right,#fefefe,#d5d5d5);
+    margin: 0px 10px;
+   justify-content: space-around;
+
 }
 .wrapCat .categoriesin a img{
-    max-height: 110px; max-width: 200px;
+    height: 80px; max-width: 60%;
 }
 
 .wrapCat .categoriesin {
     position: relative;
-    min-height: 200px;
-    padding: 30px 5px 10px 5px;
+    height: 150px;
+    padding: 5px 0;
     /* justify-content: flex-start;   */
     align-items: center;
-    min-width: 225px;
+   flex-basis: 150px;
     text-align: center;
-    background-color:#EDEDED ;
-     margin: 10px;
+
 
 }
-
+@media all and (max-width: 1351px){
+    .wrapCat { text-align: center;
+        min-width: 34%;
+        max-width: 100px;}
+}
+@media all and (max-width: 560px){
+    .wrapCat { text-align: center;
+        min-width: 25%;
+        max-width: 100px;}
+}
 /* Вывод описания категорий из таблицы categories */
 
 #contentText {
     display: block;
-    max-width:950px; margin: 100px 20px 20px 60px;
+    max-width:700px; margin: 100px 20px 20px 60px;
     min-width:250px ;
+}
+
+/*  мой кабинет*/
+.PinkerMain {
+    font-size: 12px;
+font-family: "Helvetica Neue",Helvetica,Arial,sans-serif!important;
+}
+
+
+
+/* крайнеее правое меню */
+.wrapSubProd{
+    display: flex;
+    flex-direction: column;
+    width:270px;
+    height: 630px;
+    overflow-y:auto;
+    background-color:#F5F6FF ;
+margin-left: 10px;
+    border: 1px solid #0a568c;
+  text-align: left;
+    align-items: flex-start;
+ padding-left: 10px;
+
+}
+
+
+/* Этот блок должен быть правым боковым*/
+.wrapSubProd .productsin{
+    position: relative;
+    min-height: 200px;
+    /* justify-content: flex-start;   */
+margin-top: 10px;
+    border-bottom: 1px solid #ccc;
+
+}
+
+.wrapSubProd .productsin a img{
+    max-height: 120px; width:auto; max-width: 200px;
+margin-top: 15px;
+}
+.wrapSubProd .productsin .liked-product{
+    padding-left: 150px;
+    margin-top: -40px;
+}
+
+.wrapSubProd .productsin .liked-product .mask{
+    margin-top:  10px;
+}
+.wrapSubProd .productsin .liked-product .mask a img{
+   width: 80px;height: auto;
+}
+.piza header > h1{
+    width: 100%;
+}
+.text-center {
+    background-color:#E9E9E9 ;
+    margin-left: 10px;
+padding: 10px 0 ;
+}
+.container-right-edgest {
+    background-color:#D6D6D6 ;
+    margin-left:10px;
+   padding-top: 10px;
+    padding-bottom: 10px;
+opacity: 1;
+
+}
+.container-right-edgest a img{
+   margin-left: 120px;
+}
+/*
+#edgest1 {
+    display: none;
+}*/
+
+
+#container-right-edge {
+    opacity: 1;
+}
+
+
+
+/* Этот блок по значению из левого  бокового меню выводит в центр данные  */
+.wrapSubInv,  .wrapProd{
+    flex-wrap: wrap;
+    flex-direction:row;
+    display: flex;
+    display: -webkit-flex;
+
+   width: 100%;
+    max-width: 1100px !important;
+    min-width:600px;
+    text-align: center;
+  height: auto;
+    /* background-color:#FCF9F8 ; */
+    background: linear-gradient(to bottom right,#fefefe,#d5d5d5);
+    margin: 0px  0  0 10px;
+    justify-content: space-around;
+}
+
+.wrapSubInv .productsin,.wrapProd .productsin{
+display: flex;
+    flex-direction: column;
+
+    padding: 20px 0;
+    /* justify-content: flex-start;   */
+
+    flex-basis: 350px;
+    text-align: center;
+
+
+}
+.wrapSubInv .productsin a .like_name, .wrapProd .productsin a .like_name{
+ padding: 10px 5px ;
+display: block;
+}
+.wrapSubInv .productsin .like_img img, .wrapProd .productsin .like_img img{
+    height: 100px; max-width: 60%;
+ margin-top: 15px;
+}
+.wrapSubInv .productsin .liked-product,.wrapProd .productsin .liked-product{
+    padding-left: 280px;
+    margin-top: -40px;
+}
+
+.wrapSubInv .productsin .liked-product .mask,.wrapProd .productsin .liked-product .mask{
+    margin-top:  10px;
+}
+.wrapSubInv .productsin .liked-product .mask a img,.wrapProd .productsin .liked-product .mask a img{
+    width: 80px;height: auto;
+}
+/*  работа с модальным блоком купить товар */
+.modal-body {
+    padding:5px 20px 20px 20px !important;
+
+}
+
+span {cursor:pointer; }
+.numberModal{
+    margin:100px 30%;
+}
+ .minus, .plus{
+    width:10px;
+    height:10px;
+    background:#f2f2f2;
+    border-radius:4px;
+    padding:3px 5px 3px 5px;
+    border:1px solid #ddd;
+}
+#unique{
+    height:24px;
+    border:1px solid #ddd;
+    border-radius:4px;
+    padding:0 2px;
+
+}
+
+/*  ссылка подробнее вывод продукта  второе модальное окно*/
+.modalMain {position: absolute; /* overflow-y:auto; */ width: 840px; max-width: 100%; height:562px; max-height: 100%; left: 25%; top: -100%; padding: 20px; background: #fff; border: 1px solid #333; z-index: 9999; transition: all 0.5s ease-in;}
+.overflow {width: 100%; height: 100%; z-index: 9998; background: rgba(0,0,0,0.7); position: absolute; top: 0;}
+
+.wrap_02{
+    display: flex;
+    flex-wrap: wrap;
+   justify-content: space-between;
+}
+.right_side1{
+    width: 295px;
+    max-width: 100%;
+
+}
+.right_side2 {
+    padding: 20px 0 20px 10px;
+    display: block;
+    width: 500px;
+    line-height: 1.5;
+
+    /* background-color: #EBE8E7; */
+   /* margin: 20px 0px 20px 50px; */
+}
+.right-side3 {
+    padding: 20px;
+    display: block;
+    /*   background-color: #EBE8E7; */
+    margin: 20px 20px 80px 90px;
+
+}
+.slidek {
+    width: 220px; height: auto;
+}
+
+
+.right_side_inn {
+    display: block;
+    width: 480px;
+    overflow-y:auto; height: 300px;
+}
+.right_side_inn .span__in0 {
+    display: block; width: 462px;height: 20px;
+    background:#E1E1E2;
+}
+ .tab_text_odd {
+    background:#E1E1E2; width: 462px;
+}
+
+.right_side_inn .span {
+    line-height: 2.5;
+}
+.container101{
+    width:1170px; max-width: 100%;
 }

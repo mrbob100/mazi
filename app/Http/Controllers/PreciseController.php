@@ -117,7 +117,9 @@ class PreciseController extends SiteController // контроллер отзы�
             $input = $request->except('_token');
 
          $am=trim($input['id'],'"');
-        $am1=trim($input['qt'],'"');
+        $am1=trim($input['qty'],'"');
+        $priceOut=0;
+            $total=0;
           $obj=new Cart();
             if(session('cart'))
             {
@@ -125,7 +127,7 @@ class PreciseController extends SiteController // контроллер отзы�
                 $rez1=count( $rez);
                 $i=0;
                 $sumQty=0;
-                $total=0;
+
                 do{
                     $q1=$rez[$i]['cart.id'];
                     if ($q1 == $am){
@@ -133,6 +135,7 @@ class PreciseController extends SiteController // контроллер отзы�
                     }
                     $sumQty+=  $rez[$i]['cart.qty'];
                     $total+=$rez[$i]['cart.qty']*$rez[$i]['cart.price'];
+                    $priceOut=$rez[$i]['cart.price'];
                     $i++;
                 } while($i<$rez1);
 
@@ -159,7 +162,7 @@ class PreciseController extends SiteController // контроллер отзы�
 
 
           $content=view('cart.cartModal')->render();
-            return Response::json(['success'=>true, 'content'=>$content]);
+            return Response::json(['success'=>true,  'content'=>$content]);
         }
         exit();
     }

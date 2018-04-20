@@ -5,7 +5,7 @@ return [
   'galary_path'=>'public/pink/images/galary',
     'home_port_count'=>5,
     'home_articles_count'=>3,
-    'paginate'=>18,
+    'paginate'=>12,
     'resent_comments'=>3,
     'resent_portfolios'=>3,
     'product_img'=>[

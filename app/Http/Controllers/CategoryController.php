@@ -36,15 +36,19 @@ class CategoryController extends SiteController  // выбор из боково
         $this->vars = array_add($this->vars, 'sliders', $sliders);
 */
        $id=$request->id;
+
         Session::pull('Category');
       if(!session('Category')) Session::push('Category',['id'=>$id]);
         $this->category_id=$id;
+        if(!$id) return redirect('/');
         $products=$this->getProducts($id);
         If(!$products) return redirect('/');
         $prod=$products[0];
         $prod->load('categories');
-
-
+        $category=Category::where('id',$this->category_id);
+        if(!isset($category->text)) {
+            $sigma="Привет ! Все хорошо, это проверка";
+        } else  $sigma=$category->text;
      //   dd($products);
         // блок перебора продукции и подсчета компаний , типов , фирм и т.д.
         $cnt=count($products);
@@ -232,7 +236,12 @@ class CategoryController extends SiteController  // выбор из боково
 
 
         $content=view(env('THEME').'.products_content')->with(['products'=>$products,'adopt'=>$this->adopt])->render();
-        $this->vars=array_add($this->vars,  'content', $content);
+        //$this->vars=array_add($this->vars,  'content', $content);
+        $leftBar=view(env('THEME').'.left_bar_content')->with([/*'cat'=>$this->category_id,*/'data'=>$this->data])->render();
+      //  Session::pull('leftBar');
+       // if(!session('leftBar')) Session::push('leftBar',['left'=> $this->data,'cat'=>$this->category_id]);
+       // $this->vars=array_add($this->vars,'leftBar', $leftBar);
+       //$this->vars=array_add($this->vars,'bar', $bar);
 
        /* $articles=$this->getArticles($cat_alias);
         $content=view(env('THEME').'.articles_content')->with('articles',$articles)->render();
@@ -242,9 +251,9 @@ class CategoryController extends SiteController  // выбор из боково
         $this->meta_desc=$prod->categories->description;
         $this->title='Категория '.$prod->categories->name;
 
-        return $this->renderOutput();
+       // return $this->renderOutput();
      // if(Request::has('id')) $id=Request::__get('id');
-
+        return Response::json(['success'=>true, 'content'=>$content, 'leftBar'=>$leftBar , 'sigma'=>$sigma]);
     }
 
     protected function getProducts($alias=false)
@@ -280,6 +289,10 @@ class CategoryController extends SiteController  // выбор из боково
     }
 
 
+
+
+
+//______________________________________________________________________________________________________________________
 //______________________________________________________________________________________________________________________
 
 public function resumeIndex()
@@ -296,13 +309,15 @@ public function resumeIndex()
        // $this->bar=false;
         $input = $request->except('_token');
         $p_inp=explode('-',$input['pricer']);
-     //   $p_inp1=mb_substr($p_inp[0],3);
-    //    $p_inp2=mb_substr($p_inp[1],3);
+        //   $p_inp1=mb_substr($p_inp[0],3);
+        //    $p_inp2=mb_substr($p_inp[1],3);
         $p_inp1=explode('.',$p_inp[0]);
         $p_inp2=explode('.',$p_inp[1]);
 
+       // $p_inp2=explode('.',$p_inp[1]);
+
         $query=DB::table('products')->whereBetween('price',[$p_inp1[1],$p_inp2[1]])->select('*')->where('category_id',$id_cat[0]);
-        unset($input['pricer']);
+        unset($input['pricer']); unset($input['pricer1']);
                if(isset($input['menuFirms']))
                 {
                    $query->addSelect('company')->where('company',$input['menuFirms']);
@@ -369,6 +384,7 @@ public function resumeIndex()
             return $item;
         });
         $vars=[];
+
        // $inputSave=$input;
         if($input)
         {
@@ -405,7 +421,7 @@ public function resumeIndex()
         $productsItem=$productsIt; */
 
 $category=Category::where('id', $id_cat)->first();
-        $content=view(env('THEME').'.products_choise')->with(['productsItem'=>$productsItem,'category'=>$category])->render();
+        $content=view(env('THEME').'.products_choise')->with(['productsItem'=> $productsItem,'category'=>$category])->render();
        // $this->vars=array_add($this->vars,  'content', $content);
 
         /* $articles=$this->getArticles($cat_alias);
@@ -418,7 +434,7 @@ $category=Category::where('id', $id_cat)->first();
        // return view($this->template)->with($this->vars);
         return Response::json(['success'=>true, 'content'=>$content]);
     }
-    exit();
+    exit("ошибка JSON");
 }
 
 //______________________________________________________________________________________________________________________

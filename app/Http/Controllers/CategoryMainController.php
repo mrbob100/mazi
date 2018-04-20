@@ -17,16 +17,18 @@ class CategoryMainController extends SiteController
        $j=0; $sigma='';
 foreach ($categories as $category)
 {
-    If($category->id==9999)
+    If($category->id==9999 || $category->id==315 )
     {
-        $sigma=$category->text;
+        if(!isset($category->text))
+        {
+            $sigma = "Привет ! Все хорошо, это проверка";
+        } else $sigma=$category->text;
+
          unset($categories[$j]);
     }
     $j++;
 }
-       if(!$sigma) {
-           $sigma="Привет ! Все хорошо, это проверка";
-       }
+
        $content=view(env('THEME').'.categories_main_choise')->with(['categories'=>$categories])->render();
      //  $this->vars=array_add($this->vars,  'content', $content);
 

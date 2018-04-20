@@ -49,17 +49,18 @@ Route::get('updateJson',['uses'=>'Admin\CsvloadController@updateJsonProduct','as
     Route::post('/import_process', 'ImportController@processImport')->name('import_process');
 //________________________________________________________________________________________________
 
-
-Route::get('category/{id}',['uses'=>'CategoryController@index','as'=>'category']);
-
+// работа с левым меню
+Route::get('category',['uses'=>'CategoryController@index','as'=>'category']);
+//Route::get('leftside',['uses'=>'CategoryleftController@index','as'=>'left']);
+Route::get('categoryleft',['uses'=>'CategoryLeftController@index','as'=>'categoryleft']);
 //Route::match(['get','post'],'category',['uses'=>'PreciseController@Index','as'=>'resume']);
 Route::post('catRes',['uses'=>'CategoryController@resumeIndex','as'=>'resume']);
 // стандартные маршруты  для аутенфикации
-    Route::group(['prefix'=>'product'], function() {
-        Route::get('/', ['uses'=>'ProductController@index', 'as'=>'product']);
+  //  Route::group(['prefix'=>'product'], function() {
+        Route::get('product', ['uses'=>'ProductController@index', 'as'=>'product']);
 
-    });
-Route::get('addcartios',['uses'=>'CartController@index', 'as'=>'addcart']);
+ //   });
+Route::get('addcartios',['uses'=>'CartController@index', 'as'=>'addcartios']);
 Route::get('changeQty',['uses'=>'PreciseController@changeQuantity','as'=>'changeBuy']);
  Route::get('cartShow',['uses'=>'CartController@cartShow', 'as'=>'cartShow']);
 Route::get('clear',['uses'=>'CartController@clear', 'as'=>'clearance']);
@@ -90,6 +91,11 @@ Route::get('home', 'HomeController@login')->name('home');
 Route::get('get_captcha/{config?}', function (\Mews\Captcha\Captcha $captcha, $config = 'default') {
     return $captcha->src($config);
 });
+
+
+
+// хлебные крошки
+
 
 
 

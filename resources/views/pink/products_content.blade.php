@@ -1,16 +1,18 @@
 @if($products)
+   
         <header>
             <h1 class="head text-center">{!! $products[0]->categories->name !!}</h1>
         </header>
 
 
-             <div class="wrapProd">
+             <div class="wrapSubInv">
                     @foreach($products as $prod)
 
 
                              <div class="productsin">
+                                 <span style=" color: #5A7793;font-size: 0.8em;font-weight: bold;">{{str_limit($prod->name,32)}}  </span>
 
-                                 <a href="{{route('product',['id'=>$prod->id]) }}"> <img src="{{ asset('public/'.env('THEME'))}}/images/{{ $prod->img->max }}"  alt="вывод изображения" /></a>
+                                 <a  id="reactimage" class="like_img" href="{{route('addcartios',['id'=>$prod->id])}}" data-href="{{URL::to('addcartios')}}" data-id="{{$prod->id}}" data-sign="23"> <img src="{{ asset('public/'.env('THEME'))}}/images/{{ $prod->img->max }}"  alt="вывод изображения" /></a>
 
                                     @if($prod->new)
                                      <div class="layer02">
@@ -24,23 +26,12 @@
 
                                 <div class="liked-product simpleCart_shelfItem">
 
-                                    <a class="like_name" href="{{route('product',['id'=>$prod->id]) }}" style=" color: #816263;font-size: 0.7em;">{{str_limit($prod->name,32)}}  </a>
-                                    <p><a class="item_add" href="{{route('product',['id'=>$prod->id]) }}" style=" color: #816263;font-size: 1.0em; padding-left: 40px"><i></i> <span class=" item_price">{!!$prod->price  !!} гр.</span> </a></p>
-                                    <div class="mask">
-                                        <a href="{{route('product',['id'=>$prod->id]) }}" >Купить</a>
-                                    </div>
-                                    <div class="dopContent">
-                                        <div class="tab-pane active" name="how-to" id="how-to" >
-                                            @if($prod->exactlyType1)
-                                                @foreach($prod->exactlyType1 as $item)
-                                                    <!--p class="tab-text" style=" color: #816263;font-size: 0.7em;" > {--!! $item !!--}</p-->
-                                                    <p class="tab-text" style=" color: #816263;font-size: 0.7em;" > {{str_limit($item,32)}}</p>
 
-                                                @endforeach
-                                            @endif
-
-                                        </div>
+                                    <p><i><span class="item_price" style=" color: #5A7793;font-size: 0.8em;font-weight: bold;">{!!$prod->price  !!} гр.</span></i>  </p>
+                                    <div class="mask" >
+                                        <a id="reactbutton" href="{{route('addcartios',['id'=>$prod->id])}}" data-href="{{URL::to('addcartios')}}" data-id="{{$prod->id}}" data-sign="23"> <img src="{{ asset('public/'.env('THEME'))}}/images/features/add.png" alt="вывод кнопки добавить" /></a>
                                     </div>
+
 
                                 </div>
 
@@ -52,13 +43,13 @@
              </div>
 
 
+        @if($adopt)
+            <div class="coral">
+                <p > {!! $products->render() !!}</p>
+            </div>
+        @endif
 
 
-                        @if($adopt)
-                            <div class="coral">
-                           <p > {!! $products->render() !!}</p>
-                            </div>
-                        @endif
 
 
           @else

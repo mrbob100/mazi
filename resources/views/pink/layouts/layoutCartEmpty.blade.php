@@ -63,6 +63,7 @@
 
 
 @yield('content')
+@yield('content1')
 
 @yield('sliders')
 <!-- content-section-ends-here -->

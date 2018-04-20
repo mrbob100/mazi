@@ -13,5 +13,5 @@
 @endsection
 
 @section('footer')
-    {!! $footer !!}
+   <!-- {--!! $footer !!--} -->
 @endsection

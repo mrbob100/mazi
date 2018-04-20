@@ -1,60 +1,74 @@
-<div class="header">
-        <nav>
-            <div class="line">
 
+    <nav>
+        <div class="line">
+
+        </div>
+
+        <div class="wrap">
+            <div class="logo">
+                <div class="ltitle">
+
+                    <a href="{{ route('index')  }} "> <img src="{{ asset('public/'.env('THEME')) }}/images/features/logo_bosch_165x54.png" alt="" /></a>
+                </div>
             </div>
+            <div class="menu-call">
+                <p> Заказ обратного звонка</p>
+                <div class="menu-wrap">
+                    <div class="menu-search-window">
+                        <p>{!! Form::open(['url'=>route('productSearch' ), 'class'=>'form-horizontal', 'method'=>'GET' ]) !!}
+                            {!! Form::text('q','',['class'=>' search','placeholder'=>'поиск товара']) !!}
+                            <span></span>
+                        </p>
 
-            <div class="wrap">
-                <div class="logo">
-                    <div class="ltitle">
-
-                        <img src="{{ asset('public/'.env('THEME')) }}/images/features/logo_bosch_165x54.png" alt="" />
+                        {!! Form::close() !!}</p>
+                    </div>
+                    <div class="menu-search-art">
+                        <i class="material-icons">search</i>
                     </div>
                 </div>
-                <div class="lsub">
-                    <menu>
-                        <li><a href="#"><p>Телефон - (555)6755444</p></a></li>
-                        <li><a href="#"><p>Заказ звонка</p></a></li>
-                        <li><a href="{{route('clearance') }}" ><p>Очистить корзину</p></a></li>
-                        <!--li><a href="#"><p>корзина</p></a></li-->
-                        <li ><a href="#" onclick="getCart();" class="simpleCart_empty" ><p>  Корзина</p></a></li>
-
-                    </menu>
-                </div>
-
-
+            </div>
+            <div class="menu-tel">
+                <p>Телефон - (555)6755444</p>
+                <p>Телефон - (555)6755444</p>
+                <p>Телефон - (555)6755444</p>
+            </div>
+            <div class="menu-cart">   <!-- корзина-->
+                <a href="#" onclick="getCart();" class="simpleCart_empty" ><img src="{{ asset('public/'.env('THEME')) }}/images/features/150923s.jpg" alt="" /></a>
+                <!--i class="material-icons blot">shopping_cart</i-->
             </div>
 
-
-        </nav>
-
-        <nav>
+        </div>
 
 
+    </nav>
 
-            <div class="wrap1">
+    <nav>
+        <!--  Синее меню - верхнее-->
+        <div class="wrap1">
 
-                <menu1>
-                    <li> <ul class="bender">
-                            <p>  {{ Widget::run('MainWidget') }}</p>
-                        </ul></li>
-                    <li><a href="#"><p>Оплата</p></a></li>
-                    <li><a href="#"><p>Доставка</p></a></li>
-                    <li><a href="#"><p>Гарантия</p></a></li>
-                    <li> {!! Form::open(['url'=>route('productSearch' ), 'class'=>'form-horizontal', 'method'=>'GET' ]) !!}
-                        {!! Form::text('q','',['class'=>'form-control','style'=>'margin:15px  ;height:20px; width:100px;','placeholder'=>' поиск']) !!}</p>
-                        {!! Form::close() !!}
-                    </li>
-                    @if(!Auth::check())
-                        <li><a href="{{asset('cabinet') }}"><span class="glyphicon glyphicon-user"> </span>Login</a></li>
-                    @else
-                        <li><a href="{{asset('cabinet') }}"><span class="glyphicon glyphicon-user"> </span>Кабинет</a></li>
-                    @endif
+            <menu1>
+                <li class="argo1">  <!-- Домик -->
+                    <a href="{{ route('index')  }} "> <p style="padding: 2px 0 0 0;" >  <img src="{{ asset('public/'.env('THEME')) }}/images/features/694571.png" alt="" /> </p> </a>
+                    <!--i class="material-icons"><p>home</p></i-->
+
+                </li>
+                <li class="pointer historyAPI" style="margin: 0 20px 0 -80px;" data-href="{{URL::to('categoryMain')}}"><a href="#" ><p >&nbsp;Каталог&nbsp;</p></a></li>
+
+                <li class="pointer historyAPI"><a href="#"><p>&nbsp;Акция&nbsp;</p></a></li>
+                <li class="pointer historyAPI"><a href="#"><p>&nbsp;Оплата&nbsp;</p></a></li>
+                <li class="pointer  historyAPI" ><a href="#"><p>&nbsp;Доставка&nbsp;</p></a></li>
+                <li class="pointer  historyAPI" ><a href="#"><p>&nbsp;Гарантия&nbsp;</p></a></li>
+
+                @if(!Auth::check())
+                    <li class="pointer1  sem">&nbsp;&nbsp;<a href="{{route('cabinet') }}"><span class="glyphicon glyphicon-user"> </span>&nbsp;Войти&nbsp;&nbsp;</a></li>
+                @else
+                    <li class="pointer1  sem">&nbsp;&nbsp;<a href="{{route('cabinet') }}"><span class="glyphicon glyphicon-user"> </span>&nbsp;Кабинет</a>&nbsp;&nbsp;</li>
+                @endif
 
 
-                </menu1>
-            </div>
+            </menu1>
+        </div>
 
-        </nav>
+    </nav>
 
-</div>
+

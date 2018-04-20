@@ -18,12 +18,13 @@
     <link href="{{ asset('public/'.env('THEME')) }}/css/jquery-ui.css" rel="stylesheet" type="text/css"/>
     <link href="{{ asset('public/'.env('THEME')) }}/css/jquery-ui.theme.min.css" rel="stylesheet" type="text/css"/>
     <link href="{{ asset('public/'.env('THEME')) }}/css/jquery-ui.structure.min.css" rel="stylesheet" type="text/css"/>
-    <link href="{{ asset('public/'.env('THEME')) }}/css/lucky.css" rel="stylesheet" type="text/css"/>
+
     <link href="{{ asset('public/'.env('THEME')) }}/css/smart.css" rel="stylesheet" type="text/css"/>
     <link href="{{ asset('public/'.env('THEME')) }}/css/reset.css" rel="stylesheet" type="text/css"/>
     <link href="{{ asset('public/'.env('THEME')) }}/css/slick.css" rel="stylesheet" type="text/css"/>
     <link href="{{ asset('public/'.env('THEME')) }}/css/slick-theme.css" rel="stylesheet" type="text/css"/>
 
+      
     <!--link href="{--{ asset('public/'.env('THEME')) }--}/css/flexslider.css" rel="stylesheet"  media="screen" type="text/css"/-->
     <script defer type="text/javascript" src=" {!! asset('public/'.env('THEME')) !!}/js/jquery.flexisel.js" charset="utf-8" ></script>
 
@@ -36,11 +37,11 @@
 <body>
    <main>
 <div class="modal fade" id="cart" role="dialog" data-backdrop="static" data-keyboard="false">
-    <div class="modal-dialog modal-lg " role="document" style="margin: 30px auto; width: 1000px;">
+    <div class="modal-dialog modal-lg " role="document" style="margin: 30px auto; width: 860px; height: 530px; overflow-y:auto;">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">Корзина</h4>
+                <h1 class="modal-title" >Мой набор инструментов</h1>
             </div>
             <div class="modal-body">
                 <p>One fine body&hellip;</p>
@@ -53,6 +54,17 @@
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
+
+
+       <div class="modalMain">
+           <h1>Заказать звонок</h1>
+           <form>
+               <input type="text" placeholder="Ваше имя"><br>
+               <input type="text" placeholder="Ваш телефон"><br>
+               <input type="submit" value="Отправить">
+           </form>
+       </div>
+
 <nav>
     <div class="line">
 
@@ -66,14 +78,12 @@
             </div>
         </div>
         <div class="menu-call">
-           <p> Заказ обратного звонка</p>
+            <a href="{{ route('index')  }}" >  <p> Заказ обратного звонка</p> </a>
                <div class="menu-wrap">
                  <div class="menu-search-window">
                     <p>{!! Form::open(['url'=>route('productSearch' ), 'class'=>'form-horizontal', 'method'=>'GET' ]) !!}
                         {!! Form::text('q','',['class'=>' search','placeholder'=>'поиск товара']) !!}
                         <span></span>
-                    </p>
-
                     {!! Form::close() !!}</p>
                 </div>
                 <div class="menu-search-art">
@@ -127,64 +137,74 @@
 
 
 
-<!-- секция боковой каталог -->
 
-<section class="profit">
-    <div class="container-wrap"><!-- flex: row-->
 
-        <div class="container-wrap-row">
-                <div class=" catalog" >
-                    <p>  {{ Widget::run('MainWidget') }}</p>
+       <!-- секция боковой каталог -->
+
+        <section class="profit">
+            <div class="container-wrap"><!-- flex: row-->
+
+                <div class="container-wrap-row">
+                        <div class=" catalog" >
+                            <p>  {{ Widget::run('MainWidget') }}</p>
+                        </div>
+
+                        <!--div class=" text" --> <!-- второй левый боковой -->
+                            <!--ul>
+                                <li><a href="#"><p>Статьи </p></a></li>
+                                <li><a href="#"><p>Обзоры</p></a></li>
+                            </ul>
+                        </div-->
+
+                        <div class="item">
+
+                            <div class="text" id="insertOption">
+
+                            </div>
+                        </div>
+
                 </div>
+                    <!-- конец боковых меню-->
+                <div class="container-right-wpap">
+                   @if(Route::currentRouteName()=='index')
+                        <div class="container-wrap-banner">    <!-- вывод баннера-->
+                            <img src="{{ asset('public/'.env('THEME')) }}/images/features/banner_001.jpg" alt="banner" />
+                        </div>
+                        <div class="slider">
+                            @yield('sliders')
+                        </div>
+                        <div class="profit1">
+                            <div class="wrap_01">
+                                @yield('newProducts')
+                            </div>
+                        </div>
 
-                <div class=" text" > <!-- второй левый боковой -->
-                    <ul>
-                        <li><a href="#"><p>Статьи </p></a></li>
-                        <li><a href="#"><p>Обзоры</p></a></li>
-                    </ul>
+                    @endif
+                       @yield('content1')
+                       <div class="piza"  style="background-color: white;"  id="contentHolder">
+                           <!--вставка html кода из синего меню IP history -->
+                       </div>
+                       <div class="pizaText"  style="background-color: white;"  id="contentText">
+                           <!--вставка html кода из синего меню IP history -->
+                       </div>
                 </div>
-            @if(Route::currentRouteName()!='index')
-                <div class="item">
+                <div id="wrap-last">
+                    <div id="container-right-edge">
+                        <!--h>Я здесь</h-->
+                    </div>
+                    <div class="container-right-edgest" >
 
-                    <div class="text">
-                        @yield('leftBar')
                     </div>
                 </div>
-            @endif
-        </div>  <!-- конец боковых меню-->
-        <div class="container-right-wpap">
-           @if(Route::currentRouteName()=='index')
-                <div class="container-wrap-banner">    <!-- вывод баннера-->
-                    <img src="{{ asset('public/'.env('THEME')) }}/images/features/banner_001.jpg" alt="banner" />
-                </div>
-                <div class="slider">
-                    @yield('sliders')
-                </div>
-                <div class="profit1">
-                    <div class="wrap_01">
-                        @yield('newProducts')
-                    </div>
-                </div>
+                <div id="uri_last"></div>
+            </div>
+
+        </section>
 
 
-               @else
-                <div class="item" id="mediumMine">
 
-                        @yield('content')
-                </div>
-                @endif
-               <div class="piza"  style="background-color: white;"  id="contentHolder">
-                   <!--вставка html кода из синего меню IP history -->
-               </div>
-               <div class="pizaText"  style="background-color: white;"  id="contentText">
-                   <!--вставка html кода из синего меню IP history -->
-               </div>
-        </div>
-    </div>
-
-</section>
-
-
+       <div class="bg_popUp"></div>
+  <div class="popUp_fast"> </div>
 
 
 
@@ -193,7 +213,7 @@
 
 
  </main>
-
+</body>
 
 <script type="text/javascript" src=" {!! asset('public/'.env('THEME')) !!}/js/jquery.scrollUp.min.js "  ></script>
 <script type="text/javascript" src=" {!! asset('public/'.env('THEME')) !!}/js/jquery.cookie.js"  ></script>
@@ -215,6 +235,7 @@
 <script type='text/javascript' src='{!! asset('public/'.env('THEME')) !!}/js/slick.js'></script>
    <script type='text/javascript' src='{!! asset('public/'.env('THEME')) !!}/js/history.js'></script>
    <script type='text/javascript' src='{!! asset('public/'.env('THEME')) !!}/js/jquery-migrate-1.2.1.min.js'></script>
+   <script type="text/javascript" src=" {!! asset('public/'.env('THEME')) !!}/js/jquery.listen.js"  ></script>
    <script type="text/javascript" src=" {!! asset('public/'.env('THEME')) !!}/js/main.js"  ></script>
-</body>
+
 </html>

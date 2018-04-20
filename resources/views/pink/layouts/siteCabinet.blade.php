@@ -8,36 +8,33 @@
     <title>{{$title or 'Bosch'}}</title>
     <link href="{{ asset('public/'.env('THEME')) }}/css/bootstrap.min.css" rel="stylesheet">
     <link href="{{ asset('public/'.env('THEME')) }}/css/animate.css" rel="stylesheet">
+    <link href="{{ asset('public/'.env('THEME')) }}/css/normalize.css" rel="stylesheet">
     <script type="text/javascript" src=" {!! asset('public/'.env('THEME')) !!} /js/jquery.js "  ></script>
     <script type="text/javascript" src=" {!! asset('public/'.env('THEME')) !!} /js/bootstrap.min.js"  ></script>
 
-    <link href="{{ asset('public/'.env('THEME')) }}/css/site.css" rel="stylesheet">
-    <link href="{{ asset('public/'.env('THEME')) }}/css/jumbotron.css" rel="stylesheet">
-    <link href="{{ asset('public/'.env('THEME')) }}/css/animate.css" rel="stylesheet">
-    <meta name="csrf-token" content="{!! csrf_token() !!}" />
+
 
     <link rel='stylesheet' id='zoom-css'  href='{{ asset('public/'.env('THEME')) }}/css/zoom.css' type='text/css' media='all' />
 
     <!--script type="text/javascript" src=" {--!! asset('public/'.env('THEME')) !!--}/js/jquery-ui.widget.js" charset="utf-8" ></script>
     <script type="text/javascript" src=" {--!! asset('public/'.env('THEME')) !!--}/js/jquery-ui.mouse.js" charset="utf-8" ></script>
     <script type="text/javascript" src=" {--!! asset('public/'.env('THEME')) !!--}/js/jquery-ui.slider.js" charset="utf-8" ></script-->
-    <link href="{{ asset('public/'.env('THEME')) }}/css/component.css" rel="stylesheet">
-    <link href="{{ asset('public/'.env('THEME')) }}/css/flexslider.css" media="screen" rel="stylesheet">
-    <link href="{{ asset('public/'.env('THEME')) }}/css/normalize.css" rel="stylesheet">
-    <link href="{{ asset('public/'.env('THEME')) }}/css/pushy.css" rel="stylesheet">
-    <link href="{{ asset('public/'.env('THEME')) }}/css/style.css" rel="stylesheet">
+
+
+
+
     <!--link href="{--{ asset('public/'.env('THEME')--) }}/css/uroda.css" rel="stylesheet"-->
     <link href="{{ asset('public/'.env('THEME')) }}/css/jquery-ui.css" rel="stylesheet" type="text/css"/>
     <link href="{{ asset('public/'.env('THEME')) }}/css/jquery-ui.theme.min.css" rel="stylesheet" type="text/css"/>
     <link href="{{ asset('public/'.env('THEME')) }}/css/jquery-ui.structure.min.css" rel="stylesheet" type="text/css"/>
     <link href="{{ asset('public/'.env('THEME')) }}/css/smart.css" rel="stylesheet">
-    <link href="{{ asset('public/'.env('THEME')) }}/css/Lucky.css" rel="stylesheet">
+    <link href="{{ asset('public/'.env('THEME')) }}/css/reset.css" rel="stylesheet" type="text/css"/>
 
     <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 
 </head>
 <body>
-
+<main>
 
 
 
@@ -45,12 +42,6 @@
 <div>
 @yield('headers')
 </div>
-
-
-
-
-
-
 
  <section class="cabinet">
      <div class="secondwrap-01">
@@ -131,8 +122,8 @@
 @yield('footer')
 
 
+</main>
 
-</body>
 
 
 <script type="text/javascript" src=" {!! asset('public/'.env('THEME')) !!}/js/jquery.scrollUp.min.js "  ></script>
@@ -146,8 +137,8 @@
 <script type="text/javascript" src=" {!! asset('public/'.env('THEME')) !!}/js/responsiveslides.min.js"  ></script>
 <script type="text/javascript" src=" {!! asset('public/'.env('THEME')) !!}/js/jquery.flexisel.js"  ></script>
 
-<script type="text/javascript" src=" {!! asset('public/'.env('THEME')) !!}/js/main.js"  ></script>
-<script type="text/javascript" src=" {!! asset('public/'.env('THEME')) !!}/js/pushy.js"  ></script>
+
+
 <script type="text/javascript" src=" {!! asset('public/'.env('THEME')) !!}/js/jquery-ui.js" charset="utf-8" ></script>
 <!--script type="text/javascript" src=" {--!! asset('public/'.env('THEME')) !!--}/js/vue.min.js" charset="utf-8" ></script-->
 <script type='text/javascript' src='{!! asset('public/'.env('THEME')) !!}/js/jquery.nicescroll.min.js'></script>
@@ -155,5 +146,6 @@
 <script type='text/javascript' src='{!! asset('public/'.env('THEME')) !!}/js/jquery.mousewheel.js'></script>
 <script type='text/javascript' src='{!! asset('public/'.env('THEME')) !!}/js/touch.js'></script>
 <script type='text/javascript' src='{!! asset('public/'.env('THEME')) !!}/js/zoom.js'></script>
-
+<script type="text/javascript" src=" {!! asset('public/'.env('THEME')) !!}/js/main.js"  ></script>
+</body>
 </html>
