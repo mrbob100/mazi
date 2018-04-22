@@ -1,5 +1,4 @@
-@extends(env('THEME').'.layouts.site')
-@section('content1')
+
 
 @if(session('cart'))
     <div class="container101">
@@ -129,4 +128,3 @@
     <h3>Корзина пуста</h3>
  </div>
 @endif
-@endsection

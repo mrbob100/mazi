@@ -48,7 +48,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Продолжить покупки</button>
-                <a href="{{ route('arrangeContract') }}" class="btn btn-success">Оформить заказ</a>
+                <a  href="{{route('arrangeContract')}}" data-href="{{URL::to('arrange')}}" data-sign="27" class="btn btn-success">Оформить заказ</a>
                 <button type="button" class="btn btn-danger" onclick="clearCart();">Очистить корзину</button>
             </div>
         </div><!-- /.modal-content -->
@@ -180,22 +180,25 @@
                         </div>
 
                     @endif
-                       @yield('content1')
+
                        <div class="piza"  style="background-color: white;"  id="contentHolder">
                            <!--вставка html кода из синего меню IP history -->
+                           @yield('content1')
                        </div>
                        <div class="pizaText"  style="background-color: white;"  id="contentText">
                            <!--вставка html кода из синего меню IP history -->
                        </div>
                 </div>
-                <div id="wrap-last">
-                    <div id="container-right-edge">
-                        <!--h>Я здесь</h-->
-                    </div>
-                    <div class="container-right-edgest" >
 
+                    <div id="wrap-last">
+                        <div id="container-right-edge">
+                            <!--h>Я здесь</h-->
+                        </div>
+                        <div class="container-right-edgest" >
+
+                        </div>
                     </div>
-                </div>
+
                 <div id="uri_last"></div>
             </div>
 

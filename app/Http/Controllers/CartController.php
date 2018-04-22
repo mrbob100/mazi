@@ -253,7 +253,8 @@ class CartController extends Controller
 
         }
         $content= view('cart.view', ['order'=>$order,'data'=>$data  ] )->render();
-        return view('cart.view', ['order'=>$order,'data'=>$data,'content'=>$content  ] );
+      //  return view('cart.view', ['order'=>$order,'data'=>$data,'content'=>$content  ] );
+        return Response::json(['success'=>true, 'content'=>$content]);
     }
 
     protected function saveOrderItems($items, $order_id){
