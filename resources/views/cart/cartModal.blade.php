@@ -1,5 +1,5 @@
 @if(session('cart'))
-    <div class="table-responsive">
+    <div class="table-responsive pq17">
         <table class="table table-hover table-striped">
 
             <thead>
@@ -15,6 +15,7 @@
             <tbody>
 
 
+
             @foreach(session('cart') as $item )
                 {{-- @foreach($items as $item )--}}
 
@@ -23,7 +24,7 @@
 
 
 
-                <tr>
+                <tr >
                     <td > <img src="{{ asset('public/'.env('THEME')) }}/images/{{ $item['cart.img'] }}  " height="80" alt="картинка"/> </td>
                     <td width="250px;" style=" color:#000000;font-size: 0.8em;font-weight: bold;">{!! $item['cart.name'] !!}
                         <br/>
@@ -59,15 +60,17 @@
                 <td>{--!! session('cardCommon.qty') !!--}  </td>
             </tr-->
 
-            <tr>
+            <!--tr>
                 <td colspan="4"> </td>
+                <td id="speedTotal" style=" color:#000000;font-size: 1.0em;font-weight: bold;">Итого:&nbsp;&nbsp;{--!! session('cardCommon.sum') !!--} .00&nbsp;гр. </td>
+            </tr-->
 
-                <!--td>   {--!!session('cardCommon.sum') !!--} </td-->
-                <td id="speedTotal" style=" color:#000000;font-size: 1.0em;font-weight: bold;">Итого:&nbsp;&nbsp;{!! session('cardCommon.sum') !!} .00&nbsp;гр. </td>
-            </tr>
             </tbody>
+
         </table>
+
     </div>
+    <div id="speedTotal" style=" color:#000000;font-size: 1.0em;font-weight: bold; margin-left:600px; ">Итого:&nbsp;&nbsp;{!! session('cardCommon.sum') !!} .00&nbsp;гр. </div>
 @else
     <h3>Корзина пуста</h3>
     <p><a href="{{route('index') }}" class="btn btn-primary">Продолжить</a></p>

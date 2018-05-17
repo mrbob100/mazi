@@ -13,7 +13,7 @@ class CategoryMainController extends SiteController
    public function index()
    {
 
-       $categories=Category::where('parent_id',0)->get();
+       $categories=Category::where('parent_id',8)->get();
        $j=0; $sigma='';
 foreach ($categories as $category)
 {
@@ -29,7 +29,8 @@ foreach ($categories as $category)
     $j++;
 }
 
-       $content=view(env('THEME').'.categories_main_choise')->with(['categories'=>$categories])->render();
+     //  $content=view(env('THEME').'.categories_main_choise')->with(['categories'=>$categories])->render();
+       $content=view(env('THEME').'.categories_sub_choise')->with(['categories'=>$categories])->render();
      //  $this->vars=array_add($this->vars,  'content', $content);
 
        /* $articles=$this->getArticles($cat_alias);

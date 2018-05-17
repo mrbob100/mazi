@@ -37,7 +37,7 @@
 <body>
    <main>
 <div class="modal fade" id="cart" role="dialog" data-backdrop="static" data-keyboard="false">
-    <div class="modal-dialog modal-lg " role="document" style="margin: 30px auto; width: 860px; height: 530px; overflow-y:auto;">
+    <div class="modal-dialog modal-lg " role="document" style="margin: 30px auto; width: 860px; height: 530px; ">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -46,6 +46,7 @@
             <div class="modal-body">
                 <p>One fine body&hellip;</p>
             </div>
+            <div class="modal-end"></div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Продолжить покупки</button>
                 <a  href="{{route('arrangeContract')}}" data-href="{{URL::to('arrange')}}" data-sign="27" class="btn btn-success">Оформить заказ</a>
@@ -108,6 +109,7 @@
 
 <nav>
    <!--  Синее меню - верхнее-->
+
         <div class="wrap1">
 
                 <menu1>
@@ -135,12 +137,14 @@
 
 </nav>
 
+<ul id="crumbs">
 
+</ul>
 
 
 
        <!-- секция боковой каталог -->
-
+<div id="central">
         <section class="profit">
             <div class="container-wrap"><!-- flex: row-->
 
@@ -189,15 +193,16 @@
                            <!--вставка html кода из синего меню IP history -->
                        </div>
                 </div>
+          <!-- Начало третьей колонки    -->
+                 <div id="wrap-last">
 
-                    <div id="wrap-last">
-                        <div id="container-right-edge">
+                        <div class="container-right-edge"></div>
                             <!--h>Я здесь</h-->
-                        </div>
-                        <div class="container-right-edgest" >
 
-                        </div>
-                    </div>
+                        <div class="container-right-edgest" ></div>
+
+                        <div class="container-end"></div>
+                  </div>
 
                 <div id="uri_last"></div>
             </div>
@@ -209,7 +214,7 @@
        <div class="bg_popUp"></div>
   <div class="popUp_fast"> </div>
 
-
+</div>
 
 
 <!-- Секция новых продуктов -->
@@ -236,7 +241,8 @@
 <script type='text/javascript' src='{!! asset('public/'.env('THEME')) !!}/js/touch.js'></script>
 <script type='text/javascript' src='{!! asset('public/'.env('THEME')) !!}/js/imagesloaded.pkgd.min.js'></script>
 <script type='text/javascript' src='{!! asset('public/'.env('THEME')) !!}/js/slick.js'></script>
-   <script type='text/javascript' src='{!! asset('public/'.env('THEME')) !!}/js/history.js'></script>
+<!--script type='text/javascript' src='{--!! asset('public/'.env('THEME')) !!--}/js/history.js'></script-->
+   <script type='text/javascript' src='{!! asset('public/'.env('THEME')) !!}/js/jquery.history.js'></script>
    <script type='text/javascript' src='{!! asset('public/'.env('THEME')) !!}/js/jquery-migrate-1.2.1.min.js'></script>
    <script type="text/javascript" src=" {!! asset('public/'.env('THEME')) !!}/js/jquery.listen.js"  ></script>
    <script type="text/javascript" src=" {!! asset('public/'.env('THEME')) !!}/js/main.js"  ></script>

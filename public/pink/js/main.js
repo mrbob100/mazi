@@ -60,7 +60,7 @@ $(' .modal-body').on('click', '.del-item', function(e){
 
 
 $(function(){
-    $('.tabOwl').on('click', '.del-item', function(e){
+    $('#contentHolder').on('click', '.container101 .tabOwl .del-item', function(e){
         //alert(123);
         e.preventDefault();
         let id = $(this).data('id');
@@ -420,7 +420,8 @@ function myRangeOut() {
                     $('#contentHolder').empty();
                     // $('#mediumMine').replaceWith(res.content);
                     $('#contentHolder').append(res.content);
-
+                    let h1= $('#contentHolder').height();
+                    $('.wrapSubProd').css('height',h1-120);
                 },
                 error: function () {
                     alert('Ошибка передачи slider и кнопок!');
@@ -459,14 +460,14 @@ jQuery(document).ready(function() {
 
       //  $("tr.asdast").fadeOut(1000);
         $(".asdast").fadeOut(1000);
-    };
+    }
 
 
     function func2(id){
 
         $(".asdast").fadeIn(1000);
 
-    };
+    }
 
 });
 
@@ -475,151 +476,408 @@ jQuery(document).ready(function() {
     $('#product-category_id').on('input')
 });
 
+//("main").css("opacity",0);
+jQuery(document).ready(function() {
+ //   ("main").css("opacity",1);
+    let main="indexpage";
+    $('#crumbs').empty();
+            $('#crumbs').append('<li><a>');
+            $('#crumbs li:last-child a').attr("href", "#").attr("id", main).html(main);
+    let inside={data: 'indexpage', pr: '99', url:'indexpage'};
+    NavigationCache.push(inside);
 
+});
+
+function workupPr(pr=0, data=0)
+{
+    if(pr!=25 && pr!=23)$('#insertOption').empty();
+
+    if(pr!="22") $('.profit .container-wrap-row .item .text').css({"border":"none","margin-top":"0"});
+    $('.container-wrap-banner').empty();
+    $('.slider').empty();
+    $('.profit1').empty();
+    $('#mediumMine').empty();
+    $('.container-right-edgest').empty();
+    if(pr!=22 && pr!=25 && pr!=23 &&pr!=26) $('#contentHolder').empty();
+    $('#contentText').empty();
+    if(pr==0){
+
+        $('.container-wrap-row .catalog').remove();
+        $('#wrap-last').css('display','none');
+        /*  $('.container-wrap-row ').css('border','none');
+         $('.container-wrap-row ').css({"display":"none"}); */
+
+        // $('.container-wrap-row .catalog').css({"border":"none","margin-top":"0"});
+    }
+    if(pr==0||pr==21)  {
+        $('.edgest1').empty();
+        $('.edgest2').empty();
+        $('#uri_last').empty();
+
+        //  $('#wrap-last ').empty();
+        //  $('#wrap-last ').append('<div id="container-right-edge"></div>');
+        // $('#wrap-last ').append('<div class="container-right-edgest"></div>');
+        $('.container-right-edge ').empty();
+        $('.container-right-edgest').empty();
+        $('.container-right-edgest').css('opacity','0');
+        $('.container-wrap-row .catalog').css({"display":"flex","border":"1px solid lightblue"});
+    }
+
+    if(pr=="22")
+    {
+
+        //     $('.container-wrap-row .catalog').css('border','inherit');
+
+        //     $('.container-wrap-row ').css({"display":"block"});
+
+        //      $('.container-wrap-row .catalog').append(data.leftBar);
+        $('#insertOption').append(data.leftBar);
+        $('#insertOption').css('opacity','0');
+        $('#insertOption').fadeTo(2000,1);
+        $('#insertOption').css({"border":"1px solid lightblue"});
+        /*
+         $('#wrap-last ').empty();
+         $('#wrap-last ').append('<div id="container-right-edge"></div>');
+         $('#wrap-last ').append('<div class="container-right-edgest"></div>');
+         */
+        $('#wrap-last').css('display','block');
+
+
+        if($('.container-end ').hasClass('edgest1'))
+        {
+            $('.container-end ').empty();
+            $('.edjes1').empty();
+            $('.edjes2').empty();
+        }
+        $('.edgest1').empty();
+        $('.edgest2').empty();
+        $('.container-right-edge ').empty();
+        // $('.container-end ').css('display','none');
+        $('.container-right-edge ').append(data.content);
+        $('.container-right-edge ').css('opacity','0');
+        $('.container-right-edge ').fadeTo(3000,1);
+        $('.container-right-edgest').empty();
+        $('.container-right-edgest').css('opacity','1');
+        $('.container-right-edgest').append(data.commonSum);
+        $('#wrap-last .container-end ').empty();
+        $('#wrap-last .container-end').css('display','none');
+
+        //  $sa=$('#insertOption input#pricer1').val();
+        //  $('#insertOption#selectMyFixing input#pricer dataMin').val($sa);
+        myRangeIn();
+
+    }
+    if(pr==23){
+        $('#wrap-last .container-end ').empty();
+
+        $('#wrap-last .container-end ').append(data.commonSum);
+
+        //$('#wrap-last .container-end ').css({"display":"block","background-color":"#E9E9E9","margin-left":"10px","height":"100px","width":"200px"});
+        $('.edgest1').css({"background-color":"#E9E9E9","margin":"0 0 0 10px","height":"50px","width":"200px"});
+        $('.edgest2').css({"background-color":"#E9E9E9","margin":"0 0 0 10px","padding-left":"90px","height":"50px","width":"200px"});
+    }
+    if(pr==24)  {
+        $('#container-right-edge, .container-right-edgest').css('opacity','0');
+        $('#contentHolder').append(data.content);
+        $('#insertOption').append(data.leftBar);
+
+        myRangeIn();
+    }
+    if(pr!=22 && pr!=24 && pr!=23 && pr!=26)
+    {
+        $('#contentHolder').append(data.content);
+        $('#contentText').append(data.sigma);
+
+    }
+    if(pr==25)
+    {
+        $('#container-right-edgest').empty();
+        $('.container-right-edgest').append(data.commonSum);
+
+    }
+
+    if(pr==26){
+        $('.container-right-edgest').empty();
+        $('.modalMain').empty();
+        $('.modalMain').append(data.content);
+        openWin();
+
+    }
+    if(pr==27){
+        $('#contentHolder').empty();
+        $('#wrap-last ').css('display','none');
+        $('#insertOption').css('opacity','0');
+        $('nav .wrap1').empty();
+        $('.container-wrap-row .catalog').css('border','inherit');
+        $('.container-wrap-row .catalog').css({"display":"none"});
+        // $('#container-right-edge ').empty();
+        //  $('.container-right-edgest').empty();
+        //  $('#wrap-last ').append('<div id="container-right-edge"></div>');
+        //   $('#wrap-last ').append('<div class="container-right-edgest"></div>');
+        $('#contentHolder').css('margin-left','20px');
+        $('#contentHolder').append(data.content);
+
+        $('.close').click();
+    }
+
+}
 //______________________________________________________________________________________________________________________
 // Функции history API
 
+let NavigationCache = [];
+let priznNav=0;
+let dad='';
+let riscMy=0;
+let url='';
+let cnt=0;
 $('document').ready(function(){
     jQuery('.historyAPI').on('click', function(e){
         e.preventDefault();
         let href = $(this).data('href');
         // Getting Content
 
-       let $ss=getContent(href, true);
+      let $ss=getContent(href, true);
         jQuery('.historyAPI').removeClass('active');
         $(this).addClass('active');
+
 
     });
 
 });
 
 // Adding popstate event listener to handle browser back button
-window.addEventListener("popstate", function(e) {
+/*window.addEventListener("popstate", function(e) {
     // Get State value using e.state
     $pat=location.pathname;
     getContent(location.pathname, false);
 });
-/*window.addEventListener('hashchange', function(e) {
-    // Get State value using e.state
 
-    getContent(location.pathname, false);
-}); */
+*/
+
+    History.Adapter.bind(window, 'statechange', function (e) {
+        /*  if (event.state) {
+         window.location.reload();
+         } */
+
+     console.log(window.history.length);
+     let ljn=window.history.length;
+        let ere='';
+        console.log(window.history);
+        let sss = 0;
+       // let State = History.getState();
+        let stat1=window.location.toString();
+        let kark = '';
+        let priz = '';
+    //    let pas = State.cleanUrl;
+        let tt = [];
+
+        let gibrid;
+        tt =stat1.split('//');
+        url = tt[1].split('/');
+        url = url.pop();
+        cnt=url.length;
+        let str=url.slice(cnt-1);
+
+        // убираем кэшированную запись из history
+        if(str=='#' )
+        {
+             let State1=History.back();
+            let stat1=window.location.toString();
+
+            tt =stat1.split('//');
+            url = tt[1].split('/');
+            url = url.pop();
+        }
+
+        if (priznNav != 999)
+        {
+
+            cnt = NavigationCache.length; // длина крошек
+            if (cnt > 0) {
+                for (let i = cnt-1; i >=0; i--) {
+                    kark = NavigationCache[i].url; // имя таба в навигации крошек
+
+                    if(url!=kark )
+                    {
+                        let rer = NavigationCache.pop();
+                    } else
+                        {
+                            gibrid= NavigationCache[i];
+                        break;
+                        }
+                }
+
+            }
+
+          //  dad = gibrid.data;
+            dad='';
+            let pr = gibrid.pr;
+            let id=gibrid.id;
+         //   let init = {data: dad, pr: pr};
+
+            priznNav = 0;
+            cnt = NavigationCache.length; // длина
+            $('#crumbs').empty();
+            for (let i = 0; i < cnt; i++)
+            {
+                kark = NavigationCache[i].url; // имя таба в навигации крошек
+              //  if(kark!=="addcartios" && kark!=="product")
+                if( kark!=="product")
+                {
+                $('#crumbs').append('<li><a>');
+                $('#crumbs li:last-child a').attr("href", "#").attr("id", kark).html(kark);
+                }
+            }
+        //  if(url!= "addcartios"&& url!="indexpage")
+            if(url!="indexpage")
+          {
+           getContent(url,false,id,pr);
+        //     History.replaceState(null, null, url);
+          }
+
+        }
+
+    });
+
+
+
+
+    /*window.addEventListener('hashchange', function(e) {
+        // Get State value using e.state
+
+        getContent(location.pathname, false);
+    }); */
 
 
 function getContent(url, addEntry, id=0, pr=0) {
-    $.get(url,{id: id})
+    $.get(url,{id: id},{cache: false})
         .done(function( data ) {
             // Updating Content on Page
-            if(pr!=25)$('#insertOption').empty();
-
-            if(pr!="22") $('.profit .container-wrap-row .item .text').css({"border":"none","margin-top":"0"});
-            $('.container-wrap-banner').empty();
-            $('.slider').empty();
-            $('.profit1').empty();
-            $('#mediumMine').empty();
-            $('.container-right-edgest').empty();
-           if(pr!=22 && pr!=25 && pr!=23 &&pr!=26) $('#contentHolder').empty();
-            $('#contentText').empty();
-
-            if(pr==0||pr==21)  {
-                $('#uri_last').empty();
-                $('#container-right-edge ').empty();
-                $('.container-right-edgest').empty();
-                $('.container-right-edgest').css('opacity','0');
-                $('.container-wrap-row .catalog').css({"display":"flex","border":"1px solid lightblue"});
-            }
-
-            if(pr=="22")
-            {
-                $('.container-wrap-row .catalog').css('border','inherit');
-                $('.container-wrap-row .catalog').css({"display":"none"});
-
-
-                $('#insertOption').append(data.leftBar);
-                $('#insertOption').css('opacity','0');
-                $('#insertOption').fadeTo(2000,1);
-                $('#insertOption').css({"border":"1px solid lightblue"});
-              //  $('#edgest1').css('display','block');
-              //  $('#edgest2').css('display','block');
-
-                $('#container-right-edge ').empty();
-
-                $('#container-right-edge ').append(data.content);
-                $('#container-right-edge ').css('opacity','0');
-                $('#container-right-edge ').fadeTo(2000,1);
-
-
-                $('.container-right-edgest').empty();
-                $('.container-right-edgest').css('opacity','1');
-                $('.container-right-edgest').append(data.commonSum);
-
-              //  $sa=$('#insertOption input#pricer1').val();
-              //  $('#insertOption#selectMyFixing input#pricer dataMin').val($sa);
-                myRangeIn();
-
-            }
-            if(pr==23){
-                $('#container-right-edge ').empty();
-                $('.container-right-edgest').empty();
-                $('.container-right-edgest').empty();
-                $('.container-right-edgest').append(data.commonSum);
-                $('.container-right-edgest').css({"background-color":"#E9E9E9","margin-left":"10px","height":"100px","width":"200px"});
-            }
-           if(pr==24)  {
-               $('#container-right-edge, .container-right-edgest').css('opacity','0');
-               $('#contentHolder').append(data.content);
-               $('#insertOption').append(data.leftBar);
-
-               myRangeIn();
-                       }
-            if(pr!=22 && pr!=24 && pr!=23 && pr!=26)
-            {
-            $('#contentHolder').append(data.content);
-            $('#contentText').append(data.sigma);
-
-            }
-            if(pr==25)
-            {
-                $('.container-right-edgest').empty();
-                $('.container-right-edgest').append(data.commonSum);
-
-            }
-
-            if(pr==26){
-                $('.container-right-edgest').empty();
-                $('.modalMain').empty();
-                $('.modalMain').append(data.content);
-                openWin();
-
-            }
-           if(pr==27){
-               $('#contentHolder').empty();
-               $('#container-right-edge ').empty();
-               $('.container-right-edgest').empty();
-               $('#contentHolder').append(data.content);
-               $('.close').click();
-           }
-
+           workupPr(pr, data);
             //  $('#contentHolder').html(data);
       // alert('Загрузка завершена.');
             $pas=url.split('/');
             url= $pas.pop();
-           // console.log('data',data);
-            if(addEntry == true) {
+
+            if(addEntry )
+            {
+               let kark=0;
+                // dad=$('#central').html();
+                 dad='';
+                // console.log('data',data);
+                let inside={data: dad, pr: pr, id: id, url:url};
                 // Add History Entry using pushState
-                history.pushState(null, null, url);
+                cnt=NavigationCache.length; // длина
+                let ofindi=false;
+                if(cnt>0)
+                {
+                   for(let i=0; i<cnt; i++)
+                   {
+                      kark= NavigationCache[i].url;
+                      if(url==kark)
+                      {
+                          ofindi=true; break;
+                      }
+                   }
+                   if(ofindi)
+                   {
+                       priznNav=999;
+                       cnt=NavigationCache.length; // длина
+                       for (let i = cnt-1; i >=0; i--)
+                       {
+                           kark = NavigationCache[i].url; // имя таба в навигации крошек
+
+                           if (url != kark) {
+                               let rer = NavigationCache.pop();
+                           }
+
+                           else break;
+                       }
+
+                       $('#crumbs').empty();
+                        cnt=NavigationCache.length; // длина
+                       for(let i=0; i<cnt; i++)
+                       {
+                           kark= NavigationCache[i].url; // имя таба в навигации крошек
+                        //   if(kark!=="addcartios" && kark!=="product")
+                           if(kark!=="product")
+                           {
+                               $('#crumbs').append('<li><a>');
+                               $('#crumbs li:last-child a').attr("href", "#").attr("id", kark).html(kark);
+                           }
+                       }
+                  //     $('#crumbs li:last-child a').replaceWith("<p></p>").attr("id", kark).html(kark);
+
+                    //   History.replaceState({url:url}, null, url);
+                   }
+                   else
+                       {
+                           NavigationCache.push(inside) ;
+                           priznNav=999;
+                           $('#crumbs').empty();
+                           let cnt=NavigationCache.length; // длина
+                           for(let i=0; i<cnt; i++)
+                           {
+                                kark= NavigationCache[i].url; // имя таба в навигации крошек
+                               //if(kark!=="addcartios" && kark!=="product")
+                                   if(kark!=="product")
+                               {
+                                   $('#crumbs').append('<li><a>');
+                                   $('#crumbs li:last-child a').attr("href","#").attr("id",kark).html(kark);
+                               }
+                           }
+                 //          $('#crumbs li:last-child a').replaceWith("<p></p>").attr("id", kark).html(kark);
+                           History.pushState({url:url}, null, url);
+                           priznNav=0;
+                       }
+                }
+                else
+                {
+                   NavigationCache.push(inside) ;
+                    priznNav=999;
+                    $('#crumbs').empty();
+                     cnt=NavigationCache.length; // длина
+                    for(let i=0; i<cnt; i++)
+                    {
+                        kark= NavigationCache[i].url; // имя таба в навигации крошек
+                      //  if(kark!=="addcartios" && kark!=="product")
+                            if(kark!=="product")
+                        {
+                        $('#crumbs').append('<li><a>');
+                        $('#crumbs li:last-child a').attr("href","#").attr("id",kark).html(kark);
+                        }
+                    }
+             //       $('#crumbs li:last-child a').replaceWith("<p></p>").attr("id", kark).html(kark);
+                    History.pushState({url:url}, null, url);
+
+                }
+
 
             }
-      /*      if(url=='category')
-            {
+            if(!addEntry)
+                {
 
-                url="http://localhost/mazi/index.php/leftside";
-                pr=22;
-                let $ss=getContent(url, false,id,pr);
-                //alert('Я попал в категорию !');
-            } */
+                    $('#crumbs').empty();
+
+                    let cnt=NavigationCache.length; // длина
+                    for(let i=0; i<cnt; i++)
+                    {
+                        kark= NavigationCache[i].url; // имя таба в навигации крошек
+                        $('#crumbs').append('<li><a>');
+                        $('#crumbs li:last-child a').attr("href","#").attr("id",kark).html(kark);
+                    }
+                 //  $('#crumbs li:last-child a').replaceWith("<p></p>").attr("id", kark).html(kark);
+               //   History.replaceState({url:url}, null, url);
+            }
+
+            priznNav=0;
+
         });
 }
+
+
+
+
 
 jQuery('document').ready(function(){
     jQuery('#contentHolder').on('click','.like_name, #reactimage, #reactbutton', function(e){
@@ -636,6 +894,60 @@ jQuery('document').ready(function(){
 
 
 });
+
+
+jQuery('document').ready(function(){
+    jQuery('#crumbs').on('click','li a', function(e){
+        e.preventDefault();
+        let url = $(this).html(),
+            base_url=window.location.toString();
+
+
+
+        let pas= base_url.split('//');
+      let str='';
+          let second=pas[1].split('/');
+          second.pop();
+          let cnt=second.length;
+          for(let i=0; i<cnt;i++)
+          {
+              str+= second[i]+'/';
+          }
+       base_url=pas[0]+'//'+str+url;
+        if(url==='indexpage')
+        {
+           // window.load(base_url);
+            window.location.replace('/mazi');
+        }
+        else
+     {
+        let kark='';
+        cnt = NavigationCache.length; // длина крошек
+        if (cnt > 0)
+        {
+            for (let i = cnt - 1; i >= 0; i--)
+            {
+                kark = NavigationCache[i].url; // имя таба в навигации крошек
+
+                if (url != kark) {
+                    let rer = NavigationCache.pop();
+                } else {
+                    kark = NavigationCache[i];
+                    break;
+                }
+            }
+        }
+        if(kark)
+        {
+            let pr=kark.pr;
+            let id=kark.id;
+            let $ss=getContent(base_url, true,id, pr);
+        }
+      }
+    });
+
+});
+
 
 jQuery(document).ready(function(){
     jQuery('.catalog ul#azar.azoneChild').on('click', 'li a.active', function(e){
@@ -659,7 +971,7 @@ jQuery(document).ready(function(){
 });
 
 jQuery('document').ready(function(){
-    jQuery('#container-right-edge, .modal-content').on('click',' #reactiveimg,  #reactivebut, #moreInfo, a', function(e){
+    jQuery('.container-right-edge, .modal-content').on('click',' #reactiveimg,  #reactivebut, #moreInfo, a', function(e){
         e.preventDefault();
         let href = $(this).data('href');
 
@@ -699,4 +1011,21 @@ jQuery('document').ready(function(){
     overflow.onclick = function () {
         modal.style.top = "-100%";
         overflow.remove();
-    }
+    };
+
+        // функция hover
+/*let begin=new Date().getTime();
+jQuery('#contentHolder').on('hover','.wrapProdT01 .productsinT01' ,function () {
+   begin=new Date().getTime(); },
+
+    function(){
+
+    if((new Date().getTime() - begin) >=1000) {
+        let s_name=jQuery(this).find('.dopContent').html();
+        jQuery(this).find('#how-to').empty();
+        jQuery(this).find(' .dopContent').append(s_name);
+        jQuery(this).find('.productsinT01').css({"background":"#fff"," border":"3px solid red"," display":"block"});
+    } //else jQuery(this).find(' .dopContent').empty();
+    });
+
+*/

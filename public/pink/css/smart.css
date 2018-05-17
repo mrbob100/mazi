@@ -11,7 +11,8 @@ background-color: #ededed;
 main {
     width: 75%;  margin: 0 auto;
     background-color: #fff;
-font-family:"Bosch Sans Light","Helvetica Neue",Helvetica,Arial,sans-serif!important;
+/*font-family:"Bosch Sans Light","Helvetica Neue",Helvetica,Arial,sans-serif!important; */
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif!important;
     color: #000;
 }
 
@@ -33,6 +34,45 @@ nav .line {
 
 }
 
+/*Хлебные крошки */
+#crumbs{
+    font:71%/165% "Lucida Grande", Lucida, Verdana, sans-serif;
+
+}
+ul, li {
+    list-style-type:none;
+    padding:0;
+    margin:0 ;
+}
+#crumbs {
+    height:2.3em;
+    border:1px solid #dedede;
+}
+#crumbs li {
+    float:left;
+    line-height:2.3em;
+    color:#777;
+    padding-left:.75em;
+}
+#crumbs li a {
+    background:url(../images/features/crumbs.gif) no-repeat right center;
+    display:block;
+    padding:0 15px 0 0;
+}
+#crumbs li a:link,
+#crumbs li a:visited {
+    color:#777;
+    text-decoration:none;
+}
+a:link, a:visited,
+#crumbs li a:hover,
+#crumbs li a:focus {
+    color:#dd2c0d;
+}
+
+
+
+
 .wrap {
     display: flex;
     display: -webkit-flex;
@@ -50,7 +90,7 @@ nav .line {
 }
 
 .wrap .menu-call p {
-    padding: 10px 10px 2px 0;
+    padding: 10px 10px 2px 40px;
 }
 .menu-call .menu-wrap .search {
     display: inline-block;
@@ -60,7 +100,7 @@ nav .line {
     width:250px;
     cursor: pointer;
 padding-left: 5px;
-    margin-left: 45px;
+
     font-size: 12px;
 }
 
@@ -409,7 +449,7 @@ display: block;
     flex-direction:row;
     flex-wrap: wrap;
     width: 100%;
- max-width: 1100px !important;
+ max-width: 1350px !important;
     min-width:600px;
     text-align: center;
     height: auto;
@@ -421,6 +461,7 @@ display: block;
 }
 .wrapCat .categoriesin a img{
     height: 80px; max-width: 60%;
+    /*     box-shadow: inset 7px 7px 5px  5px rgba(0,0,0,0.6); Тень */
 }
 
 .wrapCat .categoriesin {
@@ -492,6 +533,15 @@ margin-top: 10px;
     max-height: 120px; width:auto; max-width: 200px;
 margin-top: 15px;
 }
+
+.wrapSubProd .productsin .layer02{
+    position: absolute; /* Абсолютное позиционирование */
+    top: 0px; /* Положение от нижнего края */
+    left: 0px; /* Положение от правого края */
+    line-height: 1px;
+
+}
+
 .wrapSubProd .productsin .liked-product{
     padding-left: 150px;
     margin-top: -40px;
@@ -534,9 +584,14 @@ opacity: 1;
 #edgest1 {
     display: none;
 }*/
+.container-end .edge1, .container-end .edge2{
+    display: block;
+    background-color:#E9E9E9;
+margin-left:10px;
+height:100px;
+}
 
-
-#container-right-edge {
+.container-right-edge {
     opacity: 1;
 }
 
@@ -591,6 +646,100 @@ display: block;
 .wrapSubInv .productsin .liked-product .mask a img,.wrapProd .productsin .liked-product .mask a img{
     width: 80px;height: auto;
 }
+
+/* вывод обычный с перезагрузкой страницы в центральную область */
+.wrapProdT01  {
+
+    display: flex;
+    display: -webkit-flex;
+    flex-direction:row;
+    flex-wrap: wrap;
+    /*    min-width: 10%; height: 250px;
+        max-width:20%; */
+    /*  max-width: 1060px;
+       min-height:300px; */
+    height: auto;
+    width: 100%;
+    max-width: 1000px;
+    /*  height:500px;
+   height: 1800px; */
+    align-items: center;
+    justify-content: center;
+
+    /* min-width: 10%; */
+    /*flex-grow: 1;
+        flex-basis: 220px;flex-shrink: 0; */
+}
+
+.wrapProdT01 .productsinT01 {
+
+    min-height: 315px;
+    padding: 10px 5px 10px 5px;
+    /* justify-content: flex-start;   */
+    align-items: center;
+    width: 224px;
+   height: 333px;
+    text-align: center;
+    /* border: 3px solid blue; */
+
+    /*  margin: 7px 20px 10px 20px; */
+    -moz-border-radius: 10px; /* закругление для старых Mozilla Firefox */
+    -webkit-border-radius: 10px; /* закругление для старых Chrome и Safari */
+    -khtml-border-radius:10px; /* закругл. для браузера Konquerer системы Linux */
+    border-radius: 10px;  /* закругление углов для всех, кто понимает */
+    border: 3px solid #EAEAEA;
+}
+.wrapProdT01 .productsinT01 a img{
+    max-height: 150px; max-width: 190px;
+    margin-top:10px;
+}
+
+.productsinT01 .dopContent {
+    position: absolute;
+    display: none;
+
+    /*  width: 350px; */
+
+}
+
+.productsinT01:hover{
+    background: #fff;
+    border: 3px solid red;
+
+
+
+}
+
+.productsinT01:hover .dopContent{
+    display: block;
+    padding-top: 5px;
+
+
+}
+
+@media all and (max-width: 1069px){
+    .wrapProdT01{ text-align: center;
+        max-width: 900px;}
+}
+
+
+
+
+
+@media all and (max-width: 560px){
+    .wrapProdT01{ text-align: justify;}
+}
+/* вставка признака sale или new */
+.wrapProdT01 .productsinT01 .layer02, .layer03 {
+    position: absolute; /* Абсолютное позиционирование */
+    top: 0px; /* Положение от нижнего края */
+    left: 0px; /* Положение от правого края */
+    line-height: 1px;
+}
+
+
+
+
 /*  работа с модальным блоком купить товар */
 .modal-body {
     padding:5px 20px 20px 20px !important;
@@ -671,3 +820,15 @@ span {cursor:pointer; }
 .container101{
     width:1170px; max-width: 100%;
 }
+
+/* Первое модальное окно*/
+
+/*
+.modal-dialog .modal-content .modal-body {
+  overflow-y:scroll; height: 450px;
+} */
+.pq17 {
+    overflow-y:auto;   max-height: 400px;
+}
+
+

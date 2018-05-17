@@ -267,7 +267,7 @@ class CategoryController extends SiteController  // выбор из боково
 
             $were=['category_id',$alias];
         }
-        $products= $this->p_rep->get(['id','name','code','img','type','price','description','groupTools','new','class','company','country','packing','exactlyType1','category_id','keywords','meta_desc'], false,true,$were);
+        $products= $this->p_rep->get(['id','name','code','img','type','price','description','groupTools','new','class','company','country','packing','exactlyType1','category_id','keywords','meta_desc'], false,false,$were);
        // if($products) $articles->load('user','category','comments');
         // dd($id);
 

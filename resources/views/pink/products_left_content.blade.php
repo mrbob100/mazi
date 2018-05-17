@@ -16,11 +16,11 @@
 
                 @if($prod->new)
                     <div class="layer02">
-                        <img src="{{ asset('public/'.env('THEME')) }}/images/features/new01.jpg" alt="" />
+                        <img src="{{ asset('public/'.env('THEME')) }}/images/features/new012.png" width="75px;" alt="" />
                     </div>
                 @elseif($prod->sale)
-                    <div class="layer03">
-                        <img src="{{ asset('public/'.env('THEME')) }}/images/features/sale.png" alt="" />
+                    <div class="layer02">
+                        <img src="{{ asset('public/'.env('THEME')) }}/images/features/saleGreen.png" width="75px;" alt="" />
                     </div>
                 @endif
 

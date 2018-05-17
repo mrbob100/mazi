@@ -4,30 +4,45 @@
 <!--div class="new-product"-->
 
     @if($products)
+        <!--div class="flexslider">
+            <ul class="slides">
+                <li data-thumb="slide1-thumb.jpg">
+                    <img src="slide1.jpg" />
+                </li>
+                <li data-thumb="slide2-thumb.jpg">
+                    <img src="slide2.jpg" />
+                </li>
+                <li data-thumb="slide3-thumb.jpg">
+                    <img src="slide3.jpg" />
+                </li>
+                <li data-thumb="slide4-thumb.jpg">
+                    <img src="slide4.jpg" />
+                </li>
+            </ul>
+        </div-->
 
 
-
-      <script type="text/javascript">
-          jQuery(document).ready(function(){
-              jQuery('a#zoom1').swinxyzoom({mode:'dock', controls: false, size: '100%', dock: { position: 'right' } }); // dock window slippy lens
-              jQuery('.views-gallery a').click(function(e) {
-                  e.preventDefault();
-                  var $this = jQuery(this),
-                      largeImage  = $this.attr('href');
-                  smallImage  = $this.data('easyzoom-source');
-                  if (!$this.parent().hasClass('thumbnail-active')) {
-                      jQuery('a#zoom1').swinxyzoom('load', smallImage,  largeImage);
-                      jQuery('.lightbox-btn').attr('href', largeImage);
-                      jQuery('.views-gallery .slide.thumbnail-active').removeClass('thumbnail-active');
-                      $this.parent().toggleClass('thumbnail-active');
-                  }
-              });
-          });
-      </script>
+        <script>
+            $(window).load(function() {
+                $('.wrap_02 .right_side1 .flexslider').flexslider({
+                    animation: "slide",
+                    controlNav: "thumbnails"
+                });
+            });
+        </script>
 
      <div class="wrap_02">
          <div class="right_side1">
-             <div > <a itemprop="image" href="{{ asset('public/'.env('THEME')) }}/images/{{ $products[0]->img->path }}" id="zoom1" class="zoom" title="62" style="position:relative; " > <img class="slidek" src="{!! asset('public/'.env('THEME')) !!}/images/{{$products[0]->img->max}}"  alt="NICE PROMO DRESS" /> </a> </div>
+             <div class="flexslider">
+                 <ul class="slides">
+                     <li data-thumb="{!! asset('public/'.env('THEME')) !!}/images/{{$products[0]->img->max}}">
+                         <img src="{!! asset('public/'.env('THEME')) !!}/images/{{$products[0]->img->max}}"  />
+                     </li>
+
+                 </ul>
+             </div>
+             <!--div > <a itemprop="image" href="#" id="zoom1" class="zoom" title="62" style="position:relative; " > <img class="slidek" src="{!! asset('public/'.env('THEME')) !!}/images/{{$products[0]->img->max}}"  alt="NICE PROMO DRESS" /> </a> </div-->
+
          </div>
              <div class="right_side2" >
                  <div class="dress-name" >
@@ -121,9 +136,6 @@
 
 
      </div>
-
-
-<div class="clearfix"></div>
 
 
 @endif

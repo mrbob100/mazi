@@ -1,6 +1,6 @@
 <meta charset="utf-8">
 
-<div class="container">
+<div class="container101">
     @if($orders)
         <script type='text/javascript' src='{!! asset('public/'.env('THEME')) !!}/js/jquery.listen.js'></script>
     <div class="row ">
@@ -11,7 +11,7 @@
                         $j=0;
                     $as="";
                     @endphp
-           <div class="col-xs-9  text-center PinkerMain" >
+           <div class="col-xs-9  PinkerMain" >
                 <form  id="selectMyOptions" action="{{route('cabinet')}}" name="myform"  method="post">
                 {{ csrf_field() }}
               <!--  {--!! Form::open(['url'=>route('cabinet' ), 'class'=>'form-horizontal', 'id'=>'zluka', 'method'=>'POST' ]) !!--} -->
