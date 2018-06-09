@@ -34,6 +34,7 @@ class CabinetController extends SiteController
     {
         $user=Auth::user();
             if(!Auth::check()) {
+                return Response::json(['success'=>true, 'content'=>'Авторизация']);
                 return redirect()->home();
             }
 
@@ -188,16 +189,16 @@ class CabinetController extends SiteController
 
 // загрузка страницы
         $content = view(env('THEME') . '.orders_cabinet')->with(['orders'=> $orders,'priznak' =>$priznak,'optionTool'=>$optionTool])->render();
-        $this->vars = array_add($this->vars, 'content', $content);
+     //   $this->vars = array_add($this->vars, 'content', $content);
  // загрузка leftbar
             $bar=$this->barCabinet;
             $leftBar=view(env('THEME').'.left_bar_cabinet')->with('data',$data)->render();
-            $this->vars=array_add($this->vars,'leftBar', $leftBar);
-            $this->vars=array_add($this->vars,'bar', $bar);
-        $footer = view(env('THEME') . '.footer')->render();
+          //  $this->vars=array_add($this->vars,'leftBar', $leftBar);
+          //  $this->vars=array_add($this->vars,'bar', $bar);
+      //  $footer = view(env('THEME') . '.footer')->render();
         // заголовок
-        $headers = view(env('THEME') . '.header')->render();
-        $this->vars = array_add($this->vars, 'headers', $headers);
+     //   $headers = view(env('THEME') . '.header')->render();
+      //  $this->vars = array_add($this->vars, 'headers', $headers);
         // фоотер
        session()->flash('status',$zikname);
 
@@ -206,11 +207,14 @@ class CabinetController extends SiteController
         if(!session('Author')) Session::flash('Author',$user);
         Session::flash('Turnover',$turn);
 
+       $sesille=view(env('THEME') . '.session')->render();
+
       // session()->keep(['zikname'=>$zikname,'email'=>$user->email,'address'=>$user->address,'phone'=>$user->phone]);
       //  Session::pull('Author');
        // if(!session('Author')) Session::push('Author',['user'=>$user]);
-        $this->vars = array_add($this->vars, 'footer', $footer);
-        return view($this->template)->with($this->vars); // template устанавливается в дочернем классе
+    //    $this->vars = array_add($this->vars, 'footer', $footer);
+    //    return view($this->template)->with($this->vars); // template устанавливается в дочернем классе
+        return Response::json(['success'=>true, 'content'=>$content,'leftBar'=>$leftBar,'sesille'=> $sesille]);
     }
 
 

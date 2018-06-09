@@ -68,60 +68,117 @@
     </div>
 <div class="wrapper container-fluid">
     @include('auth.social')
-    {!! Form::open(['url'=>route('contract'),'class'=>'form-horizontal', 'method'=>'post']) !!}
-    {{ csrf_field() }}
 
-    @if(!Auth::check())
 
-        <div class="form-group">
-            {!! Form::label('name','Имя',['class'=>'col-xs-2 control-label']) !!}
-            <div class="col-xs-8">
-                {!! Form::text('name',!isset($data['name']) ? old('name') : $data['name'] ,['class'=>'form-control','placeholder'=>'Ваше имя']) !!}
+    <form class="form-horizontal" id="contractUser" data-href="{{URL::to('contract')}}"  data-sign="29" method="POST" action="{{ route('contract') }}">
+        {{ csrf_field() }}
+
+        <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
+            <label for="name" class="col-md-4 control-label">Имя</label>
+
+            <div class="col-md-6">
+                <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required autofocus>
+
+                @if ($errors->has('name'))
+                    <span class="help-block">
+                                        <strong>{{ $errors->first('name') }}</strong>
+                                    </span>
+                @endif
+            </div>
+        </div>
+
+        <div class="form-group{{ $errors->has('secondname') ? ' has-error' : '' }}">
+            <label for="secondname" class="col-md-4 control-label">Фамилия</label>
+
+            <div class="col-md-6">
+                <input id="secondname" type="text" class="form-control" name="secondname" value="{{ old('secondname') }}" required autofocus>
+
+                @if ($errors->has('secondname'))
+                    <span class="help-block">
+                                        <strong>{{ $errors->first('secondname') }}</strong>
+                                    </span>
+                @endif
+            </div>
+        </div>
+
+        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+            <label for="email" class="col-md-4 control-label">E-Mail</label>
+
+            <div class="col-md-6">
+                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
+
+                @if ($errors->has('email'))
+                    <span class="help-block">
+                                        <strong>{{ $errors->first('email') }}</strong>
+                                    </span>
+                @endif
+            </div>
+        </div>
+
+        <div class="form-group{{ $errors->has('phone') ? ' has-error' : '' }}">
+            <label for="phone" class="col-md-4 control-label">Телефон</label>
+
+            <div class="col-md-6">
+                <input id="phone" type="text" class="form-control" name="phone" value="{{ old('phone') }}" required autofocus>
+
+                @if ($errors->has('phone'))
+                    <span class="help-block">
+                                        <strong>{{ $errors->first('phone') }}</strong>
+                                    </span>
+                @endif
+            </div>
+        </div>
+
+        <div class="form-group{{ $errors->has('address') ? ' has-error' : '' }}">
+            <label for="address" class="col-md-4 control-label">Адрес</label>
+
+            <div class="col-md-6">
+                <input id="address" type="text" class="form-control" name="address" value="{{ old('address') }}" required autofocus>
+
+                @if ($errors->has('address'))
+                    <span class="help-block">
+                                        <strong>{{ $errors->first('address') }}</strong>
+                                    </span>
+                @endif
+            </div>
+        </div>
+
+        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+            <label for="password" class="col-md-4 control-label">Пароль</label>
+
+            <div class="col-md-6">
+                <input id="password" type="password" class="form-control" name="password" required>
+
+                @if ($errors->has('password'))
+                    <span class="help-block">
+                                        <strong>{{ $errors->first('password') }}</strong>
+                                    </span>
+                @endif
             </div>
         </div>
 
         <div class="form-group">
-            {!! Form::label('secondname','Фамилия',['class'=>'col-xs-2 control-label']) !!}
-            <div class="col-xs-8">
-                {!! Form::text('secondname',!isset($data['secondname']) ? old('secondname') : $data['secondname']  ,['class'=>'form-control','placeholder'=>'Ваша фамилия']) !!}
+            <label for="password-confirm" class="col-md-4 control-label">Подтвердить пароль</label>
+
+            <div class="col-md-6">
+                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
             </div>
         </div>
 
-        <div class="form-group">
-            {!! Form::label('email','E-mail',['class'=>'col-xs-2 control-label']) !!}
-            <div class="col-xs-8">
-                {!! Form::text('email',!isset($data['email']) ? old('email') : $data['email'] ,['class'=>'form-control','placeholder'=>'Ваш E-mail']) !!}
-            </div>
-        </div>
 
-            <div class="form-group">
-                {!! Form::label('password','Пароль',['class'=>'col-xs-2 control-label']) !!}
-                <div class="col-xs-8">
-                    {!! Form::text('password',old('password'),['class'=>'form-control','placeholder'=>'Пароль']) !!}
-                </div>
-            </div>
+
 
 
         <div class="form-group">
-            {!! Form::label('phone','Телефон',['class'=>'col-xs-2 control-label']) !!}
-            <div class="col-xs-8">
-                {!! Form::text('phone',!isset($data['phone']) ? old('phone') : $data['phone'] ,['class'=>'form-control','placeholder'=>'Телефон']) !!}
-            </div>
-        </div>
-        <div class="form-group">
-            {!! Form::label('address','Адрес',['class'=>'col-xs-2 control-label']) !!}
-            <div class="col-xs-8">
-                {!! Form::text('address',!isset($data['address']) ?old('address') : $data['address']  ,['class'=>'form-control','placeholder'=>'Ваш адрес']) !!}
+            <div class="col-md-6 col-md-offset-4">
+                <button type="submit" class="btn btn-primary " value="Заказать">
+                    Заказать
+                </button>
             </div>
         </div>
 
-    @endif
-    <div class="form-group">
-        <div class="col-xs-8">
-            {!! Form::button('Заказать',['class'=>'btn btn-primary','type'=>'submit']) !!}
-        </div>
-    </div>
-    {!! Form::close() !!}
+    </form>
+
 </div>
 
 @else

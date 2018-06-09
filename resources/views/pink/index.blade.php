@@ -16,6 +16,6 @@
     {!! $newProducts !!}
 @endsection
 
-@section('footer')
-    {!! $footer !!}
+@section('foorter')
+    {!! $foorter !!}
 @endsection

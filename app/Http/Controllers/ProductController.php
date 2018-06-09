@@ -30,11 +30,18 @@ class ProductController extends SiteController
     }
 
     // public function index($id)
-    public function index(Request $request)
+    public function index()
     {
+        $request=Request::createFromGlobals();
+        $input = $request->except('_token');
         // print_r($request->all());
-        $id = $request->id;
-
+         $cs=0;
+        $id =  $input['id'];
+      /*  if($input['cs']==26)
+        {
+            $cs=2;
+        }
+*/
         $rout=Route::currentRouteName();
         $products = $this->getProduct($id);
         $discount=0; $summa=0; $newprice=0;
@@ -76,10 +83,13 @@ class ProductController extends SiteController
         $str=mb_strpos($name, " ");
         $row=mb_substr($name, 0, $str);
         $row1=mb_substr($name,$str);
-
+             if($cs)
+             {
+                 $content = view(env('THEME') . '.product_content21')->with(['products'=> $products,'adopt'=>$this->adopt,'discount'=>$discount,'newprice'=>$newprice,'summa'=>$summa,'row'=>$row,'row1'=>$row1])->render();
+             } else {
         $content = view(env('THEME') . '.product_content')->with(['products'=> $products,'adopt'=>$this->adopt,'discount'=>$discount,'newprice'=>$newprice,'summa'=>$summa,'row'=>$row,'row1'=>$row1])->render();
        // $this->vars = array_add($this->vars, 'content', $content);
-        
+                   }
 
 
      //  return $this->renderOutput();

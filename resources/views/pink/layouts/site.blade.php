@@ -24,7 +24,7 @@
     <link href="{{ asset('public/'.env('THEME')) }}/css/slick.css" rel="stylesheet" type="text/css"/>
     <link href="{{ asset('public/'.env('THEME')) }}/css/slick-theme.css" rel="stylesheet" type="text/css"/>
 
-      
+
     <!--link href="{--{ asset('public/'.env('THEME')) }--}/css/flexslider.css" rel="stylesheet"  media="screen" type="text/css"/-->
     <script defer type="text/javascript" src=" {!! asset('public/'.env('THEME')) !!}/js/jquery.flexisel.js" charset="utf-8" ></script>
 
@@ -83,7 +83,7 @@
                <div class="menu-wrap">
                  <div class="menu-search-window">
                     <p>{!! Form::open(['url'=>route('productSearch' ), 'class'=>'form-horizontal', 'method'=>'GET' ]) !!}
-                        {!! Form::text('q','',['class'=>' search','placeholder'=>'поиск товара']) !!}
+                        {!! Form::text('q','',['class'=>' search','placeholder'=>'Поиск товара']) !!}
                         <span></span>
                     {!! Form::close() !!}</p>
                 </div>
@@ -107,112 +107,136 @@
 
 </nav>
 
+
+
+
+
+
+
 <nav>
-   <!--  Синее меню - верхнее-->
+<!--  Синее меню - верхнее-->
 
-        <div class="wrap1">
+<div class="wrap1">
 
-                <menu1>
-                    <li class="argo1">  <!-- Домик -->
-                        <a href="{{ route('index')  }} "> <p style="padding: 2px 0 0 0;" >  <img src="{{ asset('public/'.env('THEME')) }}/images/features/694571.png" alt="" /> </p> </a>
-                        <!--i class="material-icons"><p>home</p></i-->
+ <menu1>
+     <li class="argo1">  <!-- Домик -->
+         <a href="{{ route('index')  }} "> <p style="padding: 2px 0 0 0;" >  <img src="{{ asset('public/'.env('THEME')) }}/images/features/694571.png" alt="" /> </p> </a>
+         <!--i class="material-icons"><p>home</p></i-->
 
-                    </li>
-                    <li class="pointer historyAPI" style="margin: 0 20px 0 -80px;" data-href="{{URL::to('categoryMain')}}"><a href="#" ><p >&nbsp;Каталог&nbsp;</p></a></li>
+     </li>
+     <li class="pointer historyAPI" style="margin: 0 20px 0 -80px;" ><a href="#" data-href="{{URL::to('categoryMain')}}" data-sign="0" ><p>&nbspСобрать набор&nbsp;</p></a></li>
 
-                    <li class="pointer historyAPI"><a href="#"><p>&nbsp;Акция&nbsp;</p></a></li>
-                    <li class="pointer historyAPI"><a href="#"><p>&nbsp;Оплата&nbsp;</p></a></li>
-                    <li class="pointer  historyAPI" ><a href="#"><p>&nbsp;Доставка&nbsp;</p></a></li>
-                    <li class="pointer  historyAPI" ><a href="#"><p>&nbsp;Гарантия&nbsp;</p></a></li>
+     <li class="pointer historyAPI" ><a href="#" data-href="{{ URL::to('cabinet')}}"  data-sign="30" ><p>&nbsp;Акция&nbsp;</p></a></li>
+     <li class="pointer historyAPI" ><a href="#"  data-href="{{ URL::to('cabinet')}}"  data-sign="31"><p>&nbsp;Оплата&nbsp;</p></a></li>
+     <li class="pointer  historyAPI" ><a href="#" data-href="{{ URL::to('cabinet')}}"  data-sign="32"><p>&nbsp;Доставка&nbsp;</p></a></li>
+     <li class="pointer  historyAPI" ><a href="#" data-href="{{ URL::to('cabinet')}}"  data-sign="33"><p>&nbsp;Гарантия&nbsp;</p></a></li>
 
-                    @if(!Auth::check())
-                        <li class="pointer1  sem">&nbsp;&nbsp;<a href="{{route('cabinet') }}"><span class="glyphicon glyphicon-user"> </span>&nbsp;Войти&nbsp;&nbsp;</a></li>
-                    @else
-                        <li class="pointer1  sem">&nbsp;&nbsp;<a href="{{route('cabinet') }}"><span class="glyphicon glyphicon-user"> </span>&nbsp;Кабинет</a>&nbsp;&nbsp;</li>
-                    @endif
+     @if(!Auth::check())
+         <li class="pointer1  sem" >&nbsp;&nbsp;<a href="#" data-href="{{ URL::to('cabinet')}}"  data-sign="34"><span class="glyphicon glyphicon-user"> </span>&nbsp;Войти&nbsp;&nbsp;</a></li>
+     @else
+         <li class="pointer1  sem" >&nbsp;&nbsp;<a href="#" data-href="{{ URL::to('cabinet')}}"  data-sign="35"><span class="glyphicon glyphicon-user"> </span>&nbsp;Кабинет</a>&nbsp;&nbsp;</li>
+     @endif
 
 
-                </menu1>
-         </div>
+ </menu1>
+</div>
 
 </nav>
 
 <ul id="crumbs">
 
 </ul>
+       <div id="cabinet">
+
+       </div>
+               <div class="secondwrap-02">
+                   <div class="rockwel-01"> </div>
+                       <div id="mediumMine"></div>
+
+               </div>
 
 
 
-       <!-- секция боковой каталог -->
+
+
+
+
+
+
+
+
+<!-- секция боковой каталог -->
 <div id="central">
-        <section class="profit">
-            <div class="container-wrap"><!-- flex: row-->
+<section class="profit">
+<div class="container-wrap"><!-- flex: row-->
 
-                <div class="container-wrap-row">
-                        <div class=" catalog" >
-                            <p>  {{ Widget::run('MainWidget') }}</p>
-                        </div>
+ <div class="container-wrap-row">
+         <div class=" catalog" >
+             <p>  {{ Widget::run('MainWidget') }}</p>
+         </div>
 
-                        <!--div class=" text" --> <!-- второй левый боковой -->
-                            <!--ul>
-                                <li><a href="#"><p>Статьи </p></a></li>
-                                <li><a href="#"><p>Обзоры</p></a></li>
-                            </ul>
-                        </div-->
+         <!--div class=" text" --> <!-- второй левый боковой -->
+             <!--ul>
+                 <li><a href="#"><p>Статьи </p></a></li>
+                 <li><a href="#"><p>Обзоры</p></a></li>
+             </ul>
+         </div-->
 
-                        <div class="item">
+         <div class="item">
 
-                            <div class="text" id="insertOption">
+             <div class="text" id="insertOption">
 
-                            </div>
-                        </div>
+             </div>
+         </div>
 
-                </div>
-                    <!-- конец боковых меню-->
-                <div class="container-right-wpap">
-                   @if(Route::currentRouteName()=='index')
-                        <div class="container-wrap-banner">    <!-- вывод баннера-->
-                            <img src="{{ asset('public/'.env('THEME')) }}/images/features/banner_001.jpg" alt="banner" />
-                        </div>
-                        <div class="slider">
-                            @yield('sliders')
-                        </div>
-                        <div class="profit1">
-                            <div class="wrap_01">
-                                @yield('newProducts')
-                            </div>
-                        </div>
+ </div>
+     <!-- конец боковых меню-->
+ <div class="container-right-wpap">
+    @if(Route::currentRouteName()=='index')
+         <div class="container-wrap-banner">    <!-- вывод баннера-->
+             <img src="{{ asset('public/'.env('THEME')) }}/images/features/banner_001.jpg" alt="banner" />
+         </div>
+         <div class="slider">
+             @yield('sliders')
+         </div>
+         <div class="profit1">
+             <div class="wrap_01">
+                @yield('newProducts')
+             </div>
+         </div>
 
-                    @endif
+     @endif
 
-                       <div class="piza"  style="background-color: white;"  id="contentHolder">
-                           <!--вставка html кода из синего меню IP history -->
-                           @yield('content1')
-                       </div>
-                       <div class="pizaText"  style="background-color: white;"  id="contentText">
-                           <!--вставка html кода из синего меню IP history -->
-                       </div>
-                </div>
-          <!-- Начало третьей колонки    -->
-                 <div id="wrap-last">
+        <div class="piza"  style="background-color: white;"  id="contentHolder">
+            <!--вставка html кода из синего меню IP history -->
+            @yield('content1')
+        </div>
+        <div class="pizaText"  style="background-color: white;"  id="contentText">
+            <!--вставка html кода из синего меню IP history -->
+        </div>
+ </div>
+<!-- Начало третьей колонки    -->
+  <div id="wrap-last">
 
-                        <div class="container-right-edge"></div>
-                            <!--h>Я здесь</h-->
+         <div class="container-right-edge"></div>
+             <!--h>Я здесь</h-->
 
-                        <div class="container-right-edgest" ></div>
+         <div class="container-right-edgest" ></div>
 
-                        <div class="container-end"></div>
-                  </div>
+         <div class="container-end"></div>
+   </div>
 
-                <div id="uri_last"></div>
-            </div>
+ <div id="uri_last"></div>
+</div>
+   <div id="footerMy">
+       @yield('foorter')
+   </div>
+</section>
 
-        </section>
 
 
-
-       <div class="bg_popUp"></div>
-  <div class="popUp_fast"> </div>
+<div class="bg_popUp"></div>
+<div class="popUp_fast"> </div>
 
 </div>
 
@@ -220,7 +244,7 @@
 <!-- Секция новых продуктов -->
 
 
- </main>
+</main>
 </body>
 
 <script type="text/javascript" src=" {!! asset('public/'.env('THEME')) !!}/js/jquery.scrollUp.min.js "  ></script>
@@ -241,10 +265,9 @@
 <script type='text/javascript' src='{!! asset('public/'.env('THEME')) !!}/js/touch.js'></script>
 <script type='text/javascript' src='{!! asset('public/'.env('THEME')) !!}/js/imagesloaded.pkgd.min.js'></script>
 <script type='text/javascript' src='{!! asset('public/'.env('THEME')) !!}/js/slick.js'></script>
-<!--script type='text/javascript' src='{--!! asset('public/'.env('THEME')) !!--}/js/history.js'></script-->
-   <script type='text/javascript' src='{!! asset('public/'.env('THEME')) !!}/js/jquery.history.js'></script>
-   <script type='text/javascript' src='{!! asset('public/'.env('THEME')) !!}/js/jquery-migrate-1.2.1.min.js'></script>
-   <script type="text/javascript" src=" {!! asset('public/'.env('THEME')) !!}/js/jquery.listen.js"  ></script>
-   <script type="text/javascript" src=" {!! asset('public/'.env('THEME')) !!}/js/main.js"  ></script>
-
+<script type='text/javascript' src='{!! asset('public/'.env('THEME')) !!}/js/jquery.history.js'></script>
+<script type='text/javascript' src='{!! asset('public/'.env('THEME')) !!}/js/history.js'></script>
+<script type='text/javascript' src='{!! asset('public/'.env('THEME')) !!}/js/jquery-migrate-1.2.1.min.js'></script>
+<script type="text/javascript" src=" {!! asset('public/'.env('THEME')) !!}/js/jquery.listen.js"  ></script>
+<script type="text/javascript" src=" {!! asset('public/'.env('THEME')) !!}/js/main.js"  ></script>
 </html>

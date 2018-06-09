@@ -67,8 +67,8 @@ class SiteController extends Controller
            }
 
 
-           $footer = view(env('THEME') . '.footer')->render();
-           $this->vars = array_add($this->vars, 'footer', $footer);
+           $foorter = view(env('THEME') . '.foorter')->render();
+           $this->vars = array_add($this->vars, 'foorter', $foorter);
        }
 
         return view($this->template)->with($this->vars); // template устанавливается в дочернем классе

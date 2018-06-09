@@ -57,12 +57,15 @@ Route::get('categoryleft',['uses'=>'CategoryLeftController@index','as'=>'categor
 Route::post('catRes',['uses'=>'CategoryController@resumeIndex','as'=>'resume']);
 // стандартные маршруты  для аутенфикации
   //  Route::group(['prefix'=>'product'], function() {
-        Route::get('product', ['uses'=>'ProductController@index', 'as'=>'product']);
+ Route::get('product', ['uses'=>'ProductController@index', 'as'=>'product']);
 
  //   });
 Route::get('addcartios',['uses'=>'CartController@index', 'as'=>'addcartios']);
 Route::get('changeQty',['uses'=>'PreciseController@changeQuantity','as'=>'changeBuy']);
  Route::get('cartShow',['uses'=>'CartController@cartShow', 'as'=>'cartShow']);
+ Route::get('cartload',['uses'=>'CartController@loadCart', 'as'=>'cartload']);
+
+
 Route::get('clear',['uses'=>'CartController@clear', 'as'=>'clearance']);
 Route::get('arrange',['uses'=>'CartController@cartView', 'as'=>'arrangeContract']);
 Route::post('order',['uses'=>'CartController@cartView', 'as'=>'contract']);
@@ -102,8 +105,8 @@ Route::get('get_captcha/{config?}', function (\Mews\Captcha\Captcha $captcha, $c
 // маршруты для синего меню
 Route::get('categoryMain', ['uses'=>'CategoryMainController@index', 'as'=>'catmain']);
 Route::get('categorysub', ['uses'=>'CategorySubController@index', 'as'=>'catsub']);
-
-
+Route::get('categorysuper', ['uses'=>'CategorySuperController@index', 'as'=>'super']);
+Route::get('difference', ['uses'=>'DifferenceProductController@index', 'as'=>'differ']);
 
 
 Route::group(['prefix'=>'admin','middleware'=>['web','auth']], function(){
@@ -131,7 +134,8 @@ Route::group(['prefix'=>'admin','middleware'=>['web','auth']], function(){
      if(view()->exists(env('THEME').'.admin.categories.index'))
          {
              $data=['title'=>'Панель администратора'];
-            return view(env('THEME').'.admin.categories.index',$data);
+           return view(env('THEME').'.admin.categories.index',$data);
+           // return view(env('THEME').'.admin.layouts.patternAdmin',$data);
            //  return redirect()->route('handbooks');
          }
     });

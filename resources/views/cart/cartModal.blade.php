@@ -30,7 +30,7 @@
                         <br/>
                    {!! $item['cart.code'] !!}
                         <br/>
-                    <a id="moreInfo" href="{{route('product')}}" data-href="{{URL::to('product')}}" data-id="{{$item['cart.id']}}" data-sign="26" style=" color: #5A7793;font-size: 1.0em;font-weight: bold;" >Подробнее </a>
+                    <a id="moreInfo" href="{{route('product')}}" data-href="{{URL::to('product')}}" data-id="{{$item['cart.id']}}" data-sign="26" style=" color: #5A7793;font-size: 1.1em;font-weight: bold;" >Подробнее </a>
                         <!--a href="#" id="{--{$item['cart.id']}--}"  onclick="openWin();" style=" color: #5A7793;font-size: 1.1em;font-weight: bold;" > Подробнее </a-->
                     </td>
                     <!--td> <input id="movieMaker" data-id="{--{$item['cart.id']}--}" type="number" value="{--!! $item['cart.qty'] !!--}"/> </td-->

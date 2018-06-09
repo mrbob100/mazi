@@ -1,9 +1,11 @@
-@extends(env('THEME').'.admin.layouts.admin')
+@extends(env('THEME').'.admin.layouts.patternAdmin')
 
 @section('header')
+    @include(env('THEME').'.admin.common.header')
+@endsection
 
-    @include(env('THEME').'.admin.header')
-
+@section('lefsiteBar')
+    @include(env('THEME').'.admin.common.leftsideBar')
 @endsection
 
 @section('content')

@@ -41,11 +41,12 @@
 
                  </ul>
              </div>
-             <!--div > <a itemprop="image" href="#" id="zoom1" class="zoom" title="62" style="position:relative; " > <img class="slidek" src="{!! asset('public/'.env('THEME')) !!}/images/{{$products[0]->img->max}}"  alt="NICE PROMO DRESS" /> </a> </div-->
+             <!--div > <a itemprop="image" href="#" id="zoom1" class="zoom" title="62" style="position:relative; " > <img class="slidek" src="{--!! asset('public/'.env('THEME')) !!--}/images/{--{$products[0]->img->max}--}"  alt="NICE PROMO DRESS" /> </a> </div-->
 
          </div>
              <div class="right_side2" >
                  <div class="dress-name" >
+                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                      <h5>{!! $row !!}</h5>
                      <span style="font-weight:900; font-size: 24px;"><h3>{!! $row1 !!}</h3></span>
 

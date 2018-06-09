@@ -270,4 +270,30 @@ class CartController extends Controller
             $order_items->save();
         }
     }
+
+    public function loadCart(Request $request)
+    {
+        $id=$request->id;
+        // $qty =(int) $request->qty;
+
+        // $qty=!$qty ? 1 : $qty;
+        $qty=1;
+        $product = Product::where('id',$id)->select('id','name','code','description','img','price','category_id','keywords','meta_desc')->first();
+        // $product=DB::table('products')->where('id',$id)->select('id','name','code','description','img','price','category_id','keywords','meta_desc')->get();
+        if(empty($product)) return false;
+        $products=json_decode($product->img);
+        $product->img=$products->max;
+        $newprice=Session::get('Price');
+        if($newprice)  // установка новой цены
+        {
+            $product->price=$newprice[0]['newprice'];
+        }
+
+        $this->layout = false;
+        $cart = new Cart();
+        $cart->addToCart($product, $qty);
+        $content=view('cart.cartModal')->render();
+        return Response::json(['success'=>true, 'content'=>$content]);
+    }
+
 }

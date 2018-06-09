@@ -12,7 +12,7 @@
             <div class="productsin">
                 <span style=" color: #5A7793;font-size: 0.8em;font-weight: bold;">{{str_limit($prod->name,32)}}  </span>
 
-                <a  id="reactiveimg" href="{{route('addcartios',['id'=>$prod->id])}}" data-href="{{URL::to('addcartios')}}" data-id="{{$prod->id}}" data-sign="25"> <img src="{{ asset('public/'.env('THEME'))}}/images/{{ $prod->img->max }}"  alt="вывод изображения" /></a>
+                <a  id="moreInfo" href="{{route('product',['id'=>$prod->id])}}" data-href="{{URL::to('product')}}" data-id="{{$prod->id}}" data-sign="26"> <img src="{{ asset('public/'.env('THEME'))}}/images/{{ $prod->img->max }}"  alt="вывод изображения" /></a>
 
                 @if($prod->new)
                     <div class="layer02">

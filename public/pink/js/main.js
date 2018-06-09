@@ -2,7 +2,7 @@
 
 $('#sl2').slider();
 $('.catalog').dcAccordion({
-	speed: 300
+    speed: 300
 });
 
 
@@ -35,15 +35,14 @@ function getCart(){
 
 
 $(function(){
-$(' .modal-body').on('click', '.del-item', function(e){
-	//alert(123);
-    e.preventDefault();
-	var id = $(this).data('id');
+$('.modal-body').on('click', '.del-item', function(e){
 
-  //  var cat = $(this).data('cat');
+    e.preventDefault();
+	let id = $(this).data('id');
+
 	$.ajax({
 		url: 'delIt',
-		data: {id: id/*, cat: cat */},
+		data: {id: id},
         headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
 		type: 'GET',
 		success: function(res){
@@ -65,10 +64,9 @@ $(function(){
         e.preventDefault();
         let id = $(this).data('id');
 
-        //  var cat = $(this).data('cat');
         $.ajax({
             url: 'delIt',
-            data: {id: id/*, cat: cat */},
+            data: {id: id},
             headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
             type: 'GET',
             success: function(res){
@@ -101,33 +99,15 @@ function clearCart(){
 }
 
 
-/*function redirectCart(){
-    $.ajax({
-        url: 'redirect',
-        type: 'GET',
-        headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-
-        error: function(){
-            alert('Нет перехода на главную страницу!!!');
-        }
-    });
-} */
-
 $( document ).ready(function(){
 $('.add-to-cart').on('click', function (e) {
 	//e.preventDefault();
-	var id = $(this).data('id');
-//	var	 qty=$('#qty').val();
+	let id = $(this).data('id');
 
-		// qty=1;
 	$.ajax({
-		//url: 'http://pullsky.kretivz.pro/web/cart/add',
+
       url: "addcartios",
-	//	url: "<php echo URL::action('CartController@index')?>",
 		cache: false,
-		//contentType: false,
-      //  url: '/CartController/cartAdd',
-	//	url: '@web/cart/add',
 		data: {id: id},
         headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
 		type: 'GET',
@@ -181,8 +161,8 @@ $('.add-to-cart').on('click', function (e) {
  //    изменение количества в модальном окне
 
     $('.modal-body').on('click','.minus',function () {
-        let $input = $(this).parent().find('input');
-        let count = parseInt($input.val()) - 1;
+        let $input = $(this).parent().find('input'),
+             count = parseInt($input.val()) - 1;
         count = count < 1 ? 1 : count;
         $input.val(count);
         $input.change();
@@ -197,8 +177,8 @@ $('.add-to-cart').on('click', function (e) {
 
     $('.modal-body').on('change','input',function () {
 
-    let qty=$(this).val();
-    let id=$(this).data('id');
+    let qty=$(this).val(),
+        id=$(this).data('id');
 
         $.ajax({
             url: "changeQty",
@@ -213,18 +193,14 @@ $('.add-to-cart').on('click', function (e) {
                 //$('.wrap_result').append('<br/><strong>Выборка выполнена !</strong>').delay(2000).fadeOut(500);
 
                 $('.table-responsive').empty();
-              //   $('#mediumMine').replaceWith(res.content);
                 $('.table-responsive').append(res.content);
-            //    $(this).val(res.am1);
-            //    $('.modal-body .table-responsive #speedIns').val(rez.content);
-            //    $('.modal-body .table-responsive #speedTotal').val(rez.total);
             },
             error: function(){
                 alert('Ошибка передачи данных модального окна!');
             }
         });
 
-});
+    });
 
 
 
@@ -235,7 +211,7 @@ $('.add-to-cart').on('click', function (e) {
         autoPlay: true,
         autoPlaySpeed: 3000,
         pauseOnHover: true,
-        itemsToScroll: 3,
+        itemsToScroll: 1,
 
         infinite: true,
         navigationTargetSelector:true,
@@ -247,11 +223,11 @@ $('.add-to-cart').on('click', function (e) {
             },
             landscape: {
                 changePoint:640,
-                visibleItems: 2
+                visibleItems: 1
             },
             tablet: {
                 changePoint:768,
-                visibleItems: 3
+                visibleItems: 4
             }
         }
     });
@@ -285,10 +261,10 @@ $('.add-to-cart').on('click', function (e) {
 
 
 
-	var RGBChange = function() {
+	let RGBChange = function() {
 	  $('#RGB').css('background', 'rgb('+r.getValue()+','+g.getValue()+','+b.getValue()+')')
-	};	
-		
+	};
+
 /*scroll to top*/
 
 
@@ -390,49 +366,117 @@ function myRangeOut() {
 
 //______________________________________________________________________________________________________________________
 
-        $("#insertOption").on('submit','#selectMyFixing ', function (e) {
-            // $(this)
 
-            e.preventDefault();
-            let form = $(this);
+      jQuery(document).ready(function() {
+          $("#insertOption").on('submit', '#selectMyFixing ', function (e) {
+              // $(this)
+
+              e.preventDefault();
+              let form = $(this),
+                  data = $(form).serializeArray();
+
+              $.ajax({
+
+                  url: form.attr('action'),
+
+                  cache: false,
+                  data: data,
+                  /* beforeSend: function(data) { // сoбытиe дo oтпрaвки
+                   form.find('input[type="submit"]').attr('disabled', 'disabled'); // нaпримeр, oтключим кнoпку, чтoбы нe жaли пo 100 рaз
+                   },  здесь должен быть ограничитель  звездочеа и косая  */
+                  headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                  type: form.attr('method'),
+                  dataType: "JSON",
+                  success: function (res) {
+                      if (!res) alert('Ошибка!');
+
+                      //$('.wrap_result').append('<br/><strong>Выборка выполнена !</strong>').delay(2000).fadeOut(500);
+                      $('#contentHolder').empty();
+                      // $('#mediumMine').replaceWith(res.content);
+                      $('#contentHolder').append(res.content);
+                      let h1 = $('#contentHolder').height();
+                      $('.wrapSubProd').css('height', h1 - 120);
+                  },
+                  error: function () {
+                      alert('Ошибка передачи slider и кнопок!');
+                  }
+
+              });
 
 
-            //  if(counter)
-            // {
-            let data = $(form).serializeArray();
-            // alert(data);
-            $.ajax({
+          });
 
-                url: form.attr('action'),
+      });
 
-                cache: false,
-                data: data,
-                /* beforeSend: function(data) { // сoбытиe дo oтпрaвки
-                 form.find('input[type="submit"]').attr('disabled', 'disabled'); // нaпримeр, oтключим кнoпку, чтoбы нe жaли пo 100 рaз
-                 },  здесь должен быть ограничитель  звездочеа и косая  */
-                headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-                type: form.attr('method'),
-                dataType: "JSON",
-                success: function (res) {
-                    if (!res) alert('Ошибка!');
 
-                    //$('.wrap_result').append('<br/><strong>Выборка выполнена !</strong>').delay(2000).fadeOut(500);
-                    $('#contentHolder').empty();
-                    // $('#mediumMine').replaceWith(res.content);
-                    $('#contentHolder').append(res.content);
-                    let h1= $('#contentHolder').height();
-                    $('.wrapSubProd').css('height',h1-120);
-                },
-                error: function () {
-                    alert('Ошибка передачи slider и кнопок!');
-                }
-
-            });
-            // }
+//__________________________________________________________________________________________________________
+// функция выводит продукты по селекту сортировки на странице продукции
+//function onSorties()
+//{
+    $('#contentHolder').on('change','#sortValue',function(e){
+        e.preventDefault();
+        let data=$(this).val();
+        $.ajax({
+            url: 'category',
+            data: {data: data},
+            cache: false,
+            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+            //  url: 'http://pullsky.kretivz.pro/web/cart/show',
+            type: 'GET',
+            dataType: "JSON",
+            success: function(res){
+                if(!res) alert('Ошибка!');
+                $('#contentHolder').empty();
+                $('#contentHolder').append(res.content);
+            },
+            error: function(){
+                alert('Ошибка передачи переметра сортировки');
+            }
 
         });
+    });
+//}
+//________________________________________________________________________________________________________
 
+jQuery(document).ready(function() {
+    $('#contentHolder').on('click','.sortieOption .sortie5 #cascad', function(e){
+        e.preventDefault();
+        let id=$(this).data('id');
+        $.ajax({
+            url: 'category',
+            data: {vert: id},
+            cache: false,
+            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+            //  url: 'http://pullsky.kretivz.pro/web/cart/show',
+            type: 'GET',
+            dataType: "JSON",
+            success: function(res){
+                if(!res) alert('Ошибка!');
+                $('#contentHolder').empty();
+                $('#contentHolder').append(res.content);
+            },
+            error: function(){
+                alert('Ошибка передачи переметра сортировки');
+            }
 
+        });
+    });
+
+    $('#contentHolder').on('click','.sortieOption .sortie4 #caucaus', function(e) {
+        e.preventDefault();
+         let href = $(this).data('href'),
+             idi= $(this).attr('href'),
+             hr=idi.split('?'),
+             cs=$(this).data('sign'),
+             id=0,
+            pr=24; // признак работы с видом вывода на экран
+             href=hr[0];
+        let ss=getContent(href, true,id, pr,cs);
+        jQuery('.like_name').removeClass('active');
+        $(this).addClass('active');
+    });
+
+});
 
 
 
@@ -453,7 +497,7 @@ jQuery(document).ready(function() {
             flag = true;
             func2.call(this,id);
         }
-        return false;
+        return false;id=$(this).data('id')
 
     });
     function func1(id){
@@ -490,9 +534,57 @@ jQuery(document).ready(function() {
 
 function workupPr(pr=0, data=0)
 {
-    if(pr!=25 && pr!=23)$('#insertOption').empty();
+    if(pr==40)
+    {
+        let yyy=0;
+        $('#contentHolder .sortie .sortieOption .sortie1_4').empty();
+        $('#contentHolder .sortie .sortieOption .sortie1_4').css("display","block");
+        let  newElem=$("<div class='layer002'></div>").append(data.content);
+        yyy=data.content;
 
-    if(pr!="22") $('.profit .container-wrap-row .item .text').css({"border":"none","margin-top":"0"});
+        $('#contentHolder .sortie .sortieOption .sortie1_4').append(newElem);
+        return;
+    }
+    else $('picture').hide();
+    if(pr==41)
+    {
+        $('#contentHolder').empty();
+        $('#contentHolder').append(data.content);
+        return;
+    }
+        if(pr!=25 && pr!=23)$('#insertOption').empty();
+    if(pr==39) // модальное окно корзины
+    {
+        $('.modal-body').empty();
+        $('.modal-body').append(data.content);
+        showCart(data.content);
+        return;
+    }
+
+    if(pr==34)  // кабинет нет регистрации
+    {
+        let reign=data.content;
+        if(reign==="Авторизация")
+        {
+            window.location.replace('home');
+            return;
+        }
+    }
+     if(pr==35) // кабинет есть регистрация
+     {
+        $('.wrap1').css('display','none');
+         $('#cabinet').replaceWith(data.sesille);
+         $('.secondwrap-02 .rockwel-01').empty();
+         $('.secondwrap-02 .rockwel-01').append(data.leftBar);
+         $('.secondwrap-02  #mediumMine').empty();
+         $('.secondwrap-02  #mediumMine').append(data.content);
+         $('.container-wrap').css('display','none');
+         return;
+     }
+
+
+
+    if(pr!="22" && pr!="36") $('.profit .container-wrap-row .item .text').css({"border":"none","margin-top":"0"});
     $('.container-wrap-banner').empty();
     $('.slider').empty();
     $('.profit1').empty();
@@ -504,19 +596,16 @@ function workupPr(pr=0, data=0)
 
         $('.container-wrap-row .catalog').remove();
         $('#wrap-last').css('display','none');
-        /*  $('.container-wrap-row ').css('border','none');
-         $('.container-wrap-row ').css({"display":"none"}); */
 
-        // $('.container-wrap-row .catalog').css({"border":"none","margin-top":"0"});
     }
+    if(pr==36)$('#wrap-last').css('display','none');
+
     if(pr==0||pr==21)  {
         $('.edgest1').empty();
         $('.edgest2').empty();
         $('#uri_last').empty();
 
-        //  $('#wrap-last ').empty();
-        //  $('#wrap-last ').append('<div id="container-right-edge"></div>');
-        // $('#wrap-last ').append('<div class="container-right-edgest"></div>');
+
         $('.container-right-edge ').empty();
         $('.container-right-edgest').empty();
         $('.container-right-edgest').css('opacity','0');
@@ -525,21 +614,11 @@ function workupPr(pr=0, data=0)
 
     if(pr=="22")
     {
-
-        //     $('.container-wrap-row .catalog').css('border','inherit');
-
-        //     $('.container-wrap-row ').css({"display":"block"});
-
-        //      $('.container-wrap-row .catalog').append(data.leftBar);
         $('#insertOption').append(data.leftBar);
         $('#insertOption').css('opacity','0');
         $('#insertOption').fadeTo(2000,1);
         $('#insertOption').css({"border":"1px solid lightblue"});
-        /*
-         $('#wrap-last ').empty();
-         $('#wrap-last ').append('<div id="container-right-edge"></div>');
-         $('#wrap-last ').append('<div class="container-right-edgest"></div>');
-         */
+
         $('#wrap-last').css('display','block');
 
 
@@ -562,8 +641,7 @@ function workupPr(pr=0, data=0)
         $('#wrap-last .container-end ').empty();
         $('#wrap-last .container-end').css('display','none');
 
-        //  $sa=$('#insertOption input#pricer1').val();
-        //  $('#insertOption#selectMyFixing input#pricer dataMin').val($sa);
+
         myRangeIn();
 
     }
@@ -610,36 +688,41 @@ function workupPr(pr=0, data=0)
         $('nav .wrap1').empty();
         $('.container-wrap-row .catalog').css('border','inherit');
         $('.container-wrap-row .catalog').css({"display":"none"});
-        // $('#container-right-edge ').empty();
-        //  $('.container-right-edgest').empty();
-        //  $('#wrap-last ').append('<div id="container-right-edge"></div>');
-        //   $('#wrap-last ').append('<div class="container-right-edgest"></div>');
+
         $('#contentHolder').css('margin-left','20px');
         $('#contentHolder').append(data.content);
 
         $('.close').click();
     }
 
+
 }
 //______________________________________________________________________________________________________________________
 // Функции history API
 
-let NavigationCache = [];
-let priznNav=0;
-let dad='';
-let riscMy=0;
-let url='';
-let cnt=0;
+let NavigationCache = [],
+    priznNav=0,
+    suprizeMe='',
+     dad='',
+     url='',
+      cntqnt=0,
+    arc=false,
+    updatePr22=false;
+
+
+
 $('document').ready(function(){
-    jQuery('.historyAPI').on('click', function(e){
+    jQuery('.historyAPI, .sem').on('click','a', function(e){
         e.preventDefault();
-        let href = $(this).data('href');
+        let href = $(this).data('href'),
+          pr=$(this).data('sign');
+        if(pr<30 || pr>33 ){ //это временное отключение меню акция, доставка...
         // Getting Content
 
-      let $ss=getContent(href, true);
+      let ss=getContent(href, true,0, pr);
         jQuery('.historyAPI').removeClass('active');
         $(this).addClass('active');
-
+        }
 
     });
 
@@ -655,88 +738,46 @@ $('document').ready(function(){
 */
 
     History.Adapter.bind(window, 'statechange', function (e) {
-        /*  if (event.state) {
-         window.location.reload();
-         } */
 
-     console.log(window.history.length);
-     let ljn=window.history.length;
-        let ere='';
-        console.log(window.history);
-        let sss = 0;
+        let sss = 0,
        // let State = History.getState();
-        let stat1=window.location.toString();
-        let kark = '';
-        let priz = '';
+            stat1=window.location.toString(),
+             kark = '',
+             priz = '',
+             gibrid='';
+        url=lastAlfa(url);
     //    let pas = State.cleanUrl;
-        let tt = [];
 
-        let gibrid;
-        tt =stat1.split('//');
-        url = tt[1].split('/');
-        url = url.pop();
-        cnt=url.length;
-        let str=url.slice(cnt-1);
-
-        // убираем кэшированную запись из history
-        if(str=='#' )
+        if(url==='index.php')
         {
-             let State1=History.back();
-            let stat1=window.location.toString();
-
-            tt =stat1.split('//');
-            url = tt[1].split('/');
-            url = url.pop();
-        }
-
-        if (priznNav != 999)
-        {
-
-            cnt = NavigationCache.length; // длина крошек
-            if (cnt > 0) {
-                for (let i = cnt-1; i >=0; i--) {
-                    kark = NavigationCache[i].url; // имя таба в навигации крошек
-
-                    if(url!=kark )
+            // window.load(base_url);
+            window.location.replace('/mazi');
+        }else {
+                    if (priznNav != 999)
                     {
-                        let rer = NavigationCache.pop();
-                    } else
-                        {
-                            gibrid= NavigationCache[i];
-                        break;
-                        }
-                }
+                        $('#central').css("display","block");
+                    gibrid=navigationHistory(url);
+                       dad = gibrid.data;
+                      //  history.back();
+                        let State = History.getState();
+                        console.log("State ",State);
+                       // dad='';
+                        $('#contentHolder').html(dad);
+                        let pr = gibrid.pr;
+                        let id=gibrid.id;
+                     //   let init = {data: dad, pr: pr};
 
-            }
-
-          //  dad = gibrid.data;
-            dad='';
-            let pr = gibrid.pr;
-            let id=gibrid.id;
-         //   let init = {data: dad, pr: pr};
-
-            priznNav = 0;
-            cnt = NavigationCache.length; // длина
-            $('#crumbs').empty();
-            for (let i = 0; i < cnt; i++)
-            {
-                kark = NavigationCache[i].url; // имя таба в навигации крошек
-              //  if(kark!=="addcartios" && kark!=="product")
-                if( kark!=="product")
-                {
-                $('#crumbs').append('<li><a>');
-                $('#crumbs li:last-child a').attr("href", "#").attr("id", kark).html(kark);
-                }
-            }
-        //  if(url!= "addcartios"&& url!="indexpage")
-            if(url!="indexpage")
-          {
-           getContent(url,false,id,pr);
-        //     History.replaceState(null, null, url);
-          }
-
-        }
-
+                        priznNav = 0;
+                        $('#crumbs').empty();
+                        navigateBread();
+                    //  if(url!= "addcartios"&& url!="indexpage")
+                        if(url!="indexpage")
+                      {
+                       getContent(stat1,false,id,pr);
+                    //     History.replaceState(null, null, url);
+                      }
+                    }
+             }
     });
 
 
@@ -749,29 +790,33 @@ $('document').ready(function(){
     }); */
 
 
-function getContent(url, addEntry, id=0, pr=0) {
-    $.get(url,{id: id},{cache: false})
+function getContent(url, addEntry, id=0, pr=0,cs=0) {
+    $.get(url,{id: id, pr: pr, cs: cs},{cache: false})
         .done(function( data ) {
             // Updating Content on Page
            workupPr(pr, data);
             //  $('#contentHolder').html(data);
       // alert('Загрузка завершена.');
-            $pas=url.split('/');
-            url= $pas.pop();
+          let  pas=url.split('/');
+            url= pas.pop();
 
             if(addEntry )
             {
                let kark=0;
-                // dad=$('#central').html();
-                 dad='';
+                dad=data.content;
+                if(pr==0)
+                {
+                    suprizeMe=dad;
+                }
                 // console.log('data',data);
                 let inside={data: dad, pr: pr, id: id, url:url};
                 // Add History Entry using pushState
                 cnt=NavigationCache.length; // длина
                 let ofindi=false;
+                let i=0;
                 if(cnt>0)
                 {
-                   for(let i=0; i<cnt; i++)
+                   for( i=0; i<cnt; i++)
                    {
                       kark= NavigationCache[i].url;
                       if(url==kark)
@@ -782,50 +827,24 @@ function getContent(url, addEntry, id=0, pr=0) {
                    if(ofindi)
                    {
                        priznNav=999;
-                       cnt=NavigationCache.length; // длина
-                       for (let i = cnt-1; i >=0; i--)
+                        let j=0;
+                       kark=navigationHistory(kark);
+                       dad=kark.data;
+                       if((!updatePr22) && (pr!=39)&& (pr!=24)&& (pr!=26) &&(pr!=36) && (pr!=40) &&(pr!=41))
                        {
-                           kark = NavigationCache[i].url; // имя таба в навигации крошек
-
-                           if (url != kark) {
-                               let rer = NavigationCache.pop();
-                           }
-
-                           else break;
+                           $('#contentHolder').replaceWith(dad);
                        }
 
                        $('#crumbs').empty();
-                        cnt=NavigationCache.length; // длина
-                       for(let i=0; i<cnt; i++)
-                       {
-                           kark= NavigationCache[i].url; // имя таба в навигации крошек
-                        //   if(kark!=="addcartios" && kark!=="product")
-                           if(kark!=="product")
-                           {
-                               $('#crumbs').append('<li><a>');
-                               $('#crumbs li:last-child a').attr("href", "#").attr("id", kark).html(kark);
-                           }
-                       }
-                  //     $('#crumbs li:last-child a').replaceWith("<p></p>").attr("id", kark).html(kark);
+                       navigateBread();
 
-                    //   History.replaceState({url:url}, null, url);
                    }
                    else
                        {
                            NavigationCache.push(inside) ;
                            priznNav=999;
                            $('#crumbs').empty();
-                           let cnt=NavigationCache.length; // длина
-                           for(let i=0; i<cnt; i++)
-                           {
-                                kark= NavigationCache[i].url; // имя таба в навигации крошек
-                               //if(kark!=="addcartios" && kark!=="product")
-                                   if(kark!=="product")
-                               {
-                                   $('#crumbs').append('<li><a>');
-                                   $('#crumbs li:last-child a').attr("href","#").attr("id",kark).html(kark);
-                               }
-                           }
+                          navigateBread();
                  //          $('#crumbs li:last-child a').replaceWith("<p></p>").attr("id", kark).html(kark);
                            History.pushState({url:url}, null, url);
                            priznNav=0;
@@ -836,17 +855,7 @@ function getContent(url, addEntry, id=0, pr=0) {
                    NavigationCache.push(inside) ;
                     priznNav=999;
                     $('#crumbs').empty();
-                     cnt=NavigationCache.length; // длина
-                    for(let i=0; i<cnt; i++)
-                    {
-                        kark= NavigationCache[i].url; // имя таба в навигации крошек
-                      //  if(kark!=="addcartios" && kark!=="product")
-                            if(kark!=="product")
-                        {
-                        $('#crumbs').append('<li><a>');
-                        $('#crumbs li:last-child a').attr("href","#").attr("id",kark).html(kark);
-                        }
-                    }
+                     navigateBread();
              //       $('#crumbs li:last-child a').replaceWith("<p></p>").attr("id", kark).html(kark);
                     History.pushState({url:url}, null, url);
 
@@ -855,19 +864,17 @@ function getContent(url, addEntry, id=0, pr=0) {
 
             }
             if(!addEntry)
-                {
+            {
 
                     $('#crumbs').empty();
 
-                    let cnt=NavigationCache.length; // длина
-                    for(let i=0; i<cnt; i++)
-                    {
-                        kark= NavigationCache[i].url; // имя таба в навигации крошек
-                        $('#crumbs').append('<li><a>');
-                        $('#crumbs li:last-child a').attr("href","#").attr("id",kark).html(kark);
-                    }
-                 //  $('#crumbs li:last-child a').replaceWith("<p></p>").attr("id", kark).html(kark);
-               //   History.replaceState({url:url}, null, url);
+                    navigateBread();
+
+            }
+
+            if(pr==22){
+                $('#contentHolder').empty();
+                $('#contentHolder').append(suprizeMe);
             }
 
             priznNav=0;
@@ -875,21 +882,100 @@ function getContent(url, addEntry, id=0, pr=0) {
         });
 }
 
+function navigateBread()
+{
+     cnt=NavigationCache.length; // длина
+    for(let i=0; i<cnt; i++)
+    {
+        kark= NavigationCache[i].url; // имя таба в навигации крошек
+        if(kark!=="product")
+        {
+        $('#crumbs').append('<li><a>');
+        $('#crumbs li:last-child a').attr("href","#").attr("id",kark).html(kark);
+        }
+    }
+}
 
+function navigationHistory(url)
+{
+     cnt = NavigationCache.length; // длина крошек
 
+     let   kark='', gibrid='';
+    if (cnt > 0)
+    {
+        for (let i = cnt-1; i >=0; i--) {
+            kark = NavigationCache[i].url; // имя таба в навигации крошек
+
+            if(url!=kark )
+            {
+                let rer = NavigationCache.pop();
+            } else
+            {
+                gibrid= NavigationCache[i];
+                break;
+            }
+        }
+
+    }
+    return gibrid;
+}
+
+function lastAlfa(url)
+{
+
+    let stat1=window.location.toString(),
+        str='',
+        tt = [];
+    tt =stat1.split('//');
+    url = tt[1].split('/');
+    url = url.pop();
+    cnt=url.length;
+   str=url.slice(cnt-1);
+    // убираем кэшированную запись из history
+    if(str=='#' )
+    {
+        let State1=History.back(),
+          stat1=window.location.toString();
+
+        tt =stat1.split('//');
+        url = tt[1].split('/');
+        url = url.pop();
+    }
+    return url;
+}
 
 
 jQuery('document').ready(function(){
-    jQuery('#contentHolder').on('click','.like_name, #reactimage, #reactbutton', function(e){
+    jQuery('#contentHolder').on('click','.like_name, #reactimage, #reactbutton,.wrapProdT01 .productsinT01 a', function(e){
         e.preventDefault();
-        let href = $(this).data('href');
+        let href = $(this).data('href'),
+           cs=0,
+            newElem='',
+          id=$(this).data('id'),
+          pr=$(this).data('sign');
+        if(pr==26)
+        {
+        cs=26;
 
-        let id=$(this).data('id');
-        let pr=$(this).data('sign');
+        }
+        updatePr22=false;
+
+        if(pr==22) updatePr22=true;
         // Getting Content
-        let $ss=getContent(href, true,id, pr);
+        if(pr==40){
+            cntqnt++;
+            cs=cntqnt;
+            newElem=$("<div class='layer001'></div>")
+                .append("<img src='http://localhost/mazi/public/pink/images/features/tick.png' style='width:50px; height:auto; z-index:1; ' />");
+         //  $(this).css('display','none');
+            $(this).hide();
+           $(this).parents('.productsinT01').append(newElem);
+        }
+        let ss=getContent(href, true,id, pr,cs);
         jQuery('.like_name').removeClass('active');
         $(this).addClass('active');
+
+
     });
 
 
@@ -900,48 +986,50 @@ jQuery('document').ready(function(){
     jQuery('#crumbs').on('click','li a', function(e){
         e.preventDefault();
         let url = $(this).html(),
-            base_url=window.location.toString();
-
-
-
-        let pas= base_url.split('//');
-      let str='';
-          let second=pas[1].split('/');
+            base_url=window.location.toString(),
+           kark='',
+           pas= base_url.split('//'),
+           str='',
+           second=pas[1].split('/');
           second.pop();
-          let cnt=second.length;
+           cnt=second.length;
           for(let i=0; i<cnt;i++)
           {
               str+= second[i]+'/';
           }
        base_url=pas[0]+'//'+str+url;
+        let j=0;
+          kark= navigationHistory(url);
         if(url==='indexpage')
         {
-           // window.load(base_url);
             window.location.replace('/mazi');
         }
         else
      {
-        let kark='';
-        cnt = NavigationCache.length; // длина крошек
-        if (cnt > 0)
-        {
-            for (let i = cnt - 1; i >= 0; i--)
-            {
-                kark = NavigationCache[i].url; // имя таба в навигации крошек
 
-                if (url != kark) {
-                    let rer = NavigationCache.pop();
-                } else {
-                    kark = NavigationCache[i];
-                    break;
-                }
-            }
-        }
         if(kark)
         {
-            let pr=kark.pr;
-            let id=kark.id;
-            let $ss=getContent(base_url, true,id, pr);
+
+         /*   let bell='';
+            cnt = window.history.length; // длина крошек
+            if (cnt > 0)
+            {
+                for (let i = cnt - 1; i >= 0; i--)
+                {
+                    bell = History.getState(); // имя таба в навигации крошек
+
+                    if (kark.url != bell.data.url) {
+                        let rer = History.back();
+                    } else {
+                        bell = History.getState();
+                        break;
+                    }
+                }
+            }
+    */
+            let pr=kark.pr,
+               id=kark.id,
+             ss=getContent( base_url, false,id, pr);
         }
       }
     });
@@ -950,20 +1038,18 @@ jQuery('document').ready(function(){
 
 
 jQuery(document).ready(function(){
-    jQuery('.catalog ul#azar.azoneChild').on('click', 'li a.active', function(e){
+    jQuery('.catalog ').on('click', '.dcjq-parent-li #azar li a ', function(e){
    // jQuery('.catalog ul#azar.azoneChild').on('click','li.azoneFirst', function(e){
         e.preventDefault();
-       let idi= $(this).attr('href');
-      // let id1=$(this).data('id');
-       let hr=idi.split('?');
-       let href=hr[0];
-       let pr=24;  // признак работы с видом вывода на экран
-        let id=$(this).attr('href').split('data-id=').pop();
+      //  e.stopPropagation();
 
-     //   alert('Я попал в категорию !');
-
-   // console.log(id);
-        let $ss=getContent(href, true,id, pr);
+       // arc=true;
+       let idi= $(this).attr('href'),
+            hr=idi.split('?'),
+            href=hr[0],
+            pr=24,  // признак работы с видом вывода на экран
+            id=$(this).attr('href').split('data-id=').pop(),
+             ss=getContent(href, true,id, pr);
 
         jQuery('.like_name').removeClass('active');
         $(this).addClass('active');
@@ -973,12 +1059,12 @@ jQuery(document).ready(function(){
 jQuery('document').ready(function(){
     jQuery('.container-right-edge, .modal-content').on('click',' #reactiveimg,  #reactivebut, #moreInfo, a', function(e){
         e.preventDefault();
-        let href = $(this).data('href');
 
-        let id=$(this).data('id');
-        let pr=$(this).data('sign');
+        let href = $(this).data('href'),
+            id=$(this).data('id'),
+            pr=$(this).data('sign'),
         // Getting Content
-        let $ss=getContent(href, true,id, pr);
+          ss=getContent(href, true,id, pr);
 
         jQuery('.like_name').removeClass('active');
         $(this).addClass('active');
@@ -988,14 +1074,117 @@ jQuery('document').ready(function(){
 
 });
 
+
+// отправка формы заказа usera
+jQuery('document').ready(function() {
+    $('#contentHolder').on('submit','#contractUser', function (e) {
+        e.preventDefault();
+        let form = $(this),
+            href = $(this).data('href'),
+            pr=$(this).data('sign'),
+            data = $(form).serializeArray();
+
+        $.ajax({
+            url: form.attr('action'),
+            cache: false,
+            data: data,
+            /* beforeSend: function(data) { // сoбытиe дo oтпрaвки
+             form.find('input[type="submit"]').attr('disabled', 'disabled'); // нaпримeр, oтключим кнoпку, чтoбы нe жaли пo 100 рaз
+             },  здесь должен быть ограничитель  звездочеа и косая  */
+            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+            type: form.attr('method'),
+            dataType: "JSON",
+            success: function (res) {
+                if (!res) alert('Ошибка!');
+
+                //$('.wrap_result').append('<br/><strong>Выборка выполнена !</strong>').delay(2000).fadeOut(500);
+            //    window.location.replace( href);
+                $('#cabinet').replaceWith(res.sesille);
+                $('.secondwrap-02 .rockwel-01').empty();
+                $('.secondwrap-02 .rockwel-01').append(res.leftBar);
+                $('.secondwrap-02  #mediumMine').empty();
+                $('.secondwrap-02  #mediumMine').append(res.content);
+               let dad='';
+                priznNav=999;
+                $pas=href.split('/');
+               let url= $pas.pop();
+                let inside={data: dad, pr: pr, url:url};
+                NavigationCache.push(inside);
+                let cnt=NavigationCache.length; // длина
+                let kark='';
+                $('#crumbs').empty();
+                for(let i=0; i<cnt; i++)
+                {
+                    kark= NavigationCache[i].url; // имя таба в навигации крошек
+                    $('#crumbs').append('<li><a>');
+                    $('#crumbs li:last-child a').attr("href","#").attr("id",kark).html(kark);
+                }
+                $('#central').css("display","none");
+                History.pushState({url:url}, null, url);
+
+            },
+            error: function () {
+                alert('Ошибка передачи slider и кнопок!');
+            }
+        });
+    });
+});
+
+
+jQuery('document').ready(function() {
+    $('.catalog').on('click','.dcjq-parent-li .dcjq-parent', function (e) {
+e.preventDefault();
+/*
+if(arc) {
+  arc=false;
+    exit();
+}
+*/
+let href=$(this).attr('href'),
+    pic=[],
+    id='',
+    pr=36,
+    shortUrl=[];
+shortUrl=href.split('?');
+pic=shortUrl[0];
+pic+="super";
+
+  id=href.split('&');
+  href=pic;
+   id=id.pop();
+pic=id.split('=');
+id=pic[1];
+        ss=getContent(href, true,id, pr);
+
+    });
+
+});
+
+
+
+
+/*
+$(document).ready(function () {
+    document.addEventListener("keypress", function onEvent(event) {
+        if (event.key === "r" && event.ctrlKey) {
+            window.location.replace('/mazi');
+        }
+    });
+
+
+});*/
+
+
+
+
 // javascript второе модальное окно продуктов
 
-    var modal = document.querySelector('.modalMain');
-    var overflow = document.createElement('div');
+    let modal = document.querySelector('.modalMain'),
+            overflow = document.createElement('div');
     function openWin() {
         overflow.className = "overflow";
         document.body.appendChild(overflow);
-        var height = modal.offsetHeight;
+        let height = modal.offsetHeight;
         modal.style.marginTop = - height / 2 + "px";
         modal.style.top = "50%";
     }
@@ -1012,6 +1201,13 @@ jQuery('document').ready(function(){
         modal.style.top = "-100%";
         overflow.remove();
     };
+
+jQuery('document').ready(function() {
+$('.modalMain').on('click','.close', function(){
+    modal.style.top = "-100%";
+    overflow.remove();
+});
+});
 
         // функция hover
 /*let begin=new Date().getTime();

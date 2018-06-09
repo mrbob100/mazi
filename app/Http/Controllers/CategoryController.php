@@ -36,12 +36,38 @@ class CategoryController extends SiteController  // выбор из боково
         $this->vars = array_add($this->vars, 'sliders', $sliders);
 */
        $id=$request->id;
+        $priznakOut=0;
+        $priznakSort=0;
+    $iu=0;
+        $input = $request->except('_token');
+if(isset( $input['data']))
+{
+    $priznakSort= $input['data'];
+}
+        if(isset($input['vert']))
+        {
+            $priznakOut=($input['vert']); // признак вывода иконками или таблицей
+        }
 
-        Session::pull('Category');
+if(!$id && !$input)
+{
+    $priznakOut=99;
+}
+
+        if(!$id)
+        {
+            $id1=Session::pull('Category');
+           // $id1=$id1[0];
+            $id=$id1[0]['id'];
+            $iu=$id;
+
+        }
+         else
+         { Session::pull('Category'); }
       if(!session('Category')) Session::push('Category',['id'=>$id]);
         $this->category_id=$id;
         if(!$id) return redirect('/');
-        $products=$this->getProducts($id);
+        $products=$this->getProducts($id,$priznakSort );
         If(!$products) return redirect('/');
         $prod=$products[0];
         $prod->load('categories');
@@ -234,8 +260,20 @@ class CategoryController extends SiteController  // выбор из боково
 
         ];
 
+        $cs=0;
+       if($priznakOut==99)
+       {
+           $content=view(env('THEME').'.products_content')->with(['products'=>$products,'adopt'=>$this->adopt,'cs'=>$cs])->render();
+           $this->vars=array_add($this->vars,'content', $content);
+           return $this->renderOutput();
 
-        $content=view(env('THEME').'.products_content')->with(['products'=>$products,'adopt'=>$this->adopt])->render();
+       }
+       if($priznakOut=='11')
+       {
+           $content=view(env('THEME').'.products_table_content')->with(['products'=>$products,'adopt'=>$this->adopt,'cs'=>$cs])->render();
+       }
+      else  $content=view(env('THEME').'.products_content')->with(['products'=>$products,'adopt'=>$this->adopt,'cs'=>$cs])->render();
+
         //$this->vars=array_add($this->vars,  'content', $content);
         $leftBar=view(env('THEME').'.left_bar_content')->with([/*'cat'=>$this->category_id,*/'data'=>$this->data])->render();
       //  Session::pull('leftBar');
@@ -256,7 +294,7 @@ class CategoryController extends SiteController  // выбор из боково
         return Response::json(['success'=>true, 'content'=>$content, 'leftBar'=>$leftBar , 'sigma'=>$sigma]);
     }
 
-    protected function getProducts($alias=false)
+    protected function getProducts($alias=false,$priznakSort=0)
     {
         $id=false;
         $were=false;
@@ -267,7 +305,7 @@ class CategoryController extends SiteController  // выбор из боково
 
             $were=['category_id',$alias];
         }
-        $products= $this->p_rep->get(['id','name','code','img','type','price','description','groupTools','new','class','company','country','packing','exactlyType1','category_id','keywords','meta_desc'], false,false,$were);
+        $products= $this->p_rep->get(['id','name','code','img','type','price','description','groupTools','new','class','company','country','packing','exactlyType1','category_id','keywords','meta_desc'], false,false,$were,$priznakSort);
        // if($products) $articles->load('user','category','comments');
         // dd($id);
 
@@ -293,6 +331,8 @@ class CategoryController extends SiteController  // выбор из боково
 
 
 //______________________________________________________________________________________________________________________
+
+
 //______________________________________________________________________________________________________________________
 
 public function resumeIndex()

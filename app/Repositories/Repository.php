@@ -6,14 +6,21 @@ abstract class Repository
 {
  protected $model=false;
 
- public function get($select='*', $take=false, $pagination=false, $where=false)
+ public function get($select='*', $take=false, $pagination=false, $where=false, $priznakSort=0)
  {
      $builder=$this->model->select($select);
 
      if($take) $builder->take($take);
      if($where) $builder->where($where[0],$where[1]);
      if($pagination) return $this->check($builder->paginate(Config::get('settings.paginate')));
-
+ if($priznakSort==1)
+ {
+     return $this->check($builder->orderBy('price','asc')->get());
+ }
+     if($priznakSort==2)
+     {
+         return $this->check($builder->orderBy('price','desc')->get());
+     }
      return $this->check($builder->get());
  }
 
