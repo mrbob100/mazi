@@ -46,7 +46,7 @@
          </div>
              <div class="right_side2" >
                  <div class="dress-name" >
-                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" style="color: #FF0000;">&times;</span></button>
                      <h5>{!! $row !!}</h5>
                      <span style="font-weight:900; font-size: 24px;"><h3>{!! $row1 !!}</h3></span>
 

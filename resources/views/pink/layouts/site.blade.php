@@ -23,7 +23,7 @@
     <link href="{{ asset('public/'.env('THEME')) }}/css/reset.css" rel="stylesheet" type="text/css"/>
     <link href="{{ asset('public/'.env('THEME')) }}/css/slick.css" rel="stylesheet" type="text/css"/>
     <link href="{{ asset('public/'.env('THEME')) }}/css/slick-theme.css" rel="stylesheet" type="text/css"/>
-
+    <link href="{{ asset('public/'.env('THEME')) }}/css/style.css" rel="stylesheet" type="text/css"/>
 
     <!--link href="{--{ asset('public/'.env('THEME')) }--}/css/flexslider.css" rel="stylesheet"  media="screen" type="text/css"/-->
     <script defer type="text/javascript" src=" {!! asset('public/'.env('THEME')) !!}/js/jquery.flexisel.js" charset="utf-8" ></script>
@@ -126,7 +126,7 @@
      </li>
      <li class="pointer historyAPI" style="margin: 0 20px 0 -80px;" ><a href="#" data-href="{{URL::to('categoryMain')}}" data-sign="0" ><p>&nbspСобрать набор&nbsp;</p></a></li>
 
-     <li class="pointer historyAPI" ><a href="#" data-href="{{ URL::to('cabinet')}}"  data-sign="30" ><p>&nbsp;Акция&nbsp;</p></a></li>
+     <li class="pointer historyAPI" ><a href="#" data-href="{{ URL::to('actionSell')}}"  data-sign="30" ><p>&nbsp;Акция&nbsp;</p></a></li>
      <li class="pointer historyAPI" ><a href="#"  data-href="{{ URL::to('cabinet')}}"  data-sign="31"><p>&nbsp;Оплата&nbsp;</p></a></li>
      <li class="pointer  historyAPI" ><a href="#" data-href="{{ URL::to('cabinet')}}"  data-sign="32"><p>&nbsp;Доставка&nbsp;</p></a></li>
      <li class="pointer  historyAPI" ><a href="#" data-href="{{ URL::to('cabinet')}}"  data-sign="33"><p>&nbsp;Гарантия&nbsp;</p></a></li>

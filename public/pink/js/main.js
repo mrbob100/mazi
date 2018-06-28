@@ -205,10 +205,10 @@ $('.add-to-cart').on('click', function (e) {
 
 
 
-    $("#flexiselDemo3").flexisel({
+    $("#flexiselDemo3 ").flexisel({
         visibleItems: 4,
         animationSpeed: 500,
-        autoPlay: true,
+        autoPlay: false,
         autoPlaySpeed: 3000,
         pauseOnHover: true,
         itemsToScroll: 1,
@@ -223,7 +223,33 @@ $('.add-to-cart').on('click', function (e) {
             },
             landscape: {
                 changePoint:640,
+                visibleItems: 2
+            },
+            tablet: {
+                changePoint:768,
+                visibleItems: 4
+            }
+        }
+    });
+   $("#slick-slider").flexisel({
+        visibleItems: 4,
+        animationSpeed: 500,
+        autoPlay: false,
+        autoPlaySpeed: 3000,
+        pauseOnHover: true,
+        itemsToScroll: 1,
+
+        infinite: true,
+        navigationTargetSelector:true,
+        enableResponsiveBreakpoints: true,
+        responsiveBreakpoints: {
+            portrait: {
+                changePoint:480,
                 visibleItems: 1
+            },
+            landscape: {
+                changePoint:640,
+                visibleItems: 2
             },
             tablet: {
                 changePoint:768,
@@ -232,13 +258,13 @@ $('.add-to-cart').on('click', function (e) {
         }
     });
 
-    $('.slick-slider').slick({
+ /*   $('.slick-slider').slick({
         infinite: true,
         speed: 350,
 // определяем скорость перелистывания
         slidesToShow: 4,
 //количество слайдов для показа
-        slidesToScroll: 2,
+        slidesToScroll: 3,
 //сколько слайдов за раз перелистнется
         responsive: [
             {
@@ -246,13 +272,13 @@ $('.add-to-cart').on('click', function (e) {
 //сообщает, при какой ширине экрана нужно включать настройки
                 settings: {
                     slidesToShow: 4,
-                    slidesToScroll: 2,
+                    slidesToScroll: 3,
                     infinite: true,
                 }
             }
         ]
 
-    });
+    }); */
 
 
 
@@ -415,10 +441,13 @@ function myRangeOut() {
 //{
     $('#contentHolder').on('change','#sortValue',function(e){
         e.preventDefault();
-        let data=$(this).val();
+        let data21=$(this).val(),
+            lat=$(this).data('sign'),
+            href=$(this).data('href');
+         let   idi=href.split('/').pop();
         $.ajax({
-            url: 'category',
-            data: {data: data},
+            url: idi,
+            data: {data: data21, latitude: lat},
             cache: false,
             headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
             //  url: 'http://pullsky.kretivz.pro/web/cart/show',
@@ -441,10 +470,15 @@ function myRangeOut() {
 jQuery(document).ready(function() {
     $('#contentHolder').on('click','.sortieOption .sortie5 #cascad', function(e){
         e.preventDefault();
-        let id=$(this).data('id');
+        let id=$(this).data('id'),
+            href=$(this).data('href'),
+        idi=$(this).attr('href').split('/').pop(),
+            lat=$(this).data('sign');
+            if(lat) id=11;
+
         $.ajax({
-            url: 'category',
-            data: {vert: id},
+            url:  idi,
+            data: {vert: id, latitude: lat},
             cache: false,
             headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
             //  url: 'http://pullsky.kretivz.pro/web/cart/show',
@@ -540,9 +574,9 @@ function workupPr(pr=0, data=0)
         $('#contentHolder .sortie .sortieOption .sortie1_4').empty();
         $('#contentHolder .sortie .sortieOption .sortie1_4').css("display","block");
         let  newElem=$("<div class='layer002'></div>").append(data.content);
-        yyy=data.content;
-
         $('#contentHolder .sortie .sortieOption .sortie1_4').append(newElem);
+        $('.layer002').css('opacity','0');
+        $('.layer002').fadeTo(2000,1);
         return;
     }
     else $('picture').hide();
@@ -657,6 +691,8 @@ function workupPr(pr=0, data=0)
     if(pr==24)  {
         $('#container-right-edge, .container-right-edgest').css('opacity','0');
         $('#contentHolder').append(data.content);
+        $('#contentHolder').css('opacity','0');
+        $('#contentHolder').fadeTo(2000,1);
         $('#insertOption').append(data.leftBar);
 
         myRangeIn();
@@ -664,6 +700,8 @@ function workupPr(pr=0, data=0)
     if(pr!=22 && pr!=24 && pr!=23 && pr!=26)
     {
         $('#contentHolder').append(data.content);
+        $('#contentHolder').css('opacity','0');
+        $('#contentHolder').fadeTo(2000,1);
         $('#contentText').append(data.sigma);
 
     }
@@ -707,6 +745,7 @@ let NavigationCache = [],
      url='',
       cntqnt=0,
     arc=false,
+    commonNamePlus='',
     updatePr22=false;
 
 
@@ -716,7 +755,7 @@ $('document').ready(function(){
         e.preventDefault();
         let href = $(this).data('href'),
           pr=$(this).data('sign');
-        if(pr<30 || pr>33 ){ //это временное отключение меню акция, доставка...
+        if(pr<31 || pr>33 ){ //это временное отключение меню акция, доставка...
         // Getting Content
 
       let ss=getContent(href, true,0, pr);
@@ -946,7 +985,7 @@ function lastAlfa(url)
 
 
 jQuery('document').ready(function(){
-    jQuery('#contentHolder').on('click','.like_name, #reactimage, #reactbutton,.wrapProdT01 .productsinT01 a', function(e){
+    jQuery('#contentHolder').on('click','.like_name, #reactimage, #reactbutton,.wrapProdT01 .productsinT01 a, .wrapProdT02 .productsinT02 a', function(e){
         e.preventDefault();
         let href = $(this).data('href'),
            cs=0,
@@ -1145,6 +1184,13 @@ let href=$(this).attr('href'),
     id='',
     pr=36,
     shortUrl=[];
+if(href==commonNamePlus)
+{
+    commonNamePlus='';
+    e.stopPropagation();
+    return;
+}
+commonNamePlus=href;
 shortUrl=href.split('?');
 pic=shortUrl[0];
 pic+="super";
@@ -1225,3 +1271,78 @@ jQuery('#contentHolder').on('hover','.wrapProdT01 .productsinT01' ,function () {
     });
 
 */
+jQuery('document').ready(function() {
+$('.slider').on('click','.flexslider #flexiselDemo3 .mask a, .flexslider #flexiselDemo3 .pict', function (e) {
+    e.preventDefault();
+    let href = $(this).data('href'),
+        cs=0,
+        newElem='',
+        id=$(this).data('id'),
+        pr=$(this).data('sign');
+    if(pr==26)
+    {
+        cs=26;
+
+    }
+    updatePr22=false;
+
+    if(pr==22) updatePr22=true;
+    // Getting Content
+    if(pr==40){
+        cntqnt++;
+        cs=cntqnt;
+        newElem=$("<div class='layer001'></div>")
+            .append("<img src='http://localhost/mazi/public/pink/images/features/tick.png' style='width:50px; height:auto; z-index:1; ' />");
+        //  $(this).css('display','none');
+        $(this).hide();
+        $(this).parents('.productsinT01').append(newElem);
+    }
+    let ss=getContent(href, true,id, pr,cs);
+    jQuery('.like_name').removeClass('active');
+    $(this).addClass('active');
+});
+
+});
+
+
+
+jQuery('document').ready(function(e) {
+    $('.wrap_01').on('click','#flexslider #slick-slider .productsLine  .liked-product .mask a,#flexslider #slick-slider .pict', function (e) {
+        e.preventDefault();
+
+        let href = $(this).data('href'),
+            cs=0,
+            newElem='',
+            id=$(this).data('id'),
+            pr=$(this).data('sign');
+        if(pr==26)
+        {
+            cs=26;
+
+        }
+        updatePr22=false;
+
+        if(pr==22) updatePr22=true;
+        // Getting Content
+        if(pr==40){
+            cntqnt++;
+            cs=cntqnt;
+            newElem=$("<div class='layer001'></div>")
+                .append("<img src='http://localhost/mazi/public/pink/images/features/tick.png' style='width:50px; height:auto; z-index:1; ' />");
+            //  $(this).css('display','none');
+            $(this).hide();
+            $(this).parents('.productsinT01').append(newElem);
+        }
+        let ss=getContent(href, true,id, pr,cs);
+        jQuery('.like_name').removeClass('active');
+        $(this).addClass('active');
+    });
+
+});
+
+/*jQuery('document').ready(function(e) {
+    $('.wrap_01').on('click', '#flexslider #slick-slider .pict ', function (e) {
+        e.preventDefault();
+
+    });
+}); */

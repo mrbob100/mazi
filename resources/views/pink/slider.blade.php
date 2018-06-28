@@ -1,28 +1,38 @@
 
-<header>
-    <h1 class="like text-center">Лучшая коллекция</h1>
-</header>
+<div id="header">
+    <h1 class="like text-center">{!! $categoryName !!}</h1>
+</div>
 
 <div class="flexslider">
 
-
         <ul id="flexiselDemo3">
 
-            @foreach( $sliders as $slide)
+            @foreach( $products as $prod)
+                @if($prod->hit)
                 <div class="sliderIn">
-                    @if($slide->path)
 
-                        <li><a href="{{route('product',['id'=>$slide->product_id]) }}"><img src="{!! asset($slide->path) !!}"   class="img-responsive" alt="вывод изображения" /></a>
+
+                        <li>
+                            <a class="pict" href="{{route('product',['id'=>$prod->id]) }}" data-href="{{URL::to('product')}}" data-id="{{$prod['id']}}" data-sign="26"><img src="{!! asset('public/'.env('THEME')) !!}/images/{{$prod->img->max}}"   class="img-responsive " alt="вывод изображения" />
+                                <div class="layer02"  data-href="{{URL::to('product')}}" data-id="{{$prod['id']}}" data-sign="26">
+                                    <img src="{{ asset('public/'.env('THEME')) }}/images/features/topBlue.png" alt="" />
+                                </div>
+                            </a>
                             <div class="product liked-product simpleCart_shelfItem">
-                                <a class="like_name" href="{{route('product',['id'=>$slide->product_id]) }}" >{!!str_limit($slide->name,30)  !!}</a>
-                                <p><a class="item_add" href="{{route('product',['id'=>$slide->product_id]) }}" ><i></i> <span class=" item_price">{!!$slide->products->price !!}&nbsp;гр.</span></a></p>
-
+                                <p class="like_name">{!!str_limit($prod->name,30)  !!}</p>
+                                <p class="item_add"> <span class=" item_price">{!!$prod->price !!}&nbsp;гр.</span></p>
+                                <div class="mask">
+                                    <a href="{{route('cartload',['id'=>$prod->id]) }}" data-href="{{URL::to('cartload')}}" data-id="{{$prod['id']}}" data-sign="39" >Купить</a>
+                                </div>
 
                             </div>
                         </li>
-                    @endif
+
                 </div>
+                @endif
+
             @endforeach
+
         </ul>
 
 </div>

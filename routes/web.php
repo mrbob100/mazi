@@ -58,6 +58,7 @@ Route::post('catRes',['uses'=>'CategoryController@resumeIndex','as'=>'resume']);
 // стандартные маршруты  для аутенфикации
   //  Route::group(['prefix'=>'product'], function() {
  Route::get('product', ['uses'=>'ProductController@index', 'as'=>'product']);
+ Route::get('actionSell', ['uses'=>'ActionController@index', 'as'=>'actionSell']);
 
  //   });
 Route::get('addcartios',['uses'=>'CartController@index', 'as'=>'addcartios']);

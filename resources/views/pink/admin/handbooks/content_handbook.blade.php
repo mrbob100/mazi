@@ -1,7 +1,7 @@
 
 
     @if($books)
-        <div class="container">
+        <div class="container handbook">
             <table class="table table-hover table-stripped">
                 <thead>
                 <tr>

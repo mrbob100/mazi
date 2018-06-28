@@ -48,6 +48,10 @@ if(isset( $input['data']))
         {
             $priznakOut=($input['vert']); // признак вывода иконками или таблицей
         }
+        if(isset($input['latitude']))
+        {
+            $priznakOut=11; // признак вывода иконками или таблицей
+        }
 
 if(!$id && !$input)
 {
@@ -305,7 +309,7 @@ if(!$id && !$input)
 
             $were=['category_id',$alias];
         }
-        $products= $this->p_rep->get(['id','name','code','img','type','price','description','groupTools','new','class','company','country','packing','exactlyType1','category_id','keywords','meta_desc'], false,false,$were,$priznakSort);
+        $products= $this->p_rep->get(['id','name','code','img','type','price','description','groupTools','new','sale','hit','class','company','country','packing','exactlyType1','category_id','keywords','meta_desc'], false,false,$were,$priznakSort);
        // if($products) $articles->load('user','category','comments');
         // dd($id);
 

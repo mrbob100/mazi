@@ -36,21 +36,33 @@ class IndexController extends SiteController
 
     public function index($id=12)
     {
+     $new=[]; $hit=[];
+        $products = Product::where('hit',1)->orWhere('new',1)->get(); // пункты кадров слайдера
 
-        $sliderItems = $this->getSliders(); // пункты кадров слайдера
-        $sliderItems->load('products');
-        $newProducts=$this->getNew();
-        $newProducts->load('products');
+      /*  $sliderItems->$this->check($sliderItems); */
+        if( $products ->isEmpty()) return false;
+        $products ->transform(function ($item, $key){
+            if(is_string($item->img) && is_object(json_decode($item->img))&& json_last_error()==JSON_ERROR_NONE)
+            {   $item->img=json_decode($item->img); }
+
+            if(is_string($item->exactlyType1) && is_object(json_decode($item->exactlyType1))&& json_last_error()==JSON_ERROR_NONE)
+            {   $item->exactlyType1=json_decode($item->exactlyType1); }
+            return $item;
+        });
+
 
         //  $articles=$this->getArticles(); // правый сайд бар
         // dd($sliderItems);
         //   $this->contentRightBar=view(env('THEME').'.indexBar')->with('articles',$articles)->render();
         // заголовок сайта
 
+        $categoryName="Лидеры продаж";
 
-        $sliders = view(env('THEME') . '.slider')->with('sliders', $sliderItems)->render();
+        $sliders = view(env('THEME') . '.slider')->with(['products'=>  $products,'categoryName'=>$categoryName])->render();
         $this->vars = array_add($this->vars, 'sliders', $sliders);
-        $newProducts=view(env('THEME') . '.newsell')->with(['newProducts'=> $newProducts])->render();
+        $categoryName="Новинки";
+        $newProducts= $products;
+        $newProducts=view(env('THEME') . '.newsell')->with(['newProducts'=>  $newProducts,'categoryName'=>$categoryName])->render();
         $this->vars = array_add($this->vars, 'newProducts', $newProducts);  // новые продажи
 
         $this->keywords = 'Home Page';
@@ -92,19 +104,7 @@ class IndexController extends SiteController
 
     }*/
 
-    public function getSliders()
-    {
-        $sliders =$this->s_rep->get();
-        // dd($sliders);
-        if($sliders->isEmpty()) return false;
-        $sliders->transform( function ($item, $key){
-            $item->path =Config::get('settings.slider_path') .'/'.$item->path;
 
-           return $item;
-        });
-        // dd($sliders);
-        return $sliders;
-    }
 
     protected function getArticles()
     {

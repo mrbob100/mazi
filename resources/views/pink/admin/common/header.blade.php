@@ -20,7 +20,7 @@
                 </a>
                 <ul class="dropdown-menu mailbox animated bounceInDown">
                     <li>
-                        <div class="drop-title">You have 4 new messages</div>
+                        <div class="drop-title" style="z-index: 7;">You have 4 new messages</div>
                     </li>
                     <li>
                         <div class="message-center">

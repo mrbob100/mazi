@@ -53,9 +53,10 @@
                     <li><a href="{{route('userson',['id'=>3])}}">"><i class="ti-layout-width-default fa-fw"></i> <span class="hide-menu">Работа с диллерами</span></a></li>
                     <li><a href="{{route('userson')}}">"><i class="ti-layout-width-default fa-fw"></i> <span class="hide-menu">Пользователи</span></a></li>
                     <li><a href="{{route('slider')}}">"><i class="ti-layout-width-default fa-fw"></i> <span class="hide-menu">Работа со слайдером</span></a></li>
-                    <div class="catalog">
-                        <li>  {{Widget::run('MainWidget',['class'=>'Directory','tpl'=>'menuSpr.php'])}}</li>
-                    </div>
+                    <li><a href="#" class="catalogist">"><i class="ti-layout-width-default fa-fw"></i> <span class="hide-menu">Каталог</span></a></li>
+                    <!--div class="catalog">
+                        <li>  {--{Widget::run('MainWidget',['class'=>'Directory','tpl'=>'menuSpr.php'])}--}</li>
+                    </div-->
 
                     <li><a href="javascript:void(0)" class="waves-effect"><i class="ti-email fa-fw"></i> <span class="hide-menu">Email Templates</span><span class="fa arrow"></span></a>
                         <ul class="nav nav-third-level">

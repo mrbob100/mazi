@@ -48,9 +48,11 @@
     <link href="{{ asset('public/'.env('THEME')) }}/css/pushy.css" rel="stylesheet">
     <link href="{{ asset('public/'.env('THEME')) }}/css/style.css" rel="stylesheet">
 
+
     <link href="{{ asset('public/'.env('THEME')) }}/css/jquery-ui.css" rel="stylesheet" type="text/css"/>
     <link href="{{ asset('public/'.env('THEME')) }}/css/jquery-ui.theme.min.css" rel="stylesheet" type="text/css"/>
     <link href="{{ asset('public/'.env('THEME')) }}/css/jquery-ui.structure.min.css" rel="stylesheet" type="text/css"/>
+    <link href="{{ asset('public/'.env('THEME')) }}/admin/css/mystyle.css" rel="stylesheet" type="text/css"/>
     <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -63,6 +65,11 @@
 <body class="fix-header">
 <!-- ============================================================== -->
 <!-- Preloader -->
+<div class="preloader">
+    <svg class="circular" viewBox="25 25 50 50">
+        <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" />
+    </svg>
+</div>
 <!-- ============================================================== -->
 
 <!-- ============================================================== -->
@@ -71,6 +78,7 @@
 <div id="wrapper">
 
        @yield('header')
+
     <!-- ============================================================== -->
     <!-- Topbar header - style you can find in pages.scss -->
     <!-- ============================================================== -->
@@ -83,34 +91,49 @@
     <!-- ============================================================== -->
     <!-- End Left Sidebar -->
     <!-- ============================================================== -->
-           <div class="col-xs-9">
-               @if(count($errors)>0)
-                   <div class="'alert alert-danger">
-                       <ul>
-                           @foreach($errors->all() as $error)
-                               <li>{{$error}}</li>
-                           @endforeach
-                       </ul>
-                   </div>
-               @endif
-               @if(session('status'))
-                   <div class="alert alert-success" style="padding-left: 250px; font-weight: 600;">
-                       {{session('status')}}
-                   </div>
-               @endif
+           <div class="outMessages">
+                   @if(count($errors)>0)
+                       <div class="'alert alert-danger">
+                           <ul>
+                               @foreach($errors->all() as $error)
+                                   <li>{{$error}}</li>
+                               @endforeach
+                           </ul>
+                       </div>
+                   @endif
+                   @if(session('status'))
+                       <div class="alert alert-success" style="padding-left: 250px; font-weight: 600;">
+                           {{session('status')}}
+                       </div>
+                   @endif
            </div>
     <!-- ============================================================== -->
     <!-- Page Content -->
     <!-- ============================================================== -->
-       @if(Route::currentRouteName()=='')
-           @yield('main')
+                   @if(Route::currentRouteName()=='')
+                     <div class="innerAdmin">
+                       @yield('main')
+                     </div>
+
+
+                   @endif
+
+
+                      <!--этот блок для вывода продуктового меню  -->
+                           <div class="catalog " >
+                               {{Widget::run('MainWidget',['class'=>'Directory','tpl'=>'menuSpr.php'])}}
+                           </div>
+
+
+                    <div id="titleProductsMy">
 
 
 
-       @endif
-<div id="belle" style="background-color: white; margin-left:100px; padding-top: 25px;">
-       @yield('content')
-</div>
+
+                    <div id="belle" >
+                           @yield('content')
+                    </div>
+           </div>
     <!-- ============================================================== -->
     <!-- End Page Content -->
     <!-- ============================================================== -->
@@ -149,7 +172,7 @@
 <!-- Custom tab JavaScript -->
 <script src="{{ asset('public/'.env('THEME')) }}/admin/js/cbpFWTabs.js"></script>
 
-
+<script src="{{ asset('public/'.env('THEME')) }}/admin/js/adminMain.js"></script>
 <script type="text/javascript" src=" {!! asset('public/'.env('THEME')) !!}/js/jquery.scrollUp.min.js "  ></script>
 <script type="text/javascript" src=" {!! asset('public/'.env('THEME')) !!}/js/jquery.cookie.js"  ></script>
 <script type="text/javascript" src=" {!! asset('public/'.env('THEME')) !!}/js/jquery.accordion.js"  ></script>

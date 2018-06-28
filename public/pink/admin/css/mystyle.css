@@ -1,0 +1,21 @@
+.catalog {
+display: none;
+    z-index: 9;
+    margin-left: 50px;
+    margin-top: 30px;
+}
+#titleProductsMy{
+display:flex !important;
+    flex-direction: row;
+    display: -webkit-flex !important;
+margin-left: 150px;
+    margin-top: 30px;
+    justify-content: space-around;
+    list-style-type: none;
+}
+.outMessages {
+    margin-left: 50px;
+}
+#belle{
+    background-color: white; margin-left:100px;
+}
