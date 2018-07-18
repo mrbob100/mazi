@@ -6,7 +6,7 @@ use Corp\Widgets\MainWidget;
 use Cache;
 use Config;
 use Corp\User;
-use Illuminate\Http\Request;
+//use Illuminate\Http\Request;
 use PhpParser\Node\Stmt\Foreach_;
 use Symfony\Component\Routing\RequestContext;
 use Corp\Repositories\ProductsRepository;
@@ -15,6 +15,8 @@ use Route;
 use Auth;
 use Session;
 use Response;
+use Request;
+use URL;
 class ProductController extends SiteController
 {
 
@@ -42,11 +44,16 @@ class ProductController extends SiteController
             $cs=2;
         }
 */
-        $rout=Route::currentRouteName();
+       //$rout=Route::currentRouteName();
+
+        $rout=URL::current();
+        $url= $rout.'?'.$id;
         $products = $this->getProduct($id);
         $discount=0; $summa=0; $newprice=0;
         $data=[];
         // Блок расчета скидок
+         Session::pull('Quick');
+        if(!session('Quick')) Session::push('Quick',['url'=> $url]);
         $user=Auth::user();
         if(Auth::check())
         {
@@ -115,25 +122,75 @@ class ProductController extends SiteController
 
 
 
-    public function actionSearch(Request $request)
+    public function actionSearch()
     {
-        $this->template=env('THEME').'.left_bar';
-        $this->bar=true;
-        $q=$request->q;
-        $p='%'.$q.'%';
-        $query=Product::select(['id','name','price','img','category_id'])->where('name','like',$p);
+       // $this->template=env('THEME').'.left_bar';
+        $request=Request::createFromGlobals();
+        $input = $request->except('_token');
+        if(isset($input['pr'])) Session::pull('Search');
+        $search=Session::pull('Search');
+        $priznakSort=0;
+        $priznakOut=0;
+        $query='';
+        if($search)
+        {
 
+            $q=$search[0]['q'];
+            if(isset( $input['data']))
+            {
+                $priznakSort= $input['data'];
+                if(!session('Search')) Session::push('Search',['q'=>$q]);
+            }
+            if(isset($input['vert']))
+            {
+                $priznakOut=($input['vert']); // признак вывода иконками или таблицей
+                if(!session('Search')) Session::push('Search',['q'=>$q]);
+            }
+            if(isset($input['latitude']))
+            {
+                $priznakOut=11; // признак вывода иконками или таблицей
+            }
+
+        }
+        else{
+            $q=$input['cs'][0]['value'];
+            $search=Session::pull('Search');
+            if(!session('Search')) Session::push('Search',['q'=>$q]);
+        }
+       // $q=$request->q;
+        $p='%'.$q.'%';
+
+        if($priznakSort==0)
+        {
+            $query=Product::select(['id','name','price','img','category_id','exactlyType1'])->where('name','like',$p);
+        }
+        if($priznakSort==1)
+        {
+        $query=Product::select(['id','name','price','img','category_id','exactlyType1'])->where('name','like',$p)->orderBy('price','asc');
+        }
+        if($priznakSort==2)
+        {
+            $query=Product::select(['id','name','price','img','category_id','exactlyType1'])->where('name','like',$p)->orderBy('price','desc');
+        }
+        //$products=$this->getProducts($p,$priznakSort );
        // $products=$query->paginate(Config::get('settings.paginate'));
         $products=$query->get();
         $this->adopt=false;
         $products->transform(function ($item, $key){
             if(is_string($item->img) && is_object(json_decode($item->img))&& json_last_error()==JSON_ERROR_NONE)
             {   $item->img=json_decode($item->img); }
+            if(is_string($item->exactlyType1) && is_object(json_decode($item->exactlyType1))&& json_last_error()==JSON_ERROR_NONE)
+            {   $item->exactlyType1=json_decode($item->exactlyType1); }
             return $item;
         });
-        $content = view(env('THEME') . '.products_content')->with(['products'=> $products,'adopt'=>$this->adopt])->render();
-        $this->vars = array_add($this->vars, 'content', $content);
-        return $this->renderOutput();
+        if($priznakOut==11)
+        {
+            $content = view(env('THEME') . '.products_searchTable_content')->with(['products'=> $products,'adopt'=>$this->adopt, 'q'=>$q])->render();
+        } else
+        $content = view(env('THEME') . '.products_search_content')->with(['products'=> $products,'adopt'=>$this->adopt, 'q'=>$q])->render();
+        //$this->vars = array_add($this->vars, 'content', $content);
+       // return $this->renderOutput();
+        return Response::json(['success'=>true, 'content'=>$content]);
     }
 
 
@@ -166,5 +223,7 @@ class ProductController extends SiteController
         ];
         return view(env('THEME').'.admin.products.search',$data);
     }
+
+
 
 }

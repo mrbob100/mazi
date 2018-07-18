@@ -49,7 +49,7 @@
             <div class="modal-end"></div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Продолжить покупки</button>
-                <a  href="{{route('arrangeContract')}}" data-href="{{URL::to('arrange')}}" data-sign="27" class="btn btn-success">Оформить заказ</a>
+                <a  href="{{route('arrangeContract')}}" data-href="{{URL::to('arrange')}}" data-sign="27" class="btn btn-primary" style="color: white;">Оформить заказ</a>
                 <button type="button" class="btn btn-danger" onclick="clearCart();">Очистить корзину</button>
             </div>
         </div><!-- /.modal-content -->
@@ -58,13 +58,14 @@
 
 
        <div class="modalMain">
-           <h1>Заказать звонок</h1>
+           <!--h1>Заказать звонок</h1>
            <form>
                <input type="text" placeholder="Ваше имя"><br>
                <input type="text" placeholder="Ваш телефон"><br>
                <input type="submit" value="Отправить">
-           </form>
+           </form-->
        </div>
+       <div class="modalMain2"></div>
 
 <nav>
     <div class="line">
@@ -81,14 +82,18 @@
         <div class="menu-call">
             <a href="{{ route('index')  }}" >  <p> Заказ обратного звонка</p> </a>
                <div class="menu-wrap">
+
                  <div class="menu-search-window">
-                    <p>{!! Form::open(['url'=>route('productSearch' ), 'class'=>'form-horizontal', 'method'=>'GET' ]) !!}
-                        {!! Form::text('q','',['class'=>' search','placeholder'=>'Поиск товара']) !!}
+
+                    <p>{!! Form::open(['url'=>route('productSearch' ), 'id'=>'searchMain' ,'class'=>'form-horizontal', 'method'=>'GET' ]) !!}
+
+                        {!! Form::text('q',old('q'),['class'=>' search','placeholder'=>'Поиск товара']) !!}
+
                         <span></span>
                     {!! Form::close() !!}</p>
                 </div>
                 <div class="menu-search-art">
-                  <i class="material-icons">search</i>
+                    <a href="#" data-href="{{URL::to('search')}}" data-sign="53"> <i class="material-icons">search</i></a>
                 </div>
                </div>
         </div>

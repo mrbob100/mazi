@@ -10,6 +10,12 @@
 
     <ul  class="nav  ">
         <li>
+            <a href="{{route('quickinfo')}}">
+                <h4>Срочные сообщения</h4>
+            </a>
+        </li>
+
+        <li>
             <a href="{{route('categories')}}">
               <h4>Категории</h4>
             </a>

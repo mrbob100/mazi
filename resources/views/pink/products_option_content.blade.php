@@ -25,7 +25,7 @@
                         <p><a class="item_add" href="{{route('cartload',['id'=>$products[$i][0]['id']]) }}"  data-href="{{URL::to('cartload')}}" data-id="{{$products[$i][0]['id']}}" data-sign="39" style=" color: #816263;font-size: 1.0em; padding-left: 40px" ><i></i> <span class=" item_price">{!!$products[$i][0]['price']  !!} гр.</span> </a></p>
                         <div class="mask11">
 
-                            <a href="{{route('cartload',['id'=>$products[$i][0]['id']]) }}" data-href="{{URL::to('cartload')}}" data-id="{{$products[$i][0]['id']}}" data-sign="39"><i class="material-icons" style="font-size: 40px; color:#8ACC90;" >shopping_cart </i>В корзину</a>
+                            <a href="{{route('cartload',['id'=>$products[$i][0]['id']]) }}" data-href="{{URL::to('cartload')}}" data-id="{{$products[$i][0]['id']}}" data-sign="39"><i class="material-icons" style="font-size: 40px; color:#1F9ED1;" >shopping_cart </i>В корзину</a>
                             <a href="{{route('differ',['id'=>$products[$i][0]['id']]) }}" data-href="{{URL::to('difference')}}" data-id="{{$products[$i][0]['id']}}" data-sign="40"><img src="{{ asset('public/'.env('THEME'))}}/images/features/scales-100.png " id="picture" ></a>
                         </div>
                         <div class="dopContent">

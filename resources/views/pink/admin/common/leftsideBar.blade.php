@@ -42,6 +42,7 @@
             </li>
             <li> <a href="#" class="waves-effect"><i class="mdi mdi-content-copy fa-fw"></i> <span class="hide-menu">Главное меню<span class="fa arrow"></span><span class="label label-rouded label-warning pull-right">30</span></span></a>
                 <ul class="nav nav-second-level">
+                    <li><a href="{{route('quickinfo')}}">"><i class="ti-layout-width-default fa-fw"></i> <span class="hide-menu">Срочные сообщения</span></a></li>
                     <li><a href="{{route('categories')}}">"><i class="ti-layout-width-default fa-fw"></i> <span class="hide-menu">Категории</span></a></li>
                     <li><a href="{{route('products')}}">"><i class="ti-layout-width-default fa-fw"></i> <span class="hide-menu">Продукты</span></a></li>
                     <li><a href="{{route('orders')}}">"><i class="ti-layout-width-default fa-fw"></i> <span class="hide-menu">Заказы</span></a></li>

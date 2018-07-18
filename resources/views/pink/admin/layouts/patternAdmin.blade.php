@@ -53,6 +53,7 @@
     <link href="{{ asset('public/'.env('THEME')) }}/css/jquery-ui.theme.min.css" rel="stylesheet" type="text/css"/>
     <link href="{{ asset('public/'.env('THEME')) }}/css/jquery-ui.structure.min.css" rel="stylesheet" type="text/css"/>
     <link href="{{ asset('public/'.env('THEME')) }}/admin/css/mystyle.css" rel="stylesheet" type="text/css"/>
+    <!--link href="{--{ asset('public/'.env('THEME')) }--}/css/smart.css" rel="stylesheet" type="text/css"/-->
     <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -124,6 +125,10 @@
                                {{Widget::run('MainWidget',['class'=>'Directory','tpl'=>'menuSpr.php'])}}
                            </div>
 
+                    <div class="modalMain">
+
+                    </div>
+
 
                     <div id="titleProductsMy">
 
@@ -179,7 +184,7 @@
 <script type="text/javascript" src=" {!! asset('public/'.env('THEME')) !!}/js/price-range.js" charset="utf-8" ></script>
 
 <script type="text/javascript" src=" {!! asset('public/'.env('THEME')) !!}/js/script.js" charset="utf-8" ></script>
-<script type="text/javascript" src=" {!! asset('public/'.env('THEME')) !!}/js/main.js"  ></script>
+<!--script type="text/javascript" src=" {--!! asset('public/'.env('THEME')--) !!}/js/main.js"  ></script-->
 <script type="text/javascript" src=" {!! asset('public/'.env('THEME')) !!}/js/pushy.js"  ></script>
 <script type="text/javascript" src=" {!! asset('public/'.env('THEME')) !!}/js/jquery-ui.js" charset="utf-8" ></script>
 <!--script type="text/javascript" src=" {--!! asset('public/'.env('THEME')) !!--}/js/vue.min.js" charset="utf-8" ></script-->

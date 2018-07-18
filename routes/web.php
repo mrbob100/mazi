@@ -37,6 +37,9 @@ Route::match(['post','get'],'cabinet',['uses'=> 'CabinetController@index','as'=>
 
 //})->name('articleDelete');
 
+// маршрут новых, распродажа и топовых прдуктов
+    Route::get('actionSell', ['uses'=>'ActionController@index', 'as'=>'actionSell']);
+
 Route::get('loadcsv',['uses'=>'Admin\CsvloadController@index','as'=>'loadCsv']);
 Route::post('loadcsv','Admin\CsvloadController@store')->name('storeCsv');
 Route::get('updateJson',['uses'=>'Admin\CsvloadController@updateJsonProduct','as'=>'jsonProduct']);
@@ -58,9 +61,10 @@ Route::post('catRes',['uses'=>'CategoryController@resumeIndex','as'=>'resume']);
 // стандартные маршруты  для аутенфикации
   //  Route::group(['prefix'=>'product'], function() {
  Route::get('product', ['uses'=>'ProductController@index', 'as'=>'product']);
- Route::get('actionSell', ['uses'=>'ActionController@index', 'as'=>'actionSell']);
+ Route::match(['get','post'],'quickregister', ['uses'=>'QuickregisterController@index', 'as'=>'quickregister']);
 
  //   });
+// работа с корзиной
 Route::get('addcartios',['uses'=>'CartController@index', 'as'=>'addcartios']);
 Route::get('changeQty',['uses'=>'PreciseController@changeQuantity','as'=>'changeBuy']);
  Route::get('cartShow',['uses'=>'CartController@cartShow', 'as'=>'cartShow']);
@@ -73,7 +77,7 @@ Route::post('order',['uses'=>'CartController@cartView', 'as'=>'contract']);
 
 Route::get('delIt',['uses'=>'CartController@DelItem']);
 
- Route::get('search',['uses'=>'ProductController@actionSearch','as'=>'productSearch']);
+ Route::match(['get','post'],'search',['uses'=>'ProductController@actionSearch','as'=>'productSearch']);
  Route::get('admsearch',['uses'=>'ProductController@adminSearch','as'=>'admSearch']);
 
     Route::get('ulogin', ['uses'=>'UloginController@login', 'as'=>'ulogina']);
@@ -182,7 +186,15 @@ Route::group(['prefix'=>'admin','middleware'=>['web','auth']], function(){
         //admin/product/edit/2
         Route::match(['get','post','delete'],'edit/{id}',['uses'=>'Admin\CategoryEditController@index','as'=>'categoryEdit']);
     });
-    
+    // обработка сообщений от пользователя
+    Route::group(['prefix'=>'quickinfo'], function (){
+        Route::get('/', ['uses'=>'Admin\QuickinformController@index','as'=>'quickinfo']);
+
+        //admin/product/edit/2
+        Route::match(['get','post','delete'],'edit/{id}',['uses'=>'Admin\QuickinformEditController@index','as'=>'quickinfoEdit']);
+    });
+
+
     // Actions
     Route::group(['prefix'=>'products'], function (){
         Route::get('/', ['uses'=>'Admin\ProductController@index','as'=>'products']);

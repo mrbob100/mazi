@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Session;
 use Response;
 use Corp\Models\Product;
+use Corp\Models\Differenceprod;
 class DifferenceProductController extends Controller
 {
     public function index(Request $request)
@@ -63,7 +64,8 @@ for($i=0; $i<$cnt; $i++)
 
 
 } */
-            $content=view(env('THEME').'.products_option_content')->with(['products'=>$products])->render();
+            $diffprod=Differenceprod::all();
+            $content=view(env('THEME').'.products_option01_content')->with(['products'=>$products,'diffprod'=>$diffprod])->render();
             return Response::json(['success'=>true, 'content'=>$content]);
             }
 

@@ -1,6 +1,6 @@
 
-<div id="header">
-    <h1 class="biglike text-center">Новинки</h1>
+<div id="header"  data-href="{{ URL::to('actionSell')}}"  data-sign="51">
+   <a href="#" ><h1 class="biglike text-center" style="text-decoration: none;">Новинки</h1></a>
 </div>
 
 @if($newProducts)

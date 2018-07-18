@@ -33,9 +33,7 @@ class ExcelitemController extends adminSiteController
         if(view()->exists(env('THEME').'.admin.excels.index'))
         {
 
-            $data=[
-                'title'=>'Таблица выбора фильтров продукции'
-            ];
+
 
             $this->template=env('THEME').'.admin.excels.index';
             //    $users=$this->getUsers();
@@ -43,11 +41,43 @@ class ExcelitemController extends adminSiteController
             //   $sas=$users->roles()->where('id',3);
 
            // $menu=$this->getMenu();
+            $productCompany=[];
+
+         $products=Product::all();
+         $j=0;
+            $productCompany[0]=  $products[0]->company;
+         foreach($products as $product)
+         {
+             if($productCompany[$j]!=$product->company)
+             {
+                 $k=0;
+                 for($i=0; $i<count($productCompany);$i++)
+                 {
+                    if($product->company==$productCompany[$i])
+                    {
+                        $k++;
+                    }
+                 }
+                 if(!$k)
+                 {
+                     $j++;
+                     $productCompany[$j]=$product->company;
+                 }
+
+
+             }
+
+         }
+         $cnt=count($productCompany);
+            $data=[
+                'title'=>'Таблица выбора фильтров продукции',
+                'companies'=>$productCompany
+            ];
 
             // dd($menu);
           //  $navigation = view(env('THEME') . '.admin.categories.navigation_category')->with('menu',$menu)->render();
           //  $this->vars = array_add($this->vars, 'navigation', $navigation);  // вывод навигации меню
-            $content = view(env('THEME').'.admin.excels.inputCSV')->with(['data'=>$data])->render();
+            $content = view(env('THEME').'.admin.excels.inputCSV_checkbox')->with(['data'=>$data])->render();
            $this->vars = array_add($this->vars, 'content', $content);  // вывод навигации меню
             return $this->renderOutput();
 

@@ -114,17 +114,27 @@
 
 
                  </div>
-                 <div class="purchase" style="font-weight:900; font-size: 18px; padding-left: 120px;padding-top: 40px;">
+                 <div class="purchase" style="font-weight:900; font-size: 18px; padding-top: 40px;">
+
+                     <!--div class="mask" >
+                         <a id="reactivebut" href="{--{route('cartload',['id'=>$products[0]->id])}--}" data-href="{--{URL::to('cartload')}--}" data-id="{--{$products[0]->id}--}" data-sign="39"> <img src="{--{ asset('public/'.env('THEME'))}--}/images/features/add.png" alt="вывод кнопки добавить" /></a>
+
+                     </div-->
+                     <div class="mask" >
+                         <a id="reactivequick" href="{{route('quickregister',['id'=>$products[0]->id])}}" data-href="{{URL::to('quickregister')}}" data-id="{{$products[0]->id}}" data-sign="52"> <img src="{{ asset('public/'.env('THEME'))}}/images/features/quick.png" alt="вывод кнопки быстрый заказ" /></a>
+                     </div>
                      <!--label for="qty" >количество:</label>
                      <p><input  type="text" id="qty"  value="1"   class="btn btn-default"/> шт.</p>
                      <br/-->
                      <!--a href="#"  onclick="getCart();"><img src="{--{ asset('public/'.env('THEME'))}--}/images/features/add.png" alt="вывод кнопки купить" /></a-->
                  <!--a href="#"   data-id="{{--$product->id--}}" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Купить</a-->
-                     @if($discount>0)
-                         <span ><s>{!! $products[0]->price !!} гр.</s></span><span style="color:#816263; font-weight: bold;">{!! $newprice !!} гр.</span>
-                     @else
-                         <span >Цена &nbsp;{!! $products[0]->price !!} гр.</span>
-                     @endif
+                     <div class="mask" >
+                         @if($discount>0)
+                             <span ><s>{!! $products[0]->price !!} гр.</s></span><span style="color:#816263; font-weight: bold;">{!! $newprice !!} гр.</span>
+                         @else
+                             <span >Цена &nbsp;{!! $products[0]->price !!} гр.</span>
+                         @endif
+                     </div>
                      <div class="clearfix"></div>
 
                  </div>

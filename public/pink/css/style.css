@@ -35,9 +35,10 @@ display:none;
     background: #fcfcfc -ms-linear-gradient(top, #fcfcfc 0%, #eee 100%); /* IE10+ */
     background: #fcfcfc linear-gradient(top, #fcfcfc 0%, #eee 100%); /* W3C */
 
-    border-radius:5px;
-    -moz-border-radius:5px;
-    -webkit-border-radius:5px;  
+    border-radius:20px;
+    -moz-border-radius:20px;
+    -webkit-border-radius:20px;
+    border: 1px solid #ADD8E6;
 }
 
 .nbs-flexisel-item {
@@ -54,6 +55,7 @@ display:none;
     position: relative;
   margin-top: 10px;
     margin-bottom: 10px;
+
 }
 
 /*** Navigation ***/

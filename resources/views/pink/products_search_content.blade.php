@@ -3,26 +3,26 @@
 
         <div class="sortie2">
             <header>
-                <h1 class="head text-center">{!! $products[0]->categories->name !!}</h1>
+                <h1 class="head text-center">{!! $q !!}</h1>
             </header>
         </div>
         <div class="sortieOption">
-                <div class="sortie3" >
-                    <p>Сортировка</p>
-                    <select id="sortValue" data-href="{{URL::to('category')}}" >
-                        <option value="0">не выбран</option>
-                        <option value="1">по цене (возрастание)</option>
-                        <option value="2">по цене (убывание)</option>
-                        <option value="3">опция 3</option>
-                    </select>
-                </div>
+            <div class="sortie3" >
+                <p>Сортировка</p>
+                <select id="sortValue" data-href="{{URL::to('search')}}" >
+                    <option value="0">не выбран</option>
+                    <option value="1">по цене (возрастание)</option>
+                    <option value="2">по цене (убывание)</option>
+                    <option value="3">опция 3</option>
+                </select>
+            </div>
 
-                <div class="sortie5" >
-                       <a id="cascad" href="{{route('category') }}" data-href="{{URL::to('category')}}"  data-id="10"><span class="glyphicon glyphicon-th"></span></a>
-                </div>
-                <div class="sortie5" >
-                       <a id="cascad" href="{{route('category') }}" data-href="{{URL::to('category')}}"  data-id="11" ><span class="glyphicon glyphicon-th-list"></span></a>
-                </div>
+            <div class="sortie5" >
+                <a id="cascad" href="{{route('productSearch') }}" data-href="{{URL::to('search')}}"  data-id="10"><span class="glyphicon glyphicon-th"></span></a>
+            </div>
+            <div class="sortie5" >
+                <a id="cascad" href="{{route('productSearch') }}" data-href="{{URL::to('search')}}"  data-id="11" ><span class="glyphicon glyphicon-th-list"></span></a>
+            </div>
 
             <div class="sortie4">
 
@@ -38,22 +38,22 @@
             <div class="productsinT01" >
 
                 <a  id="moreInfo" href="{{route('product',['id'=>$prod->id]) }}" data-href="{{URL::to('product')}}" data-id="{{$prod['id']}}" data-sign="26"> <img src="{{ asset('public/'.env('THEME'))}}/images/{{ $prod->img->max }}"  alt="вывод изображения" />
-                   <!--div class="layer001"><img src="{--{ asset('public/'.env('THEME'))}--}/images/features/tick.png" id="tick"></div-->
+                    <!--div class="layer001"><img src="{--{ asset('public/'.env('THEME'))}--}/images/features/tick.png" id="tick"></div-->
 
 
-                        @if($prod->new)
-                            <div class="layer02">
-                                <img src="{{ asset('public/'.env('THEME')) }}/images/features/new012.png" alt="" />
-                            </div>
+                    @if($prod->new)
+                        <div class="layer02">
+                            <img src="{{ asset('public/'.env('THEME')) }}/images/features/new012.png" alt="" />
+                        </div>
                     @elseif($prod->hit)
                         <div class="layer02">
                             <img src="{{ asset('public/'.env('THEME')) }}/images/features/topBlue.png" alt="" />
                         </div>
-                        @elseif($prod->sale)
-                            <div class="layer02" >
-                                <img src="{{ asset('public/'.env('THEME')) }}/images/features/saleGreen.png" alt="" />
-                            </div>
-                        @endif
+                    @elseif($prod->sale)
+                        <div class="layer02" >
+                            <img src="{{ asset('public/'.env('THEME')) }}/images/features/saleGreen.png" alt="" />
+                        </div>
+                    @endif
                 </a>
                 <div class="liked-product simpleCart_shelfItem">
 
@@ -95,6 +95,3 @@
 @else
     {!! Lang::get('ru.articles_no') !!}
 @endif
-
-
-

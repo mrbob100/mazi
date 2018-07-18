@@ -21,10 +21,10 @@ class ActionController extends SiteController
     public function index(Request $request)
     {
 
-
+        $categoryName='';
         $priznakSort=0;
         $priznakOut=0;
-
+        $pr=0;
         $iu=0;
         $input = $request->except('_token');
         if(isset( $input['data']))
@@ -40,8 +40,31 @@ class ActionController extends SiteController
         {
             $priznakOut=11; // признак вывода иконками или таблицей
         }
+        $newhit=['sale',1];
 
-        $products =$this->getProduct($priznakSort);
+             if($input['pr'])
+             {
+                 $pr=$input['pr'];
+                     if($input['pr']==30)
+                     {
+                         $categoryName="Распродажа";
+                         $newhit=['sale',1];
+                     }
+
+                    if($input['pr']==50)
+                    {
+                        $categoryName="Лидеры продаж";
+                       $newhit=['hit',1];
+                    }
+
+                    if($input['pr']==51)
+                    {
+                        $categoryName="Новинки";
+                        $new=1;
+                        $newhit=['new',1];
+                    }
+             }
+        $products =$this->getProduct($priznakSort, $newhit);
 
         /*  $sliderItems->$this->check($sliderItems); */
         if( $products ->isEmpty()) return false;
@@ -236,13 +259,13 @@ class ActionController extends SiteController
         //   $this->contentRightBar=view(env('THEME').'.indexBar')->with('articles',$articles)->render();
         // заголовок сайта
 
-        $categoryName="Распродажа";
+
         if($priznakOut=='11')
         {
-            $content=view(env('THEME').'.action_table_content')->with(['products'=>$products,'adopt'=>$this->adopt,'cs'=>$cs])->render();
+            $content=view(env('THEME').'.action_table_content')->with(['products'=>$products,'adopt'=>$this->adopt,'cs'=>$cs,'pr'=>$pr,'categoryName'=> $categoryName])->render();
         }
        else {
-            $content=view(env('THEME').'.action_content')->with(['products'=>$products,'adopt'=>$this->adopt,'cs'=>$cs])->render();
+            $content=view(env('THEME').'.action_content')->with(['products'=>$products,'adopt'=>$this->adopt,'cs'=>$cs,'pr'=>$pr,'categoryName'=> $categoryName])->render();
             }
         $leftBar=view(env('THEME').'.left_bar_content')->with([/*'cat'=>$this->category_id,*/'data'=>$this->data])->render();
         $this->keywords = 'sale';
@@ -261,11 +284,11 @@ class ActionController extends SiteController
 
 
 
-    protected function getProduct( $priznakSort=0)
+    protected function getProduct( $priznakSort=0,$newhit=0)
     {
 
 
-        $were=['sale',1];
+        $were=$newhit;
 
         $product= $this->p_rep->get(['id','name','code','description','img','price','pricedealer1','pricedealer2','type','country','class','groupTools','new','hit','sale','weightbrutto','weightnetto',
             'length','height','exactlyType1','category_id','keywords','meta_desc'], false,false,$were, $priznakSort);

@@ -206,7 +206,7 @@ $('.add-to-cart').on('click', function (e) {
 
 
     $("#flexiselDemo3 ").flexisel({
-        visibleItems: 4,
+        visibleItems: 5,
         animationSpeed: 500,
         autoPlay: false,
         autoPlaySpeed: 3000,
@@ -227,12 +227,12 @@ $('.add-to-cart').on('click', function (e) {
             },
             tablet: {
                 changePoint:768,
-                visibleItems: 4
+                visibleItems: 5
             }
         }
     });
    $("#slick-slider").flexisel({
-        visibleItems: 4,
+        visibleItems: 5,
         animationSpeed: 500,
         autoPlay: false,
         autoPlaySpeed: 3000,
@@ -253,7 +253,7 @@ $('.add-to-cart').on('click', function (e) {
             },
             tablet: {
                 changePoint:768,
-                visibleItems: 4
+                visibleItems: 5
             }
         }
     });
@@ -443,11 +443,12 @@ function myRangeOut() {
         e.preventDefault();
         let data21=$(this).val(),
             lat=$(this).data('sign'),
+            pr=$(this).data('pr'),
             href=$(this).data('href');
          let   idi=href.split('/').pop();
         $.ajax({
             url: idi,
-            data: {data: data21, latitude: lat},
+            data: {data: data21, latitude: lat, pr: pr},
             cache: false,
             headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
             //  url: 'http://pullsky.kretivz.pro/web/cart/show',
@@ -472,13 +473,14 @@ jQuery(document).ready(function() {
         e.preventDefault();
         let id=$(this).data('id'),
             href=$(this).data('href'),
+            pr=$(this).data('pr'),
         idi=$(this).attr('href').split('/').pop(),
             lat=$(this).data('sign');
             if(lat) id=11;
 
         $.ajax({
             url:  idi,
-            data: {vert: id, latitude: lat},
+            data: {vert: id, latitude: lat, pr: pr},
             cache: false,
             headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
             //  url: 'http://pullsky.kretivz.pro/web/cart/show',
@@ -568,6 +570,43 @@ jQuery(document).ready(function() {
 
 function workupPr(pr=0, data=0)
 {
+    if(pr==26){ // признак вывода модального окна продукта
+        //  $('.container-right-edgest').empty();
+        $('.modalMain').empty();
+        $('.modalMain').append(data.content);
+        openWin();
+      return;
+    }
+    if(pr==50 || pr==51)
+   {
+       $('.container-wrap-banner').empty();
+       $('.slider').empty();
+       $('.profit1').empty();
+       $('#contentHolder').empty();
+       $('#contentHolder').append(data.content);
+       $('#contentHolder').css('opacity','0');
+       $('#contentHolder').fadeTo(2000,1);
+       return;
+   }
+
+    if(pr==52)
+    {
+        $('.modalMain2').empty();
+        $('.modalMain2').append(data.content);
+        openWin2();
+        return;
+    }
+    if(pr==53)
+    {
+        $('#contentHolder').empty();
+        $('.container-wrap-banner').css("display","none");
+        $('.slider').css("display","none");
+        $('.profit1').css("display","none");
+        $('#contentHolder').append(data.content);
+        $('#contentHolder').css('opacity','0');
+        $('#contentHolder').fadeTo(2000,1);
+        return;
+    }
     if(pr==40)
     {
         let yyy=0;
@@ -579,7 +618,7 @@ function workupPr(pr=0, data=0)
         $('.layer002').fadeTo(2000,1);
         return;
     }
-    else $('picture').hide();
+    else $('#picture').hide();
     if(pr==41)
     {
         $('#contentHolder').empty();
@@ -628,7 +667,7 @@ function workupPr(pr=0, data=0)
     $('#contentText').empty();
     if(pr==0){
 
-        $('.container-wrap-row .catalog').remove();
+    //    $('.container-wrap-row .catalog').remove();
         $('#wrap-last').css('display','none');
 
     }
@@ -712,13 +751,7 @@ function workupPr(pr=0, data=0)
 
     }
 
-    if(pr==26){
-        $('.container-right-edgest').empty();
-        $('.modalMain').empty();
-        $('.modalMain').append(data.content);
-        openWin();
 
-    }
     if(pr==27){
         $('#contentHolder').empty();
         $('#wrap-last ').css('display','none');
@@ -746,6 +779,7 @@ let NavigationCache = [],
       cntqnt=0,
     arc=false,
     commonNamePlus='',
+    commoNameReal='',
     updatePr22=false;
 
 
@@ -869,7 +903,7 @@ function getContent(url, addEntry, id=0, pr=0,cs=0) {
                         let j=0;
                        kark=navigationHistory(kark);
                        dad=kark.data;
-                       if((!updatePr22) && (pr!=39)&& (pr!=24)&& (pr!=26) &&(pr!=36) && (pr!=40) &&(pr!=41))
+                       if((!updatePr22) && (pr!=39)&& (pr!=24)&& (pr!=26) &&(pr!=36) && (pr!=40) &&(pr!=41) &&(pr!=30)&&(pr!=50) &&(pr!=51) &&(pr!=53))
                        {
                            $('#contentHolder').replaceWith(dad);
                        }
@@ -985,7 +1019,7 @@ function lastAlfa(url)
 
 
 jQuery('document').ready(function(){
-    jQuery('#contentHolder').on('click','.like_name, #reactimage, #reactbutton,.wrapProdT01 .productsinT01 a, .wrapProdT02 .productsinT02 a', function(e){
+    jQuery('#contentHolder').on('click','.like_name, #reactimage, #reactbutton,.wrapProdT01 .productsinT01 a, .wrapProdT02 .productsinT02 a, .wrapperProducts .inwrapInvent #reactivebut', function(e){
         e.preventDefault();
         let href = $(this).data('href'),
            cs=0,
@@ -1005,11 +1039,14 @@ jQuery('document').ready(function(){
             cntqnt++;
             cs=cntqnt;
             newElem=$("<div class='layer001'></div>")
-                .append("<img src='http://localhost/mazi/public/pink/images/features/tick.png' style='width:50px; height:auto; z-index:1; ' />");
+                .append("<img src='http://localhost/mazi/public/pink/images/features/tick.png' style='width:50px; height:auto; z-index:1;position:absolute; top: 218px; left: 140px; ' />");
          //  $(this).css('display','none');
-            $(this).hide();
+         //   $(this).hide();
            $(this).parents('.productsinT01').append(newElem);
         }
+       // commoNameReal.closest('ul').slideUp(1000);
+      let rer=  $('.catalog li .active').siblings().hide(1000);
+
         let ss=getContent(href, true,id, pr,cs);
         jQuery('.like_name').removeClass('active');
         $(this).addClass('active');
@@ -1081,9 +1118,10 @@ jQuery(document).ready(function(){
    // jQuery('.catalog ul#azar.azoneChild').on('click','li.azoneFirst', function(e){
         e.preventDefault();
       //  e.stopPropagation();
+        $(this).closest('ul').slideUp(1000);
 
-       // arc=true;
-       let idi= $(this).attr('href'),
+        // arc=true;
+        let idi= $(this).attr('href'),
             hr=idi.split('?'),
             href=hr[0],
             pr=24,  // признак работы с видом вывода на экран
@@ -1092,11 +1130,12 @@ jQuery(document).ready(function(){
 
         jQuery('.like_name').removeClass('active');
         $(this).addClass('active');
+
   });
 });
 
 jQuery('document').ready(function(){
-    jQuery('.container-right-edge, .modal-content').on('click',' #reactiveimg,  #reactivebut, #moreInfo, a', function(e){
+    jQuery('.container-right-edge, .modal-content, .modalMain').on('click',' #reactiveimg,  #reactivebut, #reactivequick, #moreInfo, a', function(e){
         e.preventDefault();
 
         let href = $(this).data('href'),
@@ -1109,6 +1148,7 @@ jQuery('document').ready(function(){
         $(this).addClass('active');
 
     });
+
 
 
 });
@@ -1191,6 +1231,7 @@ if(href==commonNamePlus)
     return;
 }
 commonNamePlus=href;
+        commoNameReal=$(this);
 shortUrl=href.split('?');
 pic=shortUrl[0];
 pic+="super";
@@ -1226,6 +1267,8 @@ $(document).ready(function () {
 // javascript второе модальное окно продуктов
 
     let modal = document.querySelector('.modalMain'),
+        modal2=document.querySelector('.modalMain2'),
+        overflow2 = document.createElement('div'),
             overflow = document.createElement('div');
     function openWin() {
         overflow.className = "overflow";
@@ -1234,6 +1277,14 @@ $(document).ready(function () {
         modal.style.marginTop = - height / 2 + "px";
         modal.style.top = "50%";
     }
+
+function openWin2() {
+    overflow2.className = "overflow2";
+    document.body.appendChild(overflow2);
+    let height = modal2.offsetHeight;
+    modal2.style.marginTop = - height / 2 + "px";
+    modal2.style.top = "50%";
+}
 
     if (!Element.prototype.remove) {
         Element.prototype.remove = function remove() {
@@ -1247,12 +1298,21 @@ $(document).ready(function () {
         modal.style.top = "-100%";
         overflow.remove();
     };
+overflow2.onclick = function () {
+    modal2.style.top = "-100%";
+    overflow2.remove();
+};
 
 jQuery('document').ready(function() {
 $('.modalMain').on('click','.close', function(){
     modal.style.top = "-100%";
     overflow.remove();
 });
+
+    $('.modalMain2').on('click','.close', function(){
+        modal2.style.top = "-100%";
+        overflow2.remove();
+    });
 });
 
         // функция hover
@@ -1338,11 +1398,34 @@ jQuery('document').ready(function(e) {
         $(this).addClass('active');
     });
 
+
+  $('.slider, .profit1 ').on('click','#header', function(e){
+      e.preventDefault();
+      let href = $(this).data('href'),
+          id=0,
+          cs=0,
+          pr=$(this).data('sign');
+      let ss=getContent(href, true,id, pr,cs);
+      jQuery('.like_name').removeClass('active');
+      $(this).addClass('active');
+  });
+
+// поиск по сайту
+    $('.menu-search-art a').on('click', function (e) {
+        e.preventDefault();
+        let href = $(this).data('href'),
+            id=0,
+
+            pr=$(this).data('sign');
+        let form=$('#searchMain'),
+            data=$(form).serializeArray(),
+            cs=data;
+        let ss=getContent(href, true,id, pr,cs);
+        jQuery('.like_name').removeClass('active');
+        $(this).addClass('active');
+    });
+
+
+
 });
 
-/*jQuery('document').ready(function(e) {
-    $('.wrap_01').on('click', '#flexslider #slick-slider .pict ', function (e) {
-        e.preventDefault();
-
-    });
-}); */

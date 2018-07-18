@@ -1,6 +1,6 @@
 
-<div id="header">
-    <h1 class="like text-center">{!! $categoryName !!}</h1>
+<div id="header" data-href="{{ URL::to('actionSell')}}"  data-sign="50" >
+    <a href="#"  ><h1 class="like text-center">{!! $categoryName !!}</h1></a>
 </div>
 
 <div class="flexslider">
@@ -24,7 +24,21 @@
                                 <div class="mask">
                                     <a href="{{route('cartload',['id'=>$prod->id]) }}" data-href="{{URL::to('cartload')}}" data-id="{{$prod['id']}}" data-sign="39" >Купить</a>
                                 </div>
+                                <div class="dopContent">
+                                    <div class="tab-pane active" name="how-to" id="how-to" >
+                                        @if($prod->exactlyType1)
+                                            @set($data, $prod->exactlyType1)
+                                            @foreach($data as $k=>$item)
 
+                                                {!! $item !!} <br/>
+
+                                            @endforeach
+
+
+                                        @endif
+
+                                    </div>
+                                </div>
                             </div>
                         </li>
 

@@ -71,8 +71,15 @@
 
     </div>
     <div id="speedTotal" style=" color:#000000;font-size: 1.0em;font-weight: bold; margin-left:600px; ">Итого:&nbsp;&nbsp;{!! session('cardCommon.sum') !!} .00&nbsp;гр. </div>
+    <script>
+        $('.modal-footer .btn-primary').css('display','inline');
+        $('.modal-footer .btn-danger').css('display','inline');
+    </script>
 @else
     <h3>Корзина пуста</h3>
-    <p><a href="{{route('index') }}" class="btn btn-primary">Продолжить</a></p>
+   <script>
+       $('.modal-footer .btn-primary').css('display','none');
+       $('.modal-footer .btn-danger').css('display','none');
+   </script>
 @endif
 

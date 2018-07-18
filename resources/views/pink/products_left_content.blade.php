@@ -1,8 +1,8 @@
 @if($products)
 
-    <header>
-        <h1 class="head text-center">{!! $products[0]->categories->name !!}</h1>
-    </header>
+    <!--header>
+        <h1 class="head text-center">{--!! $products[0]->categories->name !!--}</h1>
+    </header-->
 
 
     <div class="wrapSubProd">
@@ -21,6 +21,10 @@
                 @elseif($prod->sale)
                     <div class="layer02">
                         <img src="{{ asset('public/'.env('THEME')) }}/images/features/saleGreen.png" width="75px;" alt="" />
+                    </div>
+                @elseif($prod->hit)
+                    <div class="layer02">
+                        <img src="{{ asset('public/'.env('THEME')) }}/images/features/topBlue.png" width="75px;" alt="" />
                     </div>
                 @endif
 

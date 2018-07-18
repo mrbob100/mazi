@@ -3,10 +3,13 @@
 @section('header')
     @include(env('THEME').'.admin.common.header')
 @endsection
+
 @section('lefsiteBar')
     @include(env('THEME').'.admin.common.leftsideBar')
 @endsection
 
+
 @section('content')
-    {!! $content !!}
+    @include (env('THEME').'.admin.quickinform..quickinform_edit_content')
 @endsection
+

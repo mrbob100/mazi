@@ -1,3 +1,7 @@
+.flexslider {
+    margin: 0; flex-basis: 1000px;
+}
+
 .catalog {
 display: none;
     z-index: 9;
@@ -8,7 +12,7 @@ display: none;
 display:flex !important;
     flex-direction: row;
     display: -webkit-flex !important;
-margin-left: 150px;
+/*margin-left: 150px; */
     margin-top: 30px;
     justify-content: space-around;
     list-style-type: none;
@@ -17,5 +21,71 @@ margin-left: 150px;
     margin-left: 50px;
 }
 #belle{
-    background-color: white; margin-left:100px;
+    background-color: white; /*margin-left:100px; */
+}
+
+.modalMain {position: absolute; /* overflow-y:auto; */ width: 840px; max-width: 100%;  height:562px; max-height: 100%; left: 25%; top: -100%; padding: 20px; background: #fff; border: 1px solid #333; z-index: 9999; transition: all 0.5s ease-in;}
+.overflow {width: 100%; height: 100%; z-index: 1041; background: rgba(0,0,0,0.7); position: absolute; top: 0;}
+
+
+.wrap_02{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.right_side1{
+    width: 295px;
+    max-width: 100%;
+
+}
+.right_side2 {
+    padding: 20px 0 20px 10px;
+    display: block;
+    width: 390px;
+    line-height: 1.5;
+
+    /* background-color: #EBE8E7; */
+    /* margin: 20px 0px 20px 50px; */
+}
+.right-side3 {
+    padding: 20px;
+    display: block;
+    /*   background-color: #EBE8E7; */
+    margin: 20px 20px 80px 90px;
+
+}
+.slidek {
+    width: 220px; height: auto;
+}
+
+
+.right_side_inn {
+    display: block;
+    width: 384px;
+    margin-right: 12px;
+    overflow-y:auto; height: 312px;
+}
+.right_side_inn .span__in0 {
+    display: block; width: 357px;height: 20px;
+    background:#E1E1E2;
+}
+.tab_text_odd {
+    background:#E1E1E2; width: 357px;
+}
+
+.right_side_inn .span {
+    line-height: 2.5;
+}
+.container101{
+    width:1170px; max-width: 100%;
+}
+
+.wrap_02 .right_side2 .purchase {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.right_side1 .flexslider .slides >li {
+    display:inline-block;
 }
