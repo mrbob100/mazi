@@ -933,6 +933,7 @@ html .ui-button.ui-state-disabled:active {
 	background: #f6f6f6;
 	font-weight: normal;
 	color: #454545;
+	height: 36px;
 }
 .ui-state-default a,
 .ui-state-default a:link,

@@ -67,12 +67,8 @@
                     </div>
                     <div class="dopContent">
                         <div class="tab-pane active" name="how-to" id="how-to" >
-                        @if($prod->exactlyType1)
-                            @foreach($prod->exactlyType1 as $item)
-                                <!--p class="tab-text" style=" color: #816263;font-size: 0.7em;" > {--!! $item !!--}</p-->
-                                    <p class="tab-text" style=" color: #816263;font-size: 0.7em;" > {{str_limit($item,32)}}</p>
-
-                                @endforeach
+                            @if($prod->exactlyType1)
+                                {!! $prod->exactlyType1 !!}
                             @endif
 
                         </div>

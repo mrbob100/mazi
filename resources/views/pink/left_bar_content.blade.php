@@ -58,7 +58,7 @@
 
 
         <select name="{{$k}}" size="1" style="width:200px;" id="menuPower" class="selectValItem" onchange="myRangeOut();">
-            <option disabled selected>{!!$k !!}</option>
+            <option disabled selected>{!! trans('ru.'.$k) !!} </option>
             @foreach($type as $item)
 
                 <option value="{{$item[1]}}">"{{$item[1]}}- &nbsp;<span style="color:#f6931f; font-weight: bold;">{!!$item[2]  !!}</span></option>

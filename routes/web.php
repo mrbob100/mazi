@@ -151,7 +151,7 @@ Route::group(['prefix'=>'admin','middleware'=>['web','auth']], function(){
 //Excel
     Route::get('excelitem', ['uses'=>'Admin\ExcelitemController@index','as'=>'excelIt']);
     Route::match(['get','post'],'excelitem/import', ['uses'=>'Admin\ExcelitemController@import','as'=>'importIt']);
-    Route::post('excelitem/export', ['uses'=>'Admin\ExcelitemController@export','as'=>'exportIt']);
+    Route::post('exportHotline', ['uses'=>'Admin\ExcelitemController@export','as'=>'exportHotline']);
 
 
 

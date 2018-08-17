@@ -1,73 +1,47 @@
-<h3>  {!! $data['title'] !!}</h3>
-<div class="container">
+<div class="titleOne"><h3>  {!! $data['title'] !!}</h3></div>
 
-    <form  id="companies"  action="{{route('exportIt')}}"   method="post">
+
+    <form  id="companies"  action="{{route('exportHotline')}}"   method="post">
     {{ csrf_field() }}
-      <table>
-        <div class="col-xs2">
+<div class="combat">
 
-                <tr><th>Наименование</th></tr>
-                <tr><td>Код  </td></tr>
-                <tr><td>Категория  </td></tr>
-                <tr><td>Наименование  </td></tr>
-                <tr><td>Краткое описание  </td></tr>
-                <tr><td>Полное описание  </td></tr>
-                <tr><td>Цена  </td></tr>
-                <tr><td>Изображение  </td></tr>
-                <tr><td>Тип продукции  </td></tr>
-                <tr><td>Страна  </td></tr>
-                <tr><td>Группа  </td></tr>
-                <tr><td>Новый  </td></tr>
-                <tr><td>Хит продаж  </td></tr>
-                <tr><td>Распродажа  </td></tr>
-                <tr><td>Брутто вес  </td></tr>
-                <tr><td>Чистый вес  </td></tr>
-                <tr><td>Ширина  </td></tr>
-                <tr><td>Длина  </td></tr>
-                <tr><td>Высота  </td></tr>
-                <tr><td>Срок гарантии  </td></tr>
-                <tr><td> Класс инструмента </td></tr>
-                <tr><td>Упаковка  </td></tr>
-                <tr><td> Характеристики </td></tr>
-                <tr><td> На складе </td></tr>
-                <tr><td>Код УКВД  </td></tr>
+      <div id="catalog">
+          {{Widget::run('MainWidget',['class'=>'CheckBox','tpl'=>'checkbox.php'])}}
 
+      </div>
 
-        @for($i=0; $i<count($data['companies']); $i++)
+        <div class="category_two">
+           <div id="sortable">
+               <div class="ui-state-default">Наименование  <input type="checkbox" style="margin-left: 70px;" id="code1" value="name" name="Наименование"/></div>
+                <div class="ui-state-default">Код<input type="checkbox" style="margin-left: 149px;" id="code1" value="code" name="Код"/></div>
+               <div class="ui-state-default">Краткое описание  <input type="checkbox" style="margin-left: 47px;" id="code1" value="description" name="Краткое описание"/></div>
+                <div class="ui-state-default">Полное описание  <input type="checkbox" style="margin-left: 52px;" id="code1" value="text " name="Полное описание "/></div>
+                <div class="ui-state-default">Цена  <input type="checkbox" id="code1" style="margin-left: 136px;" value="price" name="Цена"/></div>
+                <div class="ui-state-default">Изображение  <input type="checkbox" style="margin-left: 77px;" id="code1" value="img" name="Изображение"/></div>
+               <div class="ui-state-default">Тип продукции  <input type="checkbox"  style="margin-left: 69px;" id="code1" value="type" name="Тип продукции"/></div>
+                <div class="ui-state-default">Страна  <input type="checkbox"  style="margin-left: 122px;" id="code1" value="country" name="Страна"/></div>
+                <div class="ui-state-default" >Группа  <input type="checkbox"  style="margin-left: 125px;" id="code1" value="groupTools " name="Группа "/></div>
+                <div class="ui-state-default">Новый  <input type="checkbox" style="margin-left: 126px;" id="code1" value="new" name="Наименование"/></div>
+               <div class="ui-state-default">Хит продаж <input type="checkbox" style="margin-left: 91px;" id="code1" value="hit" name="Хит"/></div>
+                <div class="ui-state-default">Распродажа <input type="checkbox" style="margin-left: 87px;" id="code1" value="sale" name="Распродажа"/></div>
+               <div class="ui-state-default">Брутто вес  <input type="checkbox" style="margin-left: 97px;" id="code1" value="weightbrutto" name="Брутто вес"/></div>
+               <div class="ui-state-default">Чистый вес  <input type="checkbox" style="margin-left: 93px;" id="code1" value="weightnetto" name="Чистый вес"/></div>
+                <div class="ui-state-default">Ширина  <input type="checkbox" style="margin-left: 116px;" id="code1" value="width" name="Ширина"/></div>
+                <div class="ui-state-default">Длина  <input type="checkbox" style="margin-left: 129px;" id="code1" value="length" name="Длина"/></div>
+                <div class="ui-state-default">Высота  <input type="checkbox" style="margin-left: 122px;" id="code1" value="height" name="Высота"/></div>
+               <div class="ui-state-default">Срок гарантии  <input type="checkbox" style="margin-left: 73px;" id="code1" value="termGuarantee" name="Срок гарантии"/></div>
+                <div class="ui-state-default">Класс инструмента <input type="checkbox" style="margin-left: 40px;" id="code1" value="class" name="Класс инструмента"/></div>
+                <div class="ui-state-default">Упаковка  <input type="checkbox" style="margin-left: 110px;" id="code1" value="packing" name="Упаковка"/></div>
+                <div class="ui-state-default"> Характеристики <input type="checkbox" style="margin-left: 60px;" id="code1" value="exactlyType1" name="Характеристики"/></div>
+                <div class="ui-state-default"> На складе <input type="checkbox" style="margin-left: 103px;" id="code1" value="sclad" name="На складе"/></div>
+               <div class="ui-state-default">Код УКВД  <input type="checkbox" style="margin-left: 107px;" id="code1" value="ukvd" name="Код УКВД"/></div>
+           </div>
 
-                <tr><th><input type="checkbox" id="{{$data['companies'][$i]}}" value="{{$data['companies'][$i]}}" name="Наименование"/></th></tr>
-                 <tr><td><input type="checkbox" id="{{$data['companies'][$i]}}" value="{{$data['companies'][$i]}}" name="code"/></td></tr>
-                <tr><td><input type="checkbox" id="{{$data['companies'][$i]}}" value="{{$data['companies'][$i]}}" name="category_id"/></td></tr>
-                <tr><td><input type="checkbox" id="{{$data['companies'][$i]}}" value="{{$data['companies'][$i]}}" name="name"/></td></tr>
-                <tr><td><input type="checkbox" id="{{$data['companies'][$i]}}" value="{{$data['companies'][$i]}}" name="description"/></td></tr>
-                <tr><td><input type="checkbox" id="{{$data['companies'][$i]}}" value="{{$data['companies'][$i]}}" name="text"/></td></tr>
-                <tr><td><input type="checkbox" id="{{$data['companies'][$i]}}" value="{{$data['companies'][$i]}}" name="price"/></td></tr>
-                <tr><td> <input type="checkbox" id="{{$data['companies'][$i]}}" value="{{$data['companies'][$i]}}" name="img"/></td></tr>
-                <tr><td><input type="checkbox" id="{{$data['companies'][$i]}}" value="{{$data['companies'][$i]}}" name="type"/></td></tr>
-                <tr><td><input type="checkbox" id="{{$data['companies'][$i]}}" value="{{$data['companies'][$i]}}" name="country"/></td></tr>
-                <tr><td><input type="checkbox" id="{{$data['companies'][$i]}}" value="{{$data['companies'][$i]}}" name="groupTools"/></td></tr>
-                <tr><td><input type="checkbox" id="{{$data['companies'][$i]}}" value="{{$data['companies'][$i]}}" name="new"/></td></tr>
-                <tr><td><input type="checkbox" id="{{$data['companies'][$i]}}" value="{{$data['companies'][$i]}}" name="hit"/></td></tr>
-                <tr><td><input type="checkbox" id="{{$data['companies'][$i]}}" value="{{$data['companies'][$i]}}" name="sale"/></td></tr>
-                <tr><td><input type="checkbox" id="{{$data['companies'][$i]}}" value="{{$data['companies'][$i]}}" name="weightbrutto"/></td></tr>
-                <tr><td><input type="checkbox" id="{{$data['companies'][$i]}}" value="{{$data['companies'][$i]}}" name="weightnetto"/></td></tr>
-                <tr><td> <input type="checkbox" id="{{$data['companies'][$i]}}" value="{{$data['companies'][$i]}}" name="width"/></td></tr>
-                <tr><td><input type="checkbox" id="{{$data['companies'][$i]}}" value="{{$data['companies'][$i]}}" name="length"/></td></tr>
-                <tr><td><input type="checkbox" id="{{$data['companies'][$i]}}" value="{{$data['companies'][$i]}}" name="height"/></td></tr>
-                <tr><td><input type="checkbox" id="{{$data['companies'][$i]}}" value="{{$data['companies'][$i]}}" name="termGuarantee"/></td></tr>
-                <tr><td><input type="checkbox" id="{{$data['companies'][$i]}}" value="{{$data['companies'][$i]}}" name="class"/></td></tr>
-                <tr><td><input type="checkbox" id="{{$data['companies'][$i]}}" value="{{$data['companies'][$i]}}" name="packing"/></td></tr>
-                <tr><td><input type="checkbox" id="{{$data['companies'][$i]}}" value="{{$data['companies'][$i]}}" name="exactlyType1"/></td></tr>
-                <tr><td><input type="checkbox" id="{{$data['companies'][$i]}}" value="{{$data['companies'][$i]}}" name="sclad"/></td></tr>
-                <tr><td><input type="checkbox" id="{{$data['companies'][$i]}}" value="{{$data['companies'][$i]}}" name="ukvd"/></td></tr>
-
-
-
-
-       @endfor
         </div>
-     </table>
+
+
+</div>
+        <button type="submit" style="margin: 10px 10px 50px 300px; width:200px;" id="button_left" class="btn btn-success">Отправить</button>
 
     </form>
 
-</div>

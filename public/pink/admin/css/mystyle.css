@@ -89,3 +89,47 @@ display:flex !important;
 .right_side1 .flexslider .slides >li {
     display:inline-block;
 }
+.combat {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    width:1000px;
+}
+.combat #catalog {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    width: 600px;
+
+}
+
+.combat #catalog li a{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    width:100%;
+    max-width: 400px;
+    align-items: flex-start;
+}
+.combat #catalog li a h5{
+    display: block;
+    width:250px;
+    font-weight: 600;
+    color: #0a568c;
+    margin-left: 20px;
+}
+
+
+.category_two {
+    width: 200px;
+}
+#sortable .ui-state-default{
+    background-color:#F0E3F3;
+}
+
+.titleOne h3{
+    color: red;
+    font-weight: 600;
+    margin-left: 200px;
+}

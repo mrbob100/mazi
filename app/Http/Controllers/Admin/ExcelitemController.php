@@ -12,6 +12,9 @@ use Corp\Models\Product;
 use Corp\Repositories\CategoriesRepository;
 use Corp\Repositories\ProductsRepository;
 use Menu;
+use Corp\Models\Category;
+use Response;
+
 class ExcelitemController extends adminSiteController
 {
 
@@ -33,8 +36,10 @@ class ExcelitemController extends adminSiteController
         if(view()->exists(env('THEME').'.admin.excels.index'))
         {
 
-
-
+            $request=Request::createFromGlobals();
+            $inputs = $request->except('_token');
+    $categories=Category::where([['parent_id',0],['id','<>',9999]])->get();
+        //    $categories=Category::where([['id','<>',9999]])->get();
             $this->template=env('THEME').'.admin.excels.index';
             //    $users=$this->getUsers();
 
@@ -71,13 +76,14 @@ class ExcelitemController extends adminSiteController
          $cnt=count($productCompany);
             $data=[
                 'title'=>'Таблица выбора фильтров продукции',
-                'companies'=>$productCompany
+                'companies'=>$productCompany,
+
             ];
 
             // dd($menu);
           //  $navigation = view(env('THEME') . '.admin.categories.navigation_category')->with('menu',$menu)->render();
           //  $this->vars = array_add($this->vars, 'navigation', $navigation);  // вывод навигации меню
-            $content = view(env('THEME').'.admin.excels.inputCSV_checkbox')->with(['data'=>$data])->render();
+            $content = view(env('THEME').'.admin.excels.inputCSV_checkbox')->with(['data'=>$data,'categories'=> $categories])->render();
            $this->vars = array_add($this->vars, 'content', $content);  // вывод навигации меню
             return $this->renderOutput();
 
@@ -148,30 +154,70 @@ class ExcelitemController extends adminSiteController
     {
         $request=Request::createFromGlobals();
         $inputs = $request->except('_token');
+        $items='';
       //  $items = Product::all();
         if ($request->isMethod('post'))
         {
-            $cnt=count($inputs);
+           // $cnt=count($inputs);
+            $categories=[];
+            $cat_child=[];
+            $cat_id=[];
             $str='';
-            $query=Product::select('code');
-
+            $query='category_id';
+            $j=0;
             foreach($inputs as $k=>$input)
             {
-                if(isset($k)) {
-                    if($k=='img')
-                    {
-                        $k='img->max';
+               if(is_numeric($input))
+               {
+                  array_push($categories,$input);
+               }
+                 else
+                 {
+                     if($j==0)
+                     {
+                         $query=Product::select('category_id');
+                         $query->addSelect($input);
+                         $j++;
+                     }
+
+                    if($j==1) {
+                        $j++;     continue;
                     }
-                    $query->addSelect($k);
-                }
+                     $query->addSelect($input);
+                 }
+
 
             }
 
 
+                $cnt=count($categories);
+            $products=[];  $cat_child=[];
+                $tmp='';
+            for( $i=0; $i<$cnt;$i++) {
+                $cat_id = array_pop($categories);
+                $tmp.=['category_id',$cat_id].',';
+
+            }
+                $tmp=[$tmp];
+            $products=$query->where($tmp)->get();
+            $cater=$products->load('categories') ;
+            $temp=$cater->category_id->categories();
+                //  $name= $temp[0]->parent_id->getCategory();
+
+                $tem1 = Category::where('id', $temp->parent_id)->first();
+
+                $cat_child[0][$i] = $tem1->name;
+                $cat_child[1][$i] = $cat_id;
+                $cat_child[2][$i] = $temp->name;
+                $products[$i]=$query->where('category_id', $cat_id)->all();
+                $products[$i]=json_decode( $products[$i]->img);
+                $products[$i]->img=$products[$i]->img->max;
 
 
+  // здесь я должен сделать перебор категорий с выводом категории =0 и подкатегории
 
-             $items=$query->get();
+
+           //  $items=$query->get();
 
             //  $items=$this->p_rep->get($select,false,false ,false);
             //   $items=DB::table('products')->select($str)->get();
@@ -185,8 +231,8 @@ class ExcelitemController extends adminSiteController
             })->store('xls',storage_path('app/public'));
             return redirect()->back();
         }
-
-
+        $content="Данные сброшены в файл";
+        return Response::json(['success'=>true, 'content'=>$content]);
     }
 
 

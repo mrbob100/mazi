@@ -17,6 +17,8 @@ use Corp\Models\Menu;
 use Config;
 use Auth;
 use Corp\User;
+use Session;
+use Cookie;
 class IndexController extends SiteController
 {
 
@@ -37,6 +39,12 @@ class IndexController extends SiteController
     public function index($id=12)
     {
      $new=[]; $hit=[];
+        Cache::flush();
+        foreach($_COOKIE as $key){
+            if(!is_int($key)) continue;
+            setcookie($key,' ');
+        }
+         Session::pull('Difference');
         $products = Product::where('hit',1)->orWhere('new',1)->get(); // пункты кадров слайдера
 
       /*  $sliderItems->$this->check($sliderItems); */

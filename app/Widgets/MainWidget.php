@@ -63,7 +63,10 @@ if( $this->myClass!='Directory') {
     $categories=Category::where('id','!=',9999)->get();
 }
        else  $categories=Directory::all();
-
+        if( $this->myClass=='CheckBox')
+        {
+            $this->tpl='checkbox.php';
+        }
 
         $keyd=$categories->keyBy('id');
         $this->data=$keyd->toArray();

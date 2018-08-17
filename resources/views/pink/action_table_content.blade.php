@@ -56,15 +56,11 @@
                </div>
                  <div class="liked-product simpleCart_shelfItem">
 
-                    <a class="like_name" href="{{route('cartload',['id'=>$prod->id]) }}" data-href="{{URL::to('cartload')}}" data-id="{{$prod['id']}}" data-sign="39" style=" color: #816263;font-size: 0.7em;" >{{str_limit($prod->name,32)}}  </a>
-                     <div class="dopContent01">
+                     <p   style=" color: #816263;font-size: 0.9em; font-weight: 600" >{{str_limit($prod->name,32)}}  </p>
+                     <div class="dopContent">
                          <div class="tab-pane active" name="how-to" id="how-to" >
-                         @if($prod->exactlyType1)
-                             @foreach($prod->exactlyType1 as $item)
-                                 <!--p class="tab-text" style=" color: #816263;font-size: 0.7em;" > {--!! $item !!--}</p-->
-                                     <p class="tab-text" style=" color: #816263;font-size: 0.7em;" > {{str_limit($item,32)}}</p>
-
-                                 @endforeach
+                             @if($prod->exactlyType1)
+                                 {!! $prod->exactlyType1 !!}
                              @endif
 
                          </div>
@@ -72,10 +68,16 @@
                  </div>
                 <div class="productsinT03" >
                             <p><a class="item_add" href="{{route('cartload',['id'=>$prod->id]) }}"  data-href="{{URL::to('cartload')}}" data-id="{{$prod['id']}}" data-sign="39" style=" color: #816263;font-size: 1.0em; padding-left: 40px" ><i></i> <span class=" item_price">{!!$prod->price  !!} гр.</span> </a></p>
-                            <div class="mask11">
-                                <a href="{{route('cartload',['id'=>$prod->id]) }}" data-href="{{URL::to('cartload')}}" data-id="{{$prod['id']}}" data-sign="39"><i class="material-icons" style="font-size: 40px; color:#1F9ED1;" >shopping_cart </i>В корзину</a>
-                                <a href="{{route('differ',['id'=>$prod->id]) }}" data-href="{{URL::to('difference')}}" data-id="{{$prod['id']}}" data-sign="40"><img src="{{ asset('public/'.env('THEME'))}}/images/features/scales-100.png " style="width: 50px; height:50px;"></a>
-                            </div>
+                    <div class="mask11">
+                        <div class="mask110">
+
+                            <a href="{{route('cartload',['id'=>$prod->id]) }}" data-href="{{URL::to('cartload')}}" data-id="{{$prod['id']}}" data-sign="39"><i class="material-icons" style="font-size: 40px; color:#006DC9;" >shopping_cart </i></a>
+                            <img src="{{ asset('public/'.env('THEME')) }}/images/features/incart.png" data-href="{{URL::to('cartload')}}" data-id="{{$prod['id']}}" data-sign="39" alt="" />
+                        </div>
+                        <div class="mask111">
+                            <a href="{{route('differ',['id'=>$prod->id]) }}"  ><img src="{{ asset('public/'.env('THEME'))}}/images/features/scales-100.png " id="picture" data-href="{{URL::to('difference')}}" data-id="{{$prod['id']}}" data-sign="40"></a>
+                        </div>
+                    </div>
 
                 </div>
 

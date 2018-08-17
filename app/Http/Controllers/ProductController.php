@@ -162,15 +162,15 @@ class ProductController extends SiteController
 
         if($priznakSort==0)
         {
-            $query=Product::select(['id','name','price','img','category_id','exactlyType1'])->where('name','like',$p);
+            $query=Product::select(['id','name','description','price','img','category_id','exactlyType1'])->where('name','like',$p);
         }
         if($priznakSort==1)
         {
-        $query=Product::select(['id','name','price','img','category_id','exactlyType1'])->where('name','like',$p)->orderBy('price','asc');
+        $query=Product::select(['id','name','description','price','img','category_id','exactlyType1'])->where('name','like',$p)->orderBy('price','asc');
         }
         if($priznakSort==2)
         {
-            $query=Product::select(['id','name','price','img','category_id','exactlyType1'])->where('name','like',$p)->orderBy('price','desc');
+            $query=Product::select(['id','name','description','price','img','category_id','exactlyType1'])->where('name','like',$p)->orderBy('price','desc');
         }
         //$products=$this->getProducts($p,$priznakSort );
        // $products=$query->paginate(Config::get('settings.paginate'));

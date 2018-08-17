@@ -1,3 +1,4 @@
+
 $(function () {
     $('#side-menu .catalogist ').on('click',function (e) {
      e.preventDefault();
@@ -106,7 +107,37 @@ $(function () {
         overflow.remove();
     });
 
+//_____________________________________________________
+// сортировка атрибутов  при выгрузка на hotlone
+    $("#sortable").sortable();
+//_______________________________________________________
+// передача формы выбранных атрибутов в hotline
+ /*  $('#button_left') .on('click',function (e) {
+       e.preventDefault();
+       let form=$('#companies'),
+           data = $(form).serializeArray();
+       $.ajax({
+           url: form.attr('action'),
+           data: data,
+           cache: false,
+           headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+           //  url: 'http://pullsky.kretivz.pro/web/cart/show',
+           type: form.attr('method'),
+           dataType: "JSON",
+           success: function(res){
+               if(!res) alert('Ошибка!');
+               $('#titleProductsMy').empty();
+               $('#titleProductsMy').append(res.content);
+           },
+           error: function(){
+               alert('Ошибка передачи переметра сортировки');
+           }
 
+       });
+   }); */
 
+    $(' #catalog').dcAccordion({
+        speed: 300
+    });
 
     });

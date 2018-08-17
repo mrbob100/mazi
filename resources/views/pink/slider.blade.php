@@ -1,6 +1,6 @@
 
 <div id="header" data-href="{{ URL::to('actionSell')}}"  data-sign="50" >
-    <a href="#"  ><h1 class="like text-center">{!! $categoryName !!}</h1></a>
+    <a href="#"  ><h1 class="like text-center">&nbsp;{!! $categoryName !!}&nbsp;</h1></a>
 </div>
 
 <div class="flexslider">
@@ -48,5 +48,6 @@
             @endforeach
 
         </ul>
+
 
 </div>

@@ -15,6 +15,7 @@ use Config;
 use Session;
 use DB;
 use Cache;
+use Storage;
 class CategoryController extends SiteController  // выбор из бокового меню - категорий
 {
     public function __construct( ProductsRepository $p_rep, SlidersRepository $s_rep)
@@ -35,11 +36,16 @@ class CategoryController extends SiteController  // выбор из боково
         $sliders = view(env('THEME') . '.slider')->with('sliders', $sliderItems)->render();
         $this->vars = array_add($this->vars, 'sliders', $sliders);
 */
+        $cs=0;
+        $cs=Session::get('Difference');
+        $cnt=count($cs);
+        $cs=$cnt;
        $id=$request->id;
         $priznakOut=0;
         $priznakSort=0;
     $iu=0;
         $input = $request->except('_token');
+
 if(isset( $input['data']))
 {
     $priznakSort= $input['data'];
@@ -263,8 +269,78 @@ if(!$id && !$input)
             'typeProducts'=>$typeProducts,
 
         ];
+        $arka=[];
+// блок вывода exactlyType1 в иконку продукта
+        foreach ($products as $product)
+        {
+            $qTemp=$product->exactlyType1;
+            if($qTemp)
+            {
+              ob_start();
+              $content_char="<ul>"; $i=0;
+               foreach($qTemp as $item)
+               {
 
-        $cs=0;
+                   $wqTemp01=explode('-',$item);
+                   if(!isset($wqTemp01[1]))
+                   {
+                       $wqTemp01=explode('–',$item);
+                   }
+                   if(isset($wqTemp01[2]))
+                   {
+                       $str=$wqTemp01[1].'-'.$wqTemp01[2];
+                       $wqTemp01[1]=$str;
+                   }
+
+  //____________________________________________________________________________________________________
+                   if(!isset($wqTemp01[1])) // внесение в файл ошибок
+                   {
+
+                      // $app=['exacttlyType1'=>$product->exactlyType1, 'id'=>$product->id];
+                       $s=0;
+                       foreach($qTemp as $itemic)
+                       {
+                           $arka[$s]=$itemic;
+                           $s++;
+                       }
+                       $cint=count($arka);
+                       $str=$product->id;
+                       for($s=0; $s<$cint; $s++)
+                       {
+                           $str=$str.' '.$arka[$s].' ';
+                       }
+                      //  $app=['exacttlyType1'=> $str, 'id'=>$product->id];
+                       Storage::prepend('file_error.txt',$str);
+                   break;
+                   }
+  //____________________________________________________________________________________________________
+                   $wqTemp01[0]=trim($wqTemp01[0]);
+                   $wqTemp01[1]=trim($wqTemp01[1]);
+                   if($priznakOut!=11)
+                   {
+                       $str=mb_substr($wqTemp01[0],0,22);
+                       $wqTemp01[0]=$str;
+                       $str=mb_substr($wqTemp01[1],0,11);
+                       $wqTemp01[1]=$str;
+                   }
+
+                   $content_char.="<li>";
+                   $content_char.="<div>".$wqTemp01[0]."</div>";
+                   $content_char.="<div></div>";
+                   $content_char.="<div>".$wqTemp01[1]."</div>";
+                   $content_char.="</li>";
+
+                   if($i>=3)break;
+                   $i++;
+               }
+                $content_char.="</ul>" ;
+                $product->exactlyType1=$content_char;
+                ob_end_clean();
+            }
+        }
+// конец блока вывода
+
+
        if($priznakOut==99)
        {
            $content=view(env('THEME').'.products_content')->with(['products'=>$products,'adopt'=>$this->adopt,'cs'=>$cs])->render();
@@ -295,7 +371,7 @@ if(!$id && !$input)
 
        // return $this->renderOutput();
      // if(Request::has('id')) $id=Request::__get('id');
-        return Response::json(['success'=>true, 'content'=>$content, 'leftBar'=>$leftBar , 'sigma'=>$sigma]);
+        return Response::json(['success'=>true, 'content'=>$content, 'leftBar'=>$leftBar ,'cs'=>$cs, 'sigma'=>$sigma]);
     }
 
     protected function getProducts($alias=false,$priznakSort=0)

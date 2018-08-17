@@ -47,7 +47,7 @@
              <div class="right_side2" >
                  <div class="dress-name" >
                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" style="color: #FF0000;">&times;</span></button>
-                     <h5>{!! $row !!}</h5>
+                     <h5 style="font-weight:900; font-size: 24px;">{!! $row !!}</h5>
                      <span style="font-weight:900; font-size: 24px;"><h3>{!! $row1 !!}</h3></span>
 
                  </div>
@@ -61,7 +61,7 @@
                          <div class="clearfix"></div>
                      </div>
                      <div class="span span2">
-                         <p class="left_01 tab_text_odd">made in - &nbsp;
+                         <p class="left_01 tab_text_odd">Страна производства - &nbsp;
                         {!! $products[0]->country !!}</p>
                          <div class="clearfix"></div>
                      </div>

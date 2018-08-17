@@ -20,4 +20,5 @@ class Category extends Model
     {
        return $this->hasOne('Corp\Models\Category','id','parent_id');
     }
+
 }

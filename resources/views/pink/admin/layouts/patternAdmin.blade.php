@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+   
     <meta name="description" content="{{isset($meta_desc) ? $meta_desc : '' }}" />
     <meta name="keywords" content="{{isset($keywords) ? $keywords : ''}}" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -118,8 +118,12 @@
 
 
                    @endif
+                 @if(Route::currentRouteName()=='excelIt')
+                   <div class="hotline">
 
+                   </div>
 
+                 @endif
                       <!--этот блок для вывода продуктового меню  -->
                            <div class="catalog " >
                                {{Widget::run('MainWidget',['class'=>'Directory','tpl'=>'menuSpr.php'])}}
@@ -182,7 +186,7 @@
 <script type="text/javascript" src=" {!! asset('public/'.env('THEME')) !!}/js/jquery.cookie.js"  ></script>
 <script type="text/javascript" src=" {!! asset('public/'.env('THEME')) !!}/js/jquery.accordion.js"  ></script>
 <script type="text/javascript" src=" {!! asset('public/'.env('THEME')) !!}/js/price-range.js" charset="utf-8" ></script>
-
+<script type="text/javascript" src=" {!! asset('public/'.env('THEME')) !!}/js/jquery-ui.js" charset="utf-8" ></script>
 <script type="text/javascript" src=" {!! asset('public/'.env('THEME')) !!}/js/script.js" charset="utf-8" ></script>
 <!--script type="text/javascript" src=" {--!! asset('public/'.env('THEME')--) !!}/js/main.js"  ></script-->
 <script type="text/javascript" src=" {!! asset('public/'.env('THEME')) !!}/js/pushy.js"  ></script>

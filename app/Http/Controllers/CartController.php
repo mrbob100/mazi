@@ -114,7 +114,7 @@ class CartController extends Controller
         $cart = new Cart();
         $cart->recalc($id);
         $this->layout = false;
-        return view('cart.cartModal');
+       $this->cartView($request );
     }
 
     public function cartShow()
@@ -292,7 +292,7 @@ class CartController extends Controller
         $this->layout = false;
         $cart = new Cart();
         $cart->addToCart($product, $qty);
-        $content=view('cart.cartModal')->render();
+       $content=view('cart.cartModal')->render();
         return Response::json(['success'=>true, 'content'=>$content]);
     }
 

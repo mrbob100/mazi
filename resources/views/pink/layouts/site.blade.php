@@ -48,7 +48,7 @@
             </div>
             <div class="modal-end"></div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Продолжить покупки</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" >Продолжить покупки</button>
                 <a  href="{{route('arrangeContract')}}" data-href="{{URL::to('arrange')}}" data-sign="27" class="btn btn-primary" style="color: white;">Оформить заказ</a>
                 <button type="button" class="btn btn-danger" onclick="clearCart();">Очистить корзину</button>
             </div>
@@ -80,22 +80,23 @@
             </div>
         </div>
         <div class="menu-call">
-            <a href="{{ route('index')  }}" >  <p> Заказ обратного звонка</p> </a>
+            <a href="{{ route('index')  }}" >  <p > Заказ обратного звонка</p> </a>
                <div class="menu-wrap">
 
-                 <div class="menu-search-window">
+                     <div class="menu-search-window">
 
-                    <p>{!! Form::open(['url'=>route('productSearch' ), 'id'=>'searchMain' ,'class'=>'form-horizontal', 'method'=>'GET' ]) !!}
+                        {!! Form::open(['url'=>route('productSearch' ), 'id'=>'searchMain' ,'class'=>'form-horizontal', 'method'=>'GET' ]) !!}
 
-                        {!! Form::text('q',old('q'),['class'=>' search','placeholder'=>'Поиск товара']) !!}
+                            {!! Form::text('q',old('q'),['class'=>' search','placeholder'=>'Поиск товара','data-sign'=>'53','data-href'=>'search','route'=>'search']) !!}
 
-                        <span></span>
-                    {!! Form::close() !!}</p>
+                            <span></span>
+                        {!! Form::close() !!}
+                    </div>
+                    <div class="menu-search-art">
+                        <a href="#" data-href="{{URL::to('search')}}" data-sign="53"> <i class="material-icons">search</i></a>
+                    </div>
+                       {!! Form::close() !!}
                 </div>
-                <div class="menu-search-art">
-                    <a href="#" data-href="{{URL::to('search')}}" data-sign="53"> <i class="material-icons">search</i></a>
-                </div>
-               </div>
         </div>
         <div class="menu-tel">
             <p>Телефон - (555)6755444</p>
@@ -177,7 +178,7 @@
 
  <div class="container-wrap-row">
          <div class=" catalog" >
-             <p>  {{ Widget::run('MainWidget') }}</p>
+              {{ Widget::run('MainWidget') }}
          </div>
 
          <!--div class=" text" --> <!-- второй левый боковой -->
@@ -211,6 +212,9 @@
          </div>
 
      @endif
+
+
+
 
         <div class="piza"  style="background-color: white;"  id="contentHolder">
             <!--вставка html кода из синего меню IP history -->
