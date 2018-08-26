@@ -12,7 +12,6 @@
         <div class="wrapperProducts">
 
 
-
                  @for($i=0;$i<count($products);$i++)
                     @php $j=0; @endphp
                         <div class="productsinT021" >
@@ -175,16 +174,23 @@
 
                                     @endfor
 
+
                            <div class="result">
-                               @if($i==0)
-                                <div class="mask" style="margin-left:175px;" >
 
-                                    @else
-                                        <div class="mask">
-                                @endif
-                                    <a id="reactivebut" href="{{route('cartload',['id'=>$products[$i][0]->id])}}" data-href="{{URL::to('cartload')}}" data-id="{{$products[$i][0]->id}}" data-sign="39"> <img src="{{ asset('public/'.env('THEME'))}}/images/features/add.png"  alt="вывод кнопки добавить" /></a>
 
-                                </div>
+                                    @if($i==0)
+                                        <div class="mask" style="margin-left: 176px;">
+
+                                    <a id="reactivebut" href="{{route('cartload',['id'=>$products[$i][0]->id])}}" data-href="{{URL::to('cartload')}}" data-id="{{$products[$i][0]->id}}" data-sign="39" onclick="zaraza(this);" > <img src="{{ asset('public/'.env('THEME'))}}/images/features/add.png"  alt="вывод кнопки добавить" /></a>
+
+                                        </div>
+                                   @else
+                                   <div class="mask" >
+
+                                       <a id="reactivebut" href="{{route('cartload',['id'=>$products[$i][0]->id])}}" data-href="{{URL::to('cartload')}}" data-id="{{$products[$i][0]->id}}" data-sign="39" onclick="zaraza(this);" > <img src="{{ asset('public/'.env('THEME'))}}/images/features/add.png"  alt="вывод кнопки добавить" /></a>
+
+                                   </div>
+                                   @endif
                            </div>
                         </div>
 
@@ -194,10 +200,11 @@
 
 
 
+            </div>
         </div>
-
 
 
 @else
     {!! Lang::get('ru.articles_no') !!}
+
 @endif

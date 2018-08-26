@@ -339,7 +339,9 @@ if(!$id && !$input)
             }
         }
 // конец блока вывода
-
+        $add=99;
+        Session::pull('addOrnot');
+        if(!session('addOrnot')) Session::push('addOrnot',['add'=>$add]);
 
        if($priznakOut==99)
        {

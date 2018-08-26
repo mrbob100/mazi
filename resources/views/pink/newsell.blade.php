@@ -33,14 +33,7 @@
                                 <div class="dopContent">
                                     <div class="tab-pane active" name="how-to" id="how-to" >
                                         @if($prod->exactlyType1)
-                                            @set($data, $prod->exactlyType1)
-                                            @foreach($data as $k=>$item)
-
-                                                {!! $item !!} <br/>
-
-                                            @endforeach
-
-
+                                            {!! $prod->exactlyType1 !!}
                                         @endif
 
                                     </div>

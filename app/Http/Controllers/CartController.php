@@ -114,7 +114,7 @@ class CartController extends Controller
         $cart = new Cart();
         $cart->recalc($id);
         $this->layout = false;
-       $this->cartView($request );
+        return view('cart.cartModal');
     }
 
     public function cartShow()
@@ -134,6 +134,30 @@ class CartController extends Controller
 
         $session =session('cart');
         $order = new Order();
+        $input = $request->except('_token');
+        if(isset($input['cs'])&& $input['cs']==60)
+        {
+            $id=$input['id'];
+          /* $cartDel=Session::get('cart');
+           $cnt=count($cartDel);
+
+           for($i=0;$i<count($cartDel); $i++)
+           {
+               if($cartDel[$i]['cart.id']==$id)
+               {
+                   unset($cartDel[$i]);
+                   break;
+               }
+
+           }
+            $cnt=count($cartDel);
+
+
+            Session::put(['cart' => $cartDel]);
+             $de=Session::get('cart'); */
+            $cart = new Cart();
+            $cart->recalc($id);
+        }
         if($request->isMethod('post') ) {
             if(!Auth::check())
             {
@@ -252,6 +276,7 @@ class CartController extends Controller
             ];
 
         }
+
         $content= view('cart.view', ['order'=>$order,'data'=>$data  ] )->render();
       //  return view('cart.view', ['order'=>$order,'data'=>$data,'content'=>$content  ] );
         return Response::json(['success'=>true, 'content'=>$content]);

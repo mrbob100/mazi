@@ -49,7 +49,7 @@
                     <td>{!! $item['cart.qty'] !!} </td>
                     <td>{!! $item['cart.price'] !!} </td>
                     <td>{!! $item['cart.qty']*$item['cart.price'] !!} </td>
-                    <td><span  data-id = "{!! $item['cart.id'] !!} "  class="glyphicon glyphicon-remove text-danger del-item" aria-hidden="true"></span></td>
+                    <td><span  data-id = "{!! $item['cart.id'] !!} " data-cs="60" class="glyphicon glyphicon-remove text-danger del-item" aria-hidden="true"></span></td>
                 </tr>
             @endforeach
 

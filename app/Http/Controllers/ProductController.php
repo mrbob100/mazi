@@ -90,6 +90,9 @@ class ProductController extends SiteController
         $str=mb_strpos($name, " ");
         $row=mb_substr($name, 0, $str);
         $row1=mb_substr($name,$str);
+
+        $sa=Session::get('addOrnot');
+
              if($cs)
              {
                  $content = view(env('THEME') . '.product_content21')->with(['products'=> $products,'adopt'=>$this->adopt,'discount'=>$discount,'newprice'=>$newprice,'summa'=>$summa,'row'=>$row,'row1'=>$row1])->render();

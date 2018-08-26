@@ -120,6 +120,15 @@
                          <a id="reactivebut" href="{--{route('cartload',['id'=>$products[0]->id])}--}" data-href="{--{URL::to('cartload')}--}" data-id="{--{$products[0]->id}--}" data-sign="39"> <img src="{--{ asset('public/'.env('THEME'))}--}/images/features/add.png" alt="вывод кнопки добавить" /></a>
 
                      </div-->
+                     @if(session('addOrnot'))
+
+                         <div class="mask" >
+                             <a id="reactivebut" href="{{route('cartload',['id'=>$products[0]->id])}}" data-href="{{URL::to('cartload')}}" style=" margin-right: 10px" data-id="{{$products[0]->id}}" data-sign="59"> <img src="{{ asset('public/'.env('THEME'))}}/images/features/add.png" alt="вывод кнопки добавить" /></a>
+                         </div>
+                     @else
+                         @php $as=99; @endphp
+                         {{Session::put('addOrnot.as')}}
+                     @endif
                      <div class="mask" >
                          <a id="reactivequick" href="{{route('quickregister',['id'=>$products[0]->id])}}" data-href="{{URL::to('quickregister')}}" data-id="{{$products[0]->id}}" data-sign="52"> <img src="{{ asset('public/'.env('THEME'))}}/images/features/quick.png" alt="вывод кнопки быстрый заказ" /></a>
                      </div>

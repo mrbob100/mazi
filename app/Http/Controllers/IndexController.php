@@ -19,6 +19,7 @@ use Auth;
 use Corp\User;
 use Session;
 use Cookie;
+use Storage;
 class IndexController extends SiteController
 {
 
@@ -39,6 +40,7 @@ class IndexController extends SiteController
     public function index($id=12)
     {
      $new=[]; $hit=[];
+        Cache::pull('addOrnot');
         Cache::flush();
         foreach($_COOKIE as $key){
             if(!is_int($key)) continue;
@@ -57,7 +59,77 @@ class IndexController extends SiteController
             {   $item->exactlyType1=json_decode($item->exactlyType1); }
             return $item;
         });
+        $arka=[];
 
+        $priznakOut=0;
+// блок вывода exactlyType1 в иконку продукта
+        foreach ($products as $product)
+        {
+            $qTemp=$product->exactlyType1;
+            if($qTemp)
+            {
+                ob_start();
+                $content_char="<ul>"; $i=0;
+                foreach($qTemp as $item)
+                {
+
+                    $wqTemp01=explode('-',$item);
+                    if(!isset($wqTemp01[1]))
+                    {
+                        $wqTemp01=explode('–',$item);
+                    }
+                    if(isset($wqTemp01[2]))
+                    {
+                        $str=$wqTemp01[1].'-'.$wqTemp01[2];
+                        $wqTemp01[1]=$str;
+                    }
+
+                    //____________________________________________________________________________________________________
+                    if(!isset($wqTemp01[1])) // внесение в файл ошибок
+                    {
+
+                        // $app=['exacttlyType1'=>$product->exactlyType1, 'id'=>$product->id];
+                        $s=0;
+                        foreach($qTemp as $itemic)
+                        {
+                            $arka[$s]=$itemic;
+                            $s++;
+                        }
+                        $cint=count($arka);
+                        $str=$product->id;
+                        for($s=0; $s<$cint; $s++)
+                        {
+                            $str=$str.' '.$arka[$s].' ';
+                        }
+                        //  $app=['exacttlyType1'=> $str, 'id'=>$product->id];
+                        Storage::prepend('file_error.txt',$str);
+                        break;
+                    }
+                    //____________________________________________________________________________________________________
+                    $wqTemp01[0]=trim($wqTemp01[0]);
+                    $wqTemp01[1]=trim($wqTemp01[1]);
+                    if($priznakOut!=11)
+                    {
+                        $str=mb_substr($wqTemp01[0],0,22);
+                        $wqTemp01[0]=$str;
+                        $str=mb_substr($wqTemp01[1],0,11);
+                        $wqTemp01[1]=$str;
+                    }
+
+                    $content_char.="<li>";
+                    $content_char.="<div>".$wqTemp01[0]."</div>";
+                    $content_char.="<div></div>";
+                    $content_char.="<div>".$wqTemp01[1]."</div>";
+                    $content_char.="</li>";
+
+                    if($i>=3)break;
+                    $i++;
+                }
+                $content_char.="</ul>" ;
+                $product->exactlyType1=$content_char;
+                ob_end_clean();
+            }
+        }
 
         //  $articles=$this->getArticles(); // правый сайд бар
         // dd($sliderItems);

@@ -1,6 +1,6 @@
 
 <div id="header" data-href="{{ URL::to('actionSell')}}"  data-sign="50" >
-    <a href="#"  ><h1 class="like text-center">&nbsp;{!! $categoryName !!}&nbsp;</h1></a>
+    <a href="#"  ><h1 class="like ">&nbsp;{!! $categoryName !!}&nbsp;</h1></a>
 </div>
 
 <div class="flexslider">
@@ -27,14 +27,7 @@
                                 <div class="dopContent">
                                     <div class="tab-pane active" name="how-to" id="how-to" >
                                         @if($prod->exactlyType1)
-                                            @set($data, $prod->exactlyType1)
-                                            @foreach($data as $k=>$item)
-
-                                                {!! $item !!} <br/>
-
-                                            @endforeach
-
-
+                                            {!! $prod->exactlyType1 !!}
                                         @endif
 
                                     </div>

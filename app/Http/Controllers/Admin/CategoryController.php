@@ -11,7 +11,7 @@ class CategoryController extends Controller
 {
     public function index()
     {
-      if(view()->exists(env('THEME').'.admin.categories.index'))
+      if(view()->exists(env('THEME').'.admin.categories.index11'))
       {
         //  $categories=Category::simplePaginate(10);
 
