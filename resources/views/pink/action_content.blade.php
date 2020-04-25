@@ -58,12 +58,17 @@
                 </a>
                 <div class="liked-product simpleCart_shelfItem">
 
-                    <a class="like_name" href="{{route('cartload',['id'=>$prod->id]) }}" data-href="{{URL::to('cartload')}}" data-id="{{$prod['id']}}" data-sign="39" style=" color: #816263;font-size: 0.7em;" >{{str_limit($prod->name,32)}}  </a>
-                    <p><a class="item_add" href="{{route('cartload',['id'=>$prod->id]) }}"  data-href="{{URL::to('cartload')}}" data-id="{{$prod['id']}}" data-sign="39" style=" color: #816263;font-size: 1.0em; padding-left: 40px" ><i></i> <span class=" item_price">{!!$prod->price  !!} гр.</span> </a></p>
+                    <p  style=" color: #816263;font-size: 0.7em;" >{{str_limit($prod->name,32)}}  </p>
+                    <p>  <span class=" item_price item_add">{!!$prod->price  !!} гр.</span> </p>
                     <div class="mask11">
+                        <div class="mask110">
 
-                        <a href="{{route('cartload',['id'=>$prod->id]) }}" data-href="{{URL::to('cartload')}}" data-id="{{$prod['id']}}" data-sign="39"><i class="material-icons" style="font-size: 40px; color:#1F9ED1;" >shopping_cart </i>В корзину</a>
-                        <a href="{{route('differ',['id'=>$prod->id]) }}" data-href="{{URL::to('difference')}}" data-id="{{$prod['id']}}" data-sign="40"><img src="{{ asset('public/'.env('THEME'))}}/images/features/scales-100.png " id="picture" ></a>
+                            <a href="{{route('cartload',['id'=>$prod->id]) }}" data-href="{{URL::to('cartload')}}" data-id="{{$prod['id']}}" data-sign="39"><i class="material-icons" style="font-size: 40px; color:#006DC9;" >shopping_cart </i></a>
+                            <img src="{{ asset('public/'.env('THEME')) }}/images/features/incart.png" id="buy" data-href="{{URL::to('cartload')}}" data-id="{{$prod['id']}}" data-sign="39" alt="" />
+                        </div>
+                        <div class="mask111" data-href="{{URL::to('difference')}}" data-id="{{$prod['id']}}" data-sign="40">
+                            <a href="{{route('differ',['id'=>$prod->id]) }}" data-href="{{URL::to('difference')}}" data-id="{{$prod['id']}}" data-sign="40" ><img src="{{ asset('public/'.env('THEME'))}}/images/features/scales-100.png " id="picture" ></a>
+                        </div>
                     </div>
                     <div class="dopContent">
                         <div class="tab-pane active" name="how-to" id="how-to" >

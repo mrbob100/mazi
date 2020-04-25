@@ -31,8 +31,26 @@ class DifferenceProductController extends Controller
             if($cs==1)
             {
                 Session::pull('Difference');
+                Session::push('Difference',['id'=>$id]);
             }
-           Session::push('Difference',['id'=>$id]);
+            $products=Session::get('Difference');
+            $j=0;
+            if($products)
+            {
+
+
+                foreach ($products as $prod)
+                {
+                    if ($prod['id']==$id) {
+                        $j++;
+                        break;
+                    }
+                }
+                if (!$j) {
+                    Session::push('Difference', ['id' => $id]);
+                }
+            }
+          // Session::push('Difference',['id'=>$id]);
             $content=view(env('THEME').'.products_digit_content')->with(['cs'=>$cs])->render();
             return Response::json(['success'=>true, 'content'=>$content]);
         } else{

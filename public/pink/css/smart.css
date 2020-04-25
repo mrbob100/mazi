@@ -438,6 +438,7 @@ width: 100%;
     color:#816263 !important;font-size: 1em;
     font-weight: 600;
     font-family: 'Playfair Display', serif;
+     margin-bottom: 30px;
 }
 .flexslider #flexiselDemo3 .sliderIn a img{
     height: 100px; width: auto;
@@ -839,38 +840,21 @@ align-items: center;
     display: -webkit-flex;
     flex-direction:row;
     flex-wrap: wrap;
-    /*    min-width: 10%; height: 250px;
-        max-width:20%; */
-    /*  max-width: 1060px;
-       min-height:300px; */
     height: auto;
     width: 100%;
     max-width: 1100px;
-    /*  height:500px;
-   height: 1800px; */
     align-items: center;
     justify-content:flex-start;
 
-    /* min-width: 10%; */
-    /*flex-grow: 1;
-        flex-basis: 220px;flex-shrink: 0; */
 }
 
 .wrapProdT01 .productsinT01 {
 
-    min-height: 333px;
+    min-height: 290px;
     padding: 10px 5px 10px 5px;
-    /* justify-content: flex-start;   */
     align-items: center;
     width: 210px;
-
-
-  /* height: 365px; */
     text-align: center;
-
-    /* border: 3px solid blue; */
-
-    /*  margin: 7px 20px 10px 20px; */
     -moz-border-radius: 10px; /* закругление для старых Mozilla Firefox */
     -webkit-border-radius: 10px; /* закругление для старых Chrome и Safari */
     -khtml-border-radius:10px; /* закругл. для браузера Konquerer системы Linux */
@@ -879,21 +863,13 @@ align-items: center;
     position: relative;
 }
 .wrapProdT01 .productsinT01 a img{
-   height: 150px; max-width: 190px;
+   height: 100px; max-width: 190px;
     margin-top:10px;
 
 
 }
-/*.productsinT01 .liked-product {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-} */
-
 
 .productsinT01 .liked-product .mask11 .mask110 img  {
-   /* position: absolute; */
     display: none;
 }
 
@@ -903,19 +879,13 @@ align-items: center;
 
 }
 
-
 .productsinT01 .dopContent {
     position: absolute;
     display: none;
-/*display: block; */
-
     font-size: 0.7em;
     color: #816263;
-    /*  width: 350px; */
     width: 100%; max-width: 194px!important;
 }
-
-
 
 .productsinT01 .dopContent #how-to ul li {
     list-style: none;
@@ -933,37 +903,31 @@ align-items: center;
     margin: 0 .4em;
 }
 
-
-
-
-
 .productsinT01:hover .dopContent{
     display: block;
     padding-top: 5px;
 }
-
 
 .productsinT01:hover .liked-product .mask11 .mask110 a{
     display:none;
 }
 .productsinT01:hover .liked-product .mask11 .mask110 img{
     display:block;
-   /* position: absolute; */
     width: 120px; height: 35px;
 }
-
 
 .productsinT01 #moreInfo .layer02{
     position: absolute; /* Абсолютное позиционирование */
     top: 0px; /* Положение от нижнего края */
     left: 0px; /* Положение от правого края */
     line-height: 1px;
-
-
 }
 .productsinT01 #moreInfo .layer02 img{
     width:auto; height:70px ;
 }
+
+
+
 
 @media all and (max-width: 1069px){
     .wrapProdT01{ text-align: center;
@@ -1003,6 +967,7 @@ align-items: center;
     align-items: flex-start;
     text-align: justify;
     max-width: 200px;
+    margin-top: 18px;
 }
 
 .productsinT03 p{
@@ -1074,15 +1039,16 @@ padding-left: 5px;
 }
 
 .wrapProdT02 .productsinT02 a img{
-    height: 150px;
-    width: 190px;
+    height: 100px;
+   width: 120px;
     margin-top:10px;
+    margin-bottom: 15px;
 
 
 }
 
  .wrapProdT02 #moreInfo .layer02 img{
-    width: auto; height: 90px;
+    width: auto; height: 65px;
     position: absolute;
     top: 0; /* Положение от нижнего края */
     left: 0; /* Положение от правого края */
@@ -1091,6 +1057,7 @@ padding-left: 5px;
 .wrapProdT02 .liked-product{
     width: 100%; max-width: 550px!important;
     margin-top: 20px;
+
 }
 .wrapProdT02 .liked-product .dopContent {
     position: absolute;
@@ -1152,8 +1119,11 @@ span {cursor:pointer; }
 .modalMain {position: absolute; /* overflow-y:auto; */ width: 840px; max-width: 100%;  height:562px; max-height: 100%; left: 25%; top: -100%; padding: 20px; background: #fff; border: 1px solid #333; z-index: 9999; transition: all 0.5s ease-in;}
 .overflow {width: 100%; height: 100%; z-index: 1041; background: rgba(0,0,0,0.7); position: absolute; top: 0;}
 
-.modalMain2 {position: absolute; /* overflow-y:auto; */ width: 940px; max-width: 100%;  height:200px; max-height: 100%; left: 25%; top: -100%; padding: 20px; background: #fff; border: 1px solid #333; z-index: 9999; transition: all 0.5s ease-in;}
-.overflow2 {width: 100%; height: 100%; z-index: 2045; background: rgba(0,0,0,0.7); position: absolute; top: 0;}
+.modalMain2 {position: absolute; /* overflow-y:auto; */ width: 840px; max-width: 100%;
+    height:200px; max-height: 100%; left: 25%; top: -100%; padding: 20px; background: lemonchiffon;
+    border: 1px solid #333; z-index: 9999; transition: all 0.5s ease-in;}
+.overflow2 {width: 100%; height: 100%; z-index: 2045;
+    background: rgba(0,0,0,0.7); position: absolute; top: 0;}
 .wrap_02{
     display: flex;
     flex-wrap: wrap;

@@ -9,7 +9,7 @@
                     <th>Родительская категория</th>
                     <th>Категория</th>
                     <th>Изображение</th>
-                    <th>Удалить</th>
+                    <th>Корректир./Удалить</th>
                 </tr>
 
             </thead>
@@ -20,14 +20,17 @@
                     <tr>
                         <td>{{ $category->id }}</td>
                         <td>{{ $category->parent_id==0 ?  'Самостоятельная категория' :   $category->getCategory->name  }}</td>
-                        <td> {!! Html::link(route('categoryEdit',['category'=>$category->id]), $category->name,['alt'=>$category->name, 'style'=>'background-image: url("/public/pink/images/admin/icn_edit.png")'] ) !!}</td>
+                        <td> {!!  $category->name  !!}
+                       </td>
                         <td>{!! Html::image('public/'.env('THEME').'./images/'.$category->img,'',['class'=>'img-circle img-responsive', 'width'=>'50px',
                    'data-buttonName'=>'btn-primary','data-placeholder'=>$category->name]) !!}</td>
-                   <td> {!! Form::open(['url'=>route('categoryEdit',['category'=>$category->id] ), 'class'=>'form-horizontal', 'method'=>'POST']) !!}
-
+                   <td> {!! Form::open(['url'=>route('categoryEdit',['category'=>$category->id] ),  'class'=>'form-horizontal', 'method'=>'POST', 'id'=>'deleteAdmCat']) !!}
+                       <a href="{{route('categoryEdit',['category'=>$category->id]) }}" ><img src="{{ asset('public/'.env('THEME'))}}/images/admin/icn_edit.png " style="width:40px; heigh:auto; margin-left: 30px;" id="picture" ></a>
                        {{ method_field('DELETE') }}
-                        {!! Form::button('удалить',['class'=>'btn btn-danger', 'type'=>'submit','']) !!}
 
+                       <button>
+                       <img src="{{ asset('public/'.env('THEME'))}}/images/admin/icn_trash.png " style="width:30px; heigh:auto; " id="picture" ></a>
+                       </button>
                         {!! Form::close() !!}
                    </td>
 

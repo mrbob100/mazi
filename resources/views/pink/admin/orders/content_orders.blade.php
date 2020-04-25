@@ -30,7 +30,7 @@
                         <td>{{$order->sum}}&nbsp гр.</td>
                         <td>{{$order->status ? 'обработан' : 'в работе'}}</td>
                         <td>{{$order->created_at }}</td>
-                        <td> {!! Form::open(['url'=>route('orderEdit',['order'=>$order->id] ), 'class'=>'form-horizontal', 'method'=>'POST' ]) !!}
+                        <td> {!! Form::open(['url'=>route('orderEdit',['order'=>$order->id] ), 'class'=>'form-horizontal', 'method'=>'POST','id'=>'deleteAdmCat' ]) !!}
                             {{ method_field('DELETE') }}
                             {!! Form::button('Удалить',['class'=>'btn btn-danger', 'type'=>'submit']) !!}
                             {!! Form::close() !!}

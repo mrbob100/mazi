@@ -166,7 +166,7 @@ class CartController extends Controller
                     'secondname' => 'required|max:255',
                     'password' => 'required|min:6',
                     'email' => 'required|email',
-                    'phone' => 'required||min:10',
+                    'phone' => 'required||min:9',
                     'address' => 'required|max:255',
 
                 ];
@@ -276,7 +276,7 @@ class CartController extends Controller
             ];
 
         }
-
+        Session::forget('addOrnot');
         $content= view('cart.view', ['order'=>$order,'data'=>$data  ] )->render();
       //  return view('cart.view', ['order'=>$order,'data'=>$data,'content'=>$content  ] );
         return Response::json(['success'=>true, 'content'=>$content]);

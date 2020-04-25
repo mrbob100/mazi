@@ -278,5 +278,5 @@
 <script type='text/javascript' src='{!! asset('public/'.env('THEME')) !!}/js/history.js'></script>
 <script type='text/javascript' src='{!! asset('public/'.env('THEME')) !!}/js/jquery-migrate-1.2.1.min.js'></script>
 <script type="text/javascript" src=" {!! asset('public/'.env('THEME')) !!}/js/jquery.listen.js"  ></script>
-<script type="text/javascript" src=" {!! asset('public/'.env('THEME')) !!}/js/main.js"  ></script>
+<script type="text/javascript" src=" {!! asset('public/'.env('THEME')) !!}/js/mainScrutiny.js"  ></script>
 </html>

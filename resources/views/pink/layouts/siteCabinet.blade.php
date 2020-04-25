@@ -146,6 +146,6 @@
 <script type='text/javascript' src='{!! asset('public/'.env('THEME')) !!}/js/jquery.mousewheel.js'></script>
 <script type='text/javascript' src='{!! asset('public/'.env('THEME')) !!}/js/touch.js'></script>
 <script type='text/javascript' src='{!! asset('public/'.env('THEME')) !!}/js/zoom.js'></script>
-<script type="text/javascript" src=" {!! asset('public/'.env('THEME')) !!}/js/main.js"  ></script>
+<script type="text/javascript" src=" {!! asset('public/'.env('THEME')) !!}/js/mainScrutiny.js"  ></script>
 </body>
 </html>

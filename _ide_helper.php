@@ -1,7 +1,7 @@
 <?php
 /**
  * A helper file for Laravel 5, to provide autocomplete information to your IDE
- * Generated for Laravel 5.4.36 on 2018-04-02 14:11:56.
+ * Generated for Laravel 5.4.36 on 2019-03-02 16:18:56.
  *
  * This file should not be included in your code, only analyzed by your IDE!
  *
@@ -1897,6 +1897,18 @@ namespace Illuminate\Support\Facades {
         /**
          * Determine if the current user is authenticated.
          *
+         * @return \Corp\User 
+         * @throws \Illuminate\Auth\AuthenticationException
+         * @static 
+         */ 
+        public static function authenticate()
+        {
+            return \Illuminate\Auth\SessionGuard::authenticate();
+        }
+        
+        /**
+         * Determine if the current user is authenticated.
+         *
          * @return bool 
          * @static 
          */ 
@@ -1914,18 +1926,6 @@ namespace Illuminate\Support\Facades {
         public static function guest()
         {
             return \Illuminate\Auth\SessionGuard::guest();
-        }
-        
-        /**
-         * Determine if the current user is authenticated.
-         *
-         * @return \Corp\User 
-         * @throws \Illuminate\Auth\AuthenticationException
-         * @static 
-         */ 
-        public static function authenticate()
-        {
-            return \Illuminate\Auth\SessionGuard::authenticate();
         }
         
         /**
@@ -5179,7 +5179,7 @@ namespace Illuminate\Support\Facades {
          *
          * @param string $message The log message
          * @param array $context The log context
-         * @return Boolean Whether the record has been processed
+         * @return bool Whether the record has been processed
          * @static 
          */ 
         public static function debug($message, $context = array())
@@ -5192,7 +5192,7 @@ namespace Illuminate\Support\Facades {
          *
          * @param string $message The log message
          * @param array $context The log context
-         * @return Boolean Whether the record has been processed
+         * @return bool Whether the record has been processed
          * @static 
          */ 
         public static function info($message, $context = array())
@@ -5205,7 +5205,7 @@ namespace Illuminate\Support\Facades {
          *
          * @param string $message The log message
          * @param array $context The log context
-         * @return Boolean Whether the record has been processed
+         * @return bool Whether the record has been processed
          * @static 
          */ 
         public static function notice($message, $context = array())
@@ -5218,7 +5218,7 @@ namespace Illuminate\Support\Facades {
          *
          * @param string $message The log message
          * @param array $context The log context
-         * @return Boolean Whether the record has been processed
+         * @return bool Whether the record has been processed
          * @static 
          */ 
         public static function warning($message, $context = array())
@@ -5231,7 +5231,7 @@ namespace Illuminate\Support\Facades {
          *
          * @param string $message The log message
          * @param array $context The log context
-         * @return Boolean Whether the record has been processed
+         * @return bool Whether the record has been processed
          * @static 
          */ 
         public static function error($message, $context = array())
@@ -5244,7 +5244,7 @@ namespace Illuminate\Support\Facades {
          *
          * @param string $message The log message
          * @param array $context The log context
-         * @return Boolean Whether the record has been processed
+         * @return bool Whether the record has been processed
          * @static 
          */ 
         public static function critical($message, $context = array())
@@ -5257,7 +5257,7 @@ namespace Illuminate\Support\Facades {
          *
          * @param string $message The log message
          * @param array $context The log context
-         * @return Boolean Whether the record has been processed
+         * @return bool Whether the record has been processed
          * @static 
          */ 
         public static function alert($message, $context = array())
@@ -5270,7 +5270,7 @@ namespace Illuminate\Support\Facades {
          *
          * @param string $message The log message
          * @param array $context The log context
-         * @return Boolean Whether the record has been processed
+         * @return bool Whether the record has been processed
          * @static 
          */ 
         public static function emergency($message, $context = array())
@@ -7487,7 +7487,7 @@ namespace Illuminate\Support\Facades {
          * Gets the mime type associated with the format.
          *
          * @param string $format The format
-         * @return string The associated mime type (null if not found)
+         * @return string|null The associated mime type (null if not found)
          * @static 
          */ 
         public static function getMimeType($format)
@@ -7544,7 +7544,7 @@ namespace Illuminate\Support\Facades {
          *  * _format request attribute
          *  * $default
          *
-         * @param string $default The default format
+         * @param string|null $default The default format
          * @return string The request format
          * @static 
          */ 
@@ -7669,7 +7669,7 @@ namespace Illuminate\Support\Facades {
          * Checks whether the method is cacheable or not.
          *
          * @see https://tools.ietf.org/html/rfc7231#section-4.2.3
-         * @return bool 
+         * @return bool True for GET and HEAD, false otherwise
          * @static 
          */ 
         public static function isMethodCacheable()
@@ -11208,32 +11208,6 @@ namespace Illuminate\Support\Facades {
         }
         
         /**
-         * Register a view composer event.
-         *
-         * @param array|string $views
-         * @param \Closure|string $callback
-         * @return array 
-         * @static 
-         */ 
-        public static function composer($views, $callback)
-        {
-            return \Illuminate\View\Factory::composer($views, $callback);
-        }
-        
-        /**
-         * Register a view creator event.
-         *
-         * @param array|string $views
-         * @param \Closure|string $callback
-         * @return array 
-         * @static 
-         */ 
-        public static function creator($views, $callback)
-        {
-            return \Illuminate\View\Factory::creator($views, $callback);
-        }
-        
-        /**
          * Start a component rendering process.
          *
          * @param string $name
@@ -11282,6 +11256,19 @@ namespace Illuminate\Support\Facades {
         }
         
         /**
+         * Register a view creator event.
+         *
+         * @param array|string $views
+         * @param \Closure|string $callback
+         * @return array 
+         * @static 
+         */ 
+        public static function creator($views, $callback)
+        {
+            return \Illuminate\View\Factory::creator($views, $callback);
+        }
+        
+        /**
          * Register multiple view composers via an array.
          *
          * @param array $composers
@@ -11291,6 +11278,19 @@ namespace Illuminate\Support\Facades {
         public static function composers($composers)
         {
             return \Illuminate\View\Factory::composers($composers);
+        }
+        
+        /**
+         * Register a view composer event.
+         *
+         * @param array|string $views
+         * @param \Closure|string $callback
+         * @return array 
+         * @static 
+         */ 
+        public static function composer($views, $callback)
+        {
+            return \Illuminate\View\Factory::composer($views, $callback);
         }
         
         /**
@@ -12699,7 +12699,7 @@ namespace Lavary\Menu {
     class Facade {
         
         /**
-         * Check if a menu exists.
+         * Check if a menu builder exists.
          *
          * @param string $name
          * @return bool 
@@ -12711,11 +12711,11 @@ namespace Lavary\Menu {
         }
         
         /**
-         * Create a new menu instance.
+         * Create a new menu builder instance.
          *
          * @param string $name
          * @param callable $callback
-         * @return \Menu 
+         * @return \Lavary\Menu\Builder 
          * @static 
          */ 
         public static function makeOnce($name, $callback)
@@ -12724,11 +12724,11 @@ namespace Lavary\Menu {
         }
         
         /**
-         * Create a new menu instance.
+         * Create a new menu builder instance.
          *
          * @param string $name
          * @param callable $callback
-         * @return \Menu 
+         * @return \Lavary\Menu\Builder 
          * @static 
          */ 
         public static function make($name, $callback)
@@ -12749,10 +12749,10 @@ namespace Lavary\Menu {
         }
         
         /**
-         * Return Menu instance from the collection by key.
+         * Return Menu builder instance from the collection by key.
          *
          * @param string $key
-         * @return \Lavary\Menu\Item 
+         * @return \Lavary\Menu\Builder 
          * @static 
          */ 
         public static function get($key)
@@ -12761,7 +12761,7 @@ namespace Lavary\Menu {
         }
         
         /**
-         * Return Menu collection.
+         * Return Menu builder collection.
          *
          * @return \Illuminate\Support\Collection 
          * @static 
@@ -12794,6 +12794,7 @@ namespace Intervention\Image\Facades {
          * Overrides configuration settings
          *
          * @param array $config
+         * @return self 
          * @static 
          */ 
         public static function configure($config = array())
@@ -12816,8 +12817,8 @@ namespace Intervention\Image\Facades {
         /**
          * Creates an empty image canvas
          *
-         * @param integer $width
-         * @param integer $height
+         * @param int $width
+         * @param int $height
          * @param mixed $background
          * @return \Intervention\Image\Image 
          * @static 
@@ -12832,7 +12833,7 @@ namespace Intervention\Image\Facades {
          * (requires additional package intervention/imagecache)
          *
          * @param \Closure $callback
-         * @param integer $lifetime
+         * @param int $lifetime
          * @param boolean $returnObj
          * @return \Image 
          * @static 
@@ -12993,12 +12994,13 @@ namespace Mews\Captcha\Facades {
          * Create captcha image
          *
          * @param string $config
+         * @param boolean $api
          * @return \Mews\Captcha\ImageManager->response 
          * @static 
          */ 
-        public static function create($config = 'default')
+        public static function create($config = 'default', $api = false)
         {
-            return \Mews\Captcha\Captcha::create($config);
+            return \Mews\Captcha\Captcha::create($config, $api);
         }
         
         /**
@@ -13011,6 +13013,18 @@ namespace Mews\Captcha\Facades {
         public static function check($value)
         {
             return \Mews\Captcha\Captcha::check($value);
+        }
+        
+        /**
+         * Captcha check
+         *
+         * @param $value
+         * @return bool 
+         * @static 
+         */ 
+        public static function check_api($value, $key)
+        {
+            return \Mews\Captcha\Captcha::check_api($value, $key);
         }
         
         /**
@@ -13037,6 +13051,178 @@ namespace Mews\Captcha\Facades {
         public static function img($config = null, $attrs = array())
         {
             return \Mews\Captcha\Captcha::img($config, $attrs);
+        }
+         
+    }
+ 
+}
+
+namespace DaveJamesMiller\Breadcrumbs { 
+
+    class Facade {
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function register($name, $callback)
+        {
+            return \DaveJamesMiller\Breadcrumbs\Manager::register($name, $callback);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function exists($name = null)
+        {
+            return \DaveJamesMiller\Breadcrumbs\Manager::exists($name);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function generate($name = null)
+        {
+            return \DaveJamesMiller\Breadcrumbs\Manager::generate($name);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function generateArray($name, $params = array())
+        {
+            return \DaveJamesMiller\Breadcrumbs\Manager::generateArray($name, $params);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function generateIfExists($name = null)
+        {
+            return \DaveJamesMiller\Breadcrumbs\Manager::generateIfExists($name);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function generateIfExistsArray($name, $params = array())
+        {
+            return \DaveJamesMiller\Breadcrumbs\Manager::generateIfExistsArray($name, $params);
+        }
+        
+        /**
+         * 
+         *
+         * @deprecated Since 3.0.0
+         * @see generateIfExistsArray
+         * @static 
+         */ 
+        public static function generateArrayIfExists()
+        {
+            return \DaveJamesMiller\Breadcrumbs\Manager::generateArrayIfExists();
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function render($name = null)
+        {
+            return \DaveJamesMiller\Breadcrumbs\Manager::render($name);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function renderArray($name, $params = array())
+        {
+            return \DaveJamesMiller\Breadcrumbs\Manager::renderArray($name, $params);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function renderIfExists($name = null)
+        {
+            return \DaveJamesMiller\Breadcrumbs\Manager::renderIfExists($name);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function renderIfExistsArray($name, $params = array())
+        {
+            return \DaveJamesMiller\Breadcrumbs\Manager::renderIfExistsArray($name, $params);
+        }
+        
+        /**
+         * 
+         *
+         * @deprecated Since 3.0.0
+         * @see renderIfExistsArray
+         * @static 
+         */ 
+        public static function renderArrayIfExists()
+        {
+            return \DaveJamesMiller\Breadcrumbs\Manager::renderArrayIfExists();
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function setCurrentRoute($name)
+        {
+            return \DaveJamesMiller\Breadcrumbs\Manager::setCurrentRoute($name);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function setCurrentRouteArray($name, $params = array())
+        {
+            return \DaveJamesMiller\Breadcrumbs\Manager::setCurrentRouteArray($name, $params);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function clearCurrentRoute()
+        {
+            return \DaveJamesMiller\Breadcrumbs\Manager::clearCurrentRoute();
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function setView($view)
+        {
+            return \DaveJamesMiller\Breadcrumbs\Manager::setView($view);
         }
          
     }
@@ -15696,6 +15882,8 @@ namespace  {
     class Excel extends \Maatwebsite\Excel\Facades\Excel {}
 
     class Captcha extends \Mews\Captcha\Facades\Captcha {}
+
+    class Breadcrumbs extends \DaveJamesMiller\Breadcrumbs\Facade {}
 
     class Debugbar extends \Barryvdh\Debugbar\Facade {}
  

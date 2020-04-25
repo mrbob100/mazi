@@ -162,20 +162,24 @@ class ExcelitemController extends adminSiteController
             $categories=[];
             $cat_child=[];
             $cat_id=[];
+            $names=[];
             $str='';
             $query='category_id';
-            $j=0;
+            $j=0; $j1=0;
             foreach($inputs as $k=>$input)
             {
                if(is_numeric($input))
                {
                   array_push($categories,$input);
+                   $names[$j1]=$input;
+                   $j1++;
                }
                  else
                  {
                      if($j==0)
                      {
-                         $query=Product::select('category_id');
+
+                         $query=Product::select(['id','category_id']);
                          $query->addSelect($input);
                          $j++;
                      }
@@ -189,47 +193,85 @@ class ExcelitemController extends adminSiteController
 
             }
 
-
-                $cnt=count($categories);
-            $products=[];  $cat_child=[];
-                $tmp='';
-            for( $i=0; $i<$cnt;$i++) {
-                $cat_id = array_pop($categories);
-                $tmp.=['category_id',$cat_id].',';
-
+         $products=$query->get();
+            if(isset($inputs['Изображение']))
+            {
+                $products->transform(function ($item, $key){
+                    if(is_string($item->img) && is_object(json_decode($item->img))&& json_last_error()==JSON_ERROR_NONE)
+                    {   $item->img=json_decode($item->img); }
+                    $item->img=$item->img->max;
+                    return $item;
+                });
             }
-                $tmp=[$tmp];
-            $products=$query->where($tmp)->get();
-            $cater=$products->load('categories') ;
-            $temp=$cater->category_id->categories();
-                //  $name= $temp[0]->parent_id->getCategory();
 
-                $tem1 = Category::where('id', $temp->parent_id)->first();
 
-                $cat_child[0][$i] = $tem1->name;
-                $cat_child[1][$i] = $cat_id;
-                $cat_child[2][$i] = $temp->name;
-                $products[$i]=$query->where('category_id', $cat_id)->all();
-                $products[$i]=json_decode( $products[$i]->img);
-                $products[$i]->img=$products[$i]->img->max;
+                $fin=[];
+           $glob=[];
+           $j=0;
+           $cnt=count( $names);
+            for($i=0; $i<$cnt; $i++)
+            {
+              $categories=Category::where('id',  $names[$i])->first();
+              $parent_id=$categories->getCategory->parent_id;
+              $nickname=$categories->getCategory->name; // амая высокая категория
+              $groper=$categories->name; // категория товара
+                $glob['nickname']=$nickname;
+                $glob['groper']= $groper;
+               foreach ($products as $product)
+               {
+
+                      if($product->category_id ==$names[$i] )
+                      {
+                        //  $products[$i]=json_decode( $products[$i]->img);
+                        //  $products[$i]->img=$products[$i]->img->max;
+                        $glob1=collect($glob);
+                          $glob2=collect($product);
+                        //  $str='"nickname"'.':'.'"'.$nickname.'"'.','.'"namecat"'.':'.'"'.$name.'"'.','.;
+                          $fin[$j]= $glob1->merge($glob2 );
+
+                        //  $fin[$j]=$product ;
+                          $j++;
+                      }
+
+               }
+
+           }
+
+// здесь вставка  первых два поля
+
+$prod=collect( $fin);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
   // здесь я должен сделать перебор категорий с выводом категории =0 и подкатегории
 
 
-           //  $items=$query->get();
+
 
             //  $items=$this->p_rep->get($select,false,false ,false);
             //   $items=DB::table('products')->select($str)->get();
           //  $items=Product::all();
          //   $url=Storage::url('priceXML.xls');
-            Excel::create('priceXML', function($excel) use($items) {
-                $excel->sheet('ExportFile', function ($sheet) use ($items) {
-                    $sheet->fromArray($items);
+            Excel::create('priceXML', function($excel) use( $prod) {
+                $excel->sheet('ExportFile', function ($sheet) use ($prod) {
+                    $sheet->fromArray( $prod);
                 });
                  //   })->export('xls');
             })->store('xls',storage_path('app/public'));
-            return redirect()->back();
+           // return redirect()->back();
         }
         $content="Данные сброшены в файл";
         return Response::json(['success'=>true, 'content'=>$content]);

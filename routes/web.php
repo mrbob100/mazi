@@ -73,7 +73,7 @@ Route::get('changeQty',['uses'=>'PreciseController@changeQuantity','as'=>'change
 
 Route::get('clear',['uses'=>'CartController@clear', 'as'=>'clearance']);
 Route::get('arrange',['uses'=>'CartController@cartView', 'as'=>'arrangeContract']);
-Route::post('order',['uses'=>'CartController@cartView', 'as'=>'contract']);
+Route::post('contract',['uses'=>'CartController@cartView', 'as'=>'contract']);
 
 Route::get('delIt',['uses'=>'CartController@DelItem']);
 

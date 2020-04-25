@@ -141,3 +141,10 @@ $(function () {
     });
 
     });
+jQuery(document).ready(function($){
+    $('#belle ').on('submit','.container #deleteAdmCat',function(e){
+        if(!confirm('Хотите удалить ?')){
+            e.preventDefault();
+        }
+    });
+});

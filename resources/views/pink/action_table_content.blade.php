@@ -33,17 +33,17 @@
     </div>
 
         @foreach($products as $prod)
-
             <div class="wrapProdT02">
+
                <div class="productsinT02" >
 
-                        <a  id="moreInfo" href="{{route('product',['id'=>$prod->id]) }}" data-href="{{URL::to('product')}}" data-id="{{$prod['id']}}" data-sign="26"> <img src="{{ asset('public/'.env('THEME'))}}/images/{{ $prod->img->max }}"  alt="вывод изображения" />
-
-                            @if($pr==51)
+                        <a  id="moreInfo" href="{{route('product',['id'=>$prod->id]) }}" data-href="{{URL::to('product')}}" data-id="{{$prod->id}}" data-sign="26">
+                            <img src="{{ asset('public/'.env('THEME'))}}/images/{{ $prod->img->max }}"  alt="вывод изображения" />
+                            @if($prod->new)
                                 <div class="layer02">
                                     <img src="{{ asset('public/'.env('THEME')) }}/images/features/new012.png" alt="" />
                                 </div>
-                            @elseif($pr==50)
+                            @elseif($prod->hit)
                                 <div class="layer02">
                                     <img src="{{ asset('public/'.env('THEME')) }}/images/features/topBlue.png" alt="" />
                                 </div>
@@ -56,7 +56,7 @@
                </div>
                  <div class="liked-product simpleCart_shelfItem">
 
-                     <p   style=" color: #816263;font-size: 0.9em; font-weight: 600" >{{str_limit($prod->name,32)}}  </p>
+                     <p   style=" color: #816263;font-size: 0.9em; font-weight: 600; margin-bottom: 30px;" >{{str_limit($prod->name,32)}}  </p>
                      <div class="dopContent">
                          <div class="tab-pane active" name="how-to" id="how-to" >
                              @if($prod->exactlyType1)

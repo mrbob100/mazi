@@ -42,6 +42,7 @@ class IndexController extends SiteController
      $new=[]; $hit=[];
         Cache::pull('addOrnot');
         Cache::flush();
+        Session::flush();
         foreach($_COOKIE as $key){
             if(!is_int($key)) continue;
             setcookie($key,' ');

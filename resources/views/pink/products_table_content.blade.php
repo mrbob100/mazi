@@ -10,9 +10,9 @@
             <div class="sortie3" >
                 <p>Сортировка</p>
                 <select id="sortValue"  data-href="{{URL::to('category')}}" data-sign="horizontal" onchange="onSorties();">
-                    <option value="0">не выбран</option>
+                    <option value="0 " >не упорядочен</option>
                     <option value="1">по цене (возрастание)</option>
-                    <option value="2">по цене (убывание)</option>
+                    <option value="2" >по цене (убывание)</option>
                     <option value="3">опция 3</option>
                 </select>
             </div>
@@ -52,7 +52,7 @@
                </div>
                  <div class="liked-product simpleCart_shelfItem">
 
-                    <p   style=" color: #816263;font-size: 0.9em; font-weight: 600" >{{str_limit($prod->name,32)}}  </p>
+                    <p   style=" color: #816263;font-size: 0.9em; font-weight: 600; margin-bottom: 30px;" >{{str_limit($prod->name,32)}}  </p>
                      <div class="dopContent">
                          <div class="tab-pane active" name="how-to" id="how-to" >
                              @if($prod->exactlyType1)

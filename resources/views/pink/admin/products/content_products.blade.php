@@ -29,7 +29,7 @@
 
                     <td> {!! Html::link(route('productEdit',['product'=>$product->id]), $product->name,['alt'=>$product->name] ) !!}  </td>
                     <td> {{  $product->price }}</td>
-                    <td> {!! Form::open(['url'=>route('productEdit',['product'=>$product->id] ), 'class'=>'form-horizontal', 'method'=>'POST' ]) !!}
+                    <td> {!! Form::open(['url'=>route('productEdit',['product'=>$product->id] ), 'class'=>'form-horizontal', 'method'=>'POST','id'=>'deleteAdmCat' ]) !!}
                         {{ method_field('DELETE') }}
                         {!! Form::button('Удалить',['class'=>'btn btn-danger', 'type'=>'submit']) !!}
                         {!! Form::close() !!}
